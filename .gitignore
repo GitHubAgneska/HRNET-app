@@ -23,6 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 notes.md
+notes-testing.md
 .vscode
 
 environment-dev.jsx
