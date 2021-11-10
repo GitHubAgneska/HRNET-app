@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment} from 'react'
+import {Redirect} from 'react-router-dom/cjs/react-router-dom.min';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import Header from './components/layout/Header'
+import CreateEmployee from './components/containers/Create-employee'
+import EmployeesList from './components/containers/Employees-list';
+// import NotFoundPage from './components/containers/404'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = () => {
+
+    return (
+        <div className="App">
+            <div className="container" style={{height:'100%', width:'100%'}}>
+
+                    <Router>
+                        <Header /> {/* INSIDE router because contains NAV with 'LINK TO'  */}
+
+                        <Fragment>
+                            <Switch>
+                                <Route exact path="/"  render={() => <Redirect to="/create-employee" />} />
+                                <Route exact path="/create-employee" component={CreateEmployee} />
+                                <Route exact path="/employees-list" component={EmployeesList} />
+                                {/* <Route component={NotFoundPage} /> */}
+                            </Switch>
+                        </Fragment>
+
+                    </Router>
+
+            </div>
+        </div>
+    )
 }
-
-export default App;
+export default App
