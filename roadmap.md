@@ -26,13 +26,13 @@ TASKS:
 ### ▶︎ PROCESS <ins></ins>
 ---
 
-1. Adapt and improve existing code using Express to compile original codebase : creation of:
+1. ADAPT AND IMPROVE EXISTING CODE USING EXPRESS TO COMPILE ORIGINAL CODEBASE : CREATION OF:
     - architecture
     - routing
     - services
     - mock api calls using local storage  
 <br/><br/>
-2. Planning of Jquery plugin conversion
+2. PLANNING OF JQUERY PLUGIN CONVERSION
     - read original codebase for each plugin 
     - identify independant sections that'll be necessary when refactoring to React  
     - understand where reported issues stem from
@@ -90,19 +90,56 @@ TASKS:
 
 
 
-3. Create new React app
+3. CREATE NEW REACT APP
+- Replicate features one by one and with unit testing (testing must be gradual)
+    
+    <b>■  APP architecture</b> -------------------------------
+    - layout elements :
+        - header <=> unit test
+        - routing <=>  unit test
+        - nav ( home / current employees list)  <=>  unit test
+    
+    - create employee page ( = parent container) :
+        - page title
+        - form 
+            - featured components:
+                > form validators (util)
 
-- replicate features one by one and with unit testing (testing must be gradual)
-- implement Redux state management
+                > datepicker:
+
+                > selectMenu: 
+
+            
+    - employees list page ( = parent container):
+        - page title
+        - datatable:
+            - UI structure
+            -  features:
+                > select entries amount
+
+                > search
+
+                > order by
+
+                > pagination
+
+    <br/><br/>
+    ■ ----------------------------------------------------------
+    <br/><br/>
+    1. implement base components as static with unit tests
+    2. Mock api calls
+    2. implement Redux state management
+    3. expand unit testing to stateful components
+
 
 <br/><br/>
 
-4. Plugin conversion
+4. PLUGIN CONVERSION
 - based on created React component: 
     - conversion plan elaboration
     - conversion
     - publish created React lib package as an npm
 <br/><br/>
 
-5. Make performances reports for each version (original & refactored) using LightHouse
+5. MAKE PERFORMANCES REPORTS FOR EACH VERSION (original & refactored) using LightHouse
 
