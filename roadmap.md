@@ -34,15 +34,17 @@ TASKS:
 <br/><br/>
 2. Planning of Jquery plugin conversion
     - read original codebase for each plugin 
-    - identify independant sections that'll be necessary when refactoring to React   
+    - identify independant sections that'll be necessary when refactoring to React  
     - understand where reported issues stem from
+    - choose one plugin to convert to React library
+    - elaborate conversion plan
 <br/><br/>
     - plugins:
          - ★ DATATABLES
             - plugin FOR Jquery, codebase available downloading from https://datatables.net/download/
             - purpose : 'Paginate, search and order HTML tables'
             - more info: https://datatables.net/
-            - lines of code : > 15 000 (but contains loads of jsdocs)
+            - lines of code : > 15 000  - jsdoc: yes (loads)
             - complexity: quite complex due to the many available options (see full list: https://datatables.net/examples/) but presence of jsdocs
             - options currently in use in original hrnet codebase:
             - reported issues from current hrnet implem:
@@ -55,7 +57,7 @@ TASKS:
             - purpose: 'unobtrusively add a datetimepicker, datepicker or timepicker dropdown to your forms. It's easy to customize options'
             - original code: https://github.com/xdan/datetimepicker/blob/bb372ec424ca4cbdac75d79c7df8368b9bd1a52a/jquery.datetimepicker.js
             - more info: https://xdsoft.net/jqplugins/datetimepicker/
-            - lines of code : > 2700  - no jsdoc/ comments
+            - lines of code : > 2700  - jsdoc: no / comments: no
             - complexity: quite complex due to the many available options / no jsdoc
             - options currently in use in original hrnet codebase:
             - reported issues from current hrnet implem: can be slow & unresponsive
@@ -66,34 +68,41 @@ TASKS:
             - purpose: minimal plugin to handle most common modal needs: displaying an existing DOM element + loading a page with AJAX
             - original code: https://github.com/kylefox/jquery-modal/blob/master/jquery.modal.js
             - more info: https://jquerymodal.com/
-            - lines of code : < 250  with a few comments
+            - lines of code : < 250  - jsdoc: no / comments: a few
             - complexity: easy
             - reported issues from current hrnet implem:
                  - impossible to customize style
             - challenge(s): make distinction btw ajax code that should be left as is ≠ rest of jquery code to be refactored
 <br/><br/>
-        - ★ SELECT MENU
+        - ★ SELECT MENU ➡️ <ins>Chosen to be converted to React library package</ins>
             - Jquery plugin
             - purpose: 'provides a styleable select element replacement. It will act as a proxy back to the original select element, controlling its state for form submission or serialization'
             - original code: https://github.com/jquery/jquery-ui/blob/main/ui/widgets/selectmenu.js
             - more info: https://api.jqueryui.com/selectmenu/
-            - lines of code : < 700  - no jsdoc/ comments
+            - lines of code : < 700  - jsdoc: no / comments: yes
             - complexity: ok
             - reported issues from current hrnet implem: 
                 - order of the dropdown options changing unexpectedly
-                - load time populating after select
+                - load time populating after selecting item
             - challenge(s):
+            
 <br/><br/>
 
-2. Create new React app
+
+
+3. Create new React app
 
 - replicate features one by one and with unit testing (testing must be gradual)
 - implement Redux state management
-- transform one of the jquery plugin to a React library element (as a npm)
+
 <br/><br/>
 
-3. Publish created React lib package as an npm
+4. Plugin conversion
+- based on created React component: 
+    - conversion plan elaboration
+    - conversion
+    - publish created React lib package as an npm
 <br/><br/>
 
-4. Make performances reports for each version (original & refactored) using LightHouse
+5. Make performances reports for each version (original & refactored) using LightHouse
 
