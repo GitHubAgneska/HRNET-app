@@ -1,6 +1,6 @@
-import { render,screen } from '@testing-library/react';
+import { fireEvent, render,screen } from '@testing-library/react';
 import App from './App';
-import userEvent from '@testing-library/user-event'
+// import userEvent from '@testing-library/user-event'
 import {createMemoryHistory} from 'history'
 import {Router} from 'react-router-dom'
 
@@ -22,7 +22,7 @@ test('full app rendering/navigating', () => {
   // (data-testid or role query can also be used here)
   expect(screen.getByText(/home/i)).toBeInTheDocument()
   const leftClick = {button: 0}
-  userEvent.click(screen.getByText(/employees/i), leftClick)
+  fireEvent.click(screen.getByText(/employees/i), leftClick)
 
   // check that the content changed to the new page
   expect(screen.getByText(/current employees list/i)).toBeInTheDocument()
