@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom/cjs/react-router-dom.min';
 import Header from './components/layout/Header'
 import CreateEmployee from './components/containers/Create-employee'
 import EmployeesList from './components/containers/Employees-list';
-// import NotFoundPage from './components/containers/404'
+import NotFoundPage from './components/containers/404'
 
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
                                 <Route exact path="/"  render={() => <Redirect to="/create-employee" />} />
                                 <Route exact path="/create-employee" component={CreateEmployee} />
                                 <Route exact path="/employees-list" component={EmployeesList} />
-                                {/* <Route component={NotFoundPage} /> */}
+                                <Route component={NotFoundPage} />
                             </Switch>
                         </Fragment>
 
