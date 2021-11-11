@@ -20,6 +20,7 @@ TASKS:
 - Ajax
 - React
 - Redux
+- CI/CD: Circleci + Heroku
 - LightHouse
 
 ---
