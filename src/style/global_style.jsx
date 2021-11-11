@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
         flex-direction: column;
         min-height: 100vh;
     }
-    a { text-decoration: none; }
+    a { text-decoration: none; color: inherit; }
     /* input { border: transparent; } */
     ul { margin: 0; padding: 0;}
     ul li { list-style: none; }
@@ -58,5 +58,18 @@ export const SrOnlyH2 = styled.h2`
     width: 1px !important;
     white-space: nowrap !important; /* 3 */
 `;
+
+export const StyledBtn = styled.button` 
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    /* border-color: #00bc77;
+    background-color: #00bc77; */
+    color: #fff;
+    border-radius: 5px;
+`
 
 

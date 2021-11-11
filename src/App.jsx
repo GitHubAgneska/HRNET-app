@@ -1,18 +1,18 @@
 import React, {Fragment} from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {Redirect} from 'react-router-dom/cjs/react-router-dom.min';
-import Header from './components/layout/Header'
+import Header from './components/layout/Header/Header'
 import CreateEmployee from './components/containers/Create-employee'
 import EmployeesList from './components/containers/Employees-list';
 import NotFoundPage from './components/containers/404'
-
+import { GlobalStyle } from './style/global_style'
 
 const App = () => {
 
     return (
         <div className="App">
             <div className="container" style={{height:'100%', width:'100%'}}>
-
+                <GlobalStyle />
                     <Router>
                         <Header /> {/* INSIDE router because contains NAV with 'LINK TO'  */}
 
