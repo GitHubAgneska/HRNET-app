@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
-import {Redirect} from 'react-router-dom/cjs/react-router-dom.min';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {Redirect} from 'react-router-dom/cjs/react-router-dom.min';
 import Header from './components/layout/Header'
 import CreateEmployee from './components/containers/Create-employee'
 import EmployeesList from './components/containers/Employees-list';
