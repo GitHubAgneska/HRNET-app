@@ -1,17 +1,43 @@
 import {Link} from 'react-router-dom';
-import {SrOnlyH1} from '../../style/global_style'
-import Button from '@mui/material/Button';
+import styled from 'styled-components'
+
+const StyledNav = styled.nav`
+    display: flex;
+    flexFlow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    border-bottom: 5px solid violet;
+    background-color: lightgrey;
+`;
+const MainLogoWrapper = styled.div`
+    width: 12.5rem; // 200px;
+    min-width: 135px;
+`;
+
+const MainLogo = styled.h1`
+    max-width: 100%;
+    color: white;
+`
+
+const LinksWrapper = styled.div`
+    width: 25%;
+    display: inline-flex;
+    justify-content: space-between;
+`
 
 const Header = () => {
     return (
-        <nav style={{height:'50px', width:'100%', borderBottom:'2px solid red', display:'inline-flex'}}>
-            <div style={{height:'30px', width:'100px'}}>
-                HRNET
-            </div>
-            <div>
-                <Link to="/"><Button>home</Button></Link>
-                <SrOnlyH1>HRnet</SrOnlyH1>
-            </div>
-        </nav>)
+        <StyledNav>
+            <MainLogoWrapper>
+                <MainLogo>HRNET</MainLogo>
+            </MainLogoWrapper>
+
+            <LinksWrapper>
+                <Link to="/">home</Link>
+                <Link to="/employees-list">employees</Link>
+            </LinksWrapper>
+
+        </StyledNav>)
 }
 export default Header
