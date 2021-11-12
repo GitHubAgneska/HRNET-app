@@ -1,19 +1,34 @@
+import { useState } from "react";
+
 import { FormWrapper, FormInputsWrapper, FormBtnsWrapper, InputWrapper} from './Employee-form-style'
 import { StyledBtn } from "../../../style/global_style"
 
 
 const EmployeeForm = () => { 
+    const [ values, setValues ] = useState({});
+    
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setValues({ ...values, [name]: value }); // allows dynamic adding of properties
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('FORM values=',values);
+        setValues(values)
+    }
+
     return (
         <FormWrapper>
-            <form autoComplete="off">
+            <form onSubmit={handleSubmit} autoComplete="off">
                 <FormInputsWrapper>
                         <InputWrapper>
                             <input
                                 type="text"
                                 name="firstName"
                                 placeholder="firstName"
-                                /* onBlur={handleBlur}
-                                onChange={handleInputChange} */
+                                /* onBlur={handleBlur} */
+                                onChange={handleInputChange} 
                                 />
                             {/* { touched.firstName && errors.firstName? <span>Please enter a valid first name<br /><small>(name must be at least 3 characters long)</small></span>: null } */}
                         </InputWrapper>
@@ -24,7 +39,7 @@ const EmployeeForm = () => {
                                 placeholder="lastName"
                                 /* placeholder={lastName} */
                                 /* onBlur={handleBlur} */
-                                /* onChange={handleInputChange} */
+                                onChange={handleInputChange}
                                 />
                             {/* { touched.lastName && errors.lastName? <span>Please enter a valid last name<br /><small>(name must be at least 3 characters long)</small></span>: null } */}
                         </InputWrapper>
@@ -39,7 +54,7 @@ const EmployeeForm = () => {
                                 id="dob"
                                 /* placeholder={lastName} */
                                 /* onBlur={handleBlur} */
-                                /* onChange={handleInputChange} */
+                                onChange={handleInputChange}
                             />
                             {/* { touched.lastName && errors.lastName? <span>Please enter a valid last name<br /><small>(name must be at least 3 characters long)</small></span>: null } */}
                         </InputWrapper>
@@ -51,7 +66,7 @@ const EmployeeForm = () => {
                                 id="startdate"
                                 /* placeholder={lastName} */
                                 /* onBlur={handleBlur} */
-                                /* onChange={handleInputChange} */
+                                onChange={handleInputChange}
                             />
                             {/* { touched.lastName && errors.lastName? <span>Please enter a valid last name<br /><small>(name must be at least 3 characters long)</small></span>: null } */}
                         </InputWrapper>
@@ -66,7 +81,7 @@ const EmployeeForm = () => {
                                 id="street"
                                 placeholder="street"
                                 /* onBlur={handleBlur} */
-                                /* onChange={handleInputChange} */
+                                onChange={handleInputChange}
                             />
                             {/* { touched.lastName && errors.lastName? <span>Please enter a valid last name<br /><small>(name must be at least 3 characters long)</small></span>: null } */}
                         </InputWrapper>
@@ -77,19 +92,22 @@ const EmployeeForm = () => {
                                 id="city"
                                 placeholder="city"
                                 /* onBlur={handleBlur} */
-                                /* onChange={handleInputChange} */
+                                onChange={handleInputChange}
                             />
                             {/* { touched.lastName && errors.lastName? <span>Please enter a valid last name<br /><small>(name must be at least 3 characters long)</small></span>: null } */}
                         </InputWrapper>
                         <InputWrapper>
-                            <select name="state" id="state-select">
-                                <option value="">state</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
+                            <select 
+                                name="state" 
+                                id="state-select"
+                                onChange={handleInputChange}>
+                                    <option value="">state</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
                             </select>
                             {/* { touched.lastName && errors.lastName? <span>Please enter a valid last name<br /><small>(name must be at least 3 characters long)</small></span>: null } */}
                         </InputWrapper>
@@ -100,7 +118,7 @@ const EmployeeForm = () => {
                                 id="zipcode"
                                 placeholder="zipcode"
                                 /* onBlur={handleBlur} */
-                                /* onChange={handleInputChange} */
+                                onChange={handleInputChange}
                             />
                             {/* { touched.lastName && errors.lastName? <span>Please enter a valid last name<br /><small>(name must be at least 3 characters long)</small></span>: null } */}
                         </InputWrapper>
@@ -109,14 +127,17 @@ const EmployeeForm = () => {
                     <FormInputsWrapper>
                         <legend>Department</legend>
                         <InputWrapper>
-                            <select name="department" id="dpt-select">
-                                <option value="">Department</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
+                            <select 
+                                name="department"
+                                id="dpt-select"
+                                onChange={handleInputChange}>
+                                    <option value="">Department</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
                             </select>
                             {/* { touched.lastName && errors.lastName? <span>Please enter a valid last name<br /><small>(name must be at least 3 characters long)</small></span>: null } */}
                         </InputWrapper>
