@@ -21,7 +21,11 @@ TASKS:
 - React
 - Redux
 - CI/CD: Circleci + Heroku
+---
+###  ▶︎ TOOLS
+---
 - LightHouse
+- Jest/Testing-library
 
 ---
 ### ▶︎ PROCESS <ins></ins>
@@ -127,12 +131,13 @@ TASKS:
     <br/><br/>
     ■ ----------------------------------------------------------
     <br/><br/>
-    1. implement base components as static with unit tests
+    1. implement base components as static with unit tests ( see Testing plan priority list ) 
+    
     2. Mock api calls
-    2. implement Redux state management
-    3. expand unit testing to stateful components
+    3. implement Redux state management
+    4. expand unit testing to stateful components
 
-
+        
 <br/><br/>
 
 4. PLUGIN CONVERSION
@@ -143,4 +148,34 @@ TASKS:
 <br/><br/>
 
 5. MAKE PERFORMANCES REPORTS FOR EACH VERSION (original & refactored) using LightHouse
+
+
+
+#### testing plan - priority list guidelines
+
+- High value features
+- Edge cases in high value features
+- Easy breaking parts
+- Basic components testing:
+    - user interactions
+    - conditional rendering
+    - utils / hooks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

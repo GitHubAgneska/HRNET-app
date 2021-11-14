@@ -16,19 +16,6 @@ export const FormInputsWrapper = styled.fieldset`
     &:not(:nth-child(3)) { border: none; flex-flow: row nowrap; }
     &:nth-child(3) { flex-flow: row wrap; width: 80%;}
 `
-
-export const FormBtnsWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    /* width: 45%; */
-    margin: auto;
-    justify-content: space-between;
-    button:nth-child(1) { transition: background-color 0.2s; }
-    button:nth-child(1):not(disabled) { background-color: #00bc77; }
-    button:nth-child(1):disabled { background-color: grey }
-    button:nth-child(1):hover { background-color: #00bc70 }
-`
-
 export const InputWrapper = styled.div`
     width: 100%;
     display: flex;
@@ -43,4 +30,15 @@ export const InputWrapper = styled.div`
     }
     ::placeholder { font-weight: light; opacity: 0.8; }  
     span { color: red; height: 50px; width:100%;}
+`
+export const FormBtnsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    /* width: 45%; */
+    margin: auto;
+    justify-content: space-between;
+    button:nth-child(1) { transition: background-color 0.2s; }
+    button:nth-child(1):not(disabled) { background-color: #00bc77; }
+    button:nth-child(1):disabled { background-color: grey }
+    button:nth-child(1):hover:not(:disabled) { background-color: #00bc70 }
 `
