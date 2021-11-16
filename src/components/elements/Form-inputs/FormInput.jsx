@@ -26,6 +26,28 @@ const FormInput = props => { 
                         aria-required="true"
                     /> 
                 }
+                { (fieldName ==='zipcode')
+                    &&    
+                    <input
+                        type="number"
+                        name={fieldName}
+                        placeholder={fieldName}
+                        onBlur={handleBlur}
+                        onChange={handleInputChange} 
+                        aria-required="true"
+                    /> 
+                }
+                { (fieldName ==='dob' || fieldName ==='startDate')
+                    &&    
+                    <input
+                        type="date"
+                        name={fieldName}
+                        placeholder={fieldName}
+                        onBlur={handleBlur}
+                        onChange={handleInputChange} 
+                        aria-required="true"
+                    /> 
+                }
 
                 { fieldName === 'department' &&
                         <select
