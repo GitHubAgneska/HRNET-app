@@ -14,32 +14,39 @@ const error = [
 const onlyCharsReg = /^[a-zA-Z\s]*$/; // only chars and whiteSpaces (if several names)
 
 const nameValidation = (fieldName, fieldValue) => {
+    console.log('name=', fieldValue)
     
-    if ( fieldName === 'firstName' && fieldValue === fieldName ) { return `firstName is required`; }
-    if ( ! onlyCharsReg.test(fieldValue)) { return `firstName should only contain characters`}
-    if (fieldValue.trim().length >=1 && fieldValue.trim().length < 3) {
+    if (fieldValue.trim().length <=1 && fieldValue.trim().length < 3) {
         //return error.type = 'length';
         return `${fieldName} needs to be at least three characters`;
     }
+    if ( fieldName === 'firstName' && ( fieldValue === fieldName || fieldValue === '')  ) { return `firstName is required`; }
+    if ( ! onlyCharsReg.test(fieldValue)) { return `firstName should only contain characters`}
     console.log('name OK')
     return null;
 }
 
-const dateValidation = date => {
-    
-    if ( date.trim() === '' || !(isNaN((new Date(date)).getTime()))) { return 'date is required'}
+const dateValidation = (date) => {
+    // YYYY-MM-DD
+    // MM-DD-YYYY
+    let fieldValue = date.value;
+    console.log('date=>',fieldValue)
+    let dateReg = /\d{1,2}\/\d{1,2}\/\d{4}]/ ;
+    if ( !dateReg.test(parseInt(date)) ) { return 'date is required'}
     console.log('dob/startdate OK')
     return null;
 }
 
 const streetValidation = street => {  
+    console.log('street=>',street);
     if (street.trim() === '') { return 'street is required'; } 
     if ( !(/\d/g).test(street)) { return 'a street number is required'; }
     console.log('street OK')
     return null;
 }
 
-const cityValidation = city => {  
+const cityValidation = city => {
+    console.log('city=>',city);
     if (city.trim() === '') { return 'city is required'; } 
     if ( !(onlyCharsReg).test(city)) { return 'city can only contain characters'; }
     console.log('city OK');
@@ -47,6 +54,7 @@ const cityValidation = city => { 
 }
 
 const stateValidation = state => {
+    console.log('state=>',state);
     let placeholder = 'state';
     if (state === placeholder ) { return 'state is required'; }
     console.log('state OK');
@@ -70,7 +78,7 @@ const departmentValidation = department => {
 
 /** 
 * @Object validate
-* @example validate[methodName](fieldName, value)
+* @example validate[methodName](fieldName, fieldValue)
 */
 export const validate = {
 
@@ -86,7 +94,7 @@ export const validate = {
 
 };
 
-//
+// startdate input => set max to today
 export const today = () => { 
 
     let today = new Date();
