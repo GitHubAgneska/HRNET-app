@@ -2,14 +2,40 @@ import PropTypes from "prop-types"
 import { InputWrapper } from '../Employee-form/Employee-form-style'
 import {states}  from '../../../data/us-states'
 import {departments} from '../../../data/departments'
+import { useState } from "react";
+import { validate } from "../../../utils/form_validators"
 
 const stateOptions = [...states];
 const deps = [ ...departments];
 
-
 const FormInput = props => { 
     
-    const { fieldName, handleInputChange, handleBlur } = props;
+    const { fieldName } = props;
+    const [ values, setValues ] = useState({});
+    const [ touched, setTouched ] = useState({});
+    const [ errors, setErrors ] = useState({});
+    
+    const handleInputChange = (event) => {
+        const {value, name } = event.target
+        // const { name, value: newValue, type } = event.target;
+        // const value = type === 'number' ? +newValue : newValue; // keep number fields as numbers
+       //  if ( name === 'date') { }
+        
+        setValues({ ...values, [name]: value }); // allows dynamic adding of properties
+        console.log('ONCHANGE:=',  values )
+        setTouched({ ...touched, [name]: true });
+    }
+
+    const handleBlur = (event) => {        
+        const { name, value } = event.target;
+        console.log('ONBLUR:=', event.target.value);
+
+        const { [name]: removedError, ...rest } = errors; // remove error msg if any
+        const error = validate[name](value); // check new error
+        // validate field if val touched
+        setErrors({ ...rest, ...(error && { [name]: touched[name] && error }) });
+    }
+
         
     return (
         <InputWrapper>
@@ -77,7 +103,7 @@ const FormInput = props => { 
                         </select>
                 }
             
-            {/* { touched.{fieldName} && errors.{fieldName}? <span><small>{errors.{fieldName}}</small></span>: null } */}
+            { touched.fieldName && errors.fieldName? <span><small>{errors.fieldName}</small></span>: null }
         </InputWrapper>
     )
 } 
