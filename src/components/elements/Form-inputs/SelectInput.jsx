@@ -1,13 +1,15 @@
 import { Fragment } from "react";
 import PropTypes from "prop-types"
+import FormLabel from '../FormLabel/FormLabel'
+import { InputWrapper } from '../Employee-form/Employee-form-style'
 
 const SelectInput = props => { 
 
     const { fieldName, handleInputChange, handleBlur, options } = props;
-    console.log('options=', options)
-
+    
     return (
-        <Fragment>
+        <InputWrapper>
+            <FormLabel fieldName={fieldName}></FormLabel>
             <select
                 options={options}
                 name={fieldName}
@@ -27,7 +29,7 @@ const SelectInput = props => { 
                         )) 
                     }
             </select>
-        </Fragment>
+        </InputWrapper>
     )
 }
 

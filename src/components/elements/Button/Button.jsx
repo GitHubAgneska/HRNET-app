@@ -1,12 +1,13 @@
 import { Fragment } from "react";
 import PropTypes from "prop-types"
+import { StyledBtn } from "../../../style/global_style"
 
 const Button = props => { 
     const { btnName, handleClick } = props;
 
     return ( 
         <Fragment>
-            <button onClick={handleClick}>{btnName}</button>
+            <StyledBtn onClick={handleClick}>{btnName}</StyledBtn>
         </Fragment>
 
     )

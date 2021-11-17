@@ -1,11 +1,14 @@
 import PropTypes from "prop-types"
 import { Fragment } from "react"
+import FormLabel from '../FormLabel/FormLabel'
+import { InputWrapper } from '../Employee-form/Employee-form-style'
 
 const SimpleInput = props => { 
     const { fieldName, handleBlur, handleInputChange } = props;
 
     return (
-        <Fragment>
+        <InputWrapper>
+            <FormLabel fieldName={fieldName}></FormLabel>
             <input
                 type="text"
                 name={fieldName}
@@ -14,7 +17,7 @@ const SimpleInput = props => { 
                 onChange={handleInputChange} 
                 aria-required="true"
             /> 
-        </Fragment>
+        </InputWrapper>
     )
 }
 
