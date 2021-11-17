@@ -15,9 +15,17 @@ const SelectInput = props => { 
                 onChange={handleInputChange}
                 onBlur={handleBlur}
                 aria-required="true">
-                    { options.map(i => (
-                        <option key={Math.random()} value={i.name} >{i.name}</option>
-                    )) }
+                    
+                    { fieldName === 'state' && 
+                        options.map(i => (
+                            <option key={Math.random()} value={i.name}>{i.name}</option>
+                        )) 
+                    }
+                    { fieldName === 'department' && 
+                        options.map(i => (
+                            <option key={Math.random()} value={i}>{i}</option>
+                        )) 
+                    }
             </select>
         </Fragment>
     )
