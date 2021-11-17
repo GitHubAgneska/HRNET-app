@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 const SelectInput = props => { 
 
     const { fieldName, handleInputChange, handleBlur, options } = props;
+    console.log('options=', options)
 
     return (
         <Fragment>
@@ -15,7 +16,7 @@ const SelectInput = props => { 
                 onBlur={handleBlur}
                 aria-required="true">
                     { options.map(i => (
-                        <option key={Math.random()} value={i} >{i}</option>
+                        <option key={Math.random()} value={i.name} >{i.name}</option>
                     )) }
             </select>
         </Fragment>
