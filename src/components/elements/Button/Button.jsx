@@ -9,7 +9,6 @@ const Button = props => { 
         <Fragment>
             <StyledBtn onClick={handleClick}>{btnName}</StyledBtn>
         </Fragment>
-
     )
 }
 

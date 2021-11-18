@@ -1,11 +1,10 @@
-import { Fragment } from "react";
 import PropTypes from "prop-types"
 import FormLabel from '../FormLabel/FormLabel'
 import { InputWrapper } from '../Employee-form/Employee-form-style'
 
-const SelectInput = props => { 
+const SelectInput = ({fieldName, options}) => { 
 
-    const { fieldName, handleInputChange, handleBlur, options } = props;
+    // const { handleInputChange, handleBlur, options } = props;
     
     return (
         <InputWrapper>
@@ -14,8 +13,8 @@ const SelectInput = props => { 
                 options={options}
                 name={fieldName}
                 id="`{fieldName}`-select"
-                onChange={handleInputChange}
-                onBlur={handleBlur}
+                //onChange={handleInputChange}
+                // onBlur={handleBlur}
                 aria-required="true">
                     
                     { fieldName === 'state' && 
@@ -37,7 +36,7 @@ export default SelectInput
 
 SelectInput.propTypes = { 
     fieldName: PropTypes.string.isRequired,
-    handleInputChange: PropTypes.func.isRequired,
-    handleBlur: PropTypes.func.isRequired,
+    //handleInputChange: PropTypes.func.isRequired,
+    // handleBlur: PropTypes.func.isRequired,
     options: PropTypes.array.isRequired
 }
