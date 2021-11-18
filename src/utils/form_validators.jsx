@@ -17,20 +17,18 @@ const nameValidation = (fieldName, fieldValue) => {
     console.log('VALIDATING===>', 'fieldName=',fieldName, 'fieldValue=', fieldValue)
     
     // if (fieldValue.trim().length <=1 && fieldValue.trim().length < 3) {
-    if ( fieldValue.length <=1 && fieldValue.length < 3) { return `${fieldName} needs to be at least three characters`; }
+    if ( fieldValue.length < 3) { return `${fieldName} needs to be at least three characters`; }
     if ( fieldName === 'firstName' && ( fieldValue === fieldName || fieldValue === '')  ) { return `firstName is required`; }
     if ( ! onlyCharsReg.test(fieldValue)) { return `firstName should only contain characters`}
     else { console.log('name OK'); return null; }
-    
 }
 
-const dateValidation = (date) => {
-    // YYYY-MM-DD
-    // MM-DD-YYYY
-    let fieldValue = date.value;
-    console.log('date=>',fieldValue)
-    let dateReg = /\d{1,2}\/\d{1,2}\/\d{4}]/ ;
-    if ( !dateReg.test(parseInt(date)) ) { return 'date is required'}
+const dateValidation = (fieldName, fieldValue) => {
+    // format from input = YYYY-MM-DD
+    console.log('VALIDATING==>DATE==',fieldName, fieldValue)
+    let dateReg = /\d{4}]\d{1,2}\/\d{1,2}\// ;
+    //if ( !dateReg.test((fieldValue)) ) { return 'date is required'}
+    if ( fieldValue.trim()=== ''  ) { return 'date is required'}
     console.log('dob/startdate OK')
     return null;
 }
@@ -38,7 +36,8 @@ const dateValidation = (date) => {
 const streetValidation = street => {  
     console.log('street=>',street);
     if (street.trim() === '') { return 'street is required'; } 
-    if ( !(/\d/g).test(street)) { return 'a street number is required'; }
+    if (street.length < 3) { return 'street needs to be at least three characters'; } 
+    // if ( ! (/\d/).test(street)) { return 'a street number is required'; }
     console.log('street OK')
     return null;
 }
@@ -83,7 +82,7 @@ export const validate = {
     firstName: firstName => nameValidation('firstName', firstName),
     lastName: lastName => nameValidation('lastName', lastName),
     dob: dob => dateValidation('dob', dob),
-    startdate: startdate => dateValidation('startdate', startdate),
+    startDate: startDate => dateValidation('startDate', startDate),
     street: street => streetValidation('street', street),
     city: city => cityValidation('city', city),
     state: state => stateValidation('state', state),

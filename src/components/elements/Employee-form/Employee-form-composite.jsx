@@ -18,10 +18,10 @@ const CompositeForm = props => {
     
     const handleInputChange = (fieldId, value) => {
         setValues(currentValues => { currentValues[fieldId] = value; return currentValues; });
-        //setValues({ ...values, [fieldId]: value });
+        // setValues({ ...values, [fieldId]: value });
         console.log('VALUES===', values);
-        setTouched(touched => { touched[fieldId]= true; return touched; });
-        // setTouched({ ...touched, [fieldId]: true });
+        // setTouched(touched => { touched[fieldId]= true; return touched; });
+        setTouched({ ...touched, [fieldId]: true });
         console.log('touched=', touched)
     }
 
@@ -33,7 +33,6 @@ const CompositeForm = props => {
         console.log('error at HANDLE BLUR==', error);
 
         setErrors( {...errors, [fieldName]: error })
-        // setErrors(errors => { errors[fieldName] = error; return errors; })
         // setErrors({ ...rest, ...(error && { [fieldName]: touched[fieldName] && error }) });
         console.log('errorS=', errors);
     }
@@ -62,18 +61,26 @@ const CompositeForm = props => {
                         <DateInput
                             key={i._uid}
                             fieldName={i.fieldName}
+                            field={i}
                             values={values}
                             handleInputChange={handleInputChange}
-                            handleBlur={handleBlur} />
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                            />
 
                     : (i.fieldType ==='select') ?
                         <SelectInput 
                             key={i._uid}
                             fieldName={i.fieldName}
+                            field={i}
                             values={values}
                             handleInputChange={handleInputChange}
                             options={i.options}
-                            handleBlur={handleBlur} />
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                            />
 
                     
                         :null

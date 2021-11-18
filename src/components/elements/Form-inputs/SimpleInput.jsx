@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import FormLabel from '../FormLabel/FormLabel'
 import { InputWrapper } from '../Employee-form/Employee-form-style'
-import { useState } from "react";
+
 
 const SimpleInput = ({field, fieldName, handleInputChange, values, handleBlur, touched, errors }) => { 
     console.log('error INPUT ELEMENT ==', errors[fieldName]);
