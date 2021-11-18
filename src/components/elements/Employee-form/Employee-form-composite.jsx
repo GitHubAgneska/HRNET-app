@@ -1,43 +1,41 @@
 import PropTypes from "prop-types"
+import { Fragment, useState } from "react";
+import { validate } from "../../../utils/form_validators"
 import DateInput from '../Form-inputs/DateInput'
-import { useState } from "react";
 import SimpleInput from '../Form-inputs/SimpleInput'
 import SelectInput from '../Form-inputs/SelectInput'
 import Button from '../Button/Button'
 import { FormWrapper, FormBtnsWrapper } from './Employee-form-style'
-
 import { employeeFormFields } from '../../../data/employee-form-fields'
 
 
 const CompositeForm = props => {
     
-    const [ values, setValues ] = useState({ firstName: '', lastName:'', dob:'', startDate:'',  street:''});
+    const [ values, setValues ] = useState({ firstName: '', lastName:'', dob:'', startDate:'',  street:'', city:'', state:'', department:''});
     const [ touched, setTouched ] = useState({});
+    const [ errors, setErrors ] = useState({});
 
-    const handleInputChange = (event) => {
-        console.log( event.target.value)
-        //const {value, name } = event.target;
-        const value = event.target.value
-        const field = event.target.name;
-        setValues({[field]: value});
-        // setValues({ ...values, [name]: value });
-        console.log('values=', values);
-        setTouched({ ...touched, [field]: true });
-        console.log('onChange=', values, 'touched=', touched)
-    }
     
-    const handleBlur = event => { 
-        console.log('onblur=', event.target.value, 'values=', values)
-        // const {value, name } = event.target;
-        // const error = validate[name](value);
-        // setValues({ ...values, [name]: value })
+    const handleInputChange = (fieldId, value) => {
+        setValues(currentValues => { currentValues[fieldId] = value; return currentValues; });
+        //setValues({ ...values, [fieldId]: value });
+        console.log('VALUES===', values);
+        setTouched(touched => { touched[fieldId]= true; return touched; });
+        // setTouched({ ...touched, [fieldId]: true });
+        console.log('touched=', touched)
     }
-    const fieldChanged = (fieldId, value) => {
-        setValues(currentValues => {
-            currentValues[fieldId] = value;
-            return currentValues;
-        });
-        console.log('VALUES===', values)
+
+    const handleBlur = (fieldName, value) => { 
+        console.log('onblur values=', values);
+        const { [fieldName]: removedError, ...rest } = errors;
+        
+        const error = validate[fieldName](value); // error = is a string message
+        console.log('error at HANDLE BLUR==', error);
+
+        setErrors( {...errors, [fieldName]: error })
+        // setErrors(errors => { errors[fieldName] = error; return errors; })
+        // setErrors({ ...rest, ...(error && { [fieldName]: touched[fieldName] && error }) });
+        console.log('errorS=', errors);
     }
 
     const handleSubmit = event => { }
@@ -54,10 +52,12 @@ const CompositeForm = props => {
                             fieldName={i.fieldName}
                             field={i}
                             values={values}
-                            fieldChanged={fieldChanged}
                             handleInputChange={handleInputChange}
-                            handleBlur={handleBlur} />
-                    
+                            handleBlur={handleBlur}
+                            touched={touched}
+                            errors={errors}
+                            />
+                        
                     : (i.fieldType === 'date') ?
                         <DateInput
                             key={i._uid}
@@ -71,8 +71,8 @@ const CompositeForm = props => {
                             key={i._uid}
                             fieldName={i.fieldName}
                             values={values}
-                            options={i.options}
                             handleInputChange={handleInputChange}
+                            options={i.options}
                             handleBlur={handleBlur} />
 
                     

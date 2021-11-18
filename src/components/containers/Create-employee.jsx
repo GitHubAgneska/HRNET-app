@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import EmployeeForm from '../elements/Employee-form/Employee-form'
+// import EmployeeForm from '../elements/Employee-form/Employee-form'
 import CompositeForm from '../elements/Employee-form/Employee-form-composite'
 
 const TitleWrapper = styled.div`

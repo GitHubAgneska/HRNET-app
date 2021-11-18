@@ -14,16 +14,14 @@ const error = [
 const onlyCharsReg = /^[a-zA-Z\s]*$/; // only chars and whiteSpaces (if several names)
 
 const nameValidation = (fieldName, fieldValue) => {
-    console.log('name=', fieldValue)
+    console.log('VALIDATING===>', 'fieldName=',fieldName, 'fieldValue=', fieldValue)
     
-    if (fieldValue.trim().length <=1 && fieldValue.trim().length < 3) {
-        //return error.type = 'length';
-        return `${fieldName} needs to be at least three characters`;
-    }
+    // if (fieldValue.trim().length <=1 && fieldValue.trim().length < 3) {
+    if ( fieldValue.length <=1 && fieldValue.length < 3) { return `${fieldName} needs to be at least three characters`; }
     if ( fieldName === 'firstName' && ( fieldValue === fieldName || fieldValue === '')  ) { return `firstName is required`; }
     if ( ! onlyCharsReg.test(fieldValue)) { return `firstName should only contain characters`}
-    console.log('name OK')
-    return null;
+    else { console.log('name OK'); return null; }
+    
 }
 
 const dateValidation = (date) => {

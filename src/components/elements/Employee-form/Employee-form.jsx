@@ -18,7 +18,7 @@ const EmployeeForm = () => {
     const [ successMessage, setSuccessMessage ] = useState(false);
     const [ errorMessage, setErrorMessage ] = useState({});
     
-    /* const handleInputChange = (event) => {
+    const handleInputChange = (event) => {
         const {value, name } = event.target
         //const { name, value: newValue, type } = event.target;
         // const value = type === 'number' ? +newValue : newValue; // keep number fields as numbers
@@ -29,7 +29,6 @@ const EmployeeForm = () => {
     }
 
     const handleBlur = (event) => {        
-        
         const { name, value } = event.target;
         console.log('ONBLUR:=', event.target.value);
 
@@ -37,7 +36,7 @@ const EmployeeForm = () => {
         const error = validate[name](value); // check new error
         // validate field if val touched
         setErrors({ ...rest, ...(error && { [name]: touched[name] && error }) });
-    } */
+    }
 
     const handleSubmit = (event) => {
         

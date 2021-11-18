@@ -3,8 +3,9 @@ import FormLabel from '../FormLabel/FormLabel'
 import { InputWrapper } from '../Employee-form/Employee-form-style'
 import { useState } from "react";
 
-const SimpleInput = ({field, fieldName,fieldChanged, values}) => { 
-    
+const SimpleInput = ({field, fieldName, handleInputChange, values, handleBlur, touched, errors }) => { 
+    console.log('error INPUT ELEMENT ==', errors[fieldName]);
+    console.log('Touched INPUT ELEMENT ==', touched)
     return (
         <InputWrapper>
             <FormLabel fieldName={fieldName}></FormLabel>
@@ -13,10 +14,11 @@ const SimpleInput = ({field, fieldName,fieldChanged, values}) => { 
                 id={field._uid}
                 name={fieldName}
                 placeholder={fieldName}
-                values={values}
-                onChange={e => fieldChanged(field._uid, e.target.value)}
+                onChange={e => handleInputChange(field.fieldName, e.target.value)}
+                onBlur={e => handleBlur(field.fieldName, e.target.value)}
                 aria-required="true"
-            /> 
+            />
+            { errors[fieldName] ? <span>{errors[fieldName]}</span> : null }
         </InputWrapper>
     )
 }

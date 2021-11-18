@@ -32,7 +32,7 @@ export const InputWrapper = styled.div`
     ::placeholder { 
         font-weight: light; opacity: 0.8;
     }  
-    span { color: red; height: 50px; width:100%;}
+    span { color: red; height: 5px; width:100%;font-size: 0.8rem}
 `
 export const FormBtnsWrapper = styled.div`
     display: flex;
