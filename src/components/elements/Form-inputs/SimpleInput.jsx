@@ -2,8 +2,7 @@ import PropTypes from "prop-types"
 import FormLabel from '../FormLabel/FormLabel'
 import { InputWrapper } from '../Employee-form/Employee-form-style'
 
-
-const SimpleInput = ({field, fieldName, handleInputChange, values, handleBlur, touched, errors }) => { 
+const SimpleInput = ({field, fieldName, handleInputChange, handleBlur, errors }) => { 
     // console.log('error INPUT ELEMENT ==', errors[fieldName]);
     // console.log('Touched INPUT ELEMENT ==', touched)
     return (
@@ -27,6 +26,6 @@ export default SimpleInput
 
 SimpleInput.propTypes = {
     fieldName: PropTypes.string.isRequired,
-   //handleInputChange: PropTypes.func.isRequired,
-   //  handleBlur: PropTypes.func.isRequired
+    handleInputChange: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired
 }

@@ -3,7 +3,7 @@ import FormLabel from '../FormLabel/FormLabel'
 import { InputWrapper } from '../Employee-form/Employee-form-style'
 import { today } from '../../../utils/form_validators'
 
-const DateInput = ({field, fieldName, handleInputChange, values, handleBlur, touched, errors }) => { 
+const DateInput = ({field, fieldName, handleInputChange, handleBlur, errors }) => { 
     // console.log('error DATE ELEMENT ==', errors[fieldName]);
     let todaysDate = today().toString();
     // console.log('todaysDate=', todaysDate)
@@ -29,6 +29,6 @@ export default DateInput
 
 DateInput.propTypes = {
     fieldName: PropTypes.string.isRequired,
-    //handleInputChange: PropTypes.func.isRequired,
-    //handleBlur: PropTypes.func.isRequired
+    handleInputChange: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired
 }
