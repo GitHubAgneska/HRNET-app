@@ -12,6 +12,8 @@ const error = [
 ]
 
 const onlyCharsReg = /^[a-zA-Z\s]*$/; // only chars and whiteSpaces (if several names)
+let dateReg = /\d{4}]\d{1,2}\/\d{1,2}\//;
+const onlyLettersDigits = /^[0-9a-zA-Z]+$/;
 
 const nameValidation = (fieldName, fieldValue) => {
     console.log('VALIDATING===>', 'fieldName=',fieldName, 'fieldValue=', fieldValue)
@@ -25,50 +27,54 @@ const nameValidation = (fieldName, fieldValue) => {
 
 const dateValidation = (fieldName, fieldValue) => {
     // format from input = YYYY-MM-DD
-    console.log('VALIDATING==>DATE==',fieldName, fieldValue)
-    let dateReg = /\d{4}]\d{1,2}\/\d{1,2}\// ;
-    //if ( !dateReg.test((fieldValue)) ) { return 'date is required'}
-    if ( fieldValue.trim()=== ''  ) { return 'date is required'}
+    let date = fieldValue;
+    if ( date.trim()=== ''  ) { return 'date is required'}
     console.log('dob/startdate OK')
     return null;
 }
 
-const streetValidation = street => {  
-    console.log('street=>',street);
+const streetValidation = (fieldName, fieldValue) => {
+    let street = fieldValue;  
+    console.log('street=>',fieldValue);
     if (street.trim() === '') { return 'street is required'; } 
     if (street.length < 3) { return 'street needs to be at least three characters'; } 
-    // if ( ! (/\d/).test(street)) { return 'a street number is required'; }
+    if ( !(/\d/).test(street)) { return 'a street number is required'; }
+    if ( !(/[a-zA-Z]/g).test(street)) { return 'a street name is required'; }
     console.log('street OK')
     return null;
 }
 
-const cityValidation = city => {
+const cityValidation = (fieldName, fieldValue) => {
+    let city = fieldValue; 
     console.log('city=>',city);
-    if (city.trim() === '') { return 'city is required'; } 
+    if (city.trim() === '') { return 'city is required'; }
+    if (city.length < 3) { return 'city needs to be at least three characters'; } 
     if ( !(onlyCharsReg).test(city)) { return 'city can only contain characters'; }
     console.log('city OK');
     return null;
 }
 
-const stateValidation = state => {
+const stateValidation = (fieldName, fieldValue) => {
+    let state = fieldValue; 
     console.log('state=>',state);
-    let placeholder = 'state';
-    if (state === placeholder ) { return 'state is required'; }
-    console.log('state OK');
+    // if (state.trim() === '') { return 'state is required'; }
+    // console.log('state OK');
     return null;
 }
 
-const zipCodeValidation = zipcode => {
+const zipCodeValidation = (fieldName, fieldValue) => {
+    let zipcode = fieldValue; 
     if (zipcode.trim() === '') { return 'zipcode is required'; } 
     if ( !(/\d/g).test(zipcode) ) { return 'zipcode can only contain digits '; }
-    if (zipcode.length() !== 9) { return 'us zipcode should be 9 digits'; } 
+    if (zipcode.length !== 5) { return 'us zipcode should be 5 digits'; } 
     console.log('zipcode OK');
     return null;
 }
 
-const departmentValidation = department => {
-    let placeholder = 'Department';
-    if (department === placeholder ) { return 'department is required'; }
+const departmentValidation = (fieldName, fieldValue) => {
+    let department = fieldValue; 
+    // let placeholder = 'Department';
+    // if (department === placeholder ) { return 'department is required'; }
     console.log('department OK');
     return null;
 }

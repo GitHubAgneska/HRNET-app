@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { validate } from "../../../utils/form_validators"
 import DateInput from '../Form-inputs/DateInput'
 import SimpleInput from '../Form-inputs/SimpleInput'
@@ -14,7 +14,7 @@ const CompositeForm = props => {
     const [ values, setValues ] = useState({ firstName: '', lastName:'', dob:'', startDate:'',  street:'', city:'', state:'', department:''});
     const [ touched, setTouched ] = useState({});
     const [ errors, setErrors ] = useState({});
-
+    const [ disabled, setDisabled ] = useState(true);
     
     const handleInputChange = (fieldId, value) => {
         setValues(currentValues => { currentValues[fieldId] = value; return currentValues; });
@@ -87,7 +87,7 @@ const CompositeForm = props => {
                 ))}
 
                 <FormBtnsWrapper>
-                    <Button btnName="save" handleClick={handleSubmit}></Button>
+                    <Button btnName="save" handleClick={handleSubmit} disabled={disabled}></Button>
                     <Button btnName="cancel" handleClick={resetForm}></Button>
                 </FormBtnsWrapper>
 

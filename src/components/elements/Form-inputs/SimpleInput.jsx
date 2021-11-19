@@ -4,8 +4,8 @@ import { InputWrapper } from '../Employee-form/Employee-form-style'
 
 
 const SimpleInput = ({field, fieldName, handleInputChange, values, handleBlur, touched, errors }) => { 
-    console.log('error INPUT ELEMENT ==', errors[fieldName]);
-    console.log('Touched INPUT ELEMENT ==', touched)
+    // console.log('error INPUT ELEMENT ==', errors[fieldName]);
+    // console.log('Touched INPUT ELEMENT ==', touched)
     return (
         <InputWrapper>
             <FormLabel fieldName={fieldName}></FormLabel>
