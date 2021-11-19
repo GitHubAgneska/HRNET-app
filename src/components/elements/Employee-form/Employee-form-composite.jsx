@@ -20,9 +20,10 @@ const CompositeForm = () => {
         && Object.values(touched).length === Object.values(values).length
         && Object.values(errors).every(t => t === null );
 
-    // confirm cancel form
-    const [ modalDisplay, SetModalDisplay ] = useState(false);
-    const toggleConfirmModal = () => { SetModalDisplay(!modalDisplay);}
+        // confirm cancel form
+        const [ modalDisplay, SetModalDisplay ] = useState(false);
+        const toggleConfirmModal = () => { SetModalDisplay(!modalDisplay);}
+        const formDirty = Object.values(touched).some(t => t === true );
 
 
     const handleInputChange = (fieldId, value) => {
@@ -71,8 +72,8 @@ const CompositeForm = () => {
 
     const resetForm = event => {
         event.preventDefault();
-        SetModalDisplay(true)
-        // Object.values(touched).some(t => t === true )? 
+        return formDirty? toggleConfirmModal(): null
+        
     }
     
     return (
@@ -127,7 +128,7 @@ const CompositeForm = () => {
 
             </form>
                 { modalDisplay &&
-                    <BaseModal toggleConfirmModal={toggleConfirmModal} $formDisplay />
+                    <BaseModal toggleConfirmModal={toggleConfirmModal} resetForm={resetForm} $formDisplay />
                 }
         </FormWrapper>
     )
