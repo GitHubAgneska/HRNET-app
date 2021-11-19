@@ -1,14 +1,12 @@
-import PropTypes from "prop-types"
 import { useState } from "react";
 import { validate } from "../../../utils/form_validators"
-
+import { employeeFormFields } from '../../../data/employee-form-fields'
 import DateInput from '../Form-inputs/DateInput'
 import SimpleInput from '../Form-inputs/SimpleInput'
 import SelectInput from '../Form-inputs/SelectInput'
 import Button from '../Button/Button'
 import { FormWrapper, FormBtnsWrapper } from './Employee-form-style'
-import { employeeFormFields } from '../../../data/employee-form-fields'
-
+import BaseModal from '../Modal/Modal'
 
 const CompositeForm = () => {
     
@@ -21,6 +19,10 @@ const CompositeForm = () => {
         Object.values(touched).every(t => t === true )
         && Object.values(touched).length === Object.values(values).length
         && Object.values(errors).every(t => t === null );
+
+    // confirm cancel form
+    const [ modalDisplay, SetModalDisplay ] = useState(false);
+    const toggleConfirmModal = () => { SetModalDisplay(!modalDisplay);}
 
 
     const handleInputChange = (fieldId, value) => {
@@ -67,7 +69,11 @@ const CompositeForm = () => {
             }
     }
 
-    const resetForm = event => { }
+    const resetForm = event => {
+        event.preventDefault();
+        SetModalDisplay(true)
+        // Object.values(touched).some(t => t === true )? 
+    }
     
     return (
         <FormWrapper>
@@ -120,6 +126,9 @@ const CompositeForm = () => {
                 </FormBtnsWrapper>
 
             </form>
+                { modalDisplay &&
+                    <BaseModal toggleConfirmModal={toggleConfirmModal} $formDisplay />
+                }
         </FormWrapper>
     )
 }

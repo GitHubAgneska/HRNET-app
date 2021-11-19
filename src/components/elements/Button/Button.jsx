@@ -2,12 +2,10 @@ import { Fragment } from "react";
 import PropTypes from "prop-types"
 import { StyledBtn } from './Button-style'
 
-const Button = ({btnName, handleClick, disabled} ) => { 
+const Button = ({ btnName, handleClick, disabled, width } ) => { 
 
     return ( 
-        <Fragment>
-            <StyledBtn onClick={(e)=>handleClick(e)} disabled={disabled}>{btnName}</StyledBtn>
-        </Fragment>
+        <StyledBtn onClick={(e)=>handleClick(e)} disabled={disabled} width={width}>{btnName}</StyledBtn>
     )
 }
 
@@ -15,5 +13,5 @@ export default Button
 
 Button.propTypes = { 
     btnName: PropTypes.string.isRequired,
-    handleClick: PropTypes.func.isRequired
+    // handleClick: PropTypes.func.isRequired
 }

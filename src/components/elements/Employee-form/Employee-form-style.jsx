@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const FormWrapper = styled.div`
+position: relative;
     width: 90%; height:100vh;
     margin: auto;
     border: 1px solid grey;
