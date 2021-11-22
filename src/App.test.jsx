@@ -3,6 +3,7 @@ import App from './App';
 // import userEvent from '@testing-library/user-event'
 import {createMemoryHistory} from 'history'
 import {Router} from 'react-router-dom'
+import NotFoundPage from './components/containers/404'
 
 test('renders the appropriate header', () => {
   const { getByText } =  render(<App />); // query is scoped to render's result
@@ -26,17 +27,19 @@ test('full app rendering/navigating', () => {
 
   // check that the content changed to the new page
   expect(screen.getByText(/current employees list/i)).toBeInTheDocument()
+
 })
 
 test('landing on a bad page', () => {
-  const history = createMemoryHistory()
-  history.push('/some/bad/route')
+
+  const history = createMemoryHistory({ initialEntries: ['/page1', '/page2'] })
+
   render(
     <Router history={history}>
-      <App />
+      <NotFoundPage />
     </Router>,
   )
 
-  // expect(screen.getByText(/oups/i)).toBeInTheDocument()  --- failing : ?
+  expect(screen.getByText(/oups/i)).toBeInTheDocument()
 })
 
