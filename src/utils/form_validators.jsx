@@ -55,9 +55,6 @@ const cityValidation = (fieldName, fieldValue) => {
 
 const stateValidation = (fieldName, fieldValue) => {
     let state = fieldValue; 
-    // console.log('state=>',state);
-    // if (state.trim() === '') { return 'state is required'; }
-    // console.log('state OK');
     return null;
 }
 
@@ -72,9 +69,6 @@ const zipCodeValidation = (fieldName, fieldValue) => {
 
 const departmentValidation = (fieldName, fieldValue) => {
     let department = fieldValue; 
-    // let placeholder = 'Department';
-    // if (department === placeholder ) { return 'department is required'; }
-    // console.log('department OK');
     return null;
 }
 
