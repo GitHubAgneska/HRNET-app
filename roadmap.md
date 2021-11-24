@@ -103,30 +103,33 @@ TASKS:
         - header <=> unit test
         - routing <=>  unit test
         - nav ( home / current employees list)  <=>  unit test
-    
-    - create employee page ( = parent container) :
+
+    - elements
         - page title
+
+    - pages (containers)
+        - create employee page
+        - employees list page 
+
+    - features: 
         - form 
             - featured components:
-                > form validators (util)
+                - form validators (util)
+                - input components:
+                    - simple input
+                    - datepicker:
+                    - selectMenu:
+                - label component
+                - button component
+        - modal
 
-                > datepicker:
-
-                > selectMenu: 
-
-            
-    - employees list page ( = parent container):
-        - page title
         - datatable:
             - UI structure
             -  features:
-                > select entries amount
-
-                > search
-
-                > order by
-
-                > pagination
+                - select entries amount
+                - search
+                - order by
+                - pagination
 
     <br/><br/>
     ■ ----------------------------------------------------------

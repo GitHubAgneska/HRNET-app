@@ -5,7 +5,7 @@ import { modalTypes } from '../../../data/modal-types'
 import { useEffect } from "react"
 import { useState } from "react"
 
-const BaseModal = ({ type, message, content, toggleConfirmModal }) => {
+const BaseModal = ({ type, message, content, toggleConfirmModal, resetForm }) => {
     
     /* const [ modal, setCurrentModal ] = useState({})
     
@@ -19,7 +19,7 @@ const BaseModal = ({ type, message, content, toggleConfirmModal }) => {
 
     }, [type, modal]) */
     
-    const closeModal = () => { toggleConfirmModal() } // only close modal 
+    const closeModal = (e ) => { toggleConfirmModal(); resetForm(e) } // only close modal 
     
     
     return (

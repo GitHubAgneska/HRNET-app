@@ -10,8 +10,10 @@ import BaseModal from '../Modal/Modal'
 import { modalTypes } from '../../../data/modal-types'
 
 const CompositeForm = () => {
+
+    const initialState = {firstName: '', lastName:'', dob:'', startDate:'',  street:'', city:'', zipcode: '', state:'', department:''};
     
-    const [ values, setValues ] = useState({ firstName: '', lastName:'', dob:'', startDate:'',  street:'', city:'', zipcode: '', state:'', department:''});
+    const [ values, setValues ] = useState({ ...initialState});
     const [ touched, setTouched ] = useState({});
     const [ errors, setErrors ] = useState({});
 
@@ -102,7 +104,7 @@ const CompositeForm = () => {
     }
 
     const resetForm = () => {
-        setValues({firstName: '', lastName:'', dob:'', startDate:'',  street:'', city:'', zipcode: '', state:'', department:''}); 
+        setValues({...initialState}); 
         setTouched({});
         setErrors({});
         console.log('AFTER RESET: values==', values, 'errors=', errors, 'touched=', touched);
@@ -167,6 +169,7 @@ const CompositeForm = () => {
                         message={confirmCancelMessage}
                         actions={confirmCancelActions}
                         toggleConfirmModal={toggleConfirmModal}
+                        resetForm={resetForm}
                         />
                 }
 

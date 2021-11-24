@@ -18,7 +18,7 @@ const onlyLettersDigits = /^[0-9a-zA-Z]+$/;
 const nameValidation = (fieldName, fieldValue) => {
     // console.log('VALIDATING===>', 'fieldName=',fieldName, 'fieldValue=', fieldValue)
     if ( fieldValue.length < 3) { return `${fieldName} needs to be at least three characters`; }
-    if ( fieldName === 'firstName' && ( fieldValue === fieldName || fieldValue === '')  ) { return `firstName is required`; }
+    if ( fieldName === 'firstName' && ( fieldValue === fieldName || fieldValue.trim() === '')  ) { return `firstName is required`; }
     if ( ! onlyCharsReg.test(fieldValue)) { return `firstName should only contain characters`}
     else { // console.log('name OK'); 
         return null; }
