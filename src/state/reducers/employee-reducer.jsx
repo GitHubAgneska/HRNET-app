@@ -6,7 +6,7 @@ import {
     SET_USSTATE, SET_ZIPCODE, SET_DEPARTMENT,
     EMPLOYEE_CREATE_FETCHING, EMPLOYEE_CREATE_RESOLVED, EMPLOYEE_CREATE_REJECTED,
     EMPLOYEE_GET_FETCHING, EMPLOYEE_GET_RESOLVED, EMPLOYEE_GET_REJECTED
-} from './actions-types'
+} from  '../actions/actions-types'
 
 // ......................................................
 // EMPLOYEE  REDUCER

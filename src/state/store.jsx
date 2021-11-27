@@ -21,11 +21,7 @@ export const initialState = {
         // api/local storage GET request state
         get_status: 'void',
         get_payload: null,
-        get_error: null,
-        // api/local storage POST request state
-        post_status: 'void',
-        post_payload: null,
-        post_error: null
+        get_error: null
 
     },
     employeesList: {
@@ -33,7 +29,12 @@ export const initialState = {
         // api/local storage request state
         get_status: 'void',
         get_data: null,
-        get_error: null
+        get_error: null,
+        
+        // api/local storage POST request state
+        post_status: 'void',
+        post_payload: null,
+        post_error: null
     }
 }
 
