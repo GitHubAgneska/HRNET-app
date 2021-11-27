@@ -21,7 +21,7 @@ export async function getEmployeesCurrentList(dispatch, getState) {
     try {
         const response = await client.get('/fakeApi/employees-list')
         //const data = await response.json()
-        const data = await response
+        const data = await response  // ! NOT .json()
         console.log('DATA=', data) // = object employees =  array of objects
         dispatch(employeeslistResolved(data))
     }

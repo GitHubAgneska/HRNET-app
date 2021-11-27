@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { validate } from "../../../utils/form_validators"
 import { employeeFormFields } from '../../../data/employee-form-fields'
 import DateInput from '../Form-inputs/DateInput'
@@ -8,6 +9,7 @@ import Button from '../Button/Button'
 import { FormWrapper, FormBtnsWrapper } from './Employee-form-style'
 import BaseModal from '../Modal/Modal'
 import { modalTypes } from '../../../data/modal-types'
+import { createEmployee } from '../../../features/employee_feature'
 
 const CompositeForm = () => {
 
@@ -16,6 +18,10 @@ const CompositeForm = () => {
     const [ values, setValues ] = useState({ ...initialState});
     const [ touched, setTouched ] = useState({});
     const [ errors, setErrors ] = useState({});
+    
+    const [ employee, setEmployee ] = useState({})
+    const [addRequestStatus, setAddRequestStatus] = useState('void')
+    const dispatch = useDispatch()
 
     const allFieldsOk = // acts on submit disabled/!disabled
         Object.values(touched).every(t => t === true )
@@ -26,7 +32,6 @@ const CompositeForm = () => {
 
     const [ displayModal, setDisplayModal ] = useState(false);
     const toggleModal = () => { setDisplayModal(!displayModal);}
-
 
     // confirm cancel form => modal
     const [ confirmCancel, setConfirmCancel ] = useState(false);
@@ -49,6 +54,11 @@ const CompositeForm = () => {
         { btnName:'close', method: 'toggleConfirmModal' },
         // { btnName:'modify', method: 'closeModalAndEditForm' } 
     ];
+
+/*     function useCreate(employee) { 
+        const dispatch = useDispatch()
+        useEffect(() => { dispatch(createEmployee(employee))}, [dispatch, employee])
+    } */
 
     const handleInputChange = (fieldId, value) => {
         setValues(currentValues => { currentValues[fieldId] = value; return currentValues; }); // !== setValues({ ...values, [fieldId]: value }); ?
@@ -90,13 +100,16 @@ const CompositeForm = () => {
              && Object.values(formValidation.touched).length === Object.values(values).length // all fields were touched
              && Object.values(formValidation.touched).every(t => t === true ) // every touched field is true
             ) {
-                alert(JSON.stringify(values, null, 2));
+                createEmployee(values)
+                //alert(JSON.stringify(values, null, 2));
                 
-                setCreationSuccessful(true);
+                // setCreationSuccessful(true);
                 // close form after success message display
                 // setTimeout(() => { toggleForm()}, 2000);
+
             }
     }
+    
 
     const handleCancel = event => {
         event.preventDefault();
@@ -113,7 +126,7 @@ const CompositeForm = () => {
     
     return (
         <FormWrapper>
-            <form onSubmit={handleSubmit}>
+            <form /* onSubmit={handleSubmit} */>
                 { (employeeFormFields).map(i => (
                     
                     (i.fieldType ==='text')?

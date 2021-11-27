@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-// import EmployeeForm from '../elements/Employee-form/Employee-form'
 import CompositeForm from '../elements/Employee-form/Employee-form-composite'
 
 const TitleWrapper = styled.div`
@@ -20,7 +19,6 @@ const CreateEmployee = () => {
             <TitleWrapper>
                 <StyledTitle>Create employee</StyledTitle>
             </TitleWrapper>
-            {/* <EmployeeForm /> */}
             <CompositeForm />
         </main>
     )

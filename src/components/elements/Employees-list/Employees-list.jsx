@@ -1,11 +1,14 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getEmployeesCurrentList } from '../../../features/employees-list_feature'
 import { employeesListState } from "../../../state/store"
 
 const EmployeesList = () => {
     
+    const [currentList, setCurrentList ] = useState([])
     const dispatch = useDispatch()
+    //currentList? 
+
     useEffect(()=> {
         dispatch(getEmployeesCurrentList)
     }, [dispatch])

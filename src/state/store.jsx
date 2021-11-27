@@ -7,6 +7,7 @@ import employeesListReducer from './reducers/employeesList-reducer'
 export const initialState = {
 
     employee: {
+        id: null,
         firstName: '',
         lastName: '',
         dob: '',
@@ -41,6 +42,10 @@ export const initialState = {
 // SELECTORS
 export const employeeState = (state) => state.employee
 export const employeesListState = (state) => state.employeesList
+
+const voidEmployee = { status: 'void' }
+export const selectEmployeeState = (id) => (state) => {
+    return state.employee[id] ?? voidEmployee  }
 
 export const reducers = combineReducers({
     employee: employeeReducer,

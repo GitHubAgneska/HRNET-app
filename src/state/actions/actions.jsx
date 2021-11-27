@@ -27,10 +27,10 @@ export const setUsState = (usState) => (dispatch) => (dispatch({type: SET_USSTAT
 export const setZipcode = (zipcode) => (dispatch) => (dispatch({type: SET_ZIPCODE, payload: zipcode}))
 export const setDepartment = (department) => (dispatch) => (dispatch({type: SET_DEPARTMENT, payload: department}))
 
-// EMPLOYEE - GET DATA actions .....................................................  
-export const employeeFetching = () => (dispatch) => (dispatch({type: EMPLOYEE_GET_FETCHING}))
-export const employeeResolved = (data) => (dispatch) => (dispatch({type: EMPLOYEE_GET_RESOLVED, payload: data }))
-export const employeeRejected = (error) => (dispatch) => (dispatch({ type: EMPLOYEE_GET_REJECTED, payload: error }))
+// EMPLOYEE - GET/PUT DATA actions .....................................................  
+export const employeeFetching = (id) => (dispatch) => (dispatch({type: EMPLOYEE_GET_FETCHING, payload: id}))
+export const employeeResolved = (id, data) => (dispatch) => (dispatch({type: EMPLOYEE_GET_RESOLVED, payload: { id, data } }))
+export const employeeRejected = (id, error) => (dispatch) => (dispatch({ type: EMPLOYEE_GET_REJECTED, payload: { id, error } }))
 
 // ................................................................................. 
 // ACTIONS CREATORS : EMPLOYEES LIST 
@@ -40,7 +40,7 @@ export const employeesListFetching = () => (dispatch) => (dispatch({type: EMPLOY
 export const employeeslistResolved = (data) => (dispatch) => (dispatch({type: EMPLOYEES_LIST_RESOLVED, payload: data }))
 export const employeesListRejected = (error) => (dispatch) => (dispatch({type: EMPLOYEES_LIST_REJECTED, payload: error}))
 
-export const employeeCreateFetching = () => (dispatch) => (dispatch({type: EMPLOYEE_CREATE_FETCHING}))
+export const employeeCreateFetching = (data) => (dispatch) => (dispatch({type: EMPLOYEE_CREATE_FETCHING, payload: data}))
 export const employeeCreateResolved = (data) => (dispatch) => (dispatch({type: EMPLOYEE_CREATE_RESOLVED, payload: data}))
 export const employeeCreateRejected = (error) => (dispatch) => (dispatch({type: EMPLOYEE_CREATE_REJECTED, payload: error}))
 
