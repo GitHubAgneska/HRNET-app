@@ -19,8 +19,10 @@ const EmployeesList = () => {
         <div>
             { list.currentList.map( employee => (
                 <div key={Math.random()}>
-                    <p>{employee.firstName}</p>
-                    <p>{employee.lastName}</p>
+                    <p>{employee.firstName} {employee.lastName}</p>
+                    <p>{employee.dob} - {employee.startDate}</p>
+                    <p>{employee.street} - {employee.city} - {employee.state.name} - {employee.zipcode}</p>
+                    <p>{employee.department}</p>
                 </div>
             ))}
         </div>

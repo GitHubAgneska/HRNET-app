@@ -35,7 +35,7 @@ function employeesListReducer(state = initialState.employeesList, action) {
                 if ( draft.get_status === 'pending' || draft.get_status === 'updating') {
                     draft.get_status = 'resolved'
                     draft.get_payload = action.payload.employees
-                    draft.currentList = [... draft.currentList, ...draft.get_payload]
+                    draft.currentList = [...draft.currentList, ...draft.get_payload]
                     console.log('PAYLOAD TYPE==', typeof(action.payload))
                     return 
                     //draft.currentList.push(action.payload)

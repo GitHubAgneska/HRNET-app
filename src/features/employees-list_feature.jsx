@@ -3,7 +3,7 @@ import {  employeesListFetching, employeeslistResolved, employeesListRejected }
 import { client } from '../api/client'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-// Thunk functions
+// Thunk functions - UNUSED ATM ---
 export const fetchList = createAsyncThunk('employees-list/fetching', async () => {
     const response = await fetch('/fakeApi/employees-list')
     // const response = await client.get('/fakeApi/employees-list')
@@ -19,7 +19,6 @@ export async function getEmployeesCurrentList(dispatch, getState) {
     
     dispatch(employeesListFetching())
     try {
-        //const response = await fetch('/fakeApi/employees-list')
         const response = await client.get('/fakeApi/employees-list')
         //const data = await response.json()
         const data = await response

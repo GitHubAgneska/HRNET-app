@@ -24,7 +24,9 @@ export async function client(endpoint, { body, ...customConfig } = {}) {
     try {
         const response = await window.fetch(endpoint, config)
         data = await response.json()
-        if (response.ok) { console.log('DATA==', data);return data }
+        if (response.ok) { 
+            // console.log('DATA==', data);
+            return data }
         
         throw new Error(response.statusText)
     

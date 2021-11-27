@@ -49,17 +49,18 @@ const randomFromArray = (array) => {
 }
 
 /* original example
-const todoTemplates = [
-    { base: 'Buy $THING', values: ['milk', 'bread', 'cheese', 'toys'] },
-    { base: 'Clean $THING', values: ['house', 'yard', 'bedroom', 'car'] },
-    { base: 'Read $THING', values: ['newspaper', 'book', 'email'] },
-]
-const generateTodoText = () => {
-    const template = randomFromArray(todoTemplates)
-    const value = randomFromArray(template.values)
-    const text = template.base.replace('$THING', value)
-    return text
-} */
+    const todoTemplates = [
+        { base: 'Buy $THING', values: ['milk', 'bread', 'cheese', 'toys'] },
+        { base: 'Clean $THING', values: ['house', 'yard', 'bedroom', 'car'] },
+        { base: 'Read $THING', values: ['newspaper', 'book', 'email'] },
+    ]
+    const generateTodoText = () => {
+        const template = randomFromArray(todoTemplates)
+        const value = randomFromArray(template.values)
+        const text = template.base.replace('$THING', value)
+        return text
+    } 
+*/
 
 // export function makeServer({ environment = "development" } = {}) {
 export function makeServer() {
