@@ -3,7 +3,7 @@
 // https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/tutorial-steps?file=/src/App.js:0-6
 /* eslint-disable no-unused-vars */
 
-import { Server, Model, Factory, hasMany, RestSerializer } from 'miragejs' // backend API mock
+import { createServer, Server, Model, Factory, hasMany, RestSerializer } from 'miragejs' // backend API mock
 import faker from 'faker' // js library for generating fake data
 import seedrandom from 'seedrandom'
 import _ from 'lodash'
@@ -61,19 +61,29 @@ const generateTodoText = () => {
     return text
 } */
 
+// export function makeServer({ environment = "development" } = {}) {
+export function makeServer() {
 
-new Server({
+let server = createServer({
+    
+    //environment,
+
     routes() {
         this.namespace = 'fakeApi'
-        //this.timing = 2000
+        this.timing = 2000
 
         this.resource('employee')  // define multiple Shorthands for a given resource => get/post/patch/del
         this.resource('employees-list')
 
         const server = this
 
+        this.get("/employees-list", schema => {
+            return schema.employees.all();
+        });
+
         this.post('/employees-list', function (schema, req) {
         const data = this.normalizedRequestAttrs() // helper that returns the body of a request in a normalized form
+        console.log('NORMALIZED DATA==', data)
 
         if (data.text === 'error') {
             throw new Error('Could not save the employee!')
@@ -114,10 +124,12 @@ new Server({
                 if (json.employee) { numerifyId(json.employee) }
                 else if (json.employees) { json.employees.forEach(numerifyId) }
 
-            return json
+                return json
             },
         }),
-        list: IdSerializer,
+        employeesList: IdSerializer,
     },
-    seeds(server) { server.createList('employee', 15) }
+    seeds(server) { server.createList('employee', 15) ; console.log('HERE')}
 })
+
+return server; }

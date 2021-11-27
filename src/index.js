@@ -5,6 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import { store } from './state/store'
+import { fetchList, getEmployeesCurrentList } from './features/employees-list_feature'
+import { makeServer } from './api/server'
+
+makeServer()
+// store.dispatch(fetchList())
 
 ReactDOM.render(
   <React.StrictMode>

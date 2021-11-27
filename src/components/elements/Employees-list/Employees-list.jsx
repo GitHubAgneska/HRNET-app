@@ -11,6 +11,7 @@ const EmployeesList = () => {
     }, [dispatch])
 
     const list = useSelector(employeesListState)
+    
     if ( list.get_status === 'rejected') { return <span>PB collecting list</span>}
     
 

@@ -5,7 +5,7 @@
 // https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/tutorial-steps?file=/src/App.js:0-6
 
 export async function client(endpoint, { body, ...customConfig } = {}) {
-    const headers = { 'Content-Type': 'application/json' }
+    const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
 
     const config = {
         method: body ? 'POST' : 'GET',
@@ -24,7 +24,7 @@ export async function client(endpoint, { body, ...customConfig } = {}) {
     try {
         const response = await window.fetch(endpoint, config)
         data = await response.json()
-        if (response.ok) { return data }
+        if (response.ok) { console.log('DATA==', data);return data }
         
         throw new Error(response.statusText)
     
