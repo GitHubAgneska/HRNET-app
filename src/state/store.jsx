@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux"
 import thunk from 'redux-thunk'
 import employeeReducer from "./reducers/employee-reducer"
 import employeesListReducer from './reducers/employeesList-reducer'
+import filterReducer from './reducers/filter-reducer'
 
 // INITIAL STATE ( sliced into features )
 export const initialState = {
@@ -26,7 +27,7 @@ export const initialState = {
 
     },
     employeesList: {
-        currentList: [ ],
+        currentList: [],
         // api/local storage request state
         get_status: 'void',
         get_data: null,
@@ -35,13 +36,24 @@ export const initialState = {
         // api/local storage POST request state
         post_status: 'void',
         post_payload: null,
-        post_error: null
-    }
+        post_error: null,
+
+        filteredBy: 'none'
+    },
+    filters : {
+        currentParamFilter: { param: '', reverseOrder: false },  
+        searchterm: '',
+        entries: null,
+        previous: false,
+        next: false
+    }   
 }
 
 // SELECTORS
 export const employeeState = (state) => state.employee
 export const employeesListState = (state) => state.employeesList
+export const filtersState = (state) => state.filters
+
 
 const voidEmployee = { status: 'void' }
 export const selectEmployeeState = (id) => (state) => {
@@ -49,7 +61,8 @@ export const selectEmployeeState = (id) => (state) => {
 
 export const reducers = combineReducers({
     employee: employeeReducer,
-    employeesList: employeesListReducer
+    employeesList: employeesListReducer,
+    filters: filterReducer
 })
 
 // adding of a 'rootReducer' allows a complete reset of all sub-reducers ( e.g : reset state on logout)

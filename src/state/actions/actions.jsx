@@ -7,7 +7,7 @@ import {
     EMPLOYEE_GET_FETCHING, EMPLOYEE_GET_RESOLVED, EMPLOYEE_GET_REJECTED,
 
     EMPLOYEES_LIST_FETCHING, EMPLOYEES_LIST_RESOLVED, EMPLOYEES_LIST_REJECTED,
-    FILTER_LIST_BY
+    FILTER_PARAM_CHANGED, FILTER_SEARCHTERM_CHANGED, FILTER_ENTRIES_AMOUNT_CHANGED 
 } from './actions-types'
 
 // ................................................................................. 
@@ -29,20 +29,24 @@ export const setDepartment = (department) => (dispatch) => (dispatch({type: SET_
 
 // EMPLOYEE - GET/PUT DATA actions .....................................................  
 export const employeeFetching = (id) => (dispatch) => (dispatch({type: EMPLOYEE_GET_FETCHING, payload: id}))
-export const employeeResolved = (id, data) => (dispatch) => (dispatch({type: EMPLOYEE_GET_RESOLVED, payload: { id, data } }))
-export const employeeRejected = (id, error) => (dispatch) => (dispatch({ type: EMPLOYEE_GET_REJECTED, payload: { id, error } }))
+export const employeeResolved = (id, data) => (dispatch) => (dispatch({type: EMPLOYEE_GET_RESOLVED, payload: { id, data }}))
+export const employeeRejected = (id, error) => (dispatch) => (dispatch({ type: EMPLOYEE_GET_REJECTED, payload: { id, error}}))
 
 // ................................................................................. 
 // ACTIONS CREATORS : EMPLOYEES LIST 
 // ................................................................................. 
 // EMPLOYEES LIST - GET/POST DATA actions...................................................
 export const employeesListFetching = () => (dispatch) => (dispatch({type: EMPLOYEES_LIST_FETCHING }))
-export const employeeslistResolved = (data) => (dispatch) => (dispatch({type: EMPLOYEES_LIST_RESOLVED, payload: data }))
+export const employeeslistResolved = (data) => (dispatch) => (dispatch({type: EMPLOYEES_LIST_RESOLVED, payload: data}))
 export const employeesListRejected = (error) => (dispatch) => (dispatch({type: EMPLOYEES_LIST_REJECTED, payload: error}))
 
 export const employeeCreateFetching = (data) => (dispatch) => (dispatch({type: EMPLOYEE_CREATE_FETCHING, payload: data}))
 export const employeeCreateResolved = (data) => (dispatch) => (dispatch({type: EMPLOYEE_CREATE_RESOLVED, payload: data}))
 export const employeeCreateRejected = (error) => (dispatch) => (dispatch({type: EMPLOYEE_CREATE_REJECTED, payload: error}))
 
-// EMPLOYEES LIST - DISPLAY DATA actions ...................................................
-export const filterListBy = (param) => ({type: FILTER_LIST_BY, payload: param })
+// ................................................................................. 
+// ACTIONS CREATORS : FILTERS (not async)
+// ................................................................................. 
+export const paramFilterChanged = (filterParam, reverse ) => ({ type: FILTER_PARAM_CHANGED, payload: { filterParam, reverse } })
+export const searchtermFilterChanged = (searchterm) => ({ type: FILTER_SEARCHTERM_CHANGED, payload: searchterm })
+export const entriesFilterChanged = (entries) => ({ type: FILTER_ENTRIES_AMOUNT_CHANGED, payload: entries })

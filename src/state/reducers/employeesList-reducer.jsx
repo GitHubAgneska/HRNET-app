@@ -2,8 +2,7 @@ import { initialState  } from '../store'
 import produce from 'immer'
 import {
     EMPLOYEE_CREATE_FETCHING, EMPLOYEE_CREATE_RESOLVED, EMPLOYEE_CREATE_REJECTED,
-    EMPLOYEES_LIST_FETCHING, EMPLOYEES_LIST_RESOLVED, EMPLOYEES_LIST_REJECTED,
-    FILTER_LIST_BY 
+    EMPLOYEES_LIST_FETCHING, EMPLOYEES_LIST_RESOLVED, EMPLOYEES_LIST_REJECTED
 } from  '../actions/actions-types'
 
 // ......................................................
@@ -14,6 +13,7 @@ function employeesListReducer(state = initialState.employeesList, action) {
     return produce(state, (draft) => {
         switch (action.type) {
             
+            // GET REQUEST ---------------------
             case EMPLOYEES_LIST_FETCHING: {
                 if ( draft.get_status === 'void') {
                     draft.get_status = 'pending'
@@ -55,7 +55,7 @@ function employeesListReducer(state = initialState.employeesList, action) {
             }
 
 
-         // API REQUESTS ---------------------
+            // POST REQUEST ---------------------
             case EMPLOYEE_CREATE_FETCHING: {
                 if ( draft.post_status === 'void') { 
                     draft.post_status = 'pending'
@@ -87,7 +87,7 @@ function employeesListReducer(state = initialState.employeesList, action) {
                     // set to rejected, save error, delete data
                     draft.post_status = 'rejected'
                     draft.post_error = action.payload
-                    draft.post = null
+                    draft.post_payload = null
                     return
                 }
                 return // else action ignored

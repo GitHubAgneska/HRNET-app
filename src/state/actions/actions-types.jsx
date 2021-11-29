@@ -35,5 +35,8 @@ export const  EMPLOYEES_LIST_FETCHING ='employees-list/fetching';
 export const  EMPLOYEES_LIST_RESOLVED ='employees-list/resolved';
 export const  EMPLOYEES_LIST_REJECTED ='employees-list/rejected';
 
-export const  FILTER_LIST_BY ='employees-list/filter_list_by'
+// FILTERS ACTIONS TYPES .................................
+export const FILTER_PARAM_CHANGED = 'filters/filter-param-changed'
+export const FILTER_SEARCHTERM_CHANGED = 'filters/filter-searchterm-changed'
+export const FILTER_ENTRIES_AMOUNT_CHANGED = 'filters/filter-entries-changed'
 

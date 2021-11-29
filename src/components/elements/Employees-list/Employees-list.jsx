@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getEmployeesCurrentList } from '../../../features/employees-list_feature'
-import { employeesListState } from "../../../state/store"
+import { employeesListState, filtersState } from "../../../state/store"
+import { selectFilteredEmployees } from '../../../features/filters-feature'
 
 const EmployeesList = () => {
     
-    const [currentList, setCurrentList ] = useState([])
-    const dispatch = useDispatch()
-    //currentList? 
-
-    useEffect(()=> {
-        dispatch(getEmployeesCurrentList)
-    }, [dispatch])
-
     const list = useSelector(employeesListState)
+    const sortedList = useSelector(selectFilteredEmployees)
+    const dispatch = useDispatch()
+    let sortingRequested = false
+
+    let isSorted = false
     
+    const sortListBy = (type, reversed) => { 
+        sortingRequested = true
+
+        requestFiltering(type,reversed )
+
+    }
+
+
     if ( list.get_status === 'rejected') { return <span>PB collecting list</span>}
     
 
     return (
         <div>
+            <button onClick={sortListBy('firstName', false)}>sortBy name</button>
             { list.currentList.map( employee => (
                 <div key={Math.random()}>
                     <p>{employee.firstName} {employee.lastName}</p>
