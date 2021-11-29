@@ -13,12 +13,12 @@ export default function filtersReducer(state = initialState.filters, action) {
         // user clicks sort list by <param>
         case FILTER_PARAM_CHANGED: {
             // retrieve new param ( ex: 'byName')
-            let { filterParam, reverseOrder }  = action.payload; console.log('new list filter param=', filterParam, reverseOrder)
+            let { param, reverseOrder } = action.payload; console.log('new list filter param=', param, reverseOrder)
             
             // new param will always operate on unsorted list (employeesListState remains unchanged) so no need to re-init initial list
             return {
                 ...state,
-                currentParamFilter: { filterParam, reverseOrder }
+                currentParamFilter: { param, reverseOrder }
             }
         }
         // user enters chars in search field: new search term passed to filters state

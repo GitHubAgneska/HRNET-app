@@ -1,5 +1,6 @@
 import { employeesListState } from '../state/store'
-import {  employeesListFetching, employeeslistResolved, employeesListRejected } from '../state/actions/Actions'
+import {  employeesListFetching, employeeslistResolved, employeesListRejected,
+    paramFilterChanged, searchtermFilterChanged, entriesFilterChanged } from '../state/actions/Actions'
 import { client } from '../api/client'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
@@ -29,3 +30,4 @@ export async function getEmployeesCurrentList(dispatch, getState) {
         dispatch(employeesListRejected(error))
     }
 }
+

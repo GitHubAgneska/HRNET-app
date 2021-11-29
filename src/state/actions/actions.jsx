@@ -47,6 +47,6 @@ export const employeeCreateRejected = (error) => (dispatch) => (dispatch({type: 
 // ................................................................................. 
 // ACTIONS CREATORS : FILTERS (not async)
 // ................................................................................. 
-export const paramFilterChanged = (filterParam, reverse ) => ({ type: FILTER_PARAM_CHANGED, payload: { filterParam, reverse } })
+export const paramFilterChanged = (param, reverseOrder ) => ({ type: FILTER_PARAM_CHANGED, payload: { param, reverseOrder } })
 export const searchtermFilterChanged = (searchterm) => ({ type: FILTER_SEARCHTERM_CHANGED, payload: searchterm })
 export const entriesFilterChanged = (entries) => ({ type: FILTER_ENTRIES_AMOUNT_CHANGED, payload: entries })
