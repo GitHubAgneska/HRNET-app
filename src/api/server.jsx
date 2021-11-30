@@ -82,9 +82,11 @@ let server = createServer({
             return schema.employees.all();
         });
 
-        this.post('/employees-list', function (schema, req) {
-        const data = this.normalizedRequestAttrs() // helper that returns the body of a request in a normalized form
-        console.log('NORMALIZED DATA==', data)
+        this.post('/employees-list', function (schema, req) { 
+        // const data = this.normalizedRequestAttrs() // helper that returns the body of a request in a normalized form
+        // console.log('NORMALIZED DATA==', data)
+        const data = JSON.parse(req.requestBody);
+        // schema.results.create(attrs);
 
         if (data.text === 'error') {
             throw new Error('Could not save the employee!')

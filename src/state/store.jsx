@@ -32,7 +32,6 @@ export const initialState = {
         get_status: 'void',
         get_data: null,
         get_error: null,
-        
         // api/local storage POST request state
         post_status: 'void',
         post_payload: null,

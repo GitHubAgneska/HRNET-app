@@ -1,7 +1,7 @@
 import { initialState  } from '../store'
 import produce from 'immer'
 import {
-    EMPLOYEE_CREATE_FETCHING, EMPLOYEE_CREATE_RESOLVED, EMPLOYEE_CREATE_REJECTED,
+    EMPLOYEES_LIST_CREATE_FETCHING, EMPLOYEES_LIST_CREATE_RESOLVED, EMPLOYEES_LIST_CREATE_REJECTED,
     EMPLOYEES_LIST_FETCHING, EMPLOYEES_LIST_RESOLVED, EMPLOYEES_LIST_REJECTED
 } from  '../actions/actions-types'
 
@@ -56,7 +56,7 @@ function employeesListReducer(state = initialState.employeesList, action) {
 
 
             // POST REQUEST ---------------------
-            case EMPLOYEE_CREATE_FETCHING: {
+            case EMPLOYEES_LIST_CREATE_FETCHING: {
                 if ( draft.post_status === 'void') { 
                     draft.post_status = 'pending'
                     return
@@ -73,16 +73,19 @@ function employeesListReducer(state = initialState.employeesList, action) {
                 // else action ignored
                 return
             }
-            case EMPLOYEE_CREATE_RESOLVED: {
+            case EMPLOYEES_LIST_CREATE_RESOLVED: {
+                console.log('EMPLOYEE_CREATE_RESOLVED ACTION CALLED')
                 if ( draft.post_status === 'pending' || draft.post_status === 'updating') {
                     draft.post_status = 'resolved'
                     draft.post_payload = action.payload
-                    return draft.currentList.push(action.payload)
+                    let newEmployee = action.payload
+                    draft.currentList.push(newEmployee)
+                    return
                 }
                 // else action ignored
                 return
             }
-            case EMPLOYEE_CREATE_REJECTED: {
+            case EMPLOYEES_LIST_CREATE_REJECTED: {
                 if ( draft.post_status === 'pending' || draft.post_status === 'updating') {
                     // set to rejected, save error, delete data
                     draft.post_status = 'rejected'

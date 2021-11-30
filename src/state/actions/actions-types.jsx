@@ -16,10 +16,6 @@ export const  SET_DEPARTMENT  ='employee/set_department';
 export const  EMPLOYEE_GET_FETCHING ='employee/fetching';
 export const  EMPLOYEE_GET_RESOLVED ='employee/resolved';
 export const  EMPLOYEE_GET_REJECTED ='employee/rejected';
-// POST request
-export const  EMPLOYEE_CREATE_FETCHING ='employee/create_fetching';
-export const  EMPLOYEE_CREATE_RESOLVED ='employee/create_resolved';
-export const  EMPLOYEE_CREATE_REJECTED ='employee/create_rejected';
 // PUT request
 export const  EMPLOYEE_EDIT_FETCHING ='employee/edit_fetching';
 export const  EMPLOYEE_EDIT_RESOLVED ='employee/edit_resolved';
@@ -34,6 +30,10 @@ export const  EMPLOYEE_DELETE_REJECTED ='employee/delete_rejected';
 export const  EMPLOYEES_LIST_FETCHING ='employees-list/fetching';
 export const  EMPLOYEES_LIST_RESOLVED ='employees-list/resolved';
 export const  EMPLOYEES_LIST_REJECTED ='employees-list/rejected';
+// POST request
+export const EMPLOYEES_LIST_CREATE_FETCHING ='employees-list/create_fetching';
+export const EMPLOYEES_LIST_CREATE_RESOLVED ='employees-list/create_resolved';
+export const EMPLOYEES_LIST_CREATE_REJECTED ='employees-list/create_rejected';
 
 // FILTERS ACTIONS TYPES .................................
 export const FILTER_PARAM_CHANGED = 'filters/filter-param-changed'

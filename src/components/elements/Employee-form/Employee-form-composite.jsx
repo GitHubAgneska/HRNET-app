@@ -9,7 +9,7 @@ import Button from '../Button/Button'
 import { FormWrapper, FormBtnsWrapper } from './Employee-form-style'
 import BaseModal from '../Modal/Modal'
 import { modalTypes } from '../../../data/modal-types'
-import { createEmployee } from '../../../features/employee_feature'
+import { createEmployee } from '../../../features/employees-list_feature'
 
 const CompositeForm = () => {
 
@@ -77,7 +77,7 @@ const CompositeForm = () => {
         // console.log('allFieldsOk=',allFieldsOk)
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         // console.log('formData=', values);
         event.preventDefault();
 
@@ -96,11 +96,11 @@ const CompositeForm = () => {
         setTouched(formValidation.touched);
         // console.log('ERRORS & TOUCHED ==', formValidation);
         
-        if (    Object.values(formValidation.errors).every(t => t === null ) // all errors  = null
+        if ( Object.values(formValidation.errors).every(t => t === null ) // all errors  = null
              && Object.values(formValidation.touched).length === Object.values(values).length // all fields were touched
              && Object.values(formValidation.touched).every(t => t === true ) // every touched field is true
             ) {
-                createEmployee(values)
+                await dispatch(createEmployee(values))
                 //alert(JSON.stringify(values, null, 2));
                 
                 // setCreationSuccessful(true);

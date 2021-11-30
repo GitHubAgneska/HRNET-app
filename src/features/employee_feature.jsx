@@ -2,8 +2,7 @@ import { employeeState, employeesListState, selectEmployeeState } from '../state
 import {  
     setEmployee, setFirstName, setLastName,setDob, setStartDate, setStreet,
     setCity, setUsState, setZipcode, setDepartment,
-    employeeFetching, employeeResolved, employeeRejected,
-    employeeCreateFetching, employeeCreateResolved, employeeCreateRejected
+    employeeFetching, employeeResolved, employeeRejected
 } from '../state/actions/Actions'
 import { client } from '../api/client'
 
@@ -34,28 +33,3 @@ function setVoidIfUndefined(draft, id) {
     }
 }
 
-// Thunk function : necessary to pass employee object using thunk creator
-export function createEmployee(employee) {
-    console.log('EMPLOYEE = ', employee)
-    // first, check if exists already
-    //const exists = selectEmployeeState(employee.id)
-    // exists ? askEdit() : goOn()
-
-   return async (dispatch, getState) => { // returns thunk
-        console.log('CALLING ASYNC ')
-        const status = employeesListState(getState()).post_status
-        console.log('request status when dispatch requested=', status)
-        if ( status === 'pending' || status === 'updating ') { return }
-    
-        dispatch(employeeCreateFetching(employee))
-        try {
-            const response = await client.post('/fakeApi/employees-list', employee )
-            const data = await response
-            console.log('PAYLOAD AT CREATE=', data)
-            dispatch(employeeCreateResolved(data))
-        }
-        catch(error) {
-            dispatch(employeeCreateRejected(error))
-        }
-    }
-}
