@@ -1,12 +1,12 @@
 import { createSelector } from "@reduxjs/toolkit"
-import {  initialState, employeesListState, filtersState, store } from '../state/store'
+import { initialState, employeesListState, filtersState, store } from '../state/store'
 import { paramFilterChanged, searchtermFilterChanged, entriesFilterChanged } from '../state/actions/Actions'
 
 export const requestFiltering = (filterParam, reverse) => {
     store.dispatch(paramFilterChanged(filterParam, reverse))
 }
 
-// SELECTOR : MEMOIZED SELECTOR To allow multiple filters and derive state
+// SELECTOR : MEMOIZED SELECTOR To allow multiple filters and derive state from employeesList state
 export const selectFilteredEmployees = createSelector(
 
      initialState.employeesList.currentList, // input selector 1

@@ -1,9 +1,7 @@
 import { employeesListState } from '../state/store'
 import {  
     employeesListFetching, employeeslistResolved, employeesListRejected,
-    paramFilterChanged, searchtermFilterChanged, entriesFilterChanged,
     employeesListCreateFetching, employeesListCreateResolved, employeesListCreateRejected
-
 } from '../state/actions/Actions'
 import { client } from '../api/client'
 import { createAsyncThunk } from '@reduxjs/toolkit'
