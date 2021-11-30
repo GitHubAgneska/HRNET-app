@@ -1,4 +1,4 @@
-// chunk from redux official doc https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers
+// chunk adapted from redux official doc https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers
 // https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/master/?from-embed=&file=/src/api/server.js:0-3041
 // https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/tutorial-steps?file=/src/App.js:0-6
 /* eslint-disable no-unused-vars */
