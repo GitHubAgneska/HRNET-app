@@ -4,6 +4,8 @@ import CompositeForm from './Employee-form-composite'
 import { validate } from "../../../utils/form_validators"
 import SimpleInput from "../Form-inputs/SimpleInput";
 import { employeeFormFields } from '../../../data/employee-form-fields'
+import { Provider } from 'react-redux'
+import { store } from '../../../state/store'
 
 const userMock = { 
     firstName: 'Lester',
@@ -24,7 +26,7 @@ describe('form testing', () => {
     // UI test: displays correct content
     // --------------
     test('renders all expected fields', () => {
-        const { container } = render(<CompositeForm />)
+        const { container } = render(<Provider store={store}><CompositeForm /></Provider>)
         expect(container.getElementsByTagName('input').length).toBe(7)
         expect(container.getElementsByTagName('select').length).toBe(2)
         expect(container.getElementsByTagName('button').length).toBe(2)
@@ -43,7 +45,7 @@ describe('form testing', () => {
     // <span> elements should be 'Please enter xxxx ' when validationError: true
 
     test('at form init, save btn should be disabled', () => { 
-        render(<CompositeForm />)
+        render(<Provider store={store}><CompositeForm /></Provider>)
         expect(screen.getByRole('button', { name: /save/i })).toBeDisabled();
     })
 
@@ -51,7 +53,7 @@ describe('form testing', () => {
         /* render(<CompositeForm />)
         userEvent.type(screen.getByPlaceholderText(/firstName/i ), userMock.firstName); */ // ---- TO REVIEW : diff userEvent / and following ?
         const setValues = jest.fn();
-        const { container } = render(<CompositeForm onClick={setValues}  />)
+        const { container } = render(<Provider store={store}><CompositeForm onClick={setValues} /></Provider>)
         container.querySelector('input', { name: 'firstName' }).value = 'Lester'
         container.querySelector('input', { name: 'lastName' }).value = 'Nygaard'
         container.querySelector('input', { name: 'dob' }).value = '1964-11-11'
@@ -71,7 +73,7 @@ describe('form testing', () => {
 
     test('if some fields are invalid, save btn should be disabled', () => {
         const setValues = jest.fn();
-        const { container } = render(<CompositeForm onClick={setValues}  />)
+        const { container } = render(<Provider store={store}><CompositeForm onClick={setValues} /></Provider>)
         container.querySelector('input', { name: 'firstName' }).value = 'Le99er'
         container.querySelector('input', { name: 'lastName' }).value = 'Nygaard'
         container.querySelector('input', { name: 'dob' }).value = '1964-11-11'
@@ -86,7 +88,7 @@ describe('form testing', () => {
     })
 
     test('if a field is invalid, corresponding error message should show', () => {
-        const { container } = render(<CompositeForm  />)
+        const { container } = render(<Provider store={store}><CompositeForm /></Provider>)
         const itemField = container.querySelector('input', { name: 'firstName' })
         const handleBlur = jest.fn()
         const handleInputChange = jest.fn()
@@ -105,7 +107,7 @@ describe('form testing', () => {
 
     test('When user clicks cancel btn, if fields were touched a confirm modal should show', () => {
         const setValues = jest.fn();
-        const { container } = render(<CompositeForm onClick={setValues}  />)
+        const { container } = render(<Provider store={store}><CompositeForm onClick={setValues} /></Provider>)
         const itemField = container.querySelector('input', { name: 'firstName' })
 
         fireEvent.input(itemField, {target: { value: 'Lester'}, bubbles:true})
@@ -116,7 +118,7 @@ describe('form testing', () => {
 
     test('If confirm cancel is clicked in confirm modal, form should reset', () => {  //  fake passes atm ( resetform does not work)
         const setValues = jest.fn();
-        const { container } = render(<CompositeForm onClick={setValues}  />)
+        const { container } = render(<Provider store={store}><CompositeForm onClick={setValues} /></Provider>)
         const itemField = container.querySelector('input', { name: 'firstName' })
 
         fireEvent.input(itemField, {target: { value: 'Lester'}, bubbles:true})
@@ -133,7 +135,7 @@ describe('form testing', () => {
 
     test('after completing form, if all fields are valid, save btn should be enabled', () => {
         const setValues = jest.fn();
-        const { container } = render(<CompositeForm onClick={setValues}  />)
+        const { container } = render(<Provider store={store}><CompositeForm onClick={setValues} /></Provider>)
         
         container.querySelector('input', { name: 'firstName' }).value = 'Lester'
         container.querySelector('input', { name: 'lastName' }).value = 'Nygaard'
@@ -154,7 +156,7 @@ describe('form testing', () => {
         const handleBlur = jest.fn()
         const errors = {}
         
-        const { container } = render(<CompositeForm onClick={setValues} handleBlur={setErrors} />)
+        const { container } = render(<Provider store={store}><CompositeForm onClick={setValues} onBlur={setErrors}/></Provider>)
         let itemField;
         
         // fill out each field modeled on mock user object key/values
@@ -181,8 +183,7 @@ describe('form testing', () => {
         const setTouched = jest.fn()
         
         const handleSubmit =() => { setErrors(); setTouched()}
-        
-        const { container } = render(<CompositeForm onSubmit={handleSubmit} />)
+        const { container } = render(<Provider store={store}><CompositeForm onSubmit={handleSubmit} /></Provider>)
         let itemField;
         
         // fill out each field modeled on mock user object key/values + trigger events
@@ -208,7 +209,7 @@ describe('form testing', () => {
 
     test('adding valid input values to form then submit should update state object', () => {
         const setValues = jest.fn();
-        const { container } = render(<CompositeForm onClick={setValues}  />)
+        const { container } = render(<Provider store={store}><CompositeForm onClick={setValues} /></Provider>)
         container.querySelector('input', { name: 'firstName' }).value = 'Lester'
         container.querySelector('input', { name: 'lastName' }).value = 'Nygaard'
         container.querySelector('input', { name: 'dob' }).value = '1964-11-11'

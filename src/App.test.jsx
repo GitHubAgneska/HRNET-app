@@ -4,9 +4,12 @@ import App from './App';
 import {createMemoryHistory} from 'history'
 import {Router} from 'react-router-dom'
 import NotFoundPage from './components/containers/404'
+import { Provider } from 'react-redux'
+import { store } from './state/store'
+
 
 test('renders the appropriate header', () => {
-  const { getByText } =  render(<App />); // query is scoped to render's result
+  const { getByText } =  render(<Provider store={store}><App /></Provider>); // query is scoped to render's result
   expect (getByText("HRNET")).toBeInTheDocument();
   expect (getByText("home")).toBeInTheDocument();
   expect (getByText("employees")).toBeInTheDocument();
@@ -16,7 +19,9 @@ test('full app rendering/navigating', () => {
   const history = createMemoryHistory()
   render (
       <Router history={history}>
-          <App/>
+          <Provider store={store}>
+            <App/>
+          </Provider>
       </Router>,
   )
   // verify page content for expected route

@@ -3,6 +3,8 @@ import { act, fireEvent, render, screen, cleanup } from '@testing-library/react'
 import SimpleInput from "../components/elements/Form-inputs/SimpleInput";
 import { employeeFormFields } from '../data/employee-form-fields'
 import CompositeForm from "../components/elements/Employee-form/Employee-form-composite";
+import { Provider } from 'react-redux'
+import { store } from '../state/store'
 
 const userMock = { 
     firstName: 'Lester',
@@ -21,7 +23,7 @@ describe('form validators testing', () => {
 
     test('firstName & lastName validation', () => {
 
-        const { container } = render(<CompositeForm />)
+        const { container } = render(<Provider store={store}><CompositeForm /></Provider>)
         const itemField = container.querySelector('input', { name: 'firstName' })
 
         fireEvent.input(itemField, {target: { value: 'Le99er'}, bubbles:true})
