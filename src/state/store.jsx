@@ -36,10 +36,9 @@ export const initialState = {
         post_status: 'void',
         post_payload: null,
         post_error: null,
-
-        filteredBy: 'none'
     },
     filters : {
+        none: true,
         currentParamFilter: { param: '', reverseOrder: false },  
         searchterm: '',
         entries: null,
