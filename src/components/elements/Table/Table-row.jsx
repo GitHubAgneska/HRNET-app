@@ -1,12 +1,12 @@
 import { Fragment } from "react"
-
+import {StyledTableRow } from './Table_style'
 
 const TableRow = ({list}) => {
     return (
         <Fragment>
             { list.map( employee => (
                 
-                <tr key={Math.random()}>
+                <StyledTableRow key={Math.random()}>
                     <td>{employee.firstName}</td>
                     <td>{employee.lastName}</td>
                     <td>{employee.dob}</td>
@@ -16,7 +16,7 @@ const TableRow = ({list}) => {
                     <td>{employee.state.name}</td>
                     <td>{employee.zipcode}</td>
                     <td>{employee.department}</td>
-                </tr>
+                </StyledTableRow>
                 ))
             }
         </Fragment>

@@ -1,19 +1,19 @@
 import { TableWrapper } from './Table_style'
 import TableRow  from './Table-row'
 import TableHeader from './Table-header'
-import { StyledTableHeader } from './Table_style'
+import { StyledTableHeader, StyledTable } from './Table_style'
 
-const Table = ({list}) => {
+const Table = ({list, sortListBy}) => {
     return (
         <TableWrapper>
-            <table>
+            <StyledTable>
                 <StyledTableHeader>
-                    <TableHeader />
+                    <TableHeader sortListBy={sortListBy}/>
                 </StyledTableHeader>
                 <tbody>
                     <TableRow list={list} />
                 </tbody>
-            </table>
+            </StyledTable>
         </TableWrapper>
     )
 }
