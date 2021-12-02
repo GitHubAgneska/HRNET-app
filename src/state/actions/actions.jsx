@@ -7,6 +7,8 @@ import {
     EMPLOYEES_LIST_FETCHING, EMPLOYEES_LIST_RESOLVED, EMPLOYEES_LIST_REJECTED,
 
     EMPLOYEES_LIST_CREATE_FETCHING, EMPLOYEES_LIST_CREATE_RESOLVED, EMPLOYEES_LIST_CREATE_REJECTED,
+
+    FILTERS_STATUS_CHANGED,
     FILTER_PARAM_CHANGED, FILTER_SEARCHTERM_CHANGED, FILTER_ENTRIES_AMOUNT_CHANGED 
 } from './actions-types'
 
@@ -47,6 +49,7 @@ export const employeesListCreateRejected = (error) => (dispatch) => (dispatch({t
 // ................................................................................. 
 // ACTIONS CREATORS : FILTERS (not async)
 // ................................................................................. 
+export const filtersStatusChanged = (data) => ({type: FILTERS_STATUS_CHANGED, payload: data })
 export const paramFilterChanged = (param, reverseOrder ) => ({ type: FILTER_PARAM_CHANGED, payload: { param, reverseOrder } })
 export const searchtermFilterChanged = (searchterm) => ({ type: FILTER_SEARCHTERM_CHANGED, payload: searchterm })
 export const entriesFilterChanged = (entries) => ({ type: FILTER_ENTRIES_AMOUNT_CHANGED, payload: entries })

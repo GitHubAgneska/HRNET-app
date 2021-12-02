@@ -36,7 +36,7 @@ function employeesListReducer(state = initialState.employeesList, action) {
                     draft.get_status = 'resolved'
                     draft.get_payload = action.payload.employees
                     draft.currentList = [...draft.currentList, ...draft.get_payload]
-                    console.log('PAYLOAD TYPE==', typeof(action.payload))
+                    // console.log('PAYLOAD TYPE==', typeof(action.payload))
                     return 
                     //draft.currentList.push(action.payload)
                 }
@@ -74,7 +74,7 @@ function employeesListReducer(state = initialState.employeesList, action) {
                 return
             }
             case EMPLOYEES_LIST_CREATE_RESOLVED: {
-                console.log('EMPLOYEE_CREATE_RESOLVED ACTION CALLED')
+                // console.log('EMPLOYEE_CREATE_RESOLVED ACTION CALLED')
                 if ( draft.post_status === 'pending' || draft.post_status === 'updating') {
                     draft.post_status = 'resolved'
                     draft.post_payload = action.payload

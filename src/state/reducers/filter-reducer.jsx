@@ -1,5 +1,5 @@
 import { initialState  } from '../store'
-import { FILTER_PARAM_CHANGED, FILTER_SEARCHTERM_CHANGED, FILTER_ENTRIES_AMOUNT_CHANGED } from '../actions/actions-types'
+import { FILTERS_STATUS_CHANGED, FILTER_PARAM_CHANGED, FILTER_SEARCHTERM_CHANGED, FILTER_ENTRIES_AMOUNT_CHANGED } from '../actions/actions-types'
 
 // ......................................................
 // FILTER LIST  REDUCER
@@ -9,10 +9,11 @@ import { FILTER_PARAM_CHANGED, FILTER_SEARCHTERM_CHANGED, FILTER_ENTRIES_AMOUNT_
 export default function filtersReducer(state = initialState.filters, action) {
     
     switch (action.type) {
+        case FILTERS_STATUS_CHANGED: { let status = action.payload; return { ...state, filterStatus: status }}
         // user clicks sort list by <param>
         case FILTER_PARAM_CHANGED: {
-            // retrieve new param ( ex: 'byName')
-            let { param, reverseOrder } = action.payload; console.log('new list filter param=', param, reverseOrder)
+            let { param, reverseOrder } = action.payload; 
+            console.log('filtersReducer===> new filter param=', param, 'reverseOrder=', reverseOrder)
             
             // new param will always operate on unsorted list (employeesListState remains unchanged) so no need to re-init initial list
             return { ...state, currentParamFilter: { param, reverseOrder } }

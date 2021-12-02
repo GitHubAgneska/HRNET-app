@@ -36,6 +36,7 @@ export const EMPLOYEES_LIST_CREATE_RESOLVED ='employees-list/create_resolved';
 export const EMPLOYEES_LIST_CREATE_REJECTED ='employees-list/create_rejected';
 
 // FILTERS ACTIONS TYPES .................................
+export const FILTERS_STATUS_CHANGED = 'filters/filters-status-changed'
 export const FILTER_PARAM_CHANGED = 'filters/filter-param-changed'
 export const FILTER_SEARCHTERM_CHANGED = 'filters/filter-searchterm-changed'
 export const FILTER_ENTRIES_AMOUNT_CHANGED = 'filters/filter-entries-changed'

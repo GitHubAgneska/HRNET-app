@@ -6,22 +6,19 @@ import Table from '../Table/Table'
 
 const EmployeesList = () => {
     
-    const [ isSorted, setSortingRequested]= useState(false)
-    const dispatch = useDispatch()
+    useEffect(() => {
+        
+    }, [])
+
     let list = useSelector(employeesListState)
-    let filters = useSelector(filtersState)
-    // console.log('LIST at component init ==', list)
+    
+    const sortedList = useSelector(selectFilteredEmployees)
+    const listToDisplay = sortedList??[]
 
-    const isFilteringActive = useSelector(state => state.filters.none === false )
-
-   // const sortedList = useSelector(selectFilteredEmployees)
 
     const sortListBy = (filterParam, reverse ) => {
         console.log('filtering requested: ', filterParam, reverse)
-        setSortingRequested(true)
         requestFiltering(filterParam, reverse) // call handler => modify filter state
-
-        
     }
 
     if ( list.get_status === 'rejected') { return <span>PB collecting list</span>}
@@ -30,19 +27,10 @@ const EmployeesList = () => {
     return (
         <div>
             <button onClick={() => sortListBy('firstName', false)}>sortBy name</button>
-            <Table list={list.currentList} />
-
+            <button onClick={() => sortListBy('department', false)}>sortBy department</button>
             
-            {/* { list.currentList.map( employee => (
-                    <div key={Math.random()}>
-                        <p>{employee.firstName} {employee.lastName}</p>
-                        <p>{employee.dob} - {employee.startDate}</p>
-                        <p>{employee.street} - {employee.city} - {employee.state.name} - {employee.zipcode}</p>
-                        <p>{employee.department}</p>
-                    </div>
-                ))
-            } */}
-
+            { listToDisplay &&  <Table list={listToDisplay} /> }
+            { ! listToDisplay &&  <Table list={list.currentList} /> }
 
         </div>
     )
