@@ -9,7 +9,7 @@ import seedrandom from 'seedrandom'
 import _ from 'lodash'
 import { departments } from '../data/departments'
 import { states } from '../data/us-states'
-import moment from 'moment'
+
 
 const IdSerializer = RestSerializer.extend({
     serializeIds: 'always',
@@ -107,8 +107,10 @@ let server = createServer({
             id(i) { return Number(i) },
             firstName() { return faker.name.firstName() },
             lastName() { return faker.name.lastName() },
-            dob() { return moment(faker.date.past(50, new Date(2002, 0, 1))).format('MM/DD/YYYY') },
-            startDate() { return moment(faker.date.recent()).format('MM/DD/YYYY') },
+            dob() { return faker.date.past(50, new Date(2002, 0, 1)) }, // -- keep date's ISO original format, then format to dd/mm/yyyy only when rendering
+            // dob() { return moment(faker.date.past(50, new Date(2002, 0, 1))).format('MM/DD/YYYY') }, 
+            startDate() { return faker.date.past( 10, new Date()) },
+            // startDate() { return moment(faker.date.recent()).format('MM/DD/YYYY') },
             street() { return (faker.datatype.number()).toString() + ' ' + faker.address.streetName() },
             city() { return faker.address.city() },
             state() { return randomFromArray(states) },

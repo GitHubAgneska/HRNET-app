@@ -1,5 +1,6 @@
 import { Fragment } from "react"
 import {StyledTableRow } from './Table_style'
+import moment from 'moment'
 
 const TableRow = ({list}) => {
     return (
@@ -9,8 +10,8 @@ const TableRow = ({list}) => {
                 <StyledTableRow key={Math.random()}>
                     <td>{employee.firstName}</td>
                     <td>{employee.lastName}</td>
-                    <td>{employee.dob}</td>
-                    <td>{employee.startDate}</td>
+                    <td>{moment(employee.dob).format('MM/DD/YY')}</td>
+                    <td>{moment(employee.startDate).format('MM/DD/YY')}</td>
                     <td>{employee.street}</td>
                     <td>{employee.city}</td>
                     <td>{employee.state.name}</td>
