@@ -111,7 +111,7 @@ let server = createServer({
             street() { return (faker.datatype.number()).toString() + ' ' + faker.address.streetName() },
             city() { return faker.address.city() },
             state() { return randomFromArray(states) },
-            zipcode() { return _.times(5, () => _.sample('123456789')) },
+            zipcode() { return _.times(5, () => _.sample('123456789')).join('') },
             department() { return randomFromArray(departments) }
         }),
     },
