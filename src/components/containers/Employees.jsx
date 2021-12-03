@@ -10,6 +10,9 @@ const Employees = () => {
     const sortedList = useSelector(selectFilteredEmployees)
 
     const sortListBy = (filterParam, reverse ) => {
+
+        // if (filterParam === 'state') { filterParam = 'state'['name'] }
+
         console.log('filtering requested: ', filterParam, reverse)
         requestFiltering(filterParam, reverse) // call handler => modify filter state
     }

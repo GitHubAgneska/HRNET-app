@@ -12,10 +12,10 @@ export const requestFiltering = (param, reverse) => {
 // => will re-render list only if filter is changed
 export const selectFilteredEmployees = createSelector(
 
-    initialState => initialState.employeesList.currentList,   // input selector 1
-    initialState => initialState.filters,  // input selector 2
+    initialState => initialState.employeesList.currentList,      // input selector 1
+    initialState => initialState.filters,                        // input selector 2
 
-    (currentList, filters) => {                    // output selector: takes both selectors as params
+    (currentList, filters) => {                                  // output selector: takes both selectors as params
         
         let list = [...currentList] // ---- for 'sort()' will try to mutate currentList and fail ---- !
         // console.log('MEMOIZED SELECTOR CALLED','list===>', list)
@@ -31,15 +31,14 @@ export const selectFilteredEmployees = createSelector(
             if (listParam) {  
                 console.log('listParam in CREATE SELECTOR=', listParam)
 
-                if ( listParam === 'state') { listParam =  listParam.name }
-                
-                if (!reverseOrder) { // true = descendant order
-                    return list.sort( (a, b) => a[listParam].localeCompare(b[listParam])) // a, b = employee objects of employees array
-                }  
-                else {  // false (default) = ascendant order
-                    // console.log('SORTED===',list.sort( (a, b) => b[listParam].localeCompare(a[listParam])))
-                    return list.sort( (a, b) => b[listParam].localeCompare(a[listParam]))
-                    //return currentList.filter(e => e.department === 'sales')
+                if ( listParam === 'state') {
+                    !reverseOrder? // false (default) = ascendant order
+                        list.sort( (a, b) => a[listParam].name.localeCompare(b[listParam].name))   // ( target = state.name )
+                        : list.sort( (a, b) => b[listParam].name.localeCompare(a[listParam].name))
+                } else { 
+                    !reverseOrder ?
+                        list.sort( (a, b) => a[listParam].localeCompare(b[listParam])) // a, b = employee objects of employees array
+                        : list.sort( (a, b) => b[listParam].localeCompare(a[listParam])) 
                 }
             }
         }
