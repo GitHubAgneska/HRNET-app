@@ -28,6 +28,7 @@ export const GlobalStyle = createGlobalStyle`
     ul { margin: 0; padding: 0;}
     ul li { list-style: none; }
     button { display: block; border: none; }
+    main { width: 90%; margin: auto; }
 `
 /* accessibility - .sr-only class */
 export const SrOnlyH1 = styled.h1`
