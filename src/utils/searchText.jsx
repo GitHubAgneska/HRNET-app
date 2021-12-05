@@ -2,32 +2,36 @@ import moment from 'moment'
 
 // search each employee (object) of list for a match
 // return suggestions array matching word
-export const searchSuggestions = (term, list) => {
-    let suggestions = []
-    let suggested = {}
-    let reg = new RegExp(term, 'gi')
-    term = term.toLowerCase()
+export const searchSuggestions = (query, list) => {
+    let suggested = [];
+    let suggestions = new Map()
+    let reg = new RegExp(query, 'gi')
+    query = query.toLowerCase()
     list.forEach(obj => {
-        console.log('SEARCHING CURRENT OBJECT =', obj)
-
-        let val= ''
+        // console.log('SEARCHING CURRENT OBJECT =', obj)
+        let objectValue = ''
         for (let [key, value] of Object.entries(obj)) {
-            if ( key === 'dob' || key === 'startDate' ) { val = moment(value).format('MM/DD/YYYY') }
-            else if ( key === 'state' ) { val = value.name }
-            //else if ( typeof(value) === 'number') { val = value.toString() }
-            else if ( key === 'id' ) { val = value.toString() }
-            else { val = value; }
+            if ( key === 'dob' || key === 'startDate' ) { objectValue = moment(value).format('MM/DD/YYYY') }
+            else if ( key === 'state' ) { objectValue = value.name }
+            //else if ( typeof(value) === 'number') { objectValue = value.toString() }
+            else if ( key === 'id' ) { objectValue = value.toString() }
+            else { objectValue = value; }
 
-            console.log('CURRENT VAL =', val, typeof(val))
+            // console.log('CURRENT VAL =', objectValue, typeof(objectValue))
             
-            if ( val.includes(term) || reg.test(val) )  { 
-                suggested.key = val;
-                suggested.value = obj;
-                suggestions.push(suggested);
+            if ( objectValue.includes(query) || reg.test(objectValue) )  { 
+                
+                if (suggestions.has(objectValue)) {
+                    suggestions.get(objectValue).push(obj)
+                }
+                else { 
+                    suggested.push(obj)
+                    suggestions.set(objectValue, suggested);
+                }
             }
         }
     })
-    return Array.from(new Set(suggestions)) // ---- TO REVIEW: dont allow doublons to be pushed instead
+    return suggestions
 }
 
 const normalizeValuesForSearch = (objValues) => {

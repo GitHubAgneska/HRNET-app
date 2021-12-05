@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 
 export const FormWrapper = styled.div`
-position: relative;
-    width: 90%; height:100vh;
+    position: relative;
+    height:95%;
     margin: auto;
     border: 1px solid grey;
     border-radius:5px;
     text-align: center;
+    overflow: scroll;
 `
 export const FormInputsWrapper = styled.fieldset`
     display: flex;

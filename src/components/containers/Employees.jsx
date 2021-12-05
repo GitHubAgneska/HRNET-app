@@ -5,6 +5,7 @@ import { selectFilteredEmployees, requestFiltering } from '../../features/filter
 import EmployeesList from '../elements/Employees-list/Employees-list'
 import SearchBox from "../elements/SearchBox/SearchBox"
 import { searchSuggestions } from '../../utils/searchText'
+import { TitleWrapper, StyledTitle } from '../../style/global_style'
 
 const Employees = () => {
 
@@ -27,10 +28,10 @@ const Employees = () => {
         console.log('searchInputValues==', values);
         
         if ( values.length > 2 ) {
-            let sugg = searchSuggestions(values, sortedList);
-            if ( sugg.length > 0 ) { setSuggestions(sugg)}
+            let sugg = searchSuggestions(values, sortedList);setSuggestions(sugg)
+           // if ( sugg.length > 0 ) { }
             console.log('SUGGESTIONS SET==', suggestions )
-        } 
+        }
         if (values.length === '') { setSuggestions([]) }
     }
 
@@ -49,7 +50,9 @@ const Employees = () => {
 
     return (
         <main>
-            <h1>Current Employees list</h1>
+            <TitleWrapper>
+                <StyledTitle>Current Employees list</StyledTitle>
+            </TitleWrapper>
             <SearchBox 
                 handleSearchChange={handleSearchChange}
                 handleSearchSubmit={handleSearchSubmit}

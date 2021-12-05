@@ -22,8 +22,9 @@ const App = () => {
 
     return (
         <div className="App">
-            <div className="container" style={{height:'100%', width:'100%'}}>
-                <GlobalStyle />
+            <GlobalStyle />
+                <div className="container">
+            {/* <div className="container" style={{height:'100%', width:'100%'}}> */}
                     <Router>
                         <Header /> {/* INSIDE router because contains NAV with 'LINK TO'  */}
 

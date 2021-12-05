@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import Table from '../Table/Table'
 
 const EmployeesList = ({list, sortedList, sortListBy}) => {
@@ -8,12 +9,12 @@ const EmployeesList = ({list, sortedList, sortListBy}) => {
     if ( list.get_status === 'pending') { return <span>LOADING</span>}
     
     return (
-        <div>
+        <section style={{height:'70vh'}}>
 
             { listToDisplay &&  <Table list={listToDisplay} sortListBy={sortListBy} /> }
             { ! listToDisplay &&  <Table list={list.currentList} sortListBy={sortListBy} /> }
-
-        </div>
+        
+        </section>
     )
 }
 export default EmployeesList

@@ -29,6 +29,7 @@ export const GlobalStyle = createGlobalStyle`
     ul li { list-style: none; }
     button { display: block; border: none; }
     main { width: 90%; margin: auto; }
+    .container { max-height:100vh;width:100%; position:fixed;}
 `
 /* accessibility - .sr-only class */
 export const SrOnlyH1 = styled.h1`
@@ -58,6 +59,18 @@ export const SrOnlyH2 = styled.h2`
     width: 1px !important;
     white-space: nowrap !important; /* 3 */
 `;
+
+export const TitleWrapper = styled.div`
+    width:90%;
+    margin: 2% auto;
+    border: 1px solid grey;
+    border-radius:5px;
+    text-align: center;
+`
+export const StyledTitle = styled.h1`
+    color: grey;
+    font-size:1em;
+`
 
 
 
