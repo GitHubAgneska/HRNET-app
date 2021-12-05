@@ -1,19 +1,37 @@
+import { useEffect, useState } from "react"
 import { Fragment } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch} from "@fortawesome/free-solid-svg-icons";
-import { SearchBoxWrapper, SearchBoxInput } from './SearchBow_style'
+import { faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
+import { SearchBoxWrapper, SearchBoxInput, SearchSuggestionsWrapper } from './SearchBox_style'
 
-const SearchBox = ({handleSearchChange, handleSearchSubmit} ) => { 
+const SearchBox = ({values, handleSearchChange, clearInput, handleSearchSubmit} ) => {
+    
+    
+    const [ displaySuggestionsBox, setDisplaySuggestionsBox ] = useState(false)
+    const toggleSuggestions = () => { setDisplaySuggestionsBox(!displaySuggestionsBox);}
+    
+    
     return (
         <Fragment>
             <SearchBoxWrapper>
+                
                 <SearchBoxInput 
                     type="text"
                     placeholder="search"
-                    onChange={e => handleSearchChange(e.target.value)}
+                    values={values}
+                    onChange={e => handleSearchChange(e)}
                 />
-                <FontAwesomeIcon icon={faSearch} onClick={(e) => handleSearchSubmit(e.target.value)}  />
+                <FontAwesomeIcon icon={faTimes} onClick={() => clearInput()}  />
+                <FontAwesomeIcon icon={faSearch} onClick={() => handleSearchSubmit()}  />
+                
             </SearchBoxWrapper>
+
+            <SearchSuggestionsWrapper>
+                <ul>
+                    <li>dsdsdsds</li>
+                </ul>
+            </SearchSuggestionsWrapper>
+
         </Fragment>
     )
 }
