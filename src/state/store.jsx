@@ -38,7 +38,7 @@ export const initialState = {
         post_error: null,
     },
     filters : {
-        filterStatus: '',
+        filterStatus: 'none',
         currentParamFilter: { param: '', reverseOrder: false },  
         searchterm: '',
         entries: null,

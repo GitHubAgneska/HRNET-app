@@ -4,6 +4,7 @@ import { employeesListState } from "../../state/store"
 import { selectFilteredEmployees, requestFiltering } from '../../features/filters-feature'
 import EmployeesList from '../elements/Employees-list/Employees-list'
 import SearchBox from "../elements/SearchBox/SearchBox"
+import { searchSuggestions } from '../../utils/searchText'
 
 const Employees = () => {
 
@@ -18,20 +19,33 @@ const Employees = () => {
 
     // SEARCH LIST
     const [ searchInputValues, setSearchInputValues ] = useState("")
-    
-    const handleSearchChange = e => { setSearchInputValues(e.target.value); console.log('SET searchInputValues==', searchInputValues)}
+    const [ suggestions, setSuggestions ] = useState([])
+
+    const handleSearchChange = e => { 
+        //setSearchInputValues(e.target.value);
+        let values = e.target.value;
+        console.log('searchInputValues==', values);
+        
+        if ( values.length > 2 ) {
+            let sugg = searchSuggestions(values, sortedList);
+            if ( sugg.length > 0 ) { setSuggestions(sugg)}
+            console.log('SUGGESTIONS SET==', suggestions )
+        } 
+        if (values.length === '') { setSuggestions([]) }
+    }
 
     const clearInput = () => {
         let input = document.querySelector('input')
         if ( input.value !== "" ) { 
             setSearchInputValues("")
-            input.value = "" 
-        } else return
-        
+            input.value = ""
+            setSuggestions([])
+        } else { return }
         console.log('values after clear=',searchInputValues ) // -- not empty at first: why ?
     }
 
     const handleSearchSubmit = () => { console.log('to submit :', searchInputValues); }
+
 
     return (
         <main>
@@ -41,6 +55,7 @@ const Employees = () => {
                 handleSearchSubmit={handleSearchSubmit}
                 clearInput={clearInput}
                 values={searchInputValues}
+                suggestions={suggestions}
             />
             <EmployeesList list={list.currentList } sortedList={sortedList}  sortListBy={sortListBy} />
         </main>
