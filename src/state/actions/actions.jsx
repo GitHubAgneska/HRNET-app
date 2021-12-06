@@ -10,7 +10,7 @@ import {
 
     FILTERS_STATUS_CHANGED,
     FILTER_PARAM_CHANGED,
-    FILTER_SEARCHTERM_CHANGED, SET_RESULTS_FOR_SEARCH,
+    FILTER_SEARCHTERM_CHANGED, SET_RESULTS_FOR_SEARCH, RESET_SEARCH_RESULTS,
     FILTER_ENTRIES_AMOUNT_CHANGED 
 } from './actions-types'
 
@@ -55,4 +55,5 @@ export const filtersStatusChanged = (data) => ({type: FILTERS_STATUS_CHANGED, pa
 export const paramFilterChanged = (param, reverseOrder ) => ({ type: FILTER_PARAM_CHANGED, payload: { param, reverseOrder } })
 export const searchtermFilterChanged = (searchterm) => ({ type: FILTER_SEARCHTERM_CHANGED, payload: searchterm })
 export const setSearchResults = (results) => ({ type: SET_RESULTS_FOR_SEARCH, payload: results})
+export const resetSearchResults = () => ({ type: RESET_SEARCH_RESULTS })
 export const entriesFilterChanged = (entries) => ({ type: FILTER_ENTRIES_AMOUNT_CHANGED, payload: entries })

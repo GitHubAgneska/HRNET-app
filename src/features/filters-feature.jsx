@@ -1,6 +1,13 @@
 import { createSelector } from "@reduxjs/toolkit"
 import { initialState, employeesListState, filtersState, store } from '../state/store'
-import { paramFilterChanged,filtersStatusChanged, searchtermFilterChanged, setSearchResults, entriesFilterChanged } from '../state/actions/Actions'
+import { 
+    paramFilterChanged,
+    filtersStatusChanged,
+    searchtermFilterChanged,
+    setSearchResults,
+    resetSearchResults,
+    entriesFilterChanged 
+} from '../state/actions/Actions'
 import { searchText } from '../utils/searchText'
 
 export const requestFiltering = (param, reverse) => {
@@ -15,6 +22,8 @@ export const requestSearch = (searchterm) => {
 export const requestListAsSearchResults = (resultsOfClickedSuggestion) => {
     store.dispatch(setSearchResults(resultsOfClickedSuggestion))
 }
+
+export const requestSearchResetting = () => { store.dispatch(resetSearchResults())}
 
 // SELECTOR : MEMOIZED SELECTOR To allow multiple filters and derive state from employeesList state
 // => will re-render list only if filter is changed

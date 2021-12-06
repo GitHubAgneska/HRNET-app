@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
 import { employeesListState } from "../../state/store"
-import { selectFilteredEmployees, requestFiltering, requestSearch, requestListAsSearchResults } from '../../features/filters-feature'
+import { selectFilteredEmployees, requestFiltering, requestSearch, requestListAsSearchResults, requestSearchResetting } from '../../features/filters-feature'
 import EmployeesList from '../elements/Employees-list/Employees-list'
 import SearchBox from "../elements/SearchBox/SearchBox"
 import { searchSuggestions } from '../../utils/searchText'
@@ -42,7 +42,8 @@ const Employees = () => {
             setSearchInputValues("")
             input.value = ""
             setSuggestions([])
-            
+            requestSearchResetting()
+
         } else { return }
         console.log('values after clear=',searchInputValues ) // -- not empty at first: why ?
     }
