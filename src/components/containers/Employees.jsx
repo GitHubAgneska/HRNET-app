@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
 import { employeesListState } from "../../state/store"
-import { selectFilteredEmployees, requestFiltering } from '../../features/filters-feature'
+import { selectFilteredEmployees, requestFiltering, requestSearch, requestListAsSearchResults } from '../../features/filters-feature'
 import EmployeesList from '../elements/Employees-list/Employees-list'
 import SearchBox from "../elements/SearchBox/SearchBox"
 import { searchSuggestions } from '../../utils/searchText'
@@ -10,7 +10,7 @@ import { TitleWrapper, StyledTitle } from '../../style/global_style'
 const Employees = () => {
 
     // SORT LIST
-    const list = useSelector(employeesListState) // --- TO REVIEW: should not be necessary to use here
+    //const list = useSelector(employeesListState) // --- TO REVIEW: should not be necessary to use here
     const sortedList = useSelector(selectFilteredEmployees)
 
     const sortListBy = (filterParam, reverse ) => {
@@ -22,17 +22,18 @@ const Employees = () => {
     const [ searchInputValues, setSearchInputValues ] = useState("")
     const [ suggestions, setSuggestions ] = useState([])
 
+
     const handleSearchChange = e => { 
-        //setSearchInputValues(e.target.value);
-        let values = e.target.value;
-        console.log('searchInputValues==', values);
+        let query = e.target.value;
+        console.log('searchInputValues==', query);
+
+        requestSearch(query)
+
+        if ( query.length > 2 ) {
+            let sugg = searchSuggestions(query, sortedList); 
+            setSuggestions(sugg); console.log('SUGGESTIONS SET==', suggestions);
         
-        if ( values.length > 2 ) {
-            let sugg = searchSuggestions(values, sortedList);setSuggestions(sugg)
-           // if ( sugg.length > 0 ) { }
-            console.log('SUGGESTIONS SET==', suggestions )
-        }
-        if (values.length === '') { setSuggestions([]) }
+        } else { setSuggestions([]) }
     }
 
     const clearInput = () => {
@@ -41,8 +42,15 @@ const Employees = () => {
             setSearchInputValues("")
             input.value = ""
             setSuggestions([])
+            
         } else { return }
         console.log('values after clear=',searchInputValues ) // -- not empty at first: why ?
+    }
+
+    const selectSuggestion = (suggestion) => {
+        let resultsOfClickedSuggestion = suggestions.get(suggestion) // arr of objects from map
+        // console.log('resultsOfClickedSuggestion===', resultsOfClickedSuggestion)
+        requestListAsSearchResults(resultsOfClickedSuggestion)
     }
 
     const handleSearchSubmit = () => { console.log('to submit :', searchInputValues); }
@@ -59,8 +67,13 @@ const Employees = () => {
                 clearInput={clearInput}
                 values={searchInputValues}
                 suggestions={suggestions}
+                selectSuggestion={selectSuggestion}
             />
-            <EmployeesList list={list.currentList } sortedList={sortedList}  sortListBy={sortListBy} />
+            <EmployeesList 
+                //list={list.originalList}
+                sortedList={sortedList}
+                sortListBy={sortListBy}
+                />
         </main>
     )
 }

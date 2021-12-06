@@ -27,7 +27,7 @@ export const initialState = {
 
     },
     employeesList: {
-        currentList: [],
+        originalList: [],
         // api/local storage request state
         get_status: 'void',
         get_data: null,
@@ -40,7 +40,11 @@ export const initialState = {
     filters : {
         filterStatus: 'none',
         currentParamFilter: { param: '', reverseOrder: false },  
+        
         searchterm: '',
+        searchActive: false,
+        searchResults: null,
+
         entries: null,
         previous: false,
         next: false

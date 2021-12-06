@@ -16,9 +16,7 @@ export const searchSuggestions = (query, list) => {
             //else if ( typeof(value) === 'number') { objectValue = value.toString() }
             else if ( key === 'id' ) { objectValue = value.toString() }
             else { objectValue = value; }
-
             // console.log('CURRENT VAL =', objectValue, typeof(objectValue))
-            
             if ( objectValue.includes(query) || reg.test(objectValue) )  { 
                 
                 if (suggestions.has(objectValue)) {

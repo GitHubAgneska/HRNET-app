@@ -35,10 +35,10 @@ function employeesListReducer(state = initialState.employeesList, action) {
                 if ( draft.get_status === 'pending' || draft.get_status === 'updating') {
                     draft.get_status = 'resolved'
                     draft.get_payload = action.payload.employees
-                    draft.currentList = [...draft.currentList, ...draft.get_payload]
+                    draft.originalList = [...draft.originalList, ...draft.get_payload]
                     // console.log('PAYLOAD TYPE==', typeof(action.payload))
                     return 
-                    //draft.currentList.push(action.payload)
+                    //draft.originalList.push(action.payload)
                 }
                 return // else action ignored
             }
@@ -79,7 +79,7 @@ function employeesListReducer(state = initialState.employeesList, action) {
                     draft.post_status = 'resolved'
                     draft.post_payload = action.payload
                     let newEmployee = action.payload
-                    draft.currentList.push(newEmployee)
+                    draft.originalList.push(newEmployee)
                     return
                 }
                 // else action ignored

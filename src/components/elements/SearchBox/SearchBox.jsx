@@ -4,13 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
 import { SearchBoxWrapper, SearchBoxInput, SearchSuggestionsWrapper } from './SearchBox_style'
 
-const SearchBox = ({values, handleSearchChange, clearInput, handleSearchSubmit, suggestions } ) => {
+const SearchBox = ({values, handleSearchChange, clearInput, handleSearchSubmit, suggestions, selectSuggestion} ) => {
     
-    
-    //const [ displaySuggestionsBox, setDisplaySuggestionsBox ] = useState(false)
-    // const toggleSuggestions = () => { setDisplaySuggestionsBox(!displaySuggestionsBox);}
-    
-    
+
     return (
         <Fragment>
             <SearchBoxWrapper>
@@ -26,10 +22,10 @@ const SearchBox = ({values, handleSearchChange, clearInput, handleSearchSubmit, 
                 
             </SearchBoxWrapper>
 
-            { suggestions && suggestions.length > 0 && 
+            { suggestions && suggestions.size > 0 && 
                 <SearchSuggestionsWrapper>
                     <ul>
-                        { [...suggestions.keys()].map( s => (  <li key={Math.random()}>{s}</li> )) }
+                        { [...suggestions.keys()].map( s => (  <li key={Math.random()} onClick={()=> selectSuggestion(s)}>{s}</li> )) }
                     </ul>
                 </SearchSuggestionsWrapper>
             }

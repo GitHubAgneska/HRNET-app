@@ -24,7 +24,6 @@ const App = () => {
         <div className="App">
             <GlobalStyle />
                 <div className="container">
-            {/* <div className="container" style={{height:'100%', width:'100%'}}> */}
                     <Router>
                         <Header /> {/* INSIDE router because contains NAV with 'LINK TO'  */}
 

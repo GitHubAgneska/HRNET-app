@@ -1,5 +1,8 @@
 import { initialState  } from '../store'
-import { FILTERS_STATUS_CHANGED, FILTER_PARAM_CHANGED, FILTER_SEARCHTERM_CHANGED, FILTER_ENTRIES_AMOUNT_CHANGED } from '../actions/actions-types'
+import { 
+    FILTERS_STATUS_CHANGED, FILTER_PARAM_CHANGED, 
+    FILTER_SEARCHTERM_CHANGED, SET_RESULTS_FOR_SEARCH,
+    FILTER_ENTRIES_AMOUNT_CHANGED } from '../actions/actions-types'
 
 // ......................................................
 // FILTER LIST  REDUCER
@@ -9,21 +12,25 @@ import { FILTERS_STATUS_CHANGED, FILTER_PARAM_CHANGED, FILTER_SEARCHTERM_CHANGED
 export default function filtersReducer(state = initialState.filters, action) {
     
     switch (action.type) {
-        case FILTERS_STATUS_CHANGED: { let status = action.payload; return { ...state, filterStatus: status }}
-        // user clicks sort list by <param>
-        case FILTER_PARAM_CHANGED: {
+
+        case FILTERS_STATUS_CHANGED: { 
+            let status = action.payload;
+            return { ...state, filterStatus: status }
+        }
+        case FILTER_PARAM_CHANGED: { 
             let { param, reverseOrder } = action.payload; 
-            console.log('filtersReducer===> new filter param=', param, 'reverseOrder=', reverseOrder)
-            
-            // new param will always operate on unsorted list (employeesListState remains unchanged) so no need to re-init initial list
+            // console.log('filtersReducer===> new filter param=', param, 'reverseOrder=', reverseOrder)
             return { ...state, currentParamFilter: { param, reverseOrder } }
         }
-        // user enters chars in search field: new search term passed to filters state
         case FILTER_SEARCHTERM_CHANGED: {
             let newSearchterm = action.payload
-            return { ...state, searchterm: newSearchterm }
+            return { ...state, searchterm: newSearchterm, searchActive: true }
         }
-        // user changes entries amount to display
+        case SET_RESULTS_FOR_SEARCH: {
+            let results = action.payload
+            return { ...state,  searchResults: results }
+        }
+        
         case FILTER_ENTRIES_AMOUNT_CHANGED: {
             let newAmount = action.payload
             return { ...state, entries: newAmount }
