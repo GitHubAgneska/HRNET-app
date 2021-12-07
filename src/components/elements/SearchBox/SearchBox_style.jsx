@@ -1,14 +1,27 @@
 import styled from "styled-components"
 
-export const SearchBoxWrapper = styled.section`
+
+export const SearchSectionWrapper = styled.section`
+    margin-bottom: 2%;
+`
+
+
+export const SearchBoxWrapper = styled.div`
     width: 100%;
     border: 3px solid #ccc;
-    border-radius: 15px;
     display: inline-flex;
     margin-top: 2%;
     align-items: center;
     svg { margin: 1%; }
-    margin-bottom: 2%;
+    
+
+    ${({ suggestionsBoxIsActive }) => suggestionsBoxIsActive && 
+        `border-top-right-radius: 15px;
+        border-top-left-radius: 15px; `}
+    
+    ${({ suggestionsBoxIsActive }) => !suggestionsBoxIsActive && 
+        `border-radius: 15px `}
+
 `
 
 export const SearchBoxInput = styled.input`
@@ -21,11 +34,24 @@ export const SearchBoxInput = styled.input`
 `
 
 export const SearchSuggestionsWrapper = styled.div`
-    border: 3px solid #ccc;
+    
+    border: 2px solid #ccc;
     text-align: justify;
     margin-bottom: 2%;
+    color: #888;
     ul {
-        li { border-bottom: 1px solid #ccc; }
+        li { 
+            min-height: 2rem;
+            display: flex;
+            align-items: center;
+            padding: 1%;
+            font-size: 0.8rem;
+            &:hover { background-color: #ccc; color:white; }
+        }
+        li:not(:first-child) { border-top: 1px solid #ccc; }
     }
+
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 
 `

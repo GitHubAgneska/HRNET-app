@@ -23,6 +23,11 @@ export const requestListAsSearchResults = (resultsOfClickedSuggestion) => {
     store.dispatch(setSearchResults(resultsOfClickedSuggestion))
 }
 
+// display all suggested results
+export const requestSetAllSuggestionsAsResults = (suggested) => { 
+    store.dispatch(setSearchResults(suggested))
+}
+
 export const requestSearchResetting = () => { store.dispatch(resetSearchResults())}
 
 // SELECTOR : MEMOIZED SELECTOR To allow multiple filters and derive state from employeesList state

@@ -3,8 +3,8 @@ import styled from "styled-components"
 export const TableWrapper = styled.div`
     display: flex;
     height: 90%;
-    border: 2px solid grey;
     overflow: scroll;
+    /* border: 2px solid grey; */
 `
 
 export const StyledTable = styled.table` 
@@ -13,11 +13,15 @@ export const StyledTable = styled.table`
 `
 
 export const StyledTableHeader = styled.thead`
-    /* position: fixed; width: 100%; z-index: 2; */
     min-height: 2rem;
     text-transform: capitalize;
-    th { color: white; background-color: #ccc }
-    
+    th {
+        height: 3.5rem;
+        position: sticky; top: 0; 
+        color: white; 
+        background-color: #888; 
+        /* box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.8); */
+     }
 `
 
 export const TableHeaderIconWrapper = styled.div`
@@ -26,8 +30,12 @@ export const TableHeaderIconWrapper = styled.div`
 `
 
 export const StyledTableRow = styled.tr`
-    border-bottom: 1px solid black;
-    :nth-child(even) {background-color: #ccc }
+    height: 2rem;
+    
 
+    :nth-child(even) {background-color: #ccc }
+    &:hover { background-color: lightblue; color: white;  }
+    
+    td { overflow: hidden; white-space: nowrap;}
 `
 
