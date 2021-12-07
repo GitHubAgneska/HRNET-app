@@ -19,7 +19,7 @@ export const searchSuggestions = (query, list) => {
             // console.log('CURRENT VAL =', objectValue, typeof(objectValue))
             
             if ( objectValue.includes(query) || reg.test(objectValue) )  { 
-                
+
                 if (suggestions.has(objectValue)) {
                     suggestions.get(objectValue).push(obj)
                 }

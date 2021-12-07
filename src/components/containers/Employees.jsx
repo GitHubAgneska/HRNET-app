@@ -41,11 +41,15 @@ const Employees = () => {
     const handleKeyDown = e => {
         const key = e.code; 
         if ( key === 'Enter' ) { 
-            let suggestedResults = Array.from(suggestions.values()).flat()  // retrieve all map values
-            // console.log('suggestedResults=', suggestedResults)
-            requestSetAllSuggestionsAsResults(suggestedResults)             // request to set them as results
-            setSuggestions([]) // reset suggestions => block closes
+            validateCurrentSearch()
         }
+    }
+
+    const validateCurrentSearch = () => { 
+        let suggestedResults = Array.from(suggestions.values()).flat()  // retrieve all map values
+        // console.log('suggestedResults=', suggestedResults)
+        requestSetAllSuggestionsAsResults(suggestedResults)             // request to set them as results
+        setSuggestions([]) // reset suggestions => block closes
     }
 
     const clearInput = () => {
@@ -70,9 +74,8 @@ const Employees = () => {
         requestListAsSearchResults(resultsOfClickedSuggestion)
     }
 
-    const handleSearchSubmit = () => { console.log('to submit :', searchInputValues); }
-
-
+    const handleSearchSubmit = () => { validateCurrentSearch() }
+    
     return (
         <main>
             <TitleWrapper>
@@ -90,7 +93,7 @@ const Employees = () => {
             <EmployeesList 
                 sortedList={sortedList}
                 sortListBy={sortListBy}
-                />
+            />
         </main>
     )
 }

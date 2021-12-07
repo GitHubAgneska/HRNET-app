@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const TableWrapper = styled.div`
     display: flex;
-    height: 90%;
+    max-height: 90%;
     overflow: scroll;
     /* border: 2px solid grey; */
 `
