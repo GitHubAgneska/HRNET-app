@@ -17,6 +17,7 @@ export const searchSuggestions = (query, list) => {
             else if ( key === 'id' ) { objectValue = value.toString() }
             else { objectValue = value; }
             // console.log('CURRENT VAL =', objectValue, typeof(objectValue))
+            
             if ( objectValue.includes(query) || reg.test(objectValue) )  { 
                 
                 if (suggestions.has(objectValue)) {
@@ -27,11 +28,10 @@ export const searchSuggestions = (query, list) => {
                     suggestions.set(objectValue, suggested);
                 }
             }
+            suggested = [];
         }
     })
     return suggestions
 }
 
-const normalizeValuesForSearch = (objValues) => {
-
-}
+const normalizeValuesForSearch = (key, value) => { }

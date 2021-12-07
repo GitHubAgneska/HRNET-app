@@ -31,7 +31,8 @@ const Employees = () => {
 
         if ( query.length > 2 ) {
             let sugg = searchSuggestions(query, sortedList); 
-            setSuggestions(sugg); console.log('SUGGESTIONS SET==', suggestions);
+            setSuggestions(sugg); 
+            console.log('SUGGESTIONS SET==', sugg);
         
         } else { setSuggestions([]) }
     }
@@ -49,8 +50,10 @@ const Employees = () => {
     }
 
     const selectSuggestion = (suggestion) => {
+        console.log('SUGGESTION PICKED===', suggestion)
         let resultsOfClickedSuggestion = suggestions.get(suggestion) // arr of objects from map
-        // console.log('resultsOfClickedSuggestion===', resultsOfClickedSuggestion)
+        console.log('resultsOfClickedSuggestion===', resultsOfClickedSuggestion)
+        
         requestListAsSearchResults(resultsOfClickedSuggestion)
     }
 
