@@ -23,6 +23,7 @@ const Employees = () => {
     }
 
     // SEARCH LIST
+    const input = document.querySelector('input')
     const [ searchInputValues, setSearchInputValues ] = useState("")
     const [ suggestions, setSuggestions ] = useState([])
 
@@ -53,7 +54,6 @@ const Employees = () => {
     }
 
     const clearInput = () => {
-        let input = document.querySelector('input')
         if ( input.value !== "" ) { 
             setSearchInputValues("")
             input.value = ""
@@ -66,7 +66,6 @@ const Employees = () => {
 
     const selectSuggestion = (suggestion) => {
         // console.log('SUGGESTION PICKED===', suggestion)
-        let input = document.querySelector('input')
         input.value = suggestion
         let resultsOfClickedSuggestion = suggestions.get(suggestion) // arr of objects from map
         // console.log('resultsOfClickedSuggestion===', resultsOfClickedSuggestion)
@@ -74,7 +73,7 @@ const Employees = () => {
         requestListAsSearchResults(resultsOfClickedSuggestion)
     }
 
-    const handleSearchSubmit = () => { validateCurrentSearch() }
+    const handleSearchSubmit = () => {  return input.value !== ""? validateCurrentSearch() : null }
     
     return (
         <main>

@@ -1,4 +1,5 @@
 import moment from 'moment'
+import {highlightText} from '../utils/highlightText'
 
 // search each employee (object) of list for a match
 // return suggestions array matching word
@@ -19,7 +20,10 @@ export const searchSuggestions = (query, list) => {
             // console.log('CURRENT VAL =', objectValue, typeof(objectValue))
             
             if ( objectValue.includes(query) || reg.test(objectValue) )  { 
-
+                
+                let highlightedObjValue = `<span style={{backgroundColor:'yellow'}}>`+ objectValue + `</span>`
+                console.log('highlightedObjValue===', highlightedObjValue)
+                
                 if (suggestions.has(objectValue)) {
                     suggestions.get(objectValue).push(obj)
                 }
