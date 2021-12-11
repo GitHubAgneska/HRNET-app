@@ -11,7 +11,9 @@ import {
     FILTERS_STATUS_CHANGED,
     FILTER_PARAM_CHANGED,
     FILTER_SEARCHTERM_CHANGED, SET_RESULTS_FOR_SEARCH, RESET_SEARCH_RESULTS,
-    FILTER_ENTRIES_AMOUNT_CHANGED 
+    
+    ENTRIES_AMOUNT_CHANGED, SET_PAGES_AMOUNT, SET_PAGES, SET_CURRENTACTIVE_PAGE,
+    SETUP_PAGINATION 
 } from './actions-types'
 
 // ................................................................................. 
@@ -56,4 +58,13 @@ export const paramFilterChanged = (param, reverseOrder ) => ({ type: FILTER_PARA
 export const searchtermFilterChanged = (searchterm) => ({ type: FILTER_SEARCHTERM_CHANGED, payload: searchterm })
 export const setSearchResults = (results) => ({ type: SET_RESULTS_FOR_SEARCH, payload: results})
 export const resetSearchResults = () => ({ type: RESET_SEARCH_RESULTS })
-export const entriesFilterChanged = (entries) => ({ type: FILTER_ENTRIES_AMOUNT_CHANGED, payload: entries })
+
+// ................................................................................. 
+// ACTIONS CREATORS :PAGES (not async)
+// ................................................................................. 
+export const changeEntriesPerPage = (entries) => ({ type: ENTRIES_AMOUNT_CHANGED, payload: entries })
+export const setPages = (pages) => ({ type: SET_PAGES, payload: pages  })
+export const setPagesAmount = (n) => ({ type: SET_PAGES_AMOUNT, payload: n })
+export const setCurrentActivePage = (pageRequested) => ({ type: SET_CURRENTACTIVE_PAGE, payload: pageRequested })
+
+export const setUpPagination = (entries) => ({ type: SETUP_PAGINATION, payload: entries})

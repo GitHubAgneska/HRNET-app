@@ -3,6 +3,7 @@ import {StyledTableRow } from './Table_style'
 import moment from 'moment'
 
 const TableRow = ({list}) => {
+    if (list.constructor.name !== "Array") { list = list.employees} // --- dirty workaround -- should use NORMALIZED DATA
     return (
         <Fragment>
             { list.map( employee => (

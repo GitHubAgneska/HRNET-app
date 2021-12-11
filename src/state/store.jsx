@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import employeeReducer from "./reducers/employee-reducer"
 import employeesListReducer from './reducers/employeesList-reducer'
 import filterReducer from './reducers/filter-reducer'
+import pagesReducer from './reducers/pages-reducer'
 
 // INITIAL STATE ( sliced into features )
 export const initialState = {
@@ -43,18 +44,22 @@ export const initialState = {
         
         searchterm: '',
         searchActive: false,
-        searchResults: null,
+        searchResults: [],
 
-        entries: null,
-        previous: false,
-        next: false
-    }   
+    },
+    pages: {
+        entries: 100,
+        totalPages: 1,
+        pages: [],
+        currentActivePage: 0
+    }
 }
 
 // SELECTORS
 export const employeeState = (state) => state.employee
 export const employeesListState = (state) => state.employeesList
 export const filtersState = (state) => state.filters
+export const pagesState = (state) => state.pages
 
 
 const voidEmployee = { status: 'void' }
@@ -64,7 +69,8 @@ export const selectEmployeeState = (id) => (state) => {
 export const reducers = combineReducers({
     employee: employeeReducer,
     employeesList: employeesListReducer,
-    filters: filterReducer
+    filters: filterReducer,
+    pages: pagesReducer
 })
 
 // adding of a 'rootReducer' allows a complete reset of all sub-reducers ( e.g : reset state on logout)

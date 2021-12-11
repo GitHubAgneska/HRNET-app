@@ -1,10 +1,12 @@
 import { employeesListState } from '../state/store'
 import {  
     employeesListFetching, employeeslistResolved, employeesListRejected,
-    employeesListCreateFetching, employeesListCreateResolved, employeesListCreateRejected
+    employeesListCreateFetching, employeesListCreateResolved, employeesListCreateRejected,
+    setSearchResults
 } from '../state/actions/Actions'
 import { client } from '../api/client'
 import { createAsyncThunk } from '@reduxjs/toolkit'
+
 
 // Thunk functions - UNUSED ATM ---
 export const fetchList = createAsyncThunk('employees-list/fetching', async () => {
@@ -26,6 +28,8 @@ export async function getEmployeesCurrentList(dispatch, getState) {
         const data = await response  // ! NOT .json()
         // console.log('DATA=', data) // = object employees =  array of objects
         dispatch(employeeslistResolved(data))
+        dispatch(setSearchResults(data)) // ------ SETS  SEARCHED LIST DEFAULT = ALL RESULTS
+
     }
     catch (error) {
         dispatch(employeesListRejected(error))

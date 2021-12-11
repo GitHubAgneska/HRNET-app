@@ -135,7 +135,7 @@ let server = createServer({
         }),
         employeesList: IdSerializer,
     },
-    seeds(server) { server.createList('employee', 15) ; console.log('HERE')}
+    seeds(server) { server.createList('employee', 100) ; console.log('HERE')}
 })
 
 return server; }

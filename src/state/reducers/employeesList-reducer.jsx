@@ -4,7 +4,7 @@ import {
     EMPLOYEES_LIST_CREATE_FETCHING, EMPLOYEES_LIST_CREATE_RESOLVED, EMPLOYEES_LIST_CREATE_REJECTED,
     EMPLOYEES_LIST_FETCHING, EMPLOYEES_LIST_RESOLVED, EMPLOYEES_LIST_REJECTED
 } from  '../actions/actions-types'
-
+import uuid from "uuid" 
 // ......................................................
 // EMPLOYEES LIST  REDUCER
 // ......................................................
@@ -79,6 +79,8 @@ function employeesListReducer(state = initialState.employeesList, action) {
                     draft.post_status = 'resolved'
                     draft.post_payload = action.payload
                     let newEmployee = action.payload
+                    let newId = uuid.v4()
+                    newEmployee.id = newId
                     draft.originalList.push(newEmployee)
                     return
                 }

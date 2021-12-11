@@ -41,5 +41,12 @@ export const FILTER_PARAM_CHANGED = 'filters/filter-param-changed'
 export const FILTER_SEARCHTERM_CHANGED = 'filters/filter-searchterm-changed'
 export const SET_RESULTS_FOR_SEARCH = 'filters/display-search-results'
 export const RESET_SEARCH_RESULTS = 'filters/reset-search-results'
-export const FILTER_ENTRIES_AMOUNT_CHANGED = 'filters/filter-entries-changed'
+
+// PAGES ACTIONS TYPES .................................
+export const ENTRIES_AMOUNT_CHANGED = 'pages/page-entries-changed'
+export const SET_PAGES = 'pages/set-pages'
+export const SET_PAGES_AMOUNT = 'pages/set-pages-amount'
+export const SET_CURRENTACTIVE_PAGE = 'pages/set-currentActive-page'
+
+export const SETUP_PAGINATION  = 'pages/setUpPagination'
 

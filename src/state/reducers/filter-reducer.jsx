@@ -2,7 +2,7 @@ import { initialState  } from '../store'
 import { 
     FILTERS_STATUS_CHANGED, FILTER_PARAM_CHANGED, 
     FILTER_SEARCHTERM_CHANGED, SET_RESULTS_FOR_SEARCH,  RESET_SEARCH_RESULTS,
-    FILTER_ENTRIES_AMOUNT_CHANGED } from '../actions/actions-types'
+    } from '../actions/actions-types'
 
 // ......................................................
 // FILTER LIST  REDUCER
@@ -32,10 +32,6 @@ export default function filtersReducer(state = initialState.filters, action) {
         }
         case RESET_SEARCH_RESULTS: {
             return { ...state,  searchResults: null }
-        }
-        case FILTER_ENTRIES_AMOUNT_CHANGED: {
-            let newAmount = action.payload
-            return { ...state, entries: newAmount }
         }
         default: return state
     }

@@ -1,32 +1,24 @@
 import { createSelector } from "@reduxjs/toolkit"
-import { initialState, employeesListState, filtersState, store } from '../state/store'
+import { store } from '../state/store'
 import { 
     paramFilterChanged,
     filtersStatusChanged,
     searchtermFilterChanged,
     setSearchResults,
-    resetSearchResults,
-    entriesFilterChanged 
+    resetSearchResults
 } from '../state/actions/Actions'
-import { searchText } from '../utils/searchText'
+
 
 export const requestFiltering = (param, reverse) => {
     store.dispatch(filtersStatusChanged('active'))
     store.dispatch(paramFilterChanged(param, reverse))
 }
 
-export const requestSearch = (searchterm) => {
-    store.dispatch(searchtermFilterChanged(searchterm))
-}
-
-export const requestListAsSearchResults = (resultsOfClickedSuggestion) => {
-    store.dispatch(setSearchResults(resultsOfClickedSuggestion))
-}
-
+export const requestSearch = (searchterm) => { store.dispatch(searchtermFilterChanged(searchterm)) }
+// set results in state
+export const requestListAsSearchResults = (resultsOfClickedSuggestion) => { store.dispatch(setSearchResults(resultsOfClickedSuggestion)) }
 // display all suggested results
-export const requestSetAllSuggestionsAsResults = (suggested) => { 
-    store.dispatch(setSearchResults(suggested))
-}
+export const requestSetAllSuggestionsAsResults = (suggested) => { store.dispatch(setSearchResults(suggested)) }
 
 export const requestSearchResetting = () => { store.dispatch(resetSearchResults())}
 
@@ -51,7 +43,8 @@ export const selectFilteredEmployees = createSelector(
             list = searchResults
             : list = [...originalList] // ---- for 'sort()' will try to mutate originalList and fail ---- !
 
-        if ( noFilters ) { return list } else {
+        if ( noFilters ) { // console.log('LIST noFilters OUTPUT FROM CREATE SELECTOR====', list)   ----------------------- TO REVIEW TYPEOF ...
+            return list } else {
 
             if (listParam) {  
                 // console.log('listParam in CREATE SELECTOR=', listParam)
@@ -71,6 +64,10 @@ export const selectFilteredEmployees = createSelector(
                 return list = [...searchResults] 
             }
         }
+        // console.log('LIST OUTPUT FROM CREATE SELECTOR====', list)     ------------------------------------------------- TO REVIEW TYPEOF ≠ ... 
         return list
     }
 )
+
+
+

@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
     ul li { list-style: none; }
     button { display: block; border: none; }
     main { width: 90%; margin: auto; }
-    .container { max-height:100vh;width:100%; position:fixed;}
+    .container { max-height:100vh; width:100%; /* position:fixed; */}
 `
 /* accessibility - .sr-only class */
 export const SrOnlyH1 = styled.h1`

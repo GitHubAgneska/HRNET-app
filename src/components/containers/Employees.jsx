@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { useState } from "react"
 import { 
     selectFilteredEmployees,
@@ -8,16 +8,20 @@ import {
     requestSetAllSuggestionsAsResults,
     requestSearchResetting
 } from '../../features/filters-feature'
+import { setUpPagination } from '../../features/pagination_feature'
 import EmployeesList from '../elements/Employees-list/Employees-list'
 import SearchBox from "../elements/SearchBox/SearchBox"
 import { searchSuggestions } from '../../utils/searchText'
 import { TitleWrapper, StyledTitle } from '../../style/global_style'
+import SelectEntriesBox from '../elements/SelectEntriesBox/SelectEntriesBox'
+import Pagination from "../elements/Pagination/Pagination"
 
 const Employees = () => {
+    const dispatch = useDispatch()
 
-    // SORT LIST
     const sortedList = useSelector(selectFilteredEmployees)
-
+    // dispatch(setUpPagination(sortedList.length))
+    
     const sortListBy = (filterParam, reverse ) => { // console.log('filtering requested: ', filterParam, reverse)
         requestFiltering(filterParam, reverse) // call handler => modify filter state
     }
@@ -75,11 +79,29 @@ const Employees = () => {
 
     const handleSearchSubmit = () => {  return input.value !== ""? validateCurrentSearch() : null }
     
+    // ENTRIES / PAGINATION
+    let entriesOptions = [ 15, 30, 50]
+
+    const selectEntriesAmount = (n) => { dispatch(setUpPagination(n)) }
+    const currentlyshowing = sortedList.length
+    const pages = useSelector(state => state.pages.pages)
+    const totalPages = useSelector(state => state.pages.totalPages)
+    const currentActivePage = useSelector(state => state.pages.currentActivePage)
+
+    if ( sortedList.length === 0 ) { return <span>loading</span> }
+
     return (
         <main>
             <TitleWrapper>
                 <StyledTitle>Current Employees list</StyledTitle>
             </TitleWrapper>
+
+            <SelectEntriesBox 
+                options={entriesOptions}
+                selectEntriesAmount={selectEntriesAmount}
+                currentlyshowing={currentlyshowing}
+            />
+
             <SearchBox 
                 handleSearchChange={handleSearchChange}
                 handleSearchSubmit={handleSearchSubmit}
@@ -92,6 +114,11 @@ const Employees = () => {
             <EmployeesList 
                 sortedList={sortedList}
                 sortListBy={sortListBy}
+            />
+            <Pagination 
+                pages={pages}
+                totalPages={totalPages}
+                currentActivePage={currentActivePage}
             />
         </main>
     )
