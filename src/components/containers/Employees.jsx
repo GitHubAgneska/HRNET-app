@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { 
     selectFilteredEmployees,
     requestFiltering,
@@ -16,12 +16,26 @@ import { TitleWrapper, StyledTitle } from '../../style/global_style'
 import SelectEntriesBox from '../elements/SelectEntriesBox/SelectEntriesBox'
 import Pagination from "../elements/Pagination/Pagination"
 
+// spinner
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: fuchsia;
+`;
+
 const Employees = () => {
+
+    // spinner
+    let [loading, setLoading] = useState(true);
+    let [color, setColor] = useState("#ffffff");
+
     const dispatch = useDispatch()
 
     const sortedList = useSelector(selectFilteredEmployees)
-    // dispatch(setUpPagination(sortedList.length))
     
+    // SORT LIST By
     const sortListBy = (filterParam, reverse ) => { // console.log('filtering requested: ', filterParam, reverse)
         requestFiltering(filterParam, reverse) // call handler => modify filter state
     }
@@ -81,20 +95,24 @@ const Employees = () => {
     
     // ENTRIES / PAGINATION
     let entriesOptions = [ 15, 30, 50]
-
+    
     const selectEntriesAmount = (n) => { dispatch(setUpPagination(n)) }
     const currentlyshowing = sortedList.length
-    const pages = useSelector(state => state.pages.pages)
+    
+    const pages = useSelector(state => state.pages.pagesArray)
     const totalPages = useSelector(state => state.pages.totalPages)
     const currentActivePage = useSelector(state => state.pages.currentActivePage)
 
-    if ( sortedList.length === 0 ) { return <span>loading</span> }
-
+    const changePage = (pageNumber) => { console.log('page requested:', pageNumber)}
+    
     return (
         <main>
             <TitleWrapper>
                 <StyledTitle>Current Employees list</StyledTitle>
             </TitleWrapper>
+            { sortedList.length === 0  && 
+                <ClipLoader color={color} loading={loading} css={override} size={150} />
+            }
 
             <SelectEntriesBox 
                 options={entriesOptions}
@@ -111,15 +129,17 @@ const Employees = () => {
                 selectSuggestion={selectSuggestion}
                 handleKeyDown={handleKeyDown}
             />
-            <EmployeesList 
+            {/*  <EmployeesList 
                 sortedList={sortedList}
                 sortListBy={sortListBy}
-            />
+            /> */}
             <Pagination 
                 pages={pages}
                 totalPages={totalPages}
                 currentActivePage={currentActivePage}
+                changePage={changePage}
             />
+
         </main>
     )
 }

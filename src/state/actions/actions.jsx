@@ -12,7 +12,7 @@ import {
     FILTER_PARAM_CHANGED,
     FILTER_SEARCHTERM_CHANGED, SET_RESULTS_FOR_SEARCH, RESET_SEARCH_RESULTS,
     
-    ENTRIES_AMOUNT_CHANGED, SET_PAGES_AMOUNT, SET_PAGES, SET_CURRENTACTIVE_PAGE,
+    SET_LIST_TO_PAGINATE, ENTRIES_AMOUNT_CHANGED, SET_PAGES_AMOUNT, SET_PAGES, SET_CURRENTACTIVE_PAGE,
     SETUP_PAGINATION 
 } from './actions-types'
 
@@ -66,5 +66,3 @@ export const changeEntriesPerPage = (entries) => ({ type: ENTRIES_AMOUNT_CHANGED
 export const setPages = (pages) => ({ type: SET_PAGES, payload: pages  })
 export const setPagesAmount = (n) => ({ type: SET_PAGES_AMOUNT, payload: n })
 export const setCurrentActivePage = (pageRequested) => ({ type: SET_CURRENTACTIVE_PAGE, payload: pageRequested })
-
-export const setUpPagination = (entries) => ({ type: SETUP_PAGINATION, payload: entries})

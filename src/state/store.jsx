@@ -25,7 +25,6 @@ export const initialState = {
         get_status: 'void',
         get_payload: null,
         get_error: null
-
     },
     employeesList: {
         originalList: [],
@@ -45,12 +44,11 @@ export const initialState = {
         searchterm: '',
         searchActive: false,
         searchResults: [],
-
     },
     pages: {
-        entries: 100,
-        totalPages: 1,
-        pages: [],
+        entries: 0,
+        totalPages: 0,
+        pagesArray: null,
         currentActivePage: 0
     }
 }

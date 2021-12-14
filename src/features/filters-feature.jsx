@@ -64,6 +64,7 @@ export const selectFilteredEmployees = createSelector(
                 return list = [...searchResults] 
             }
         }
+        
         // console.log('LIST OUTPUT FROM CREATE SELECTOR====', list)     ------------------------------------------------- TO REVIEW TYPEOF ≠ ... 
         return list
     }

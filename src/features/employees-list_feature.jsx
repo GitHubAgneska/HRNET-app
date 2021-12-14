@@ -6,6 +6,7 @@ import { 
 } from '../state/actions/Actions'
 import { client } from '../api/client'
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { setUpPagination } from './pagination_feature.jsx'
 
 
 // Thunk functions - UNUSED ATM ---
@@ -28,7 +29,9 @@ export async function getEmployeesCurrentList(dispatch, getState) {
         const data = await response  // ! NOT .json()
         // console.log('DATA=', data) // = object employees =  array of objects
         dispatch(employeeslistResolved(data))
-        dispatch(setSearchResults(data)) // ------ SETS  SEARCHED LIST DEFAULT = ALL RESULTS
+        
+        dispatch(setSearchResults(data.employees))    // ------ SETS  SEARCHED LIST DEFAULT = ALL RESULTS
+        dispatch(setUpPagination(10)) // thunk dispatching all related pagination actions
 
     }
     catch (error) {
@@ -49,7 +52,6 @@ export function createEmployee(employee) {
         const status = employeesListState(getState()).post_status
         console.log('request status when dispatch requested=', status)
 
-    
         if ( status === 'pending' || status === 'updating ') { return }
     
         dispatch(employeesListCreateFetching(employee))

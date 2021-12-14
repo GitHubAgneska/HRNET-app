@@ -31,7 +31,8 @@ test('full app rendering/navigating', () => {
   fireEvent.click(screen.getByText(/employees/i), leftClick)
 
   // check that the content changed to the new page
-  expect(screen.getByText(/current employees list/i)).toBeInTheDocument()
+  expect(screen.getByText(/loading/i)).toBeInTheDocument()
+  expect(screen.getByText(/employees list/i)).toBeInTheDocument()
 
 })
 
