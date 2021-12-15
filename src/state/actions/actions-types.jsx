@@ -43,11 +43,10 @@ export const SET_RESULTS_FOR_SEARCH = 'filters/display-search-results'
 export const RESET_SEARCH_RESULTS = 'filters/reset-search-results'
 
 // PAGES ACTIONS TYPES .................................
-export const SET_LIST_TO_PAGINATE = 'pages/setList-to-paginate'
 export const ENTRIES_AMOUNT_CHANGED = 'pages/page-entries-changed'
 export const SET_PAGES = 'pages/set-pages'
 export const SET_PAGES_AMOUNT = 'pages/set-pages-amount'
-export const SET_CURRENTACTIVE_PAGE = 'pages/set-currentActive-page'
+export const SET_CURRENTACTIVE_PAGE_INDEX = 'pages/set-currentActive-page-index'
 
-export const SETUP_PAGINATION  = 'pages/setUpPagination'
+export const SET_CURRENTACTIVE_PAGE  = 'pages/set-currentActive-page'
 

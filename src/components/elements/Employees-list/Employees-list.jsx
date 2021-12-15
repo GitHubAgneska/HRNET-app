@@ -1,12 +1,16 @@
 import Table from '../Table/Table'
 
-const EmployeesList = ({sortedList, sortListBy}) => {
-    
-
+const EmployeesList = ({page, sortedList, sortListBy}) => {
+    console.log('PAGE==', page)
     return (
+        
         <section style={{height:'70vh'}}>
-                <Table list={sortedList} sortListBy={sortListBy} />
+            <Table page={page} sortListBy={sortListBy} />
         </section>
+
+    /*  <section style={{height:'70vh'}}>
+            <Table list={sortedList} sortListBy={sortListBy} />
+        </section> */
     )
 }
 export default EmployeesList

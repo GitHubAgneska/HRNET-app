@@ -49,7 +49,8 @@ export const initialState = {
         entries: 0,
         totalPages: 0,
         pagesArray: null,
-        currentActivePage: 0
+        currentActivePageIndex: 0,
+        currentActivePage: null
     }
 }
 

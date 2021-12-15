@@ -2,11 +2,13 @@ import { Fragment } from "react"
 import {StyledTableRow } from './Table_style'
 import moment from 'moment'
 
-const TableRow = ({list}) => {
-    if (list.constructor.name !== "Array") { list = list.employees} // --- dirty workaround -- should use NORMALIZED DATA
+const TableRow = ({list, page}) => {
+    // if (list.constructor.name !== "Array") { list = list.employees} // --- dirty workaround -- should use NORMALIZED DATA
     return (
         <Fragment>
-            { list.map( employee => (
+
+            { page.map( employee => (
+           /*  { list.map( employee => ( */
                 
                 <StyledTableRow key={Math.random()}>
                     <td>{employee.firstName}</td>

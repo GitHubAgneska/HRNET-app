@@ -3,7 +3,7 @@ import TableRow  from './Table-row'
 import TableHeader from './Table-header'
 import { StyledTableHeader, StyledTable } from './Table_style'
 
-const Table = ({list, sortListBy}) => {
+const Table = ({list, page, sortListBy}) => {
     return (
         <TableWrapper>
             <StyledTable>
@@ -11,7 +11,8 @@ const Table = ({list, sortListBy}) => {
                     <TableHeader sortListBy={sortListBy}/>
                 </StyledTableHeader>
                 <tbody>
-                    <TableRow list={list} />
+                    <TableRow page={page} />
+                    {/* <TableRow list={list} /> */}
                 </tbody>
             </StyledTable>
         </TableWrapper>

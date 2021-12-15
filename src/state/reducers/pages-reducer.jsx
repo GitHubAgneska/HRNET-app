@@ -3,8 +3,8 @@ import {
     ENTRIES_AMOUNT_CHANGED,
     SET_PAGES_AMOUNT,
     SET_PAGES,
-    SET_CURRENTACTIVE_PAGE,
-    SETUP_PAGINATION 
+    SET_CURRENTACTIVE_PAGE_INDEX,
+    SET_CURRENTACTIVE_PAGE
 } from '../actions/actions-types'
 
 // ......................................................
@@ -27,10 +27,15 @@ export default function PagesReducer(state = initialState.pages, action) {
             let pagesArray = action.payload
             return { ...state, pagesArray: pagesArray }
         }
-        case SET_CURRENTACTIVE_PAGE: {
+        case SET_CURRENTACTIVE_PAGE_INDEX: {
             let pageRequested = action.payload
-            return { ...state, currentActivePage: pageRequested }
+            return { ...state, currentActivePageIndex: pageRequested }
         }
+        case SET_CURRENTACTIVE_PAGE: {
+            let activePage = action.payload
+            return { ...state, currentActivePage: activePage }
+        }
+
         
         default: return state
     }

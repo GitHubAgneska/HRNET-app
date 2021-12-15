@@ -8,7 +8,7 @@ import {
     requestSetAllSuggestionsAsResults,
     requestSearchResetting
 } from '../../features/filters-feature'
-import { setUpPagination } from '../../features/pagination_feature'
+import { setUpPagination, selectCurrentPage } from '../../features/pagination_feature'
 import EmployeesList from '../elements/Employees-list/Employees-list'
 import SearchBox from "../elements/SearchBox/SearchBox"
 import { searchSuggestions } from '../../utils/searchText'
@@ -34,6 +34,7 @@ const Employees = () => {
     const dispatch = useDispatch()
 
     const sortedList = useSelector(selectFilteredEmployees)
+    const page = useSelector(state => state.pages.currentActivePage)
     
     // SORT LIST By
     const sortListBy = (filterParam, reverse ) => { // console.log('filtering requested: ', filterParam, reverse)
@@ -95,14 +96,16 @@ const Employees = () => {
     
     // ENTRIES / PAGINATION
     let entriesOptions = [ 15, 30, 50]
-    
+    //const allCurrentIds = useSelector(selectAllCurrentEmployeesIds)
+
     const selectEntriesAmount = (n) => { dispatch(setUpPagination(n)) }
     const currentlyshowing = sortedList.length
     
-    const pages = useSelector(state => state.pages.pagesArray)
+    //const pages = useSelector(state => state.pages.pagesArray)
     const totalPages = useSelector(state => state.pages.totalPages)
-    const currentActivePage = useSelector(state => state.pages.currentActivePage)
-
+    
+    //const page = useSelector(selectCurrentPage)
+    const currentActivePageIndex = useSelector(state => state.pages.currentActivePageIndex)
     const changePage = (pageNumber) => { console.log('page requested:', pageNumber)}
     
     return (
@@ -110,7 +113,10 @@ const Employees = () => {
             <TitleWrapper>
                 <StyledTitle>Current Employees list</StyledTitle>
             </TitleWrapper>
-            { sortedList.length === 0  && 
+            {/* { sortedList.length === 0  && 
+                <ClipLoader color={color} loading={loading} css={override} size={150} />
+            } */}
+            { page.length === 0  && 
                 <ClipLoader color={color} loading={loading} css={override} size={150} />
             }
 
@@ -129,14 +135,16 @@ const Employees = () => {
                 selectSuggestion={selectSuggestion}
                 handleKeyDown={handleKeyDown}
             />
-            {/*  <EmployeesList 
+
+            <EmployeesList
                 sortedList={sortedList}
+                page={page}
                 sortListBy={sortListBy}
-            /> */}
+            />
+
             <Pagination 
-                pages={pages}
                 totalPages={totalPages}
-                currentActivePage={currentActivePage}
+                currentActivePage={currentActivePageIndex}
                 changePage={changePage}
             />
 
