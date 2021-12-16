@@ -1,8 +1,8 @@
-import { initialState  } from '../store'
+import { initialState } from '../store'
 import {
-    ENTRIES_AMOUNT_CHANGED,
+    SET_ENTRIES_AMOUNT,
     SET_PAGES_AMOUNT,
-    SET_PAGES,
+    SET_RESULTS_AS_PAGES,
     SET_CURRENTACTIVE_PAGE_INDEX,
     SET_CURRENTACTIVE_PAGE
 } from '../actions/actions-types'
@@ -10,11 +10,11 @@ import {
 // ......................................................
 // PAGINATION REDUCER
 // ......................................................
-export default function PagesReducer(state = initialState.pages, action) {
+export default function PaginationReducer(state = initialState.pagination, action) {
 
     switch (action.type) {
 
-        case ENTRIES_AMOUNT_CHANGED: {
+        case SET_ENTRIES_AMOUNT: {
             let newAmount = action.payload;
             return { ...state, entries: newAmount }
         }
@@ -23,9 +23,9 @@ export default function PagesReducer(state = initialState.pages, action) {
             console.log('PAYLOAD PAGES=====', newPagesAmount)
             return { ...state, totalPages: newPagesAmount }
         }
-        case SET_PAGES: {
-            let pagesArray = action.payload
-            return { ...state, pagesArray: pagesArray }
+        case SET_RESULTS_AS_PAGES: {
+            let pages = action.payload
+            return { ...state, resultsAsPages: pages }
         }
         case SET_CURRENTACTIVE_PAGE_INDEX: {
             let pageRequested = action.payload
@@ -35,8 +35,6 @@ export default function PagesReducer(state = initialState.pages, action) {
             let activePage = action.payload
             return { ...state, currentActivePage: activePage }
         }
-
-        
         default: return state
     }
 }

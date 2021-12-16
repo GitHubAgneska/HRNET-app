@@ -1,4 +1,4 @@
-import { initialState  } from '../store'
+import { initialState  } from '../store'
 import produce from 'immer'
 import {
     SET_EMPLOYEE, SET_FIRSTNAME, SET_LASTNAME,
@@ -10,7 +10,7 @@ import {
 // ......................................................
 // EMPLOYEE  REDUCER
 // ......................................................
-function employeeReducer(state = initialState.employee, action) {
+export default function employeeReducer(state = initialState.employee, action) {
 
     return produce(state, (draft) => {
         switch (action.type) {
@@ -65,5 +65,3 @@ function employeeReducer(state = initialState.employee, action) {
         }
     })
 }
-
-export default employeeReducer

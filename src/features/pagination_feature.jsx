@@ -1,27 +1,20 @@
-import { store, pagesState, employeesListState, filtersState } from '../state/store'
-import { changeEntriesPerPage, setPagesAmount, setPages, setCurrentActivePageIndex, setCurrentActivePage } from '../state/actions/Actions'
+import { store, pagesState, employeesListState, filteringsState } from '../state/store'
+import { setEntriesPerPage, setPagesAmount, setResultsAsPages, setCurrentActivePageIndex, setCurrentActivePage } from '../state/actions/Actions'
 import { useSelector } from "react-redux"
-import {  selectFilteredEmployees } from './filters-feature'
+import {  selectFilteredEmployees } from './filtering-feature'
 import { createSelector } from "@reduxjs/toolkit"
 
 
-// memoized selector to retrieve all IDs from current list of results
-/* export const selectAllCurrentEmployeesIds = createSelector (
-    filtersState => filtersState.searchResults,
-    searchResults => searchResults?.map(result => result.id)
-) */
-
-
-// THUNK ACTION CREATOR  (used here to dispatch multiple actions)
+// THUNK ACTION CREATOR  (used here to dispatch all pagination related actions)
 export const setUpPagination = (n) => (dispatch, getState) => {
         
         console.log('ENTRIES==', n)
-        dispatch(changeEntriesPerPage(n))
+        dispatch(setEntriesPerPage(n))
 
         let outputPages = []
         let start = 0
         
-        const currentList = filtersState(getState()).searchResults // needs to wait for initial fetch to be resolved =>  = default search results
+        const currentList = filteringsState(getState()).results // needs to wait for initial fetch to be resolved =>  = default search results
         console.log('CURRENT LIST AT SET UP PAGINATION==', currentList)
         
         if ( currentList) {
@@ -37,18 +30,18 @@ export const setUpPagination = (n) => (dispatch, getState) => {
                 outputPages.push(newPageArray)
                 start+=n
             }
-            dispatch(setPages(outputPages))
+            dispatch(setResultsAsPages(outputPages))
             dispatch(setCurrentActivePage(outputPages[0]))
             dispatch(setCurrentActivePageIndex(0))
         }
 }
 
 export const selectCurrentPage = createSelector(
-    pagesState => pagesState.pagesArray,
+    pagesState => pagesState.resultsAsPages,
     pagesState => pagesState.currentActivePage,
     
-    ( pagesArray, currentActivePage ) => {
-        return pagesArray[currentActivePage]
+    ( resultsAsPages, currentActivePage ) => {
+        return resultsAsPages[currentActivePage]
     }  
 )
 

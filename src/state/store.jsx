@@ -2,8 +2,8 @@ import { createStore, combineReducers, applyMiddleware } from "redux"
 import thunk from 'redux-thunk'
 import employeeReducer from "./reducers/employee-reducer"
 import employeesListReducer from './reducers/employeesList-reducer'
-import filterReducer from './reducers/filter-reducer'
-import pagesReducer from './reducers/pages-reducer'
+import filteringReducer from './reducers/filtering-reducer'
+import paginationReducer from './reducers/pagination-reducer'
 
 // INITIAL STATE ( sliced into features )
 export const initialState = {
@@ -28,7 +28,7 @@ export const initialState = {
     },
     employeesList: {
         originalList: [],
-        // api/local storage request state
+        // api/local storage GET request state
         get_status: 'void',
         get_data: null,
         get_error: null,
@@ -37,39 +37,39 @@ export const initialState = {
         post_payload: null,
         post_error: null,
     },
-    filters : {
-        filterStatus: 'none',
-        currentParamFilter: { param: '', reverseOrder: false },  
-        
-        searchterm: '',
+    filtering : {
+        results: [],
+        filteringStatus: 'none',
         searchActive: false,
-        searchResults: [],
+        currentSortingParam: { param: '', reverseOrder: false },  
+        searchterm: '',
     },
-    pages: {
-        entries: 0,
-        totalPages: 0,
-        pagesArray: null,
-        currentActivePageIndex: 0,
+    pagination: {
+        resultsAsPages: [],
+        entries: null,
+        totalPages: null,
+        currentActivePageIndex: null,
         currentActivePage: null
     }
 }
 
 // SELECTORS
-export const employeeState = (state) => state.employee
-export const employeesListState = (state) => state.employeesList
-export const filtersState = (state) => state.filters
-export const pagesState = (state) => state.pages
+export const employeeState = (initialState) => initialState.employee
+export const employeesListState = (initialState) => initialState.employeesList
+export const filteringsState = (initialState) => initialState.filtering
+export const paginationState = (initialState) => initialState.pagination
 
 
 const voidEmployee = { status: 'void' }
 export const selectEmployeeState = (id) => (state) => {
     return state.employee[id] ?? voidEmployee  }
 
+
 export const reducers = combineReducers({
     employee: employeeReducer,
     employeesList: employeesListReducer,
-    filters: filterReducer,
-    pages: pagesReducer
+    filtering: filteringReducer,
+    pagination: paginationReducer
 })
 
 // adding of a 'rootReducer' allows a complete reset of all sub-reducers ( e.g : reset state on logout)

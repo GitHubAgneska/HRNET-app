@@ -1,4 +1,4 @@
-import { initialState  } from '../store'
+import { initialState  } from '../store'
 import produce from 'immer'
 import {
     EMPLOYEES_LIST_CREATE_FETCHING, EMPLOYEES_LIST_CREATE_RESOLVED, EMPLOYEES_LIST_CREATE_REJECTED,
@@ -8,7 +8,7 @@ import uuid from "uuid"
 // ......................................................
 // EMPLOYEES LIST  REDUCER
 // ......................................................
-function employeesListReducer(state = initialState.employeesList, action) {
+export default function  employeesListReducer(state = initialState.employeesList, action) {
 
     return produce(state, (draft) => {
         switch (action.type) {
@@ -49,7 +49,6 @@ function employeesListReducer(state = initialState.employeesList, action) {
                     draft.get_error = action.payload
                     draft.get_payload = null
                     return 
-                    
                 }
                 return // else action ignored
             }
@@ -101,5 +100,3 @@ function employeesListReducer(state = initialState.employeesList, action) {
         }
     })
 }
-
-export default employeesListReducer

@@ -36,17 +36,16 @@ export const EMPLOYEES_LIST_CREATE_RESOLVED ='employees-list/create_resolved';
 export const EMPLOYEES_LIST_CREATE_REJECTED ='employees-list/create_rejected';
 
 // FILTERS ACTIONS TYPES .................................
-export const FILTERS_STATUS_CHANGED = 'filters/filters-status-changed'
-export const FILTER_PARAM_CHANGED = 'filters/filter-param-changed'
-export const FILTER_SEARCHTERM_CHANGED = 'filters/filter-searchterm-changed'
-export const SET_RESULTS_FOR_SEARCH = 'filters/display-search-results'
-export const RESET_SEARCH_RESULTS = 'filters/reset-search-results'
+export const FILTERS_STATUS_CHANGED = 'filtering/filtering-status-changed'
+export const FILTER_PARAM_CHANGED = 'filtering/filter-param-changed'
+export const FILTER_SEARCHTERM_CHANGED = 'filtering/filter-searchterm-changed'
+export const SET_RESULTS_FOR_SEARCH = 'filtering/display-search-results'
+export const RESET_SEARCH_RESULTS = 'filtering/reset-search-results'
 
 // PAGES ACTIONS TYPES .................................
-export const ENTRIES_AMOUNT_CHANGED = 'pages/page-entries-changed'
-export const SET_PAGES = 'pages/set-pages'
+export const SET_ENTRIES_AMOUNT = 'pages/set-entries-amount'
+export const SET_RESULTS_AS_PAGES = 'pages/set-results-as-pages'
 export const SET_PAGES_AMOUNT = 'pages/set-pages-amount'
 export const SET_CURRENTACTIVE_PAGE_INDEX = 'pages/set-currentActive-page-index'
-
 export const SET_CURRENTACTIVE_PAGE  = 'pages/set-currentActive-page'
 

@@ -22,25 +22,25 @@ export const requestSetAllSuggestionsAsResults = (suggested) => { store.dispatch
 
 export const requestSearchResetting = () => { store.dispatch(resetSearchResults())}
 
-// SELECTOR : MEMOIZED SELECTOR To allow multiple filters and derive state from employeesList state
+// SELECTOR : MEMOIZED SELECTOR To allow multiple filtering and derive state from employeesList state
 // => will re-render list only if filter is changed OR original list (e.g creation of a new employee)
 export const selectFilteredEmployees = createSelector(
 
     initialState => initialState.employeesList.originalList,      // input selector 1
-    initialState => initialState.filters,                         // input selector 2
+    initialState => initialState.filtering,                         // input selector 2
 
-    (originalList, filters) => {                                  // output selector: takes both selectors as params
+    (originalList, filtering) => {                                  // output selector: takes both selectors as params
         
         let list;
         
-        const { filterStatus, currentParamFilter, searchResults } = filters
-        const noFilters = filterStatus === 'none'
+        const { filteringStatus, currentSortingParam, results } = filtering
+        const noFilters = filteringStatus === 'none'
                 
-        let listParam = currentParamFilter.param  // ex : param = 'firstName'
-        const reverseOrder = currentParamFilter.reverseOrder
+        let listParam = currentSortingParam.param  // ex : param = 'firstName'
+        const reverseOrder = currentSortingParam.reverseOrder
         
-        searchResults ? // filters will either operate on original list or results of search
-            list = searchResults
+        results ? // filtering will either operate on original list or results of search
+            list = results
             : list = [...originalList] // ---- for 'sort()' will try to mutate originalList and fail ---- !
 
         if ( noFilters ) { // console.log('LIST noFilters OUTPUT FROM CREATE SELECTOR====', list)   ----------------------- TO REVIEW TYPEOF ...
@@ -60,8 +60,8 @@ export const selectFilteredEmployees = createSelector(
                 }
             }
             
-            if (searchResults) {
-                return list = [...searchResults] 
+            if (results) {
+                return list = [...results] 
             }
         }
         

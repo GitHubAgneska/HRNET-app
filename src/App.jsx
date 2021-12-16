@@ -7,8 +7,19 @@ import Employees from './components/containers/Employees';
 import NotFoundPage from './components/containers/404'
 import { GlobalStyle } from './style/global_style'
 
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { getEmployeesCurrentList } from './features/employees-list_feature'
+
 
 const App = () => {
+    const dispatch = useDispatch()
+    // 1 - INITIAL FETCH: generate a fake list of employees from mirage
+    //   will also dispatch 'set' (default=all list) 
+    // + 'setUpPagination' (default = 10 results/page)
+    useEffect(()=> {
+        dispatch(getEmployeesCurrentList)
+    }, [dispatch])
 
     return (
         <div className="App">

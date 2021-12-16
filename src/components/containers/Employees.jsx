@@ -1,7 +1,5 @@
-import { useSelector, useDispatch } from "react-redux"
-import { getEmployeesCurrentList } from '../../features/employees-list_feature'
-import { useEffect, useState } from "react"
-
+import { useSelector } from "react-redux"
+import { useState } from 'react'
 import { 
     selectFilteredEmployees,
     requestFiltering,
@@ -9,19 +7,23 @@ import {
     requestListAsSearchResults,
     requestSetAllSuggestionsAsResults,
     requestSearchResetting
-} from '../../features/filters-feature'
+} from '../../features/filtering-feature'
+import { employeesListState } from "../../state/store"
+
 import { setUpPagination, selectCurrentPage } from '../../features/pagination_feature'
 import EmployeesList from '../elements/Employees-list/Employees-list'
+
 import SearchBox from "../elements/SearchBox/SearchBox"
+import SelectEntriesBox from '../elements/SelectEntriesBox/SelectEntriesBox'
 import { searchSuggestions } from '../../utils/searchText'
 import { TitleWrapper, StyledTitle } from '../../style/global_style'
-import SelectEntriesBox from '../elements/SelectEntriesBox/SelectEntriesBox'
 import Pagination from "../elements/Pagination/Pagination"
 
 // spinner
-import { css } from "@emotion/react";
-import ClipLoader from "react-spinners/ClipLoader";
-import { employeesListState } from "../../state/store"
+import { css } from "@emotion/react"
+import ClipLoader from "react-spinners/ClipLoader"
+import { useDispatch } from "react-redux"
+
 const override = css`
     display: block;
     margin: 0 auto;
@@ -31,27 +33,20 @@ const override = css`
 const Employees = () => {
 
     const dispatch = useDispatch()
-    
     // spinner
     let [loading, setLoading] = useState(true);
     let [color, setColor] = useState("#ffffff");
     
-    // 1 - INITIAL FETCH: generate a fake list of employees from mirage
-    //   will also dispatch 'setSearchResults' (default=all list) 
-    // + 'setUpPagination' (default = 10 results/page)
-    useEffect(()=> {
-        dispatch(getEmployeesCurrentList)
-    }, [dispatch])
-    
+
     const listStatus = useSelector(state => state.employeesList.get_status)
     const originalList = useSelector(state => state.employeesList.originalList)
     
     const sortedList = useSelector(selectFilteredEmployees)
     
-    const page = useSelector(state => state.pages.currentActivePage)
-    const totalPages = useSelector(state => state.pages.totalPages)
-    const currentActivePageIndex = useSelector(state => state.pages.currentActivePageIndex)
-    const entries = useSelector(state => state.pages.entries)
+    const page = useSelector(state => state.pagination.currentActivePage)
+    const totalPages = useSelector(state => state.pagination.totalPages)
+    const currentActivePageIndex = useSelector(state => state.pagination.currentActivePageIndex)
+    const entries = useSelector(state => state.pagination.entries)
     
     // SEARCH LIST
     const input = document.querySelector('input')

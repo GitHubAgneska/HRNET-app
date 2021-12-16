@@ -12,7 +12,7 @@ import {
     FILTER_PARAM_CHANGED,
     FILTER_SEARCHTERM_CHANGED, SET_RESULTS_FOR_SEARCH, RESET_SEARCH_RESULTS,
     
-    ENTRIES_AMOUNT_CHANGED, SET_PAGES_AMOUNT, SET_PAGES, SET_CURRENTACTIVE_PAGE_INDEX,SET_CURRENTACTIVE_PAGE
+    SET_ENTRIES_AMOUNT, SET_PAGES_AMOUNT, SET_RESULTS_AS_PAGES, SET_CURRENTACTIVE_PAGE_INDEX,SET_CURRENTACTIVE_PAGE
     
 } from './actions-types'
 
@@ -62,8 +62,8 @@ export const resetSearchResults = () => ({ type: RESET_SEARCH_RESULTS })
 // ................................................................................. 
 // ACTIONS CREATORS :PAGES (not async)
 // ................................................................................. 
-export const changeEntriesPerPage = (entries) => ({ type: ENTRIES_AMOUNT_CHANGED, payload: entries })
-export const setPages = (pages) => ({ type: SET_PAGES, payload: pages  })
+export const setEntriesPerPage = (entries) => ({ type: SET_ENTRIES_AMOUNT, payload: entries })
+export const setResultsAsPages = (pages) => ({ type: SET_RESULTS_AS_PAGES, payload: pages  })
 export const setPagesAmount = (n) => ({ type: SET_PAGES_AMOUNT, payload: n })
 export const setCurrentActivePageIndex = (pageRequested) => ({ type: SET_CURRENTACTIVE_PAGE_INDEX, payload: pageRequested })
 export const setCurrentActivePage = (page) => ({ type: SET_CURRENTACTIVE_PAGE, payload: page })

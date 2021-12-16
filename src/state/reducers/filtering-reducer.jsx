@@ -1,4 +1,4 @@
-import { initialState  } from '../store'
+import { initialState } from '../store'
 import { 
     FILTERS_STATUS_CHANGED, FILTER_PARAM_CHANGED, 
     FILTER_SEARCHTERM_CHANGED, SET_RESULTS_FOR_SEARCH,  RESET_SEARCH_RESULTS,
@@ -8,19 +8,19 @@ import {
 // FILTER LIST  REDUCER
 // ......................................................
 // Here, the list will NOT be altered as filtered in the state,
-// only filters will be marked as active, then implemented via selectors' 'instructions'
-export default function filtersReducer(state = initialState.filters, action) {
+// only filtering will be marked as active, then implemented via selectors' 'instructions'
+export default function filteringReducer(state = initialState.filtering, action) {
     
     switch (action.type) {
 
         case FILTERS_STATUS_CHANGED: { 
             let status = action.payload;
-            return { ...state, filterStatus: status }
+            return { ...state, filteringStatus: status }
         }
         case FILTER_PARAM_CHANGED: { 
             let { param, reverseOrder } = action.payload; 
             // console.log('filtersReducer===> new filter param=', param, 'reverseOrder=', reverseOrder)
-            return { ...state, currentParamFilter: { param, reverseOrder } }
+            return { ...state, currentSortingParam: { param, reverseOrder } }
         }
         case FILTER_SEARCHTERM_CHANGED: {
             let newSearchterm = action.payload
@@ -28,10 +28,10 @@ export default function filtersReducer(state = initialState.filters, action) {
         }
         case SET_RESULTS_FOR_SEARCH: {
             let results = action.payload
-            return { ...state,  searchResults: results }
+            return { ...state,  results: results }
         }
         case RESET_SEARCH_RESULTS: {
-            return { ...state,  searchResults: null }
+            return { ...state,  results: null }
         }
         default: return state
     }
