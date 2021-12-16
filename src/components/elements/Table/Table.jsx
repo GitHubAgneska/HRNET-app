@@ -11,8 +11,10 @@ const Table = ({list, page, sortListBy}) => {
                     <TableHeader sortListBy={sortListBy}/>
                 </StyledTableHeader>
                 <tbody>
-                    <TableRow page={page} />
-                    {/* <TableRow list={list} /> */}
+                { page && page.map( item => (
+                    <TableRow key={Math.random()} item={item} />))
+                } 
+                {/* <TableRow list={list} /> */}
                 </tbody>
             </StyledTable>
         </TableWrapper>

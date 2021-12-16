@@ -1,6 +1,6 @@
 import { SelectEntriesBoxWrapper } from './SelectEntriesBox_style'
 
-const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing}) => {
+const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing, ListTotal}) => {
     return (
         <SelectEntriesBoxWrapper>
 
@@ -14,7 +14,7 @@ const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing}) => {
                 ))}
             </select>
 
-            <div currentlyshowing={currentlyshowing}>Showing: {currentlyshowing} of {currentlyshowing}</div>
+            <div currentlyshowing={currentlyshowing}>Showing: {currentlyshowing} of {ListTotal}</div>
         </SelectEntriesBoxWrapper>
     )
 }

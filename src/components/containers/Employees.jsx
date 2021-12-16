@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
-import { useState, useEffect } from "react"
+import { getEmployeesCurrentList } from '../../features/employees-list_feature'
+import { useEffect, useState } from "react"
+
 import { 
     selectFilteredEmployees,
     requestFiltering,
@@ -19,6 +21,7 @@ import Pagination from "../elements/Pagination/Pagination"
 // spinner
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
+import { employeesListState } from "../../state/store"
 const override = css`
     display: block;
     margin: 0 auto;
@@ -27,24 +30,44 @@ const override = css`
 
 const Employees = () => {
 
+    const dispatch = useDispatch()
+    
     // spinner
     let [loading, setLoading] = useState(true);
     let [color, setColor] = useState("#ffffff");
-
-    const dispatch = useDispatch()
-
-    const sortedList = useSelector(selectFilteredEmployees)
-    const page = useSelector(state => state.pages.currentActivePage)
     
-    // SORT LIST By
-    const sortListBy = (filterParam, reverse ) => { // console.log('filtering requested: ', filterParam, reverse)
-        requestFiltering(filterParam, reverse) // call handler => modify filter state
-    }
-
+    // 1 - INITIAL FETCH: generate a fake list of employees from mirage
+    //   will also dispatch 'setSearchResults' (default=all list) 
+    // + 'setUpPagination' (default = 10 results/page)
+    useEffect(()=> {
+        dispatch(getEmployeesCurrentList)
+    }, [dispatch])
+    
+    const listStatus = useSelector(state => state.employeesList.get_status)
+    const originalList = useSelector(state => state.employeesList.originalList)
+    
+    const sortedList = useSelector(selectFilteredEmployees)
+    
+    const page = useSelector(state => state.pages.currentActivePage)
+    const totalPages = useSelector(state => state.pages.totalPages)
+    const currentActivePageIndex = useSelector(state => state.pages.currentActivePageIndex)
+    const entries = useSelector(state => state.pages.entries)
+    
     // SEARCH LIST
     const input = document.querySelector('input')
     const [ searchInputValues, setSearchInputValues ] = useState("")
     const [ suggestions, setSuggestions ] = useState([])
+    
+    // wait for pagination to be set (depends on initial fetch resolving)
+    let proceed = false;
+    if ( listStatus === 'pending' || listStatus === 'updating' ) { return 'loading' }
+    else if ( listStatus === 'resolved') { page?.length > 0 ? proceed=true:proceed=false; }
+
+
+    // SORT AND SEARCH LIST 
+    const sortListBy = (filterParam, reverse ) => { // console.log('filtering requested: ', filterParam, reverse)
+        requestFiltering(filterParam, reverse) // call handler => modify filter state
+    }
 
     const handleSearchChange = e => { 
         let query = e.target.value
@@ -73,7 +96,7 @@ const Employees = () => {
     }
 
     const clearInput = () => {
-        if ( input.value !== "" ) { 
+        if ( input.value !== "" ) {
             setSearchInputValues("")
             input.value = ""
             setSuggestions([]) // reset suggestions => block closes
@@ -95,17 +118,10 @@ const Employees = () => {
     const handleSearchSubmit = () => {  return input.value !== ""? validateCurrentSearch() : null }
     
     // ENTRIES / PAGINATION
+    const currentlyShowing = entries;
+    const ListTotal = sortedList.length
     let entriesOptions = [ 15, 30, 50]
-    //const allCurrentIds = useSelector(selectAllCurrentEmployeesIds)
-
     const selectEntriesAmount = (n) => { dispatch(setUpPagination(n)) }
-    const currentlyshowing = sortedList.length
-    
-    //const pages = useSelector(state => state.pages.pagesArray)
-    const totalPages = useSelector(state => state.pages.totalPages)
-    
-    //const page = useSelector(selectCurrentPage)
-    const currentActivePageIndex = useSelector(state => state.pages.currentActivePageIndex)
     const changePage = (pageNumber) => { console.log('page requested:', pageNumber)}
     
     return (
@@ -116,14 +132,16 @@ const Employees = () => {
             {/* { sortedList.length === 0  && 
                 <ClipLoader color={color} loading={loading} css={override} size={150} />
             } */}
-            { page.length === 0  && 
+            { listStatus === 'pending' || listStatus === 'updating' ?  
                 <ClipLoader color={color} loading={loading} css={override} size={150} />
+                :null
             }
 
             <SelectEntriesBox 
                 options={entriesOptions}
                 selectEntriesAmount={selectEntriesAmount}
-                currentlyshowing={currentlyshowing}
+                currentlyshowing={entries}
+                ListTotal={ListTotal}
             />
 
             <SearchBox 
@@ -136,11 +154,13 @@ const Employees = () => {
                 handleKeyDown={handleKeyDown}
             />
 
-            <EmployeesList
-                sortedList={sortedList}
-                page={page}
-                sortListBy={sortListBy}
-            />
+                { proceed && 
+                    <EmployeesList
+                        /* sortedList={sortedList} */
+                        page={page}
+                        sortListBy={sortListBy}
+                    />
+                }
 
             <Pagination 
                 totalPages={totalPages}

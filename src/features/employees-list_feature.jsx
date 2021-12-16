@@ -23,6 +23,7 @@ export async function getEmployeesCurrentList(dispatch, getState) {
         dispatch(employeeslistResolved(data))
         
         dispatch(setSearchResults(data.employees))    // ------ SETS  SEARCHED LIST DEFAULT = ALL RESULTS
+        
         dispatch(setUpPagination(10)) // thunk dispatching all related pagination actions
 
     }

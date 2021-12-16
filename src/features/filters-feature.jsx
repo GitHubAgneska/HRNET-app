@@ -23,7 +23,7 @@ export const requestSetAllSuggestionsAsResults = (suggested) => { store.dispatch
 export const requestSearchResetting = () => { store.dispatch(resetSearchResults())}
 
 // SELECTOR : MEMOIZED SELECTOR To allow multiple filters and derive state from employeesList state
-// => will re-render list only if filter is changed
+// => will re-render list only if filter is changed OR original list (e.g creation of a new employee)
 export const selectFilteredEmployees = createSelector(
 
     initialState => initialState.employeesList.originalList,      // input selector 1

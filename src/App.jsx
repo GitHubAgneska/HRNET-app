@@ -6,18 +6,9 @@ import CreateEmployee from './components/containers/Create-employee'
 import Employees from './components/containers/Employees';
 import NotFoundPage from './components/containers/404'
 import { GlobalStyle } from './style/global_style'
-import { getEmployeesCurrentList } from './features/employees-list_feature'
-import { useEffect } from "react"
-import { useDispatch } from "react-redux"
 
 
 const App = () => {
-
-    // at app init, fetch a fake list of employees from mirage
-    const dispatch = useDispatch()
-    useEffect(()=> {
-        dispatch(getEmployeesCurrentList)
-    }, [dispatch])
 
     return (
         <div className="App">
