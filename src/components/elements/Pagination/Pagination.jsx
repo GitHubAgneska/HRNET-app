@@ -18,20 +18,3 @@ const Pagination = ({totalPages, currentActivePage, changePage}) => { 
     )
 }
 export default Pagination
-
-
-
-{/*   { pages.map(page => (
-    <Paginated page={page} key={Math.random()}>
-        { page.map(item => (
-            <Fragment key={Math.random()}>
-                <span key={Math.random()}>{item.firstName}</span>
-                <span key={Math.random()}>{item.lastName}</span>
-                <span key={Math.random()}>{item.city}</span>
-            </Fragment>
-            
-            
-            ))}
-    </Paginated>
-    )) 
-} */}

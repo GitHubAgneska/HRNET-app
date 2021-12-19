@@ -5,35 +5,38 @@ import {  selectFilteredEmployees } from './filtering-feature'
 import { createSelector } from "@reduxjs/toolkit"
 
 
-// THUNK ACTION CREATOR  (used here to dispatch all pagination related actions)
-export const setUpPagination = (n) => (dispatch, getState) => {
-        
-        console.log('ENTRIES==', n)
-        dispatch(setEntriesPerPage(n))
+export const setPage = (pageNumber) => (dispatch, getState) => { 
+    dispatch(setCurrentActivePageIndex(pageNumber))
+    dispatch(setCurrentActivePage(pageNumber))
+}
 
-        let outputPages = []
-        let start = 0
-        
-        const currentList = filteringsState(getState()).results // needs to wait for initial fetch to be resolved =>  = default search results
-        console.log('CURRENT LIST AT SET UP PAGINATION==', currentList)
-        
-        if ( currentList) {
-            let totalPages = Math.ceil(currentList.length / n);
-            console.log('totalPages=', totalPages)
+
+export const changeEntriesAmount = (entries) => (dispatch, getState) => { 
+    dispatch(setEntriesPerPage(entries))
+    const currentList = filteringsState(getState()).results; console.log('RESULTS=========>', currentList)
+
+    store.dispatch(setResultsAsPages([])) // reset pages
+
+    let outputPages = []
+    let from = 0
+
+    let totalPages = filteringsState(getState()).totalPages
     
-            dispatch(setPagesAmount(totalPages))
-            
-            for (let i = start; i < totalPages; i++ ) {
-                let newPageArray = []
-                
-                newPageArray.push(currentList.slice(start, start+ (n-1)))
-                outputPages.push(newPageArray)
-                start+=n
-            }
-            dispatch(setResultsAsPages(outputPages))
-            dispatch(setCurrentActivePage(outputPages[0]))
-            dispatch(setCurrentActivePageIndex(0))
-        }
+    if ( !totalPages) { 
+        totalPages = Math.ceil(currentList.length / entries)
+        dispatch(setPagesAmount(totalPages))
+    }
+
+    // setup pages arrays
+    for (let i = from; i <= totalPages; i++ ) {
+        let newPageArray = []
+        let to = from + entries
+        newPageArray.push(currentList.slice(from, to ))
+        outputPages.push(newPageArray)
+        from += entries
+    }
+    dispatch(setResultsAsPages(outputPages))
+
 }
 
 export const selectCurrentPage = createSelector(
@@ -44,4 +47,47 @@ export const selectCurrentPage = createSelector(
         return resultsAsPages[currentActivePage]
     }  
 )
+
+// THUNK ACTION CREATOR  (used here to dispatch all pagination related actions)
+// used when : first setup for default list
+// then : 
+export const setUpPagination = (entries, pageIndex) => (dispatch, getState) => {
+
+        if ( entries ) { 
+            dispatch(setEntriesPerPage(entries))
+        
+            let outputPages = []
+            let from = 0
+            
+            const currentList = filteringsState(getState()).results; console.log('RESULTS=========>', currentList)
+            let totalPages = filteringsState(getState()).totalPages
+            
+            if ( !totalPages) { 
+                totalPages = Math.ceil(currentList.length / entries)
+                dispatch(setPagesAmount(totalPages))
+            }
+        
+            // setup pages arrays
+            for (let i = from; i <= totalPages; i++ ) {
+                let newPageArray = []
+                let to = from + entries
+                newPageArray.push(currentList.slice(from, to ))
+                outputPages.push(newPageArray)
+                from += entries
+            }
+            dispatch(setResultsAsPages(outputPages))
+        }
+    
+
+        const currentPages = filteringsState(getState()).resultsAsPages
+        if (pageIndex) {
+            dispatch(setCurrentActivePage(currentPages[pageIndex]))
+            dispatch(setCurrentActivePageIndex(pageIndex))
+        } else { 
+            dispatch(setCurrentActivePage(currentPages[0]))
+            dispatch(setCurrentActivePageIndex(0))
+        }
+}
+
+
 

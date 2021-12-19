@@ -29,11 +29,11 @@ export default function PaginationReducer(state = initialState.pagination, actio
         }
         case SET_CURRENTACTIVE_PAGE_INDEX: {
             let pageRequested = action.payload
-            return { ...state, currentActivePageIndex: pageRequested }
+            return { ...state, currentActivePageIndex: pageRequested  }
         }
         case SET_CURRENTACTIVE_PAGE: {
-            let activePage = action.payload
-            return { ...state, currentActivePage: activePage }
+            let requestedIndex = action.payload
+            return { ...state, currentActivePage: state.resultsAsPages[requestedIndex] }
         }
         default: return state
     }

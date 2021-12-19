@@ -10,7 +10,7 @@ import {
 } from '../../features/filtering-feature'
 import { employeesListState } from "../../state/store"
 
-import { setUpPagination, selectCurrentPage } from '../../features/pagination_feature'
+import { setUpPagination, setPage, changeEntriesAmount } from '../../features/pagination_feature'
 import EmployeesList from '../elements/Employees-list/Employees-list'
 
 import SearchBox from "../elements/SearchBox/SearchBox"
@@ -116,8 +116,8 @@ const Employees = () => {
     const currentlyShowing = entries;
     const ListTotal = sortedList.length
     let entriesOptions = [ 15, 30, 50]
-    const selectEntriesAmount = (n) => { dispatch(setUpPagination(n)) }
-    const changePage = (pageNumber) => { console.log('page requested:', pageNumber)}
+    const selectEntriesAmount = (n) => { dispatch(setUpPagination(n, undefined)) }
+    const changePage = (pageNumber) => { console.log('page requested:', pageNumber); dispatch(setPage(pageNumber))}
     
     return (
         <main>
