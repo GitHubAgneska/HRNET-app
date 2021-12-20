@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from "redux"
+import { createStore, combineReducers, applyMiddleware, compose} from "redux"
 import thunk from 'redux-thunk'
 import employeeReducer from "./reducers/employee-reducer"
 import employeesListReducer from './reducers/employeesList-reducer'
@@ -77,7 +77,8 @@ export const rootReducer = (state, action) => {
     return reducers(state, action)
 }
 
-export const store = createStore(rootReducer, applyMiddleware(thunk))
+const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+export const store = createStore(rootReducer, compose(applyMiddleware(thunk),reduxDevtools));
 
 store.subscribe(() => {
     console.log('NEW STATE:', store.getState())
