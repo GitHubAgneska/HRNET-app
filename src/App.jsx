@@ -8,6 +8,10 @@ import NotFoundPage from './components/containers/404'
 import { GlobalStyle } from './style/global_style'
 
 
+import { useDispatch, useSelector, useStore } from "react-redux"
+import { useEffect } from "react"
+import { fetchList } from './features/list_feature'
+
 const App = () => {
 /*     const dispatch = useDispatch()
     // 1 - INITIAL FETCH: generate a fake list of employees from mirage
@@ -16,6 +20,11 @@ const App = () => {
     useEffect(()=> {
         dispatch(getEmployeesCurrentList)
     }, [dispatch]) */
+
+    const dispatch = useDispatch()
+    useEffect(()=> {
+        dispatch(fetchList)
+    }, [dispatch])
 
     return (
         <div className="App">

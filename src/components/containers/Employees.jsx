@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useState, useEffect } from 'react'
 import { 
-    showListSortedBy,showListSortedBy2,
     requestFiltering,
     requestSearch,
     requestListAsSearchResults,
@@ -19,12 +18,20 @@ import { searchSuggestions } from '../../utils/searchText'
 import { TitleWrapper, StyledTitle } from '../../style/global_style'
 import Pagination from "../elements/Pagination/Pagination"
 
+
+//V2 ..................................................
+import { fetchList, selectAllList, selectCollection, selectCollectionAsPages } from '../../features/list_feature'
+import { listState, initialState } from '../../state/store'
+import { faArrowCircleDown, faRandom } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import  { TableWrapper, StyledTable, StyledTableHeader, TableHeaderIconWrapper, StyledTableRow } from './DataTable_style'
+import moment from 'moment'
+
+
 // spinner
 import { css } from "@emotion/react"
 import ClipLoader from "react-spinners/ClipLoader"
-
-import { getEmployeesCurrentList } from '../../features/employees-list_feature'
-
 const override = css`
     display: block;
     margin: 0 auto;
@@ -34,35 +41,47 @@ const override = css`
 const Employees = () => {
     
     const dispatch = useDispatch()
-
-    // 1 - INITIAL FETCH: generate a fake list of employees from mirage
-    //   will also dispatch 'set' (default=all list) 
-    // + 'setUpPagination' (default = 10 results/page)
-    useEffect(()=> {
-        dispatch(getEmployeesCurrentList)
-    }, [dispatch])
-    
-    
     // spinner
     let [loading, setLoading] = useState(true);
     let [color, setColor] = useState("#ffffff");
-    
-    
+    //V1
     const listStatus = useSelector(state => state.employeesList.get_status)
     const originalList = useSelector(state => state.employeesList.originalList)
-    
     const allList = useSelector(state => state.filtering.results)
-    
-    //const sortedList = useSelector(showListSortedBy)
-
-    
-
-    
     const page = useSelector(state => state.pagination.currentActivePage)
     const totalPages = useSelector(state => state.pagination.totalPages)
     const currentActivePageIndex = useSelector(state => state.pagination.currentActivePageIndex)
     const entries = useSelector(state => state.pagination.entries)
-    
+
+
+    //V2 ..................................................
+    const collectionAsPages = useSelector(initialState => initialState.list.collectionAsPages)
+    const currentPageIndex = useSelector(initialState => initialState.list.currentPageIndex)
+    const currentPageToDisplay = collectionAsPages[currentPageIndex]
+
+    const tableHead = [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department']
+    const headRow = () => { return (tableHead).map((h, index) => (
+        <th key={index}>
+            {h}
+            <TableHeaderIconWrapper>
+                <FontAwesomeIcon icon={faArrowCircleDown} onClick={() => sortListBy(h, false)}/>
+                <FontAwesomeIcon icon={faArrowCircleUp} onClick={() => sortListBy(h, true)} />
+            </TableHeaderIconWrapper>
+        </th>
+    ))}
+    const tableRows = rowDataObject => {
+        const { key, index } = rowDataObject
+        const tableCell = [...tableHead]
+        const columnData = tableCell.map((keyD, i) => {
+            console.log('COLUMN DATA===', key[keyD])
+            if ( key.constructor.name !== "String") { keyD = keyD.name }
+            return <td key={i}>{key[keyD]}</td>})
+        return (<tr key={index}>{columnData}</tr>)
+    }
+    const tableData = () => { return currentPageToDisplay.map((key, index) => tableRows({key, index})) }
+
+
+
     // SEARCH LIST
     const input = document.querySelector('input')
     const [ searchInputValues, setSearchInputValues ] = useState("")
@@ -165,11 +184,19 @@ const Employees = () => {
             />
 
             
-                <EmployeesList
-                   /*  sortedList={sortedList} */
-                    page={page}
-                    sortListBy={sortListBy}
-                />
+            <EmployeesList
+                /*  sortedList={sortedList} */
+                page={page}
+                sortListBy={sortListBy}
+            />
+
+            <StyledTable>
+                <StyledTableHeader>
+                    <tr>{headRow()}</tr>
+                </StyledTableHeader>
+                    <tbody>{tableData()}</tbody>    
+            </StyledTable>
+
                 
 
             <Pagination 
