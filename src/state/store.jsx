@@ -11,7 +11,7 @@ export const initialState = {
         collection: null,
         sorted: false,
         sortedBy: { sortParam: '', reverse: false },
-        searchedBy: false,
+        searchActive: false,
         searchTerm: '',
 
         collectionAsPages: null,

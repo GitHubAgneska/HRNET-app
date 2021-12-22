@@ -1,9 +1,11 @@
 import TableRow  from './Table-row'
 import TableHeader from './Table-header'
-import { TableWrapper, StyledTableHeader, StyledTable } from './Table_style'
+import { TableWrapper, StyledTableHeader, StyledTable } from './Table_style'
+import { useState } from 'react'
 
 
-const Table = ({list, page, sortListBy}) => {
+const Table = ({currentPageToDisplay, sortListBy}) => {
+
     return (
         <TableWrapper>
             <StyledTable>
@@ -11,10 +13,9 @@ const Table = ({list, page, sortListBy}) => {
                     <TableHeader sortListBy={sortListBy}/>
                 </StyledTableHeader>
                 <tbody>
-                { page && page.map( item => (
-                    <TableRow key={Math.random()} item={item} />))
-                } 
-                {/* <TableRow list={list} /> */}
+                    { currentPageToDisplay && currentPageToDisplay.map( employee => (
+                        <TableRow key={Math.random()} employee={employee} /> ))
+                    } 
                 </tbody>
             </StyledTable>
         </TableWrapper>

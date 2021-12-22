@@ -107,7 +107,7 @@ const Employees = () => {
             let sugg = searchSuggestions(query, sortedList) // returns a map with: { suggestedWord1 => [ {suggObj1}, {suggObj2} ], ... }
             setSuggestions(sugg)
             // console.log('SUGGESTIONS SET==', sugg);
-        } else { setSuggestions([]) ; requestSearchResetting()}
+        } else { setSuggestions([]) ; selectListAsFetched()}
     }
 
     const handleKeyDown = e => {
@@ -129,7 +129,7 @@ const Employees = () => {
             setSearchInputValues("")
             input.value = ""
             setSuggestions([]) // reset suggestions => block closes
-            requestSearchResetting()
+            selectListAsFetched()
 
         } else { return }
         console.log('values after clear=',searchInputValues ) // -- not empty at first: why ?

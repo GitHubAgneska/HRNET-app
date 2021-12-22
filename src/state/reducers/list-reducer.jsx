@@ -4,7 +4,11 @@ import {
     LIST_FETCHING, LIST_RESOLVED, LIST_REJECTED,
     SETUP_COLLECTION,
     SET_ENTRIES_COUNT, SET_CURRENT_ACTIVE_PAGE, SET_CURRENT_PAGE_INDEX,
-    SETUP_COLLECTION_AS_PAGES,SET_TOTAL_PAGES
+    SETUP_COLLECTION_AS_PAGES,SET_TOTAL_PAGES,
+
+    SORT_STATUS_CHANGED, SORT_PARAM_CHANGED,
+    SEARCHTERM_CHANGED
+
 } from '../actions/actions-types'
 
 // ......................................................
@@ -40,7 +44,7 @@ export default function listReducer(state = initialState.list, action) {
                     return 
                 }
                 console.log('2 - LIST_RESOLVED => PAYLOAD DONE'  )
-                return // else action ignored
+                return
             }
             case LIST_REJECTED: {
                 if ( draft.status === 'loading' || draft.status === 'updating') {
@@ -50,15 +54,14 @@ export default function listReducer(state = initialState.list, action) {
                     draft.payload = null
                     return 
                 }
-                return // else action ignored
+                return
             }
-            // CURRENT COLLECTION ( all results/ sorted /searched )
+            // CURRENT COLLECTION ( all results || sorted || searched )
             case SETUP_COLLECTION: {
                 if (draft.collection) { draft.collection = null } // reset collection
                 draft.collection = action.payload
                 return
             }
-            
             // PAGINATE ACTIONS (NOT ASYNC)
             case SET_ENTRIES_COUNT: {
                 let newAmount = action.payload;
@@ -78,23 +81,25 @@ export default function listReducer(state = initialState.list, action) {
                 let newPagesAmount = action.payload;
                 return { ...state, totalPages: newPagesAmount }
             }
-
-            
             case SET_CURRENT_ACTIVE_PAGE: {
                 let requestedIndex = action.payload
                 return { ...state, currentPage: state.collectionAsPages[requestedIndex+1] }
             }
-
-
             // SORT ACTIONS
-
+            case SORT_STATUS_CHANGED: { 
+                let status = action.payload;
+                return { ...state, sortingStatus: status }
+            }
+            case SORT_PARAM_CHANGED: { 
+                let { param, reverseOrder } = action.payload; 
+                return { ...state, sortedBy: { param, reverseOrder } }
+            }
             // SEARCH ACTIONS
-
-
-
-
-
-            default: return
+            case SEARCHTERM_CHANGED: {
+                let newSearchterm = action.payload
+                return { ...state, searchterm: newSearchterm, searchActive: true }
+            }
+            default: return state
         }
     })
 }
