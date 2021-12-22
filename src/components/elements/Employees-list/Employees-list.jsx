@@ -1,7 +1,7 @@
 import Table from '../Table/Table'
 
 const EmployeesList = ({page, sortedList, sortListBy}) => {
-    console.log('PAGE==', page)
+    console.log('EmployeesList COMPONENT RECEIVES PAGE=====>', page)
     return (
         
         <section style={{height:'70vh'}}>

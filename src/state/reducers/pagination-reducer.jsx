@@ -19,21 +19,21 @@ export default function PaginationReducer(state = initialState.pagination, actio
             return { ...state, entries: newAmount }
         }
         case SET_PAGES_AMOUNT: {
-            let newPagesAmount = action.payload;
-            console.log('PAYLOAD PAGES=====', newPagesAmount)
+            let newPagesAmount = action.payload
             return { ...state, totalPages: newPagesAmount }
         }
         case SET_RESULTS_AS_PAGES: {
             let pages = action.payload
+            console.log('4 - PAGINATION REDUCER ==> - SET_RESULTS_AS_PAGES ==> NOW'  )
             return { ...state, resultsAsPages: pages }
         }
         case SET_CURRENTACTIVE_PAGE_INDEX: {
             let pageRequested = action.payload
-            return { ...state, currentActivePageIndex: pageRequested }
+            return { ...state, currentActivePageIndex: pageRequested  }
         }
         case SET_CURRENTACTIVE_PAGE: {
-            let activePage = action.payload
-            return { ...state, currentActivePage: activePage }
+            let requestedIndex = action.payload
+            return { ...state, currentActivePage: state.resultsAsPages[requestedIndex] }
         }
         default: return state
     }

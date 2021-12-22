@@ -39,7 +39,7 @@ export const initialState = {
     },
     filtering : {
         results: [],
-        filteringStatus: 'none',
+        sortingStatus: 'none',
         searchActive: false,
         currentSortingParam: { param: '', reverseOrder: false },  
         searchterm: '',
@@ -63,8 +63,8 @@ export const paginationState = (initialState) => initialState.pagination
 const voidEmployee = { status: 'void' }
 export const selectEmployeeState = (id) => (state) => {
     return state.employee[id] ?? voidEmployee  }
-
-
+    
+    
 export const reducers = combineReducers({
     employee: employeeReducer,
     employeesList: employeesListReducer,

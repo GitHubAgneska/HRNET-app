@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit"
-import { store } from '../state/store'
+import { store, filteringsState } from '../state/store'
 import { 
     paramFilterChanged,
     filtersStatusChanged,
@@ -9,11 +9,7 @@ import {
 } from '../state/actions/Actions'
 
 
-export const requestFiltering = (param, reverse) => {
-    store.dispatch(filtersStatusChanged('active'))
-    store.dispatch(paramFilterChanged(param, reverse))
-}
-
+// SEARCH BY - actions creators
 export const requestSearch = (searchterm) => { store.dispatch(searchtermFilterChanged(searchterm)) }
 // set results in state
 export const requestListAsSearchResults = (resultsOfClickedSuggestion) => { store.dispatch(setSearchResults(resultsOfClickedSuggestion)) }
@@ -22,53 +18,75 @@ export const requestSetAllSuggestionsAsResults = (suggested) => { store.dispatch
 
 export const requestSearchResetting = () => { store.dispatch(resetSearchResults())}
 
-// SELECTOR : MEMOIZED SELECTOR To allow multiple filtering and derive state from employeesList state
-// => will re-render list only if filter is changed OR original list (e.g creation of a new employee)
-export const selectFilteredEmployees = createSelector(
 
-    initialState => initialState.employeesList.originalList,      // input selector 1
-    initialState => initialState.filtering,                         // input selector 2
+// SORT BY - actions creators
+export const requestFiltering = (param, reverse) => {
+    store.dispatch(filtersStatusChanged('active'))
+    store.dispatch(paramFilterChanged(param, reverse))
+}    
 
-    (originalList, filtering) => {                                  // output selector: takes both selectors as params
-        
-        let list;
-        
-        const { filteringStatus, currentSortingParam, results } = filtering
-        const noFilters = filteringStatus === 'none'
-                
-        let listParam = currentSortingParam.param  // ex : param = 'firstName'
-        const reverseOrder = currentSortingParam.reverseOrder
-        
-        results ? // filtering will either operate on original list or results of search
-            list = results
-            : list = [...originalList] // ---- for 'sort()' will try to mutate originalList and fail ---- !
+// -  memoized selector: display list as sorted by ( = results derived state ) 
+// ISSUE => as derived state, is never stored in state as is, 
+// therefore CANNOT be used by pagination feature that feeds on results from state !
+export const showListSortedBy = createSelector(
+    
+    initialState => initialState.filtering.results,
+    initialState => initialState.filtering,
+    
+        (results, filtering ) => {
+            
+            const { sortingStatus, currentSortingParam  } = filtering
+            
+            const noFilters = sortingStatus === 'none' 
+            const listParam = currentSortingParam.param  // ex : param = 'firstName'
+            const reverseOrder = currentSortingParam.reverseOrder
 
-        if ( noFilters ) { // console.log('LIST noFilters OUTPUT FROM CREATE SELECTOR====', list)   ----------------------- TO REVIEW TYPEOF ...
-            return list } else {
-
-            if (listParam) {  
-                // console.log('listParam in CREATE SELECTOR=', listParam)
+            if ( noFilters ) { return results  }
+            
+            let sortedList = [ ...results] // ---- for 'sort()' will try to mutate 'results' and fail ---- !
+            if (listParam) {
 
                 if ( listParam === 'state') {
-                    !reverseOrder? // false (default) = ascendant order
-                        list.sort( (a, b) => a[listParam].name.localeCompare(b[listParam].name))   // ( target = state.name )
-                        : list.sort( (a, b) => b[listParam].name.localeCompare(a[listParam].name))
+                    !reverseOrder?
+                        sortedList.sort( (a, b) => a[listParam].name.localeCompare(b[listParam].name))   // ( target = state.name )
+                        : sortedList.sort( (a, b) => b[listParam].name.localeCompare(a[listParam].name))
                 } else { 
                     !reverseOrder ?
-                        list.sort( (a, b) => a[listParam].localeCompare(b[listParam])) // a, b = employee objects of employees array
-                        : list.sort( (a, b) => b[listParam].localeCompare(a[listParam])) 
+                        sortedList.sort( (a, b) => a[listParam].localeCompare(b[listParam])) // a, b = employee objects of employees array
+                        : sortedList.sort( (a, b) => b[listParam].localeCompare(a[listParam])) 
                 }
             }
-            
-            if (results) {
-                return list = [...results] 
-            }
-        }
-        
-        // console.log('LIST OUTPUT FROM CREATE SELECTOR====', list)     ------------------------------------------------- TO REVIEW TYPEOF ≠ ... 
-        return list
+            return sortedList
     }
 )
 
+// thunk replacing previous selector 
+// => role = to process sorting if any then STORE current list as sorted/unsorted in state, so it can be paginated
+export const showListSortedBy2 = () => (dispatch, getState) => {
 
+    const currentList = filteringsState(getState()).results; 
+
+    const { sortingStatus, currentSortingParam }  = filteringsState(getState())
+    const noFilters = sortingStatus === 'none' 
+    const listParam = currentSortingParam.param  // ex : param = 'firstName'
+    const reverseOrder = currentSortingParam.reverseOrder
+
+    if ( noFilters ) { return } // 
+    let sortedList = [ ...currentList] // ---- for 'sort()' will try to mutate 'results' and fail ---- !
+    
+    if (listParam) {
+
+        if ( listParam === 'state') {
+            !reverseOrder?
+                sortedList.sort( (a, b) => a[listParam].name.localeCompare(b[listParam].name))   // ( target = state.name )
+                : sortedList.sort( (a, b) => b[listParam].name.localeCompare(a[listParam].name))
+        } else { 
+            !reverseOrder ?
+                sortedList.sort( (a, b) => a[listParam].localeCompare(b[listParam])) // a, b = employee objects of employees array
+                : sortedList.sort( (a, b) => b[listParam].localeCompare(a[listParam])) 
+        }
+        dispatch(requestListAsSearchResults(sortedList)) // makes current sorted
+    }
+
+}
 

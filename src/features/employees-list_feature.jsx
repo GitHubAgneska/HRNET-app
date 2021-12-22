@@ -5,10 +5,10 @@ import { 
     setSearchResults
 } from '../state/actions/Actions'
 import { client } from '../api/client'
-import { setUpPagination } from './pagination_feature.jsx'
+import { changeEntriesAmount, setPage } from './pagination_feature.jsx'
+import { showListSortedBy2 } from './filtering-feature'
 
-// GET ----------
-// thunk function creator
+// GET/FETCH (thunk function creator)
 export async function getEmployeesCurrentList(dispatch, getState) {
     
     const status = employeesListState(getState()).get_status
@@ -22,10 +22,13 @@ export async function getEmployeesCurrentList(dispatch, getState) {
         // console.log('DATA=', data) // = object employees =  array of objects
         dispatch(employeeslistResolved(data))
         
-        dispatch(setSearchResults(data.employees))    // ------ SETS  SEARCHED LIST DEFAULT = ALL RESULTS
+        // SET RESULTS LIST DEFAULT => ALL RESULTS from fetch
+        dispatch(setSearchResults(data.employees))
+        dispatch(showListSortedBy2())
         
-        dispatch(setUpPagination(10)) // thunk dispatching all related pagination actions
-
+        // default pagination actions
+        dispatch(changeEntriesAmount(10)) 
+        dispatch(setPage(1))
     }
     catch (error) {
         dispatch(employeesListRejected(error))

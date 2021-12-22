@@ -15,7 +15,7 @@ export default function filteringReducer(state = initialState.filtering, action)
 
         case FILTERS_STATUS_CHANGED: { 
             let status = action.payload;
-            return { ...state, filteringStatus: status }
+            return { ...state, sortingStatus: status }
         }
         case FILTER_PARAM_CHANGED: { 
             let { param, reverseOrder } = action.payload; 
@@ -28,6 +28,7 @@ export default function filteringReducer(state = initialState.filtering, action)
         }
         case SET_RESULTS_FOR_SEARCH: {
             let results = action.payload
+            console.log('3 - FILTERING REDUCER ==> - SET_RESULTS_FOR_SEARCH OR SORTING  ==> NOW'  )
             return { ...state,  results: results }
         }
         case RESET_SEARCH_RESULTS: {

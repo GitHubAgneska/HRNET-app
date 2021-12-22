@@ -1,7 +1,7 @@
-import { TableWrapper } from './Table_style'
 import TableRow  from './Table-row'
 import TableHeader from './Table-header'
-import { StyledTableHeader, StyledTable } from './Table_style'
+import { TableWrapper, StyledTableHeader, StyledTable } from './Table_style'
+
 
 const Table = ({list, page, sortListBy}) => {
     return (
