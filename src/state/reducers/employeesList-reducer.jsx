@@ -28,6 +28,7 @@ export default function  employeesListReducer(state = initialState.employeesList
                     draft.get_status = 'updating' // ongoing request but presence of data
                     return
                 }
+                console.log(' 1 - EMPLOYEES_LIST_FETCHING => status===', draft.get_status )
                 return // else action ignored
             }
 
@@ -38,8 +39,8 @@ export default function  employeesListReducer(state = initialState.employeesList
                     draft.originalList = [...draft.originalList, ...draft.get_payload]
                     // console.log('PAYLOAD TYPE==', typeof(action.payload))
                     return 
-                    //draft.originalList.push(action.payload)
                 }
+                console.log('2 - EMPLOYEES_LIST_RESOLVED => PAYLOAD DONE'  )
                 return // else action ignored
             }
             case EMPLOYEES_LIST_REJECTED: {

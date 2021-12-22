@@ -1,16 +1,16 @@
-import { useSelector } from "react-redux"
-import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { useState, useEffect } from 'react'
 import { 
-    selectFilteredEmployees,
+    showListSortedBy,showListSortedBy2,
     requestFiltering,
     requestSearch,
     requestListAsSearchResults,
     requestSetAllSuggestionsAsResults,
     requestSearchResetting
 } from '../../features/filtering-feature'
-import { employeesListState } from "../../state/store"
 
-import { setUpPagination, setPage, changeEntriesAmount } from '../../features/pagination_feature'
+
+import { setPage, changeEntriesAmount } from '../../features/pagination_feature'
 import EmployeesList from '../elements/Employees-list/Employees-list'
 
 import SearchBox from "../elements/SearchBox/SearchBox"
@@ -22,7 +22,8 @@ import Pagination from "../elements/Pagination/Pagination"
 // spinner
 import { css } from "@emotion/react"
 import ClipLoader from "react-spinners/ClipLoader"
-import { useDispatch } from "react-redux"
+
+import { getEmployeesCurrentList } from '../../features/employees-list_feature'
 
 const override = css`
     display: block;
@@ -31,17 +32,31 @@ const override = css`
 `;
 
 const Employees = () => {
-
+    
     const dispatch = useDispatch()
+
+    // 1 - INITIAL FETCH: generate a fake list of employees from mirage
+    //   will also dispatch 'set' (default=all list) 
+    // + 'setUpPagination' (default = 10 results/page)
+    useEffect(()=> {
+        dispatch(getEmployeesCurrentList)
+    }, [dispatch])
+    
+    
     // spinner
     let [loading, setLoading] = useState(true);
     let [color, setColor] = useState("#ffffff");
     
-
+    
     const listStatus = useSelector(state => state.employeesList.get_status)
     const originalList = useSelector(state => state.employeesList.originalList)
     
-    const sortedList = useSelector(selectFilteredEmployees)
+    const allList = useSelector(state => state.filtering.results)
+    
+    //const sortedList = useSelector(showListSortedBy)
+
+    
+
     
     const page = useSelector(state => state.pagination.currentActivePage)
     const totalPages = useSelector(state => state.pagination.totalPages)
@@ -114,9 +129,9 @@ const Employees = () => {
     
     // ENTRIES / PAGINATION
     const currentlyShowing = entries;
-    const ListTotal = sortedList.length
-    let entriesOptions = [ 15, 30, 50]
-    const selectEntriesAmount = (n) => { dispatch(setUpPagination(n, undefined)) }
+    const ListTotal = allList.length
+    const entriesOptions = [ 15, 30, 50]
+    const selectEntriesAmount = (n) => { dispatch(changeEntriesAmount(n, undefined)) }
     const changePage = (pageNumber) => { console.log('page requested:', pageNumber); dispatch(setPage(pageNumber))}
     
     return (
@@ -124,13 +139,13 @@ const Employees = () => {
             <TitleWrapper>
                 <StyledTitle>Current Employees list</StyledTitle>
             </TitleWrapper>
-            {/* { sortedList.length === 0  && 
+           {/*  { sortedList.length === 0  && 
                 <ClipLoader color={color} loading={loading} css={override} size={150} />
             } */}
-            { listStatus === 'pending' || listStatus === 'updating' ?  
+           {/*  { listStatus === 'pending' || listStatus === 'updating' ?  
                 <ClipLoader color={color} loading={loading} css={override} size={150} />
                 :null
-            }
+            } */}
 
             <SelectEntriesBox 
                 options={entriesOptions}
@@ -149,13 +164,13 @@ const Employees = () => {
                 handleKeyDown={handleKeyDown}
             />
 
-                { proceed && 
-                    <EmployeesList
-                        /* sortedList={sortedList} */
-                        page={page}
-                        sortListBy={sortListBy}
-                    />
-                }
+            
+                <EmployeesList
+                   /*  sortedList={sortedList} */
+                    page={page}
+                    sortListBy={sortListBy}
+                />
+                
 
             <Pagination 
                 totalPages={totalPages}
