@@ -1,10 +1,11 @@
-import { listState, initialState } from '../state/store'
+import { store, listState, initialState } from '../state/store'
 import { 
     listFetching, listResolved, listRejected,
     setCollection,
     setEntriesPerPage, setTotalPages,
     setCurrentActivePage, setCurrentActivePageIndex,
-    setCollectionAsPages
+    setCollectionAsPages,
+    sortParamChanged, sortStatusChanged
 } from '../state/actions/Actions'
 import { client } from '../api/client'
 
@@ -27,7 +28,7 @@ export async function fetchList(dispatch, getState) { // rtk = createAsyncThunk
         const data = await response
         dispatch(listResolved(data))
         dispatch(setCollection(data.employees))   // set default collection to all list
-        dispatch(changeEntriesAmount(50))
+        dispatch(changeEntriesAmount(25))
         
     }
     catch (error) {
@@ -68,27 +69,36 @@ export const changeEntriesAmount = (entries) => (dispatch, getState) => {
 // ......................................................
 // LIST SORTING
 // ......................................................
-export const sortList = () => (dispatch, getState) => {
+
+// SORT BY - actions creators
+export const requestSorting = (param, reverse) => {
+    store.dispatch(sortStatusChanged('true'))
+    store.dispatch(sortParamChanged(param, reverse))
+}  
+
+
+export const sortList = (sortParam, reverseOrder) => (dispatch, getState) => {
 
     const currentList = listState(getState()).collection
-    const sortParam = listState(getState()).sortedBy.sortParam
-    const reverseOrder = listState(getState()).sortedBy.reverse
-    
+    store.dispatch(sortStatusChanged('true'))
+    store.dispatch(sortParamChanged(sortParam, reverseOrder))
+
+    const currentEntries = listState(getState()).entries
+
     let sortedList = [ ...currentList] // ---- for 'sort()' will try to mutate 'currentList' and fail ---- !
     
-    if (sortParam) {
-
-        if ( sortParam === 'state') {
-            !reverseOrder?
-                sortedList.sort( (a, b) => a[sortParam].name.localeCompare(b[sortParam].name))
-                : sortedList.sort( (a, b) => b[sortParam].name.localeCompare(a[sortParam].name))
-        } else { 
-            !reverseOrder ?
-                sortedList.sort( (a, b) => a[sortParam].localeCompare(b[sortParam])) // a, b = employee objects of employees array
-                : sortedList.sort( (a, b) => b[sortParam].localeCompare(a[sortParam])) 
-        }
-        dispatch(setCollection(sortedList))
+    if ( sortParam === 'state') {
+        !reverseOrder?
+            sortedList.sort( (a, b) => a[sortParam].name.localeCompare(b[sortParam].name))
+            : sortedList.sort( (a, b) => b[sortParam].name.localeCompare(a[sortParam].name))
+    } else { 
+        !reverseOrder ?
+            sortedList.sort( (a, b) => a[sortParam].localeCompare(b[sortParam])) // a, b = employee objects of employees array
+            : sortedList.sort( (a, b) => b[sortParam].localeCompare(a[sortParam])) 
     }
+    dispatch(setCollection(sortedList))
+    dispatch(changeEntriesAmount(currentEntries))
+
 }
 
 // ......................................................

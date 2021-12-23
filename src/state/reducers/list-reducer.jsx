@@ -70,8 +70,9 @@ export default function listReducer(state = initialState.list, action) {
             case SETUP_COLLECTION_AS_PAGES: {
                 let pages = action.payload
                 console.log('4 - PAGINATION REDUCER ==> - SET_RESULTS_AS_PAGES ==> NOW'  )
-                if (draft.collectionAsPages) { draft.collectionAsPages = null } // reset collection
-                return { ...state, collectionAsPages: pages }
+                if (draft.collectionAsPages) { draft.collectionAsPages = null;   } // reset collection
+                draft.collectionAsPages = pages 
+                return
             }
             case SET_CURRENT_PAGE_INDEX: {
                 let pageRequested = action.payload
@@ -88,7 +89,7 @@ export default function listReducer(state = initialState.list, action) {
             // SORT ACTIONS
             case SORT_STATUS_CHANGED: { 
                 let status = action.payload;
-                return { ...state, sortingStatus: status }
+                return { ...state, sorted: status }
             }
             case SORT_PARAM_CHANGED: { 
                 let { param, reverseOrder } = action.payload; 
