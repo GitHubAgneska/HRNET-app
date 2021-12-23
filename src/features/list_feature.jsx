@@ -5,13 +5,10 @@ import {
     setEntriesPerPage, setTotalPages,
     setCurrentActivePage, setCurrentActivePageIndex,
     setCollectionAsPages,
-    sortParamChanged, sortStatusChanged
+    sortParamChanged, sortStatusChanged,
+    searchtermChanged
 } from '../state/actions/Actions'
 import { client } from '../api/client'
-
-export const selectListAsFetched = initialState => initialState.list.data
-export const selectCollection = initialState => initialState.list.collection
-export const selectCollectionAsPages =  initialState => initialState.list.collectionAsPages
 
 // ......................................................
 // FETCH
