@@ -29,7 +29,6 @@ export async function fetchList(dispatch, getState) { // rtk = createAsyncThunk
         dispatch(listResolved(data))
         dispatch(setCollection(data.employees))   // set default collection to all list
         dispatch(changeEntriesAmount(15))         // set default entries to 15
-        
     }
     catch (error) {
         dispatch(listRejected(error))
@@ -62,7 +61,7 @@ export const changeEntriesAmount = (entries) => (dispatch, getState) => {
         from += entries
     }
     // set current page to default only if unset (otherwise keep current page after rearranging after entries amount changed)
-    if ( !currentActivePageIndex ) { dispatch(setCurrentActivePageIndex(1)) }
+    if ( !currentActivePageIndex ) { dispatch(setCurrentActivePageIndex(0)) }
     dispatch(setCollectionAsPages(outputPages))
 }
 
