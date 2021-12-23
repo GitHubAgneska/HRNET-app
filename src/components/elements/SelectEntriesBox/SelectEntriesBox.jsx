@@ -1,6 +1,11 @@
 import { SelectEntriesBoxWrapper } from './SelectEntriesBox_style'
+import { useSelector } from 'react-redux'
+
 
 const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing, listTotal}) => {
+
+    const currentEntries = useSelector(initialState => initialState.list.entries)
+
     return (
         <SelectEntriesBoxWrapper>
 
@@ -8,6 +13,8 @@ const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing, listT
             <select 
                 options={options}
                 name="entries"
+                value={currentEntries}
+                onChange={e => ( console.log(e.target.value))}
                 aria-required="true">
                 { options.map(o => (
                     <option key={Math.random()} onClick={() => {selectEntriesAmount(o)}}>{o}</option>

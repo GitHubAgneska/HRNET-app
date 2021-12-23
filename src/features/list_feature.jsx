@@ -51,7 +51,7 @@ export const changeEntriesAmount = (entries) => (dispatch, getState) => {
     
     let outputPages = []
     let from = 0
-    let totalPages = Math.ceil(currentList.length / entries)
+    let totalPages = Math.floor(currentList.length / entries)
     dispatch(setTotalPages(totalPages))
     
     // setup pages arrays

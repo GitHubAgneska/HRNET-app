@@ -13,7 +13,7 @@ export const List = () => {
 
     const collectionAsPages = useSelector(initialState => initialState.list.collectionAsPages)
     const currentPageIndex = useSelector(initialState => initialState.list.currentPageIndex)
-    const currentPageToDisplay = collectionAsPages[currentPageIndex]
+    const currentPageToDisplay = collectionAsPages[currentPageIndex]??collectionAsPages[0]
     const totalPages = useSelector(initialState => initialState.list.totalPages)
 
     const sortListBy = (filterParam, reverse ) => { dispatch(sortList(filterParam, reverse)) }
