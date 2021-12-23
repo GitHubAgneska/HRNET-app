@@ -1,7 +1,7 @@
 import { 
     LIST_FETCHING, LIST_RESOLVED, LIST_REJECTED,
     SETUP_COLLECTION,
-    SET_ENTRIES_AMOUNT, SET_TOTAL_PAGES,
+    SET_ENTRIES_COUNT, SET_TOTAL_PAGES,
     SET_CURRENT_PAGE_INDEX, SET_CURRENT_ACTIVE_PAGE,
     SETUP_COLLECTION_AS_PAGES,
     SORT_STATUS_CHANGED, SORT_PARAM_CHANGED, SEARCHTERM_CHANGED
@@ -19,7 +19,7 @@ export const setCollection = (data) => (dispatch) => (dispatch({type: SETUP_COLL
 
 // LIST - PAGINATE actions...............................................
 export const setCollectionAsPages = (pages) => ({type: SETUP_COLLECTION_AS_PAGES, payload: pages})
-export const setEntriesPerPage = (entries) => ({type: SET_ENTRIES_AMOUNT, payload: entries })
+export const setEntriesPerPage = (entries) => ({type: SET_ENTRIES_COUNT, payload: entries })
 export const setTotalPages = (n) => ({type: SET_TOTAL_PAGES, payload: n})
 export const setCurrentActivePageIndex = (i) => ({ type: SET_CURRENT_PAGE_INDEX, payload: i })
 export const setCurrentActivePage = (i) => ({ type: SET_CURRENT_ACTIVE_PAGE, payload: i })

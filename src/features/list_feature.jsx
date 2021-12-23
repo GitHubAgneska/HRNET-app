@@ -28,7 +28,7 @@ export async function fetchList(dispatch, getState) { // rtk = createAsyncThunk
         const data = await response
         dispatch(listResolved(data))
         dispatch(setCollection(data.employees))   // set default collection to all list
-        dispatch(changeEntriesAmount(25))
+        dispatch(changeEntriesAmount(15))         // set default entries to 15
         
     }
     catch (error) {
@@ -69,15 +69,7 @@ export const changeEntriesAmount = (entries) => (dispatch, getState) => {
 // ......................................................
 // LIST SORTING
 // ......................................................
-
-// SORT BY - actions creators
-export const requestSorting = (param, reverse) => {
-    store.dispatch(sortStatusChanged('true'))
-    store.dispatch(sortParamChanged(param, reverse))
-}  
-
-
-export const sortList = (sortParam, reverseOrder) => (dispatch, getState) => {
+  export const sortList = (sortParam, reverseOrder) => (dispatch, getState) => {
 
     const currentList = listState(getState()).collection
     store.dispatch(sortStatusChanged('true'))

@@ -15,7 +15,7 @@ export const initialState = {
         searchTerm: '',
 
         collectionAsPages: null,
-        entries: 10,
+        entries: 15,
         currentPage: null,
         currentPageIndex: null,
         totalPages: 1
