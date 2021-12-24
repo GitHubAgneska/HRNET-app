@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import { useState } from 'react'
+import { useState } from 'react'
 
 import { sortList, updatePage, changeEntriesAmount, requestSearch } from "../../features/list_feature"
 import { setCollection } from '../../state/actions/Actions'
@@ -12,9 +12,11 @@ import SearchBox from "../elements/SearchBox/SearchBox"
 import { searchSuggestions } from '../../utils/searchText'
 
 
+
 export const List = () => {
     const dispatch = useDispatch()
 
+    const collection = useSelector(initialState => initialState.list.collection)
     const collectionAsPages = useSelector(initialState => initialState.list.collectionAsPages)
     const currentPageIndex = useSelector(initialState => initialState.list.currentPageIndex)
     const currentPageToDisplay = collectionAsPages[currentPageIndex]??collectionAsPages[0]
@@ -27,13 +29,13 @@ export const List = () => {
     const currentEntriesAmount = useSelector(initialState => initialState.list.entries)
     const selectEntriesAmount = (n) => { dispatch(changeEntriesAmount(n)) }
     const currentlyShowing = currentPageToDisplay.length
-    const collection = useSelector(initialState => initialState.list.collection)
     const listTotal = collection.length
-
 
     const input = document.querySelector('input')
     const [ searchInputValues, setSearchInputValues ] = useState("")
     const [ suggestions, setSuggestions ] = useState([])
+
+    const originalListData = useSelector(initialState => initialState.list.data)
 
 
     const handleSearchChange = e => { 
@@ -42,7 +44,11 @@ export const List = () => {
         if ( query.length > 2 ) {
             let sugg = searchSuggestions(query, collection)
             setSuggestions(sugg)
-        } else { setSuggestions([]); }
+        } else { 
+            setSuggestions([])
+            dispatch(setCollection(originalListData))
+            dispatch(changeEntriesAmount(currentEntriesAmount))
+        }
     }
 
     const handleKeyDown = e => {
@@ -62,7 +68,8 @@ export const List = () => {
             setSearchInputValues("")
             input.value = ""
             setSuggestions([])
- 
+            dispatch(setCollection(originalListData))
+            dispatch(changeEntriesAmount(currentEntriesAmount))
         } else { return }
     }
 

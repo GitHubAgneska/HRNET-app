@@ -1,41 +1,31 @@
 import moment from 'moment'
-import {highlightText} from '../utils/highlightText'
 
-// search each employee (object) of list for a match
-// return suggestions array matching word
+
 export const searchSuggestions = (query, list) => {
     let suggested = [];
     let suggestions = new Map()
     let reg = new RegExp(query, 'gi')
     query = query.toLowerCase()
     list.forEach(obj => {
-        // console.log('SEARCHING CURRENT OBJECT =', obj)
         let objectValue = ''
         for (let [key, value] of Object.entries(obj)) {
             if ( key === 'dob' || key === 'startDate' ) { objectValue = moment(value).format('MM/DD/YYYY') }
             else if ( key === 'state' ) { objectValue = value.name }
-            //else if ( typeof(value) === 'number') { objectValue = value.toString() }
             else if ( key === 'id' ) { objectValue = value.toString() }
-            else { objectValue = value; }
-            // console.log('CURRENT VAL =', objectValue, typeof(objectValue))
+            else { objectValue = value }
             
             if ( objectValue.includes(query) || reg.test(objectValue) )  { 
                 
-                let highlightedObjValue = `<span style={{backgroundColor:'yellow'}}>`+ objectValue + `</span>`
-                console.log('highlightedObjValue===', highlightedObjValue)
+                //let highligtedValue = `<span style={{backgroundColor:'yellow'}}>`+ objectValue + `</span>`
                 
-                if (suggestions.has(objectValue)) {
-                    suggestions.get(objectValue).push(obj)
-                }
-                else { 
+                if (suggestions.has(objectValue)) { suggestions.get(objectValue).push(obj) }
+                else {
                     suggested.push(obj)
-                    suggestions.set(objectValue, suggested);
+                    suggestions.set(objectValue, suggested)
                 }
             }
-            suggested = [];
+            suggested = []
         }
     })
     return suggestions
 }
-
-const normalizeValuesForSearch = (key, value) => { }

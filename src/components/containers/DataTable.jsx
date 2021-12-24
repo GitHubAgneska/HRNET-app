@@ -9,11 +9,10 @@ import SearchBox from '../../components/SearchBox/SearchBox'
 import SelectEntriesBox from '../../components/SelectEntriesBox/SelectEntriesBox'
 import Table from './Table'
 
-import { faArrowCircleDown, faRandom } from "@fortawesome/free-solid-svg-icons";
-import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleDown, faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import  { TableWrapper, StyledTable, StyledTableHeader, TableHeaderIconWrapper, StyledTableRow } from './DataTable_style'
-import moment from 'moment'
+
 // spinner
 import { css } from "@emotion/react"
 import ClipLoader from "react-spinners/ClipLoader"

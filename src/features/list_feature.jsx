@@ -96,6 +96,4 @@ export const requestSearch = (searchterm) => { store.dispatch(searchtermChanged(
 export const requestListAsSearchResults = (resultsOfClickedSuggestion) => { store.dispatch(setCollection(resultsOfClickedSuggestion)) }
 export const requestSetAllSuggestionsAsResults = (suggested) => { store.dispatch(setCollection(suggested)) }
 
-export const requestResetList = () => { store.dispatch(resetSearchResults())}
-
 

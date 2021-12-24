@@ -3,10 +3,12 @@ import {StyledTableRow } from './Table_style'
 import moment from 'moment'
 
 const TableRow = ({employee}) => {
+    const currentQuery = useSelector(initialState => initialState.list.searchTerm)
+
     return (
         <Fragment>         
             <StyledTableRow key={Math.random()}>
-                <td>{employee.firstName}</td>
+                <td className={}>{employee.firstName}</td>
                 <td>{employee.lastName}</td>
                 <td>{moment(employee.dob).format('MM/DD/YY')}</td>
                 <td>{moment(employee.startDate).format('MM/DD/YY')}</td>
