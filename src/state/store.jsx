@@ -7,6 +7,10 @@ export const initialState = {
         status: 'void',
         data: null,
         error: null,
+        
+        post_status: 'void',
+        post_data: null,
+        post_error: null,
 
         collection: null,
         sorted: false,

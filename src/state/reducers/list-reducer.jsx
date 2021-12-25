@@ -2,6 +2,7 @@ import {initialState } from '../store'
 import produce from 'immer'
 import { 
     LIST_FETCHING, LIST_RESOLVED, LIST_REJECTED,
+    CREATE_EMPLOYEE_FETCHING, CREATE_EMPLOYEE_RESOLVED, CREATE_EMPLOYEE_REJECTED,
     SETUP_COLLECTION,
     SET_ENTRIES_COUNT, SET_CURRENT_ACTIVE_PAGE, SET_CURRENT_PAGE_INDEX,
     SETUP_COLLECTION_AS_PAGES,SET_TOTAL_PAGES,
@@ -10,6 +11,7 @@ import {
     SEARCHTERM_CHANGED
 
 } from '../actions/actions-types'
+import uuid from "uuid"
 
 // ......................................................
 // EMPLOYEES LIST  REDUCER
@@ -56,6 +58,47 @@ export default function listReducer(state = initialState.list, action) {
                 }
                 return
             }
+            // POST REQUEST ---------------------
+            case CREATE_EMPLOYEE_FETCHING: {
+                if ( draft.post_status === 'void') { 
+                    draft.post_status = 'pending'
+                    return
+                }
+                if ( draft.post_status === 'rejected') {
+                    draft.post_error = null
+                    draft.post_status = 'pending'
+                    return
+                }
+                if ( draft.post_status === 'resolved') {
+                    draft.post_status = 'updating' // ongoing request but presence of data
+                    return
+                }
+                return
+            }
+            case CREATE_EMPLOYEE_RESOLVED: {
+                // console.log('EMPLOYEE_CREATE_RESOLVED ACTION CALLED')
+                if ( draft.post_status === 'pending' || draft.post_status === 'updating') {
+                    draft.post_status = 'resolved'
+                    draft.post_data = action.payload
+                    let newEmployee = action.payload
+                    let newId = uuid.v4()
+                    newEmployee.id = newId
+                    draft.collection.push(newEmployee)
+                    return
+                }
+                return
+            }
+            case CREATE_EMPLOYEE_REJECTED: {
+                if ( draft.post_status === 'pending' || draft.post_status === 'updating') {
+                    // set to rejected, save error, delete data
+                    draft.post_status = 'rejected'
+                    draft.post_error = action.payload
+                    draft.post_payload = null
+                    return
+                }
+                return
+            }
+
             // CURRENT COLLECTION ( all results || sorted || searched )
             case SETUP_COLLECTION: {
                 if (draft.collection) { draft.collection = null } // reset collection

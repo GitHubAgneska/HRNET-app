@@ -1,5 +1,6 @@
 import { 
     LIST_FETCHING, LIST_RESOLVED, LIST_REJECTED,
+    CREATE_EMPLOYEE_FETCHING, CREATE_EMPLOYEE_RESOLVED, CREATE_EMPLOYEE_REJECTED,
     SETUP_COLLECTION,
     SET_ENTRIES_COUNT, SET_TOTAL_PAGES,
     SET_CURRENT_PAGE_INDEX, SET_CURRENT_ACTIVE_PAGE,
@@ -15,9 +16,13 @@ import {
 export const listFetching = () => (dispatch) => (dispatch({type: LIST_FETCHING }))
 export const listResolved = (data) => (dispatch) => (dispatch({type: LIST_RESOLVED, payload: data}))
 export const listRejected = (error) => (dispatch) => (dispatch({type: LIST_REJECTED, payload: error}))
+// POST - CREATE
+export const createEmployeeFetching = (data) => (dispatch) => (dispatch({type: CREATE_EMPLOYEE_FETCHING, payload: data}))
+export const createEmployeeResolved = (data) => (dispatch) => (dispatch({type: CREATE_EMPLOYEE_RESOLVED, payload: data}))
+export const createEmployeeRejected = (error) => (dispatch) => (dispatch({type: CREATE_EMPLOYEE_REJECTED, payload: error}))
+
 
 export const setCollection = (data) => (dispatch) => (dispatch({type: SETUP_COLLECTION, payload: data }))
-
 // LIST - PAGINATE actions...............................................
 export const setCollectionAsPages = (pages) => ({type: SETUP_COLLECTION_AS_PAGES, payload: pages})
 export const setEntriesPerPage = (entries) => ({type: SET_ENTRIES_COUNT, payload: entries })

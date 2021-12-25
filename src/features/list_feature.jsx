@@ -1,4 +1,4 @@
-import { store, listState, initialState } from '../state/store'
+import { store, listState } from '../state/store'
 import { 
     listFetching, listResolved, listRejected,
     setCollection,
@@ -65,7 +65,7 @@ export const changeEntriesAmount = (entries) => (dispatch, getState) => {
 // ......................................................
 // LIST SORTING
 // ......................................................
-  export const sortList = (sortParam, reverseOrder) => (dispatch, getState) => {
+export const sortList = (sortParam, reverseOrder) => (dispatch, getState) => {
 
     const currentList = listState(getState()).collection
     store.dispatch(sortStatusChanged('true'))

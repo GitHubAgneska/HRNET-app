@@ -1,30 +1,27 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useEffect} from 'react'
+import { useDispatch, useSelector } from "react-redux"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {Redirect} from 'react-router-dom/cjs/react-router-dom.min';
+
+import { fetchList } from './features/list_feature'
+
 import Header from './components/layout/Header/Header'
 import CreateEmployee from './components/containers/Create-employee'
-//import Employees from './components/containers/Employees';
+import List from './components/containers/List';
 import NotFoundPage from './components/containers/404'
+
 import { GlobalStyle } from './style/global_style'
 
-
-import { useDispatch, useSelector, useStore } from "react-redux"
-import { useEffect } from "react"
-import { fetchList } from './features/list_feature'
-import List from './components/containers/List';
-
 const App = () => {
-   
+
     const dispatch = useDispatch()
     const listStatus = useSelector(initialState => initialState.list.status)
     const pages = useSelector(initialState => initialState.list.collectionAsPages)
 
-    
     useEffect(()=> {
         if (listStatus !== 'resolved')
         dispatch(fetchList)
-    }, [dispatch])
-
+    }, [dispatch, listStatus])
 
     // wait for pagination to be set (depends on initial fetch resolving)
     let proceed = false;

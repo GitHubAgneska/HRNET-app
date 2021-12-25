@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+
 import { validate } from "../../../utils/form_validators"
 import { employeeFormFields } from '../../../data/employee-form-fields'
+
 import DateInput from '../Form-inputs/DateInput'
 import SimpleInput from '../Form-inputs/SimpleInput'
 import SelectInput from '../Form-inputs/SelectInput'
 import Button from '../Button/Button'
+
 import { FormWrapper, FormBtnsWrapper } from './Employee-form-style'
 import BaseModal from '../Modal/Modal'
 import { modalTypes } from '../../../data/modal-types'
-import { createEmployee } from '../../../features/employees-list_feature'
+import { createEmployee } from '../../../features/employee_feature'
 
 const CompositeForm = () => {
 
@@ -54,11 +57,6 @@ const CompositeForm = () => {
         { btnName:'close', method: 'toggleConfirmModal' },
         // { btnName:'modify', method: 'closeModalAndEditForm' } 
     ];
-
-/*     function useCreate(employee) { 
-        const dispatch = useDispatch()
-        useEffect(() => { dispatch(createEmployee(employee))}, [dispatch, employee])
-    } */
 
     const handleInputChange = (fieldId, value) => {
         setValues(currentValues => { currentValues[fieldId] = value; return currentValues; }); // !== setValues({ ...values, [fieldId]: value }); ?

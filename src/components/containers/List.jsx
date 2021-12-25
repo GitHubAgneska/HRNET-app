@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from 'react'
 
-import { sortList, updatePage, changeEntriesAmount, requestSetSearchTerm, requestSetWordToHighlight } from "../../features/list_feature"
+import { sortList, updatePage, changeEntriesAmount, requestSetSearchTerm } from "../../features/list_feature"
 import { setCollection } from '../../state/actions/Actions'
 
 import Table from "../elements/Table/Table"
@@ -11,10 +11,20 @@ import SelectEntriesBox from '../elements/SelectEntriesBox/SelectEntriesBox'
 import SearchBox from "../elements/SearchBox/SearchBox"
 import { searchSuggestions } from '../../utils/searchText'
 
-
+// spinner
+import { css } from "@emotion/react"
+import ClipLoader from "react-spinners/ClipLoader"
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: fuchsia;
+`;
 
 export const List = () => {
     const dispatch = useDispatch()
+    // spinner
+    let [loading, setLoading] = useState(true);
+    let [color, setColor] = useState("#ffffff");
 
     const collection = useSelector(initialState => initialState.list.collection)
     const collectionAsPages = useSelector(initialState => initialState.list.collectionAsPages)
@@ -111,7 +121,7 @@ export const List = () => {
                 currentPageToDisplay={currentPageToDisplay}
                 sortListBy={sortListBy}
                 />
-                : 'loading'
+                : <ClipLoader color={color} loading={loading} css={override} size={150} />
             }
 
             <Pagination 
@@ -121,7 +131,6 @@ export const List = () => {
             />
 
         </div>
-
     )
 }
 export default List
