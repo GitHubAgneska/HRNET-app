@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from 'react'
 
-import { sortList, updatePage, changeEntriesAmount, requestSearch } from "../../features/list_feature"
+import { sortList, updatePage, changeEntriesAmount, requestSetSearchTerm, requestSetWordToHighlight } from "../../features/list_feature"
 import { setCollection } from '../../state/actions/Actions'
 
 import Table from "../elements/Table/Table"
@@ -40,7 +40,7 @@ export const List = () => {
 
     const handleSearchChange = e => { 
         let query = e.target.value
-        requestSearch(query)
+        requestSetSearchTerm(query)
         if ( query.length > 2 ) {
             let sugg = searchSuggestions(query, collection)
             setSuggestions(sugg)
@@ -70,6 +70,7 @@ export const List = () => {
             setSuggestions([])
             dispatch(setCollection(originalListData))
             dispatch(changeEntriesAmount(currentEntriesAmount))
+            requestSetSearchTerm('')
         } else { return }
     }
 

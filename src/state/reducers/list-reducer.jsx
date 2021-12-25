@@ -98,7 +98,7 @@ export default function listReducer(state = initialState.list, action) {
             // SEARCH ACTIONS
             case SEARCHTERM_CHANGED: {
                 let newSearchterm = action.payload
-                return { ...state, searchterm: newSearchterm, searchActive: true }
+                return { ...state, searchTerm: newSearchterm, searchActive: true }
             }
             default: return state
         }

@@ -1,14 +1,12 @@
 //import TableRow  from './Table-row'
 import TableHeader from './Table-header'
-import { TableWrapper, StyledTableHeader, StyledTable, StyledTableRow, highlighted } from './Table_style'
+import { TableWrapper, StyledTableHeader, StyledTable, StyledTableRow } from './Table_style'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
 
 const Table = ({currentPageToDisplay, sortListBy}) => {
 
     const currentQuery = useSelector(initialState => initialState.list.searchTerm)
-    const [ highlighted, setHighlighted ] = useState(false)
 
     const tableHead = [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department']
 
@@ -21,10 +19,10 @@ const Table = ({currentPageToDisplay, sortListBy}) => {
             if ( key[prop].hasOwnProperty('name') ) { valueToDisplay = key[prop]['name'] }
             else if ( prop === 'dob' || prop ==='startDate') { valueToDisplay = moment(key[prop]).format('MM/DD/YY') }
             else { valueToDisplay = key[prop] }
-    
-            if (currentQuery && valueToDisplay.toLowerCase().includes(currentQuery)  ) { console.log('MATCH!'); setHighlighted(true) }
+            let match = false;
+            if (currentQuery.length > 4 && valueToDisplay.toLowerCase().includes(currentQuery)  ) { match=true }
 
-            return (<td key={Math.random()} style={{backgroundColor:highlighted?'yellow':'none'}} >{valueToDisplay}</td>) 
+            return (<td key={Math.random()} style={{backgroundColor:match?'yellow':'none'}} >{valueToDisplay}</td>) 
         })        
         return (<StyledTableRow key={Math.random()}>{columnData}</StyledTableRow>)
     }

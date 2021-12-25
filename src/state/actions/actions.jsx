@@ -4,7 +4,8 @@ import {
     SET_ENTRIES_COUNT, SET_TOTAL_PAGES,
     SET_CURRENT_PAGE_INDEX, SET_CURRENT_ACTIVE_PAGE,
     SETUP_COLLECTION_AS_PAGES,
-    SORT_STATUS_CHANGED, SORT_PARAM_CHANGED, SEARCHTERM_CHANGED
+    SORT_STATUS_CHANGED, SORT_PARAM_CHANGED,
+    SEARCHTERM_CHANGED
 } from './actions-types'
 
 // ................................................................................. 
@@ -28,6 +29,5 @@ export const setCurrentActivePage = (i) => ({ type: SET_CURRENT_ACTIVE_PAGE, pay
 export const sortStatusChanged = (data) => ({type: SORT_STATUS_CHANGED, payload: data })
 export const sortParamChanged = (param, reverseOrder ) => ({ type: SORT_PARAM_CHANGED, payload: { param, reverseOrder } })
 export const searchtermChanged = (searchterm) => ({ type: SEARCHTERM_CHANGED, payload: searchterm })
-
 
 // ............................................

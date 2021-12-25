@@ -6,7 +6,7 @@ import {
     setCurrentActivePage, setCurrentActivePageIndex,
     setCollectionAsPages,
     sortParamChanged, sortStatusChanged,
-    searchtermChanged
+    searchtermChanged, setWordToHighlight
 } from '../state/actions/Actions'
 import { client } from '../api/client'
 
@@ -92,7 +92,8 @@ export const changeEntriesAmount = (entries) => (dispatch, getState) => {
 // ......................................................
 // LIST SEARCHING
 // ......................................................
-export const requestSearch = (searchterm) => { store.dispatch(searchtermChanged(searchterm)) }
+export const requestSetSearchTerm = (searchTerm) => { store.dispatch(searchtermChanged(searchTerm)) }
+export const requestSetWordToHighlight = (term) => { store.dispatch(setWordToHighlight(term)) }
 export const requestListAsSearchResults = (resultsOfClickedSuggestion) => { store.dispatch(setCollection(resultsOfClickedSuggestion)) }
 export const requestSetAllSuggestionsAsResults = (suggested) => { store.dispatch(setCollection(suggested)) }
 
