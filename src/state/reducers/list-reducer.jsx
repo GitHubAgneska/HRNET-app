@@ -9,9 +9,8 @@ import {
 
     SORT_STATUS_CHANGED, SORT_PARAM_CHANGED,
     SEARCHTERM_CHANGED
-
 } from '../actions/actions-types'
-import uuid from "uuid"
+
 
 // ......................................................
 // EMPLOYEES LIST  REDUCER
@@ -35,7 +34,6 @@ export default function listReducer(state = initialState.list, action) {
                     draft.status = 'updating' // ongoing request but presence of data
                     return
                 }
-                console.log(' 1 - LIST_FETCHING => status===', draft.status )
                 return // else action ignored
             }
             case LIST_RESOLVED: {
@@ -45,7 +43,6 @@ export default function listReducer(state = initialState.list, action) {
                     if ( !draft.collection ) { draft.collection = action.payload.employees }
                     return 
                 }
-                console.log('2 - LIST_RESOLVED => PAYLOAD DONE'  )
                 return
             }
             case LIST_REJECTED: {
@@ -79,11 +76,8 @@ export default function listReducer(state = initialState.list, action) {
                 // console.log('EMPLOYEE_CREATE_RESOLVED ACTION CALLED')
                 if ( draft.post_status === 'pending' || draft.post_status === 'updating') {
                     draft.post_status = 'resolved'
-                    draft.post_data = action.payload
-                    let newEmployee = action.payload
-                    let newId = uuid.v4()
-                    newEmployee.id = newId
-                    draft.collection.push(newEmployee)
+                    draft.post_data = action.payload.employee
+                    draft.collection = [...draft.collection, draft.post_data]
                     return
                 }
                 return
@@ -112,7 +106,6 @@ export default function listReducer(state = initialState.list, action) {
             }
             case SETUP_COLLECTION_AS_PAGES: {
                 let pages = action.payload
-                console.log('4 - PAGINATION REDUCER ==> - SET_RESULTS_AS_PAGES ==> NOW'  )
                 if (draft.collectionAsPages) { draft.collectionAsPages = null;   } // reset collection
                 draft.collectionAsPages = pages 
                 return

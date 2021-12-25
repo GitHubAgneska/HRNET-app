@@ -6,7 +6,7 @@ import {
     setCurrentActivePage, setCurrentActivePageIndex,
     setCollectionAsPages,
     sortParamChanged, sortStatusChanged,
-    searchtermChanged, setWordToHighlight
+    searchtermChanged
 } from '../state/actions/Actions'
 import { client } from '../api/client'
 
@@ -31,6 +31,7 @@ export async function fetchList(dispatch, getState) { // rtk = createAsyncThunk
         dispatch(listRejected(error))
     }
 }
+
 // ......................................................
 // SET UP PAGINATION : thunks dispatching multiple pagination actions
 // ......................................................
@@ -93,7 +94,6 @@ export const sortList = (sortParam, reverseOrder) => (dispatch, getState) => {
 // LIST SEARCHING
 // ......................................................
 export const requestSetSearchTerm = (searchTerm) => { store.dispatch(searchtermChanged(searchTerm)) }
-export const requestSetWordToHighlight = (term) => { store.dispatch(setWordToHighlight(term)) }
 export const requestListAsSearchResults = (resultsOfClickedSuggestion) => { store.dispatch(setCollection(resultsOfClickedSuggestion)) }
 export const requestSetAllSuggestionsAsResults = (suggested) => { store.dispatch(setCollection(suggested)) }
 

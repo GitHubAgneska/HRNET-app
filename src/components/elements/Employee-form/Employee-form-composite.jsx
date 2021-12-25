@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+import { useDispatch } from "react-redux"
 
+import { createEmployee } from '../../../features/employee_feature'
 import { validate } from "../../../utils/form_validators"
-import { employeeFormFields } from '../../../data/employee-form-fields'
 
+import { employeeFormFields } from '../../../data/employee-form-fields'
 import DateInput from '../Form-inputs/DateInput'
 import SimpleInput from '../Form-inputs/SimpleInput'
 import SelectInput from '../Form-inputs/SelectInput'
@@ -11,8 +12,7 @@ import Button from '../Button/Button'
 
 import { FormWrapper, FormBtnsWrapper } from './Employee-form-style'
 import BaseModal from '../Modal/Modal'
-import { modalTypes } from '../../../data/modal-types'
-import { createEmployee } from '../../../features/employee_feature'
+import { modalTypes } from '../../../data/modal-types'
 
 const CompositeForm = () => {
 
@@ -22,8 +22,6 @@ const CompositeForm = () => {
     const [ touched, setTouched ] = useState({});
     const [ errors, setErrors ] = useState({});
     
-    const [ employee, setEmployee ] = useState({})
-    const [addRequestStatus, setAddRequestStatus] = useState('void')
     const dispatch = useDispatch()
 
     const allFieldsOk = // acts on submit disabled/!disabled
@@ -45,7 +43,7 @@ const CompositeForm = () => {
     // const confirmCancelUserResponseTypes = [ 'yes', 'no' ];
     const confirmCancelActions = [ 
         { btnName:'yes'/* ,method: 'confirmClose' */ },
-        { btnName:'no'/* , method: 'confirmClose' */ } ];
+        { btnName:'no'/* , method: 'confirmClose' */ } ];
 
     // confirm creation successful => modal
     const [ creationSuccessful, setCreationSuccessful ] = useState(false);
@@ -60,19 +58,13 @@ const CompositeForm = () => {
 
     const handleInputChange = (fieldId, value) => {
         setValues(currentValues => { currentValues[fieldId] = value; return currentValues; }); // !== setValues({ ...values, [fieldId]: value }); ?
-        // console.log('VALUES===', values);
         setTouched({ ...touched, [fieldId]: true });// === setTouched(touched => { touched[fieldId]= true; return touched; });
-        // console.log('touched=', touched)
     }
 
-    const handleBlur = (fieldName, value) => { 
-        // console.log('onblur values=', values);
+    const handleBlur = (fieldName, value) => {
         const { [fieldName]: removedError, ...rest } = errors;
         const error = validate[fieldName](value); // error = is a string message
-        // console.log('error at HANDLE BLUR==', error);
         setErrors( {...errors, [fieldName]: error }); // !== setErrors({ ...rest, ...(error && { [fieldName]: touched[fieldName] && error }) }); ? 
-        // console.log('errorS=', errors);
-        // console.log('allFieldsOk=',allFieldsOk)
     }
 
     const handleSubmit = async event => {
@@ -98,7 +90,8 @@ const CompositeForm = () => {
              && Object.values(formValidation.touched).length === Object.values(values).length // all fields were touched
              && Object.values(formValidation.touched).every(t => t === true ) // every touched field is true
             ) {
-                await dispatch(createEmployee(values))
+                dispatch(createEmployee(values))
+                
                 //alert(JSON.stringify(values, null, 2));
                 
                 // setCreationSuccessful(true);

@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react'
+import React, {Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {Redirect} from 'react-router-dom/cjs/react-router-dom.min';
@@ -12,6 +12,15 @@ import NotFoundPage from './components/containers/404'
 
 import { GlobalStyle } from './style/global_style'
 
+// spinner
+import { css } from "@emotion/react"
+import ClipLoader from "react-spinners/ClipLoader"
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: fuchsia;
+`;
+
 const App = () => {
 
     const dispatch = useDispatch()
@@ -19,8 +28,7 @@ const App = () => {
     const pages = useSelector(initialState => initialState.list.collectionAsPages)
 
     useEffect(()=> {
-        if (listStatus !== 'resolved')
-        dispatch(fetchList)
+        if (listStatus !== 'resolved') dispatch(fetchList)
     }, [dispatch, listStatus])
 
     // wait for pagination to be set (depends on initial fetch resolving)
@@ -39,8 +47,9 @@ const App = () => {
                             <Switch>
                                 <Route exact path="/"  render={() => <Redirect to="/create-employee" />} />
                                 <Route exact path="/create-employee" component={CreateEmployee} />
-                                { proceed &&
+                                { proceed ?
                                     <Route exact path="/employees-list" component={List} />
+                                    : <div><ClipLoader css={override} size={100} /></div>
                                 }
                                 <Route component={NotFoundPage} />
                             </Switch>
