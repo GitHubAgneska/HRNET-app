@@ -1,21 +1,40 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {Redirect} from 'react-router-dom/cjs/react-router-dom.min';
+
+import { fetchList } from './features/list_feature'
+
 import Header from './components/layout/Header/Header'
 import CreateEmployee from './components/containers/Create-employee'
-import Employees from './components/containers/Employees';
+import List from './components/containers/List';
 import NotFoundPage from './components/containers/404'
-import { GlobalStyle } from './style/global_style'
 
+import { GlobalStyle, LoadingSpinnerWrapper } from './style/global_style'
+
+// spinner
+import { css } from "@emotion/react"
+import ClipLoader from "react-spinners/ClipLoader"
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: fuchsia;
+`;
 
 const App = () => {
-/*     const dispatch = useDispatch()
-    // 1 - INITIAL FETCH: generate a fake list of employees from mirage
-    //   will also dispatch 'set' (default=all list) 
-    // + 'setUpPagination' (default = 10 results/page)
+
+    const dispatch = useDispatch()
+    const listStatus = useSelector(initialState => initialState.list.status)
+    const pages = useSelector(initialState => initialState.list.collectionAsPages)
+
     useEffect(()=> {
-        dispatch(getEmployeesCurrentList)
-    }, [dispatch]) */
+        if (listStatus !== 'resolved') dispatch(fetchList)
+    }, [dispatch, listStatus])
+
+    // wait for pagination to be set (depends on initial fetch resolving)
+    let proceed = false;
+    if ( listStatus === 'pending' || listStatus === 'updating' ) { return 'loading' }
+    else if ( listStatus === 'resolved') { pages?.length > 0 ? proceed=true:proceed=false; }
 
     return (
         <div className="App">
@@ -28,7 +47,10 @@ const App = () => {
                             <Switch>
                                 <Route exact path="/"  render={() => <Redirect to="/create-employee" />} />
                                 <Route exact path="/create-employee" component={CreateEmployee} />
-                                <Route exact path="/employees-list" component={Employees} />
+                                { proceed ?
+                                    <Route exact path="/employees-list" component={List} />
+                                    : <LoadingSpinnerWrapper><ClipLoader css={override} size={100} /></LoadingSpinnerWrapper>
+                                }
                                 <Route component={NotFoundPage} />
                             </Switch>
                         </Fragment>

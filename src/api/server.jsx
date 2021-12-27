@@ -89,9 +89,7 @@ let server = createServer({
         const data = JSON.parse(req.requestBody);
         // schema.results.create(attrs);
 
-        if (data.text === 'error') {
-            throw new Error('Could not save the employee!')
-        }
+        if (data.text === 'error') { throw new Error('Could not save the employee!')  }
 
         const result = server.create('employee', data)
         return result
@@ -115,7 +113,7 @@ let server = createServer({
             city() { return faker.address.city() },
             state() { return randomFromArray(states) },
             zipcode() { return _.times(5, () => _.sample('123456789')).join('') },
-            department() { return randomFromArray(departments) }
+            department() { return randomFromArray(departments) }
         }),
     },
     serializers: {
@@ -135,7 +133,7 @@ let server = createServer({
         }),
         employeesList: IdSerializer,
     },
-    seeds(server) { server.createList('employee', 100) ; console.log('HERE')}
+    seeds(server) { server.createList('employee', 100) ; }
 })
 
 return server; }

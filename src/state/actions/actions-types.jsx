@@ -1,51 +1,23 @@
 
-// EMPLOYEE ACTIONS TYPES.....................................
-export const  SET_EMPLOYEE = 'employee/create_employee'; // whole object
 
-export const  SET_FIRSTNAME ='employee/set_firstname';
-export const  SET_LASTNAME ='employee/set_lastname';
-export const  SET_DOB ='employee/set_dob';
-export const  SET_STARTDATE ='employee/set_startdate';
-export const  SET_STREET ='employee/set_street';
-export const  SET_CITY  ='employee/set_city';
-export const  SET_USSTATE  ='employee/set_usstate';
-export const  SET_ZIPCODE  ='employee/set_zipcode';
-export const  SET_DEPARTMENT  ='employee/set_department';
+// LIST ACTIONS TYPES .................................
+export const LIST_FETCHING ='list/fetching';
+export const LIST_RESOLVED ='list/resolved';
+export const LIST_REJECTED ='list/rejected';
 
-// GET request
-export const  EMPLOYEE_GET_FETCHING ='employee/fetching';
-export const  EMPLOYEE_GET_RESOLVED ='employee/resolved';
-export const  EMPLOYEE_GET_REJECTED ='employee/rejected';
-// PUT request
-export const  EMPLOYEE_EDIT_FETCHING ='employee/edit_fetching';
-export const  EMPLOYEE_EDIT_RESOLVED ='employee/edit_resolved';
-export const  EMPLOYEE_EDIT_REJECTED ='employee/edit_rejected';
-// DELETE request
-export const  EMPLOYEE_DELETE_FETCHING ='employee/delete_fetching';
-export const  EMPLOYEE_DELETE_RESOLVED ='employee/delete_resolved';
-export const  EMPLOYEE_DELETE_REJECTED ='employee/delete_rejected';
-
-
-// EMPLOYEES LIST ACTIONS TYPES .................................
-export const  EMPLOYEES_LIST_FETCHING ='employees-list/fetching';
-export const  EMPLOYEES_LIST_RESOLVED ='employees-list/resolved';
-export const  EMPLOYEES_LIST_REJECTED ='employees-list/rejected';
 // POST request
-export const EMPLOYEES_LIST_CREATE_FETCHING ='employees-list/create_fetching';
-export const EMPLOYEES_LIST_CREATE_RESOLVED ='employees-list/create_resolved';
-export const EMPLOYEES_LIST_CREATE_REJECTED ='employees-list/create_rejected';
+export const CREATE_EMPLOYEE_FETCHING ='employees-list/create_fetching';
+export const CREATE_EMPLOYEE_RESOLVED ='employees-list/create_resolved';
+export const CREATE_EMPLOYEE_REJECTED ='employees-list/create_rejected';
 
-// FILTERS ACTIONS TYPES .................................
-export const FILTERS_STATUS_CHANGED = 'filtering/filtering-status-changed'
-export const FILTER_PARAM_CHANGED = 'filtering/filter-param-changed'
-export const FILTER_SEARCHTERM_CHANGED = 'filtering/filter-searchterm-changed'
-export const SET_RESULTS_FOR_SEARCH = 'filtering/display-search-results'
-export const RESET_SEARCH_RESULTS = 'filtering/reset-search-results'
+export const SETUP_COLLECTION = 'list/collection'
+export const SETUP_COLLECTION_AS_PAGES = 'list/collection/pages'
+export const SET_ENTRIES_COUNT = 'list/collection/entries'
+export const SET_TOTAL_PAGES = 'list/collection/total-pages'
+export const SET_CURRENT_ACTIVE_PAGE = 'list/collection/active-page'
+export const SET_CURRENT_PAGE_INDEX = 'list/collection/active-index'
 
-// PAGES ACTIONS TYPES .................................
-export const SET_ENTRIES_AMOUNT = 'pages/set-entries-amount'
-export const SET_RESULTS_AS_PAGES = 'pages/set-results-as-pages'
-export const SET_PAGES_AMOUNT = 'pages/set-pages-amount'
-export const SET_CURRENTACTIVE_PAGE_INDEX = 'pages/set-currentActive-page-index'
-export const SET_CURRENTACTIVE_PAGE  = 'pages/set-currentActive-page'
+export const SORT_STATUS_CHANGED = 'list/collection/sort-status-changed'
+export const SORT_PARAM_CHANGED = 'list/collection/sort-param-changed'
 
+export const SEARCHTERM_CHANGED = 'list/collection/searchterm-changed'

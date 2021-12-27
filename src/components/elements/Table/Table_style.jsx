@@ -20,20 +20,25 @@ export const StyledTableHeader = styled.thead`
         position: sticky; top: 0; 
         color: white; 
         background-color: #888; 
-     }
+    }
 `
 
 export const TableHeaderIconWrapper = styled.div`
     min-height: 1rem;
-    
 `
 
 export const StyledTableRow = styled.tr`
     height: 2rem;
     
-    :nth-child(even) {background-color: #ccc }
+    :nth-child(even) {background-color: #ccc }
     &:hover { background-color: lightblue; color: white;  }
     
-    td { width: 10%; overflow: hidden;}
+    td { 
+        width: 10%;
+        overflow: hidden;
+       /*  ${ ({highlighted}) => highlighted && `background-color:yellow` } */
+    }
 `
+
+
 
