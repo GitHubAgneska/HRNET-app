@@ -10,7 +10,7 @@ import CreateEmployee from './components/containers/Create-employee'
 import List from './components/containers/List';
 import NotFoundPage from './components/containers/404'
 
-import { GlobalStyle } from './style/global_style'
+import { GlobalStyle, LoadingSpinnerWrapper } from './style/global_style'
 
 // spinner
 import { css } from "@emotion/react"
@@ -49,7 +49,7 @@ const App = () => {
                                 <Route exact path="/create-employee" component={CreateEmployee} />
                                 { proceed ?
                                     <Route exact path="/employees-list" component={List} />
-                                    : <div><ClipLoader css={override} size={100} /></div>
+                                    : <LoadingSpinnerWrapper><ClipLoader css={override} size={100} /></LoadingSpinnerWrapper>
                                 }
                                 <Route component={NotFoundPage} />
                             </Switch>

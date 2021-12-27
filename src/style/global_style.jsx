@@ -71,6 +71,13 @@ export const StyledTitle = styled.h1`
     color: grey;
     font-size:1em;
 `
+export const LoadingSpinnerWrapper = styled.div`
+    width:90%; padding-top:20%;
+    border:1px solid grey;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+`
 
 
 
