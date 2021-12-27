@@ -11,8 +11,9 @@ import SelectInput from '../Form-inputs/SelectInput'
 import Button from '../Button/Button'
 
 import { FormWrapper, FormBtnsWrapper } from './Employee-form-style'
-import BaseModal from '../Modal/Modal'
-import { modalTypes } from '../../../data/modal-types'
+import ModalComp from '../Modal/Modal'
+
+
 
 const CompositeForm = () => {
 
@@ -31,30 +32,14 @@ const CompositeForm = () => {
 
     const formDirty = Object.values(touched).some(t => t === true );
 
+
     const [ displayModal, setDisplayModal ] = useState(false);
     const toggleModal = () => { setDisplayModal(!displayModal);}
-
-    // confirm cancel form => modal
     const [ confirmCancel, setConfirmCancel ] = useState(false);
+    const [ confirmSuccess, setConfirmSuccess ] = useState(false);
     const toggleConfirmModal = () => { setConfirmCancel(!confirmCancel);}
+    const closeModal = e => { console.log('cancelling action'); toggleModal(); }
     
-
-    const confirmCancelMessage = `Are you sure you want to reset the form ? All data for ${values.firstName} ${values.lastName} will be lost`;
-    // const confirmCancelUserResponseTypes = [ 'yes', 'no' ];
-    const confirmCancelActions = [ 
-        { btnName:'yes'/* ,method: 'confirmClose' */ },
-        { btnName:'no'/* , method: 'confirmClose' */ } ];
-
-    // confirm creation successful => modal
-    const [ creationSuccessful, setCreationSuccessful ] = useState(false);
-    const toggleSuccessModal = () => { setCreationSuccessful(!creationSuccessful);}
-    const successMessage = `New employee ${values.firstName}, ${values.lastName} successfully created`;
-    const successContent = `${values}`;
-    // const successUserResponseTypes = [ 'close', 'modify' ];
-    const successActions = [ 
-        { btnName:'close', method: 'toggleConfirmModal' },
-        // { btnName:'modify', method: 'closeModalAndEditForm' } 
-    ];
 
     const handleInputChange = (fieldId, value) => {
         setValues(currentValues => { currentValues[fieldId] = value; return currentValues; }); // !== setValues({ ...values, [fieldId]: value }); ?
@@ -84,24 +69,16 @@ const CompositeForm = () => {
 
         setErrors(formValidation.errors);
         setTouched(formValidation.touched);
-        // console.log('ERRORS & TOUCHED ==', formValidation);
         
         if ( Object.values(formValidation.errors).every(t => t === null ) // all errors  = null
              && Object.values(formValidation.touched).length === Object.values(values).length // all fields were touched
              && Object.values(formValidation.touched).every(t => t === true ) // every touched field is true
             ) {
                 dispatch(createEmployee(values))
-                
-                //alert(JSON.stringify(values, null, 2));
-                
-                // setCreationSuccessful(true);
-                // close form after success message display
-                // setTimeout(() => { toggleForm()}, 2000);
-
+                setConfirmSuccess(true)
             }
     }
     
-
     const handleCancel = event => {
         event.preventDefault();
         return formDirty? toggleConfirmModal(): resetForm();
@@ -114,10 +91,24 @@ const CompositeForm = () => {
         console.log('AFTER RESET: values==', values, 'errors=', errors, 'touched=', touched);
         return confirmCancel? toggleConfirmModal() : null;
     }
+
+    let confirmCancelModal = {
+            action: 'reset the form',
+            message: `Are you sure you want to`,
+            content: `All data will be lost`,
+            btnNames: ['yes', 'no']
+    }
+
+    let confirmSuccessModal = {
+            message: `New employee  successfully created`,
+            btnNames: ['ok']
+        }
+
+
     
     return (
         <FormWrapper>
-            <form /* onSubmit={handleSubmit} */>
+            <form>
                 { (employeeFormFields).map(i => (
                     
                     (i.fieldType ==='text')?
@@ -168,22 +159,11 @@ const CompositeForm = () => {
             </form>
                 
                 { confirmCancel &&
-                    <BaseModal
-                        type='cancelEmployeeCreation'
-                        message={confirmCancelMessage}
-                        actions={confirmCancelActions}
-                        toggleConfirmModal={toggleConfirmModal}
-                        resetForm={resetForm}
-                        />
+                    <ModalComp confirmCancelModal={confirmCancelModal} closeModal={handleCancel} confirmAction={resetForm} />
                 }
 
-                { creationSuccessful &&
-                    <BaseModal
-                        type='employeeSuccessfullyCreated'
-                        message={successMessage}
-                        actions={successActions}
-                        content={successContent}                    
-                        toggleConfirmModal={toggleConfirmModal} />
+                { confirmSuccess &&
+                    <ModalComp confirmSuccessModal={confirmSuccessModal} closeModal={closeModal}/>
                 }
         </FormWrapper>
     )

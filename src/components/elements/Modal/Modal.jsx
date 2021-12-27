@@ -1,73 +1,76 @@
 import PropTypes from "prop-types"
-import { ModalWrapper, ModalBlock, ModalBtnsWrapper } from './Modal-style'
-import Button from "../Button/Button"
-import { modalTypes } from '../../../data/modal-types'
-import { useEffect } from "react"
-import { useState } from "react"
+import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
+import ModalButton from '../Button/Button'
 
-const BaseModal = ({ type, message, content, toggleConfirmModal, resetForm }) => {
+const ModalComp = ({confirmCancelModal}) => {
     
-    /* const [ modal, setCurrentModal ] = useState({})
-    
-    useEffect(() => {
-        
-        let currentType = modalTypes.find(m => m.type === {type})?? {}; // ! runtime err if no '?'
-        let currentModal = currentType?.body?? {}
-        
-        setCurrentModal(currentModal);
-        console.log('modal===', modal);
-
-    }, [type, modal]) */
-    
-    const closeModal = (e ) => { toggleConfirmModal(); resetForm(e) } // only close modal 
-    
+    const { 
+        modalBgBlur,
+        width, height,
+        buttonsWrapperWidth, 
+        modalData,
+        content,
+        action,
+        message,
+        btnNames,
+        handleCancel,
+        confirmAction  
+    } = confirmCancelModal
     
     return (
-        <ModalWrapper>
-            <ModalBlock>
-                <p>{message}</p>
-                <p>{content}</p>
-                <Button btnName="YES" handleClick={(e)=>closeModal(e)} width="30%" />
-                {/* <p>{modal.header}</p>
-                <p>{modal.content}</p> */}
-                
-                {/* <ModalBtnsWrapper>
-                    {modal.actions.map( a => {
-                        <Button
-                            btnName={a.btnName}
-                            key={Math.random()}
-                            handleClick={() => {
-                                return a.actions.actions.component === 'modal'? 
-                                    a.actions.actions.type : null
-                            }}
-                        />
-                    })}
-                </ModalBtnsWrapper> */}
+            <PageModalWrapper>
 
+                <ModalWrapper width={width} height={height}>
+                    <ModalBlock>
 
-            {/*  <ModalBtnsWrapper>
-                { actions.map(a => (
-                    <Button 
-                        btnName={a.btnName}
-                        key={Math.random()} 
-                        handleClick={() => a.method}
-                        />
-                ))
-            }
-            </ModalBtnsWrapper> */}
+                        <ModalBody>
+                            <p>{message}</p>
+                            <p>{action} {modalData} ? </p>
+                        </ModalBody>
+                        
+                        <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
+                            { btnNames.map(i => ( 
+                                i==='cancel' ? 
+                                    <ModalButton
+                                        key={Math.random()}
+                                        btnName={i}
+                                        handleClick={ handleCancel}
+                                        disabled={false}
+                                    ></ModalButton>  
+                                :
+                                    <ModalButton
+                                        key={Math.random()}
+                                        btnName={i}
+                                        handleClick={confirmAction}
+                                        disabled={false}
+                                    ></ModalButton>
+                                ))}
+                        </ModalBtnsWrapper>
 
-            {/*  <ModalBtnsWrapper>
-                    <Button btnName="NO" handleClick={confirmClose} width="30%" />
-                    <Button btnName="YES" handleClick={(e)=>resetForm(e)} width="30%" />
-                    <Button btnName="Close" handleClick={confirmClose} width="30%" />
-                </ModalBtnsWrapper> */}
-            </ModalBlock>
-        </ModalWrapper>
+                    </ModalBlock>
+                </ModalWrapper>
+            
+            </PageModalWrapper>
     )
 }
 
-export default BaseModal
+export default ModalComp
 
-BaseModal.propTypes = {
+ModalComp.defaultProps = {
+    modalBgBlur: true,
+    width: '70%',
+    height: '300px',
+    buttonsWrapperWidth: '50%',
+}
 
+ModalComp.propTypes = { 
+    modalBgBlur: PropTypes.bool,
+    width: PropTypes.string,
+    height: PropTypes.string,
+    buttonsWrapperWidth: PropTypes.string,
+    content: PropTypes.string,
+    message: PropTypes.string,
+    action: PropTypes.string,
+    modalData: PropTypes.string,
+    btnNames: PropTypes.array
 }
