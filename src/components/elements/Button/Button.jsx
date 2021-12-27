@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import { StyledBtn } from './Button-style'
 
+
 const Button = ({ btnName, handleClick, disabled, width } ) => {
 
     return ( 
@@ -13,9 +14,18 @@ const Button = ({ btnName, handleClick, disabled, width } ) => {
 }
 export default Button
 
-Button.propTypes = { 
+Button.propTypes = {
+    btnType: PropTypes.string,
     btnName: PropTypes.string.isRequired,
     handleClick: PropTypes.func,
     disabled: PropTypes.bool,
     width: PropTypes.string
 }
+
+/* function BtnFactory(props) {
+    switch (props.btnType) {
+        case: "cancelAction":
+            return  <StyledBtn
+
+    }
+} */

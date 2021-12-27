@@ -1,9 +1,9 @@
 import PropTypes from "prop-types"
 import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
-import ModalButton from '../Button/Button'
+import Button from '../Button/Button'
 
-const ModalComp = ({confirmCancelModal}) => {
-    
+const ModalComp = ({props, handleClick, handleCancel, resetForm}) => {
+
     const { 
         modalBgBlur,
         width, height,
@@ -12,12 +12,11 @@ const ModalComp = ({confirmCancelModal}) => {
         content,
         action,
         message,
-        btnNames,
-        handleCancel,
-        confirmAction  
-    } = confirmCancelModal
-    
+        btnNames
+    } = props
+
     return (
+
             <PageModalWrapper>
 
                 <ModalWrapper width={width} height={height}>
@@ -30,20 +29,20 @@ const ModalComp = ({confirmCancelModal}) => {
                         
                         <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
                             { btnNames.map(i => ( 
-                                i==='cancel' ? 
-                                    <ModalButton
+                                i==='no' || i=== 'ok' ? 
+                                    <Button
                                         key={Math.random()}
-                                        btnName={i}
-                                        handleClick={ handleCancel}
+                                        handleClick={handleCancel}
                                         disabled={false}
-                                    ></ModalButton>  
+                                        btnName={i}
+                                    >{i}</Button>  
                                 :
-                                    <ModalButton
+                                    <Button
                                         key={Math.random()}
-                                        btnName={i}
-                                        handleClick={confirmAction}
+                                        handleClick={resetForm}
                                         disabled={false}
-                                    ></ModalButton>
+                                        btnName={i}
+                                    >{i}</Button>
                                 ))}
                         </ModalBtnsWrapper>
 

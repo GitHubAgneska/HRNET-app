@@ -35,10 +35,10 @@ const CompositeForm = () => {
 
     const [ displayModal, setDisplayModal ] = useState(false);
     const toggleModal = () => { setDisplayModal(!displayModal);}
+    
     const [ confirmCancel, setConfirmCancel ] = useState(false);
     const [ confirmSuccess, setConfirmSuccess ] = useState(false);
     const toggleConfirmModal = () => { setConfirmCancel(!confirmCancel);}
-    const closeModal = e => { console.log('cancelling action'); toggleModal(); }
     
 
     const handleInputChange = (fieldId, value) => {
@@ -47,7 +47,7 @@ const CompositeForm = () => {
     }
 
     const handleBlur = (fieldName, value) => {
-        const { [fieldName]: removedError, ...rest } = errors;
+        const { [fieldName]: removedError, ...rest } = errors;
         const error = validate[fieldName](value); // error = is a string message
         setErrors( {...errors, [fieldName]: error }); // !== setErrors({ ...rest, ...(error && { [fieldName]: touched[fieldName] && error }) }); ? 
     }
@@ -100,7 +100,7 @@ const CompositeForm = () => {
     }
 
     let confirmSuccessModal = {
-            message: `New employee  successfully created`,
+            message: `New employee successfully created`,
             btnNames: ['ok']
         }
 
@@ -159,11 +159,11 @@ const CompositeForm = () => {
             </form>
                 
                 { confirmCancel &&
-                    <ModalComp confirmCancelModal={confirmCancelModal} closeModal={handleCancel} confirmAction={resetForm} />
+                    <ModalComp props={confirmCancelModal} handleCancel={handleCancel} resetForm={resetForm} />
                 }
 
                 { confirmSuccess &&
-                    <ModalComp confirmSuccessModal={confirmSuccessModal} closeModal={closeModal}/>
+                    <ModalComp props={confirmSuccessModal} handleCancel={toggleModal}/>
                 }
         </FormWrapper>
     )
