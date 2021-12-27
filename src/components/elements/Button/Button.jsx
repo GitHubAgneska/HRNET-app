@@ -15,7 +15,6 @@ const Button = ({ btnName, handleClick, disabled, width } ) => {
 export default Button
 
 Button.propTypes = {
-    btnType: PropTypes.string,
     btnName: PropTypes.string.isRequired,
     handleClick: PropTypes.func,
     disabled: PropTypes.bool,
@@ -26,6 +25,5 @@ Button.propTypes = {
     switch (props.btnType) {
         case: "cancelAction":
             return  <StyledBtn
-
     }
 } */

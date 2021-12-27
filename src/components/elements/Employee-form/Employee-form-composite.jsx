@@ -14,7 +14,6 @@ import { FormWrapper, FormBtnsWrapper } from './Employee-form-style'
 import ModalComp from '../Modal/Modal'
 
 
-
 const CompositeForm = () => {
 
     const initialState = {firstName: '', lastName:'', dob:'', startDate:'',  street:'', city:'', zipcode: '', state:'', department:''};
@@ -37,10 +36,11 @@ const CompositeForm = () => {
     const toggleModal = () => { setDisplayModal(!displayModal);}
     
     const [ confirmCancel, setConfirmCancel ] = useState(false);
-    const [ confirmSuccess, setConfirmSuccess ] = useState(false);
     const toggleConfirmModal = () => { setConfirmCancel(!confirmCancel);}
-    
+    const [ confirmSuccess, setConfirmSuccess ] = useState(false);
+    const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess);}
 
+    
     const handleInputChange = (fieldId, value) => {
         setValues(currentValues => { currentValues[fieldId] = value; return currentValues; }); // !== setValues({ ...values, [fieldId]: value }); ?
         setTouched({ ...touched, [fieldId]: true });// === setTouched(touched => { touched[fieldId]= true; return touched; });
@@ -78,19 +78,18 @@ const CompositeForm = () => {
                 setConfirmSuccess(true)
             }
     }
-    
+    // form cancel btn
     const handleCancel = event => {
-        event.preventDefault();
-        return formDirty? toggleConfirmModal(): resetForm();
+        event.preventDefault()
+        toggleConfirmModal()
     }
 
-    const resetForm = () => {
-        setValues({...initialState}); 
-        setTouched({});
-        setErrors({});
-        console.log('AFTER RESET: values==', values, 'errors=', errors, 'touched=', touched);
-        return confirmCancel? toggleConfirmModal() : null;
-    }
+    // modal btn : confirm yes (reset form)
+    const resetForm = () => { window.location.reload() }
+    // modal btn : confirm no (close modal)
+    const cancelModal = () => { toggleConfirmModal()}
+
+
 
     let confirmCancelModal = {
             action: 'reset the form',
@@ -102,12 +101,11 @@ const CompositeForm = () => {
     let confirmSuccessModal = {
             message: `New employee successfully created`,
             btnNames: ['ok']
-        }
+    }
 
 
-    
     return (
-        <FormWrapper>
+        <FormWrapper displayModal={displayModal} >
             <form>
                 { (employeeFormFields).map(i => (
                     
@@ -153,23 +151,19 @@ const CompositeForm = () => {
 
                 <FormBtnsWrapper>
                     <Button btnName="save" handleClick={handleSubmit} disabled={!allFieldsOk}></Button>
-                    <Button btnName="cancel" handleClick={handleCancel}></Button>
+                    <Button btnName="cancel" handleClick={handleCancel} disabled={!formDirty}></Button>
                 </FormBtnsWrapper>
 
             </form>
                 
                 { confirmCancel &&
-                    <ModalComp props={confirmCancelModal} handleCancel={handleCancel} resetForm={resetForm} />
+                    <ModalComp props={confirmCancelModal} cancelModal={cancelModal} resetForm={resetForm} />
                 }
 
                 { confirmSuccess &&
-                    <ModalComp props={confirmSuccessModal} handleCancel={toggleModal}/>
+                    <ModalComp props={confirmSuccessModal} handleCancel={toggleModal} />
                 }
         </FormWrapper>
     )
 }
-
 export default CompositeForm
-CompositeForm.propTypes = { 
-
-}
