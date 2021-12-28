@@ -72,12 +72,14 @@ export const StyledTitle = styled.h1`
     font-size:1em;
 `
 export const LoadingSpinnerWrapper = styled.div`
-    width:90%; padding-top:20%;
-    border:1px solid grey;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    margin-top:10%;
 `
+
+export const DataTablePageWrapper = styled.main`
+    width: 90%;
+    margin:auto; padding-top: 2%;
+`
+
 
 
 

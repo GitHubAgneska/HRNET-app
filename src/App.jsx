@@ -49,7 +49,7 @@ const App = () => {
                                 <Route exact path="/create-employee" component={CreateEmployee} />
                                 { proceed ?
                                     <Route exact path="/employees-list" component={List} />
-                                    : <LoadingSpinnerWrapper><ClipLoader css={override} size={100} /></LoadingSpinnerWrapper>
+                                    : <LoadingSpinnerWrapper><ClipLoader css={override} size={100} /><p>Loading...</p></LoadingSpinnerWrapper>
                                 }
                                 <Route component={NotFoundPage} />
                             </Switch>

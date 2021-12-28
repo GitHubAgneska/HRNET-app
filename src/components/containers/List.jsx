@@ -11,6 +11,8 @@ import SelectEntriesBox from '../elements/SelectEntriesBox/SelectEntriesBox'
 import SearchBox from "../elements/SearchBox/SearchBox"
 import { searchSuggestions } from '../../utils/searchText'
 
+import { DataTablePageWrapper } from '../../style/global_style'
+
 
 
 export const List = () => {
@@ -87,7 +89,7 @@ export const List = () => {
 
 
     return (
-        <div>
+        <DataTablePageWrapper>
 
             <SelectEntriesBox 
                 options={entriesOptions}
@@ -119,7 +121,7 @@ export const List = () => {
                 changePage={changePage}
             />
 
-        </div>
+        </DataTablePageWrapper>
     )
 }
 export default List
