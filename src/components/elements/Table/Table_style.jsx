@@ -4,6 +4,7 @@ export const TableWrapper = styled.div`
     display: flex;
     max-height: 90%;
     overflow: scroll;
+    border:1px solid grey;
 `
 
 export const StyledTable = styled.table` 
@@ -36,7 +37,6 @@ export const StyledTableRow = styled.tr`
     td { 
         width: 10%;
         overflow: hidden;
-       /*  ${ ({highlighted}) => highlighted && `background-color:yellow` } */
     }
 `
 

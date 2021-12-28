@@ -5,7 +5,6 @@ export const SearchSectionWrapper = styled.section`
     margin-bottom: 2%;
 `
 
-
 export const SearchBoxWrapper = styled.div`
     width: 100%;
     border: 3px solid #ccc;
@@ -21,7 +20,6 @@ export const SearchBoxWrapper = styled.div`
     
     ${({ suggestionsBoxIsActive }) => !suggestionsBoxIsActive && 
         `border-radius: 15px `}
-
 `
 
 export const SearchBoxInput = styled.input`
@@ -48,7 +46,7 @@ export const SearchSuggestionsWrapper = styled.div`
             font-size: 0.8rem;
             &:hover { background-color: #ccc; color:white; }
         }
-        li:not(:first-child) { border-top: 1px solid #ccc; }
+        li:not(:first-child) { border-top: 1px solid #ccc; }
     }
 
     border-bottom-right-radius: 15px;
