@@ -24,12 +24,36 @@ export const GlobalStyle = createGlobalStyle`
         min-height: 100vh;
     }
     a { text-decoration: none; color: inherit; }
-    /* input { border: transparent; } */
     ul { margin: 0; padding: 0;}
     ul li { list-style: none; }
     button { display: block; border: none; }
     main { width: 90%; margin: auto; }
-    .container { max-height:100vh; width:100%; /* position:fixed; */}
+`
+
+export const TitleWrapper = styled.div`
+    margin: 2% auto;
+    border: 1px solid grey;
+    border-radius:5px;
+    text-align: center;
+    background-color: white;
+`
+
+export const StyledTitle = styled.h1`
+    color: grey;
+    font-size:1em;
+`
+
+export const LoadingSpinnerWrapper = styled.div`
+    margin-top:10%;
+`
+
+export const DataTablePageWrapper = styled.main`
+    width: 90%;
+    margin:auto; padding-top: 2%;
+`
+
+export const EmployeeFormPageWrapper = styled.main`
+    background-color: lightgrey;
 `
 /* accessibility - .sr-only class */
 export const SrOnlyH1 = styled.h1`
@@ -59,26 +83,6 @@ export const SrOnlyH2 = styled.h2`
     width: 1px !important;
     white-space: nowrap !important; /* 3 */
 `;
-
-export const TitleWrapper = styled.div`
-    width:90%;
-    margin: 2% auto;
-    border: 1px solid grey;
-    border-radius:5px;
-    text-align: center;
-`
-export const StyledTitle = styled.h1`
-    color: grey;
-    font-size:1em;
-`
-export const LoadingSpinnerWrapper = styled.div`
-    margin-top:10%;
-`
-
-export const DataTablePageWrapper = styled.main`
-    width: 90%;
-    margin:auto; padding-top: 2%;
-`
 
 
 

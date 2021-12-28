@@ -10,7 +10,7 @@ import SimpleInput from '../Form-inputs/SimpleInput'
 import SelectInput from '../Form-inputs/SelectInput'
 import Button from '../Button/Button'
 
-import { FormWrapper, FormBtnsWrapper } from './Employee-form-style'
+import { FormWrapper,FieldsWrapper, FormBtnsWrapper } from './Employee-form-style'
 import ModalComp from '../Modal/Modal'
 
 
@@ -38,7 +38,7 @@ const CompositeForm = () => {
     const [ confirmCancel, setConfirmCancel ] = useState(false);
     const toggleConfirmModal = () => { setConfirmCancel(!confirmCancel);}
     const [ confirmSuccess, setConfirmSuccess ] = useState(false);
-    const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess);}
+    // const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess);}
 
     
     const handleInputChange = (fieldId, value) => {
@@ -47,6 +47,7 @@ const CompositeForm = () => {
     }
 
     const handleBlur = (fieldName, value) => {
+        // eslint-disable-next-line no-unused-vars
         const { [fieldName]: removedError, ...rest } = errors;
         const error = validate[fieldName](value); // error = is a string message
         setErrors( {...errors, [fieldName]: error }); // !== setErrors({ ...rest, ...(error && { [fieldName]: touched[fieldName] && error }) }); ? 
@@ -107,51 +108,53 @@ const CompositeForm = () => {
     return (
         <FormWrapper displayModal={displayModal} >
             <form>
-                { (employeeFormFields).map(i => (
-                    
-                    (i.fieldType ==='text')?
-                        <SimpleInput 
-                            key={i._uid}
-                            fieldName={i.fieldName}
-                            field={i}
-                            values={values}
-                            handleInputChange={handleInputChange}
-                            handleBlur={handleBlur}
-                            touched={touched}
-                            errors={errors}
-                            />
+                <FieldsWrapper>
+                    { (employeeFormFields).map(i => (
                         
-                    : (i.fieldType === 'date') ?
-                        <DateInput
-                            key={i._uid}
-                            fieldName={i.fieldName}
-                            field={i}
-                            values={values}
-                            handleInputChange={handleInputChange}
-                            handleBlur={handleBlur}
-                            touched={touched}
-                            errors={errors}
-                            />
+                        (i.fieldType ==='text')?
+                            <SimpleInput 
+                                key={i._uid}
+                                fieldName={i.fieldName}
+                                field={i}
+                                values={values}
+                                handleInputChange={handleInputChange}
+                                handleBlur={handleBlur}
+                                touched={touched}
+                                errors={errors}
+                                />
+                            
+                        : (i.fieldType === 'date') ?
+                            <DateInput
+                                key={i._uid}
+                                fieldName={i.fieldName}
+                                field={i}
+                                values={values}
+                                handleInputChange={handleInputChange}
+                                handleBlur={handleBlur}
+                                touched={touched}
+                                errors={errors}
+                                />
 
-                    : (i.fieldType ==='select') ?
-                        <SelectInput 
-                            key={i._uid}
-                            fieldName={i.fieldName}
-                            field={i}
-                            values={values}
-                            handleInputChange={handleInputChange}
-                            options={i.options}
-                            handleBlur={handleBlur}
-                            touched={touched}
-                            errors={errors}
-                            />
+                        : (i.fieldType ==='select') ?
+                            <SelectInput 
+                                key={i._uid}
+                                fieldName={i.fieldName}
+                                field={i}
+                                values={values}
+                                handleInputChange={handleInputChange}
+                                options={i.options}
+                                handleBlur={handleBlur}
+                                touched={touched}
+                                errors={errors}
+                                />
 
-                        :null
-                ))}
+                            :null
+                    ))}
+                </FieldsWrapper>
 
-                <FormBtnsWrapper>
-                    <Button btnName="save" handleClick={handleSubmit} disabled={!allFieldsOk}></Button>
-                    <Button btnName="cancel" handleClick={handleCancel} disabled={!formDirty}></Button>
+                <FormBtnsWrapper style={{width: "60%"}}>
+                    <Button btnName="save" handleClick={handleSubmit} disabled={!allFieldsOk} width="40%"></Button>
+                    <Button btnName="cancel" handleClick={handleCancel} disabled={!formDirty} width="40%"></Button>
                 </FormBtnsWrapper>
 
             </form>

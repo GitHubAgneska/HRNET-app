@@ -1,16 +1,15 @@
 import CompositeForm from '../elements/Employee-form/Employee-form-composite'
-import { TitleWrapper, StyledTitle } from '../../style/global_style'
-
+import { EmployeeFormPageWrapper, TitleWrapper, StyledTitle } from '../../style/global_style'
 
 const CreateEmployee = () => {
 
     return (
-        <main>
+        <EmployeeFormPageWrapper>
             <TitleWrapper>
-                <StyledTitle>Create employee</StyledTitle>
+                <StyledTitle>Create a new employee</StyledTitle>
             </TitleWrapper>
             <CompositeForm />
-        </main>
+        </EmployeeFormPageWrapper>
     )
 }
 
