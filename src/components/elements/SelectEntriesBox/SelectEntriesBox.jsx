@@ -1,6 +1,6 @@
 import { SelectEntriesBoxWrapper } from './SelectEntriesBox_style'
 import { useSelector } from 'react-redux'
-
+import PropTypes from "prop-types"
 
 const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing, listTotal}) => {
 
@@ -27,3 +27,10 @@ const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing, listT
 }
 
 export default SelectEntriesBox
+
+SelectEntriesBox.propTypes = {
+    options: PropTypes.array.isRequired,
+    selectEntriesAmount: PropTypes.func.isRequired,
+    currentlyshowing: PropTypes.number.isRequired,
+    listTotal: PropTypes.number.isRequired
+}

@@ -21,9 +21,3 @@ Button.propTypes = {
     width: PropTypes.string
 }
 
-/* function BtnFactory(props) {
-    switch (props.btnType) {
-        case: "cancelAction":
-            return  <StyledBtn
-    }
-} */

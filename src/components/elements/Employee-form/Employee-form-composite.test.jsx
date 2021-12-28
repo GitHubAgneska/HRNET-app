@@ -44,9 +44,10 @@ describe('form testing', () => {
     // <span> element should be null when validationError: false
     // <span> elements should be 'Please enter xxxx ' when validationError: true
 
-    test('at form init, save btn should be disabled', () => { 
+    test('at form init, save btn and cancel btn should be disabled', () => { 
         render(<Provider store={store}><CompositeForm /></Provider>)
         expect(screen.getByRole('button', { name: /save/i })).toBeDisabled();
+        expect(screen.getByRole('button', { name: /cancel/i })).toBeDisabled();
     })
 
     test('after completing form, if one field is empty, save btn should still be disabled', () => {

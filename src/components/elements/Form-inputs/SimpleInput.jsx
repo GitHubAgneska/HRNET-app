@@ -3,8 +3,7 @@ import FormLabel from '../FormLabel/FormLabel'
 import { InputWrapper } from '../Employee-form/Employee-form-style'
 
 const SimpleInput = ({field, handleInputChange, handleBlur, errors }) => { 
-    // console.log('error INPUT ELEMENT ==', errors[fieldName]);
-    // console.log('Touched INPUT ELEMENT ==', touched)
+    
     return (
         <InputWrapper>
             <FormLabel fieldName={field.fieldName}></FormLabel>
