@@ -29,8 +29,11 @@ export const TableHeaderIconWrapper = styled.div`
 
 export const StyledTableRow = styled.tr`
     height: 2rem;
-    
-    :nth-child(even) {background-color: #ccc }
+
+    ${({entries}) => entries%2===0 ? 
+    `:nth-child(even) {background-color: #ccc; }`
+    : `:nth-child(odd) {background-color: #ccc; }` }
+
     &:hover { background-color: lightblue; color: white;  }
     
     td { 
