@@ -59,11 +59,11 @@ const CompositeForm = () => {
 
         const formValidation = Object.keys(values).reduce(
             (acc, key) => {
-                    const newError = validate[key](values[key]); // = validate[fieldName](fieldValue)
-                    const newTouched = { [key]: true };
-                    return { errors: { ...acc.errors, ...(newError && { [key]: newError }) },
-                            touched: { ...acc.touched, ...newTouched }
-                            }
+                const newError = validate[key](values[key]); // = validate[fieldName](fieldValue)
+                const newTouched = { [key]: true };
+                return { errors: { ...acc.errors, ...(newError && { [key]: newError }) },
+                        touched: { ...acc.touched, ...newTouched }
+                        }
             },
             { errors: { ...errors }, touched: { ...touched } }
         );

@@ -1,14 +1,14 @@
 import PropTypes from "prop-types"
-import { InputWrapper } from '../Employee-form/Employee-form-style'
-import {states}  from '../../../data/us-states'
-import {departments} from '../../../data/departments'
+import { InputWrapper } from '../Employee-form/Employee-form-style'
+import { states } from '../../../data/us-states'
+import { departments } from '../../../data/departments'
 import { useState } from "react";
 import { validate } from "../../../utils/form_validators"
 
 const stateOptions = [...states];
 const deps = [ ...departments];
 
-const FormInput = props => { 
+const FormInput = props => {
     
     const { fieldName } = props;
     const [ values, setValues ] = useState({});
@@ -30,7 +30,7 @@ const FormInput = props => { 
         const { name, value } = event.target;
         console.log('ONBLUR:=', event.target.value);
 
-        const { [name]: removedError, ...rest } = errors; // remove error msg if any
+        const {[name]: removedError, ...rest } = errors; // remove error msg if any
         const error = validate[name](value); // check new error
         // validate field if val touched
         setErrors({ ...rest, ...(error && { [name]: touched[name] && error }) });

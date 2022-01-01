@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import FormLabel from '../FormLabel/FormLabel'
 import { InputWrapper } from '../Employee-form/Employee-form-style'
 
-const SimpleInput = ({field, handleInputChange, handleBlur, errors }) => { 
+const SimpleInput = ({field, handleInputChange, handleBlur, errors, touched }) => { 
     
     return (
         <InputWrapper>
@@ -11,10 +11,12 @@ const SimpleInput = ({field, handleInputChange, handleBlur, errors }) => { 
                 type="text"
                 id={field._uid}
                 name={field.fieldName}
-                placeholder={field.fieldName}
+                /* placeholder={field.fieldName} */
                 onChange={e => handleInputChange(field.fieldName, e.target.value)}
                 onBlur={e => handleBlur(field.fieldName, e.target.value)}
                 aria-required="true"
+                touched={touched}
+                
             />
             { errors[field.fieldName] ? <span>{errors[field.fieldName]}</span> : null }
         </InputWrapper>

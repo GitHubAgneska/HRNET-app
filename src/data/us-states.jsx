@@ -1,6 +1,10 @@
 
 export const states = [
     {
+        "name": "Select a state",
+        "abbreviation": ""
+    },
+    {
         "name": "Alabama",
         "abbreviation": "AL"
     },

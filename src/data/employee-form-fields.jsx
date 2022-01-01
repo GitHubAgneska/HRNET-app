@@ -1,4 +1,4 @@
-import {states} from '../data/us-states'
+import {states} from '../data/us-states'
 import {departments} from '../data/departments'
 
 export const employeeFormFields = [
