@@ -10,6 +10,8 @@ import _ from 'lodash'
 import { departments } from '../data/departments'
 import { states } from '../data/us-states'
 
+let dpartments = departments.slice(1)
+let minstates = states.slice(1)
 
 const IdSerializer = RestSerializer.extend({
     serializeIds: 'always',
@@ -111,9 +113,9 @@ let server = createServer({
             // startDate() { return moment(faker.date.recent()).format('MM/DD/YYYY') },
             street() { return (faker.datatype.number()).toString() + ' ' + faker.address.streetName() },
             city() { return faker.address.city() },
-            state() { return randomFromArray(states) },
+            state() { return randomFromArray(minstates) },
             zipcode() { return _.times(5, () => _.sample('123456789')).join('') },
-            department() { return randomFromArray(departments) }
+            department() { return randomFromArray(dpartments) }
         }),
     },
     serializers: {

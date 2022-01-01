@@ -34,7 +34,7 @@ export const StyledTableRow = styled.tr`
     `:nth-child(even) {background-color: #ccc; }`
     : `:nth-child(odd) {background-color: #ccc; }` }
 
-    &:hover { background-color: lightblue; color: white;  }
+    &:hover { background-color: lightblue;   }
     
     td { 
         width: 10%;
