@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
 import Button from '../Button/Button'
 
-const ModalComp = ({props, cancelModal, resetForm}) => {
+const ModalComp = ({props, cancelModal, okCloselModal, resetForm}) => {
 
     const { 
         modalBgBlur,
@@ -24,7 +24,7 @@ const ModalComp = ({props, cancelModal, resetForm}) => {
 
                         <ModalBody>
                             <p>{message}</p>
-                            <p>{action} {modalData} ? </p>
+                            <p>{action} {modalData}</p>
                         </ModalBody>
                         
                         <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
@@ -32,10 +32,10 @@ const ModalComp = ({props, cancelModal, resetForm}) => {
                                 i==='no' || i=== 'ok' ? 
                                     <Button
                                         key={Math.random()}
-                                        handleClick={cancelModal}
+                                        handleClick={cancelModal || okCloselModal}
                                         disabled={false}
                                         btnName={i}
-                                    >{i}</Button>  
+                                    >{i}</Button>
                                 :
                                     <Button
                                         key={Math.random()}

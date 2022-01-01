@@ -38,7 +38,7 @@ const CompositeForm = () => {
     const [ confirmCancel, setConfirmCancel ] = useState(false);
     const toggleConfirmModal = () => { setConfirmCancel(!confirmCancel);}
     const [ confirmSuccess, setConfirmSuccess ] = useState(false);
-    // const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess);}
+    const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess);}
 
     
     const handleInputChange = (fieldId, value) => {
@@ -89,6 +89,8 @@ const CompositeForm = () => {
     const resetForm = () => { window.location.reload() }
     // modal btn : confirm no (close modal)
     const cancelModal = () => { toggleConfirmModal()}
+    // modal btn : confirm ok (close modal)
+    const okCloselModal = () => { toggleConfirmSuccess()}
 
 
 
@@ -164,7 +166,7 @@ const CompositeForm = () => {
                 }
 
                 { confirmSuccess &&
-                    <ModalComp props={confirmSuccessModal} handleCancel={toggleModal} />
+                    <ModalComp props={confirmSuccessModal} okCloselModal={okCloselModal} />
                 }
         </FormWrapper>
     )

@@ -15,7 +15,6 @@ const DateInput = ({field, fieldName, handleInputChange, handleBlur, errors, tou
                 id={field._uid}
                 name={fieldName}
                 placeholder={fieldName}
-                value="enter a date"
                 onChange={e => handleInputChange(field.fieldName, e.target.value)}
                 onBlur={e => handleBlur(field.fieldName, e.target.value)} 
                 aria-required="true"
