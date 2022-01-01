@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const StyledNav = styled.nav`
-    width: 90%;
-    margin: auto;
+    @media screen and (min-width:600px) { width: 90%; margin: auto;}
+    @media screen and (max-width:600px) {height:3rem; padding: 3%}
     display: flex;
     flexFlow: row nowrap;
     justify-content: space-between;
@@ -13,8 +13,8 @@ export const StyledNav = styled.nav`
 `
 
 export const MainLogoWrapper = styled.div`
-    /* width: 12.5rem; // 200px; */
-    min-width: 135px;
+    @media screen and (max-width:600px) { max-width: 80px; }
+    @media screen and (min-width:600px) { min-width: 135px; }
 `
 
 export const MainLogo = styled.h1`
@@ -24,6 +24,7 @@ export const MainLogo = styled.h1`
 
 export const LinksWrapper = styled.div`
     width: 25%;
+    @media screen and (max-width:600px) {display: inline-grid;text-align: left;}
     display: inline-flex;
     justify-content: space-between;
 `

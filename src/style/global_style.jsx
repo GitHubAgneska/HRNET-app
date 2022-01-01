@@ -27,7 +27,9 @@ export const GlobalStyle = createGlobalStyle`
     ul { margin: 0; padding: 0;}
     ul li { list-style: none; }
     button { display: block; border: none; }
-    main { width: 90%; margin: auto; }
+    main {
+        @media screen and (min-width:600px) { width: 90%; margin: auto;}
+    }
 `
 
 export const TitleWrapper = styled.div`
@@ -53,8 +55,9 @@ export const DataTablePageWrapper = styled.main`
 `
 
 export const EmployeeFormPageWrapper = styled.main`
-    background-color: lightgrey;
+    /* border:1px solid lightgrey; */
 `
+
 /* accessibility - .sr-only class */
 export const SrOnlyH1 = styled.h1`
     border: 0 !important;

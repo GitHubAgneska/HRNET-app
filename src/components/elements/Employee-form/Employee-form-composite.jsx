@@ -10,7 +10,7 @@ import SimpleInput from '../Form-inputs/SimpleInput'
 import SelectInput from '../Form-inputs/SelectInput'
 import Button from '../Button/Button'
 
-import { FormWrapper,FieldsWrapper, FormBtnsWrapper } from './Employee-form-style'
+import { FormWrapper, FieldsWrapper, FormBtnsWrapper } from './Employee-form-style'
 import ModalComp from '../Modal/Modal'
 
 

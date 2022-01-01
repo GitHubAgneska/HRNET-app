@@ -1,15 +1,17 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const FormWrapper = styled.div`
     padding-bottom: 2%;
 `
 export const FieldsWrapper = styled.div`
-    height: 500px;
+    @media screen and (max-width:600px) { width:100%; border: none;}   
+    @media screen and (min-width:600px) { width:60%;}   
+    height: 70vh;
+    margin: auto;
+    position: relative;
+    border: 2px solid lightgrey;
     overflow: scroll;
     background-color: white;
-    position: relative;
-    width:60%;
-    margin: auto;
     border-radius:5px;
     text-align: center;
 `
@@ -22,11 +24,6 @@ export const FormInputsWrapper = styled.fieldset`
     &:not(:nth-child(3)) { border: none; flex-flow: row nowrap; }
     &:nth-child(3) { flex-flow: row wrap; width: 80%;}
 `
-
-/* const validatedInputStyle = `
-    border:2px solid lightgreen;
-    label { opacity: 1; }
-` */
 
 export const InputWrapper = styled.div`
     display: flex;

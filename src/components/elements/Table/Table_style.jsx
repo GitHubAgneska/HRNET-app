@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const TableWrapper = styled.div`
-    height: 400px;
+    height: 60vh;
     overflow: scroll;
     border-bottom:1px solid grey;
 `

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import FormLabel from '../FormLabel/FormLabel'
-import { InputWrapper } from '../Employee-form/Employee-form-style'
+import { InputWrapper } from '../Employee-form/Employee-form-style'
 
 const SimpleInput = ({field, handleInputChange, handleBlur, errors, touched }) => { 
     
