@@ -31,14 +31,14 @@ const CompositeForm = () => {
 
     const formDirty = Object.values(touched).some(t => t === true );
 
-
+    
     const [ displayModal, setDisplayModal ] = useState(false);
-    const toggleModal = () => { setDisplayModal(!displayModal);}
+    // const toggleModal = () => { setDisplayModal(!displayModal);}
     
     const [ confirmCancel, setConfirmCancel ] = useState(false);
     const toggleConfirmModal = () => { setConfirmCancel(!confirmCancel);}
     const [ confirmSuccess, setConfirmSuccess ] = useState(false);
-    const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess);}
+    const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess); resetForm()}
 
     
     const handleInputChange = (fieldId, value) => {
@@ -91,7 +91,6 @@ const CompositeForm = () => {
     const cancelModal = () => { toggleConfirmModal()}
     // modal btn : confirm ok (close modal)
     const okCloselModal = () => { toggleConfirmSuccess()}
-
 
 
     let confirmCancelModal = {

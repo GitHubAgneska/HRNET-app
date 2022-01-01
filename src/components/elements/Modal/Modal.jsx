@@ -1,8 +1,9 @@
 import PropTypes from "prop-types"
 import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
 import Button from '../Button/Button'
+// import { Fragment } from "react"
 
-const ModalComp = ({props, cancelModal, okCloselModal, resetForm}) => {
+const ModalComp = ({props, cancelModal, okCloselModal, resetForm }) => {
 
     const { 
         modalBgBlur,
@@ -25,6 +26,10 @@ const ModalComp = ({props, cancelModal, okCloselModal, resetForm}) => {
                         <ModalBody>
                             <p>{message}</p>
                             <p>{action} {modalData}</p>
+                            {/* { content && 
+                                <Fragment>
+                                    { Object.keys(content).map(i => ( <p key={Math.random()}>{i.value}</p>))}
+                                </Fragment> } */}
                         </ModalBody>
                         
                         <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
@@ -67,9 +72,9 @@ ModalComp.propTypes = {
     width: PropTypes.string,
     height: PropTypes.string,
     buttonsWrapperWidth: PropTypes.string,
-    content: PropTypes.string,
+    /* content: PropTypes.string, */
     message: PropTypes.string,
     action: PropTypes.string,
-    modalData: PropTypes.string,
+    modalData: PropTypes.object,
     btnNames: PropTypes.array
 }
