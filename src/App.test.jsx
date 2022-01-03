@@ -9,7 +9,7 @@ import { store } from './state/store'
 
 
 test('renders the appropriate header', () => {
-  const { getByText } =  render(<Provider store={store}><App /></Provider>); // query is scoped to render's result
+  const { getByText } =  render(<Provider store={store}><App /></Provider>); // query is scoped to render's result
   expect (getByText("HRNET")).toBeInTheDocument();
   expect (getByText("home")).toBeInTheDocument();
   expect (getByText("employees")).toBeInTheDocument();

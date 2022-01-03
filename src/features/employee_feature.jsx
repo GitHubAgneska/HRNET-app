@@ -49,15 +49,16 @@ export function createEmployee(employee) {
         const status = listState(getState()).post_status
         if ( status === 'pending' || status === 'updating ') { return }
         
-        const collection = listState(getState()).collection
-
+        let currentCollection = listState(getState()).collection
+        let newCollection = [...currentCollection]
         dispatch(createEmployeeFetching(employee))
 
         try {
             const response = await client.post('/fakeApi/employees-list', employee )
             const data = await response
+            newCollection.push(data.employee)
             dispatch(createEmployeeResolved(data))
-            dispatch(setCollection([...collection, data]))
+            dispatch(setCollection(newCollection))
             dispatch(changeEntriesAmount(15))      
         }
         catch(error) {

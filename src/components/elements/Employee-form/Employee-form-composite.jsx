@@ -38,7 +38,7 @@ const CompositeForm = () => {
     const [ confirmCancel, setConfirmCancel ] = useState(false);
     const toggleConfirmModal = () => { setConfirmCancel(!confirmCancel);}
     const [ confirmSuccess, setConfirmSuccess ] = useState(false);
-    const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess); resetForm()}
+    const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess); }
 
     
     const handleInputChange = (fieldId, value) => {

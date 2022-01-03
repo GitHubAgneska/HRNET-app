@@ -5,9 +5,9 @@ import { validate } from "../../../utils/form_validators"
 import SimpleInput from "../Form-inputs/SimpleInput";
 import { employeeFormFields } from '../../../data/employee-form-fields'
 import { Provider } from 'react-redux'
-import { store } from '../../../state/store'
+import { store } from '../../../state/store'
 
-const userMock = { 
+const userMock = {
     firstName: 'Lester',
     lastName :'Nygaard',
     dob: '1964-11-11',
