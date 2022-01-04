@@ -1,9 +1,9 @@
 import { listState } from '../state/store'
-import {  
-    setEmployee, setFirstName, setLastName,setDob, setStartDate, setStreet,
+import {
+/*  setEmployee, setFirstName, setLastName,setDob, setStartDate, setStreet,
     setCity, setUsState, setZipcode, setDepartment,
-    employeeFetching, employeeResolved, employeeRejected,
-    setCollection,
+    employeeFetching, employeeResolved, employeeRejected, 
+    setCollection,*/
     createEmployeeFetching, createEmployeeResolved, createEmployeeRejected
 } from '../state/actions/Actions'
 import { client } from '../api/client'
@@ -40,30 +40,28 @@ function setVoidIfUndefined(draft, id) {
 // Thunk function : necessary to pass employee object using thunk creator
 export function createEmployee(employee) {
    // console.log('EMPLOYEE = ', employee)
-    // first, check if exists already
-    //const exists = selectEmployeeState(employee.id)
-    // exists ? askEdit() : goOn()
 
    return async function createNewEmployeeThunk (dispatch, getState) { // returns thunk
-        
+
         const status = listState(getState()).post_status
         if ( status === 'pending' || status === 'updating ') { return }
-        
-        let currentCollection = listState(getState()).collection
-        let newCollection = [...currentCollection]
         dispatch(createEmployeeFetching(employee))
 
         try {
             const response = await client.post('/fakeApi/employees-list', employee )
             const data = await response
-            newCollection.push(data.employee)
-            dispatch(createEmployeeResolved(data))
-            dispatch(setCollection(newCollection))
-            dispatch(changeEntriesAmount(15))      
+            dispatch(createEmployeeResolved(data)) // => set post status to resolved + update collection
+            dispatch(changeEntriesAmount(15))
+            return response
         }
         catch(error) {
             dispatch(createEmployeeRejected(error))
+            return error
         }
     }
 }
+
+
+
+
 

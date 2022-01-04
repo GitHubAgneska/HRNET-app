@@ -1,7 +1,8 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
 
-import { createEmployee } from '../../../features/employee_feature'
+import { selectEmployeeByName, createEmployee } from '../../../features/employee_feature'
 import { validate } from "../../../utils/form_validators"
 
 import { employeeFormFields } from '../../../data/employee-form-fields'
@@ -12,15 +13,18 @@ import Button from '../Button/Button'
 
 import { FormWrapper, FieldsWrapper, FormBtnsWrapper } from './Employee-form-style'
 import ModalComp from '../Modal/Modal'
+import { listState } from "../../../state/store"
 
 
 const CompositeForm = () => {
 
     const initialState = {firstName: '', lastName:'', dob:'', startDate:'',  street:'', city:'', zipcode: '', state:'', department:''};
     
-    const [ values, setValues ] = useState({ ...initialState});
-    const [ touched, setTouched ] = useState({});
-    const [ errors, setErrors ] = useState({});
+    const [ values, setValues ] = useState({ ...initialState})
+    const [ touched, setTouched ] = useState({})
+    const [ errors, setErrors ] = useState({})
+    const [ isLoading, setIsLoading ] = useState(false)
+    const history = useHistory();
     
     const dispatch = useDispatch()
 
@@ -31,14 +35,14 @@ const CompositeForm = () => {
 
     const formDirty = Object.values(touched).some(t => t === true );
 
-    
+    const collection = useSelector(initialState => initialState.list.collection)
     const [ displayModal, setDisplayModal ] = useState(false);
-    // const toggleModal = () => { setDisplayModal(!displayModal);}
     
-    const [ confirmCancel, setConfirmCancel ] = useState(false);
-    const toggleConfirmModal = () => { setConfirmCancel(!confirmCancel);}
-    const [ confirmSuccess, setConfirmSuccess ] = useState(false);
-    const toggleConfirmSuccess = () => { setConfirmSuccess(!confirmSuccess); }
+    const [ showConfirmAction, setConfirmAction ] = useState(false);
+    const toggleConfirmModal = () => { setConfirmAction(!showConfirmAction);}
+    const [ showInfoModal, setInfoModal ] = useState({});
+    const toggleInfoModal = () => { setInfoModal(!showInfoModal); }
+    let infoSuccess = false, infoError = false
 
     
     const handleInputChange = (fieldId, value) => {
@@ -55,7 +59,8 @@ const CompositeForm = () => {
 
     const handleSubmit = async event => {
         // console.log('formData=', values);
-        event.preventDefault();
+        event.preventDefault()
+        setIsLoading(true)
 
         const formValidation = Object.keys(values).reduce(
             (acc, key) => {
@@ -75,10 +80,14 @@ const CompositeForm = () => {
              && Object.values(formValidation.touched).length === Object.values(values).length // all fields were touched
              && Object.values(formValidation.touched).every(t => t === true ) // every touched field is true
             ) {
+
                 dispatch(createEmployee(values))
-                setConfirmSuccess(true)
+                    .then(response => alert(response) )
+
+                
             }
     }
+
     // form cancel btn
     const handleCancel = event => {
         event.preventDefault()
@@ -90,7 +99,7 @@ const CompositeForm = () => {
     // modal btn : confirm no (close modal)
     const cancelModal = () => { toggleConfirmModal()}
     // modal btn : confirm ok (close modal)
-    const okCloselModal = () => { toggleConfirmSuccess()}
+    const okCloselModal = () => { toggleInfoModal()}
 
 
     let confirmCancelModal = {
@@ -104,7 +113,12 @@ const CompositeForm = () => {
             message: `New employee successfully created`,
             btnNames: ['ok']
     }
+    let warningModal = {
+            message: `This employee already exists`,
+            btnNames: ['ok']
+    }
 
+    if ( isLoading ) { return ('loading...') }
 
     return (
         <FormWrapper displayModal={displayModal} >
@@ -159,14 +173,19 @@ const CompositeForm = () => {
                 </FormBtnsWrapper>
 
             </form>
+            { infoSuccess && 
+                <ModalComp props={confirmSuccessModal} okCloselModal={okCloselModal} />
+            }
                 
-                { confirmCancel &&
+               {/*  { showConfirmAction &&
                     <ModalComp props={confirmCancelModal} cancelModal={cancelModal} resetForm={resetForm} />
                 }
-
-                { confirmSuccess &&
+                { (showInfoModal && infoSuccess) && 
                     <ModalComp props={confirmSuccessModal} okCloselModal={okCloselModal} />
                 }
+                { (showInfoModal && infoError) &&
+                    <ModalComp props={warningModal} okCloselModal={okCloselModal} />
+                } */}
         </FormWrapper>
     )
 }

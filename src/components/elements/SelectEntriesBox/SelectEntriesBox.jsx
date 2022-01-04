@@ -32,5 +32,5 @@ SelectEntriesBox.propTypes = {
     options: PropTypes.array.isRequired,
     selectEntriesAmount: PropTypes.func.isRequired,
     currentlyshowing: PropTypes.number.isRequired,
-    listTotal: PropTypes.number.isRequired
+    listTotal: PropTypes.number
 }

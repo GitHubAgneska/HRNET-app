@@ -43,17 +43,17 @@ const App = () => {
                     <Router>
                         <Header /> {/* INSIDE router because contains NAV with 'LINK TO'  */}
 
-                        <Fragment>
-                            <Switch>
-                                <Route exact path="/"  render={() => <Redirect to="/create-employee" />} />
-                                <Route exact path="/create-employee" component={CreateEmployee} />
-                                { proceed ?
-                                    <Route exact path="/employees-list" component={List} />
-                                    : <LoadingSpinnerWrapper><ClipLoader css={override} size={100} /><p>Loading...</p></LoadingSpinnerWrapper>
-                                }
-                                <Route component={NotFoundPage} />
-                            </Switch>
-                        </Fragment>
+                        { proceed ?
+                            <Fragment>
+                                <Switch>
+                                    <Route exact path="/"  render={() => <Redirect to="/create-employee" />} />
+                                    <Route exact path="/create-employee" component={CreateEmployee} />
+                                        <Route exact path="/employees-list" component={List} />
+                                    <Route component={NotFoundPage} />
+                                </Switch>
+                            </Fragment>
+                        : <LoadingSpinnerWrapper><ClipLoader css={override} size={100} /><p>Loading...</p></LoadingSpinnerWrapper>
+                        }
 
                     </Router>
 

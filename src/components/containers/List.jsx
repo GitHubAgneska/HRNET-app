@@ -14,7 +14,6 @@ import { searchSuggestions } from '../../utils/searchText'
 import { DataTablePageWrapper } from '../../style/global_style'
 
 
-
 export const List = () => {
     
     const dispatch = useDispatch()
@@ -49,7 +48,7 @@ export const List = () => {
             setSuggestions(sugg)
         } else { 
             setSuggestions([])
-            dispatch(setCollection(originalListData))
+            dispatch(setCollection(collection))
             dispatch(changeEntriesAmount(currentEntriesAmount))
         }
     }
@@ -71,7 +70,7 @@ export const List = () => {
             setSearchInputValues("")
             input.value = ""
             setSuggestions([])
-            dispatch(setCollection(originalListData))
+            dispatch(setCollection(collection))
             dispatch(changeEntriesAmount(currentEntriesAmount))
             requestSetSearchTerm('')
         } else { return }

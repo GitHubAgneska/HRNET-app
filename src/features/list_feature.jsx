@@ -55,7 +55,7 @@ export const changeEntriesAmount = (entries) => (dispatch, getState) => {
     // setup pages arrays
     for (let i = from; i <= totalPages; i++ ) {
         let to = from + entries
-        outputPages.push(currentList.slice(from, to ))
+        outputPages.push(currentList.slice(from, to))
         from += entries
     }
     // set current page to default only if unset (otherwise keep current page after rearranging after entries amount changed)

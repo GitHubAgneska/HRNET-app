@@ -2,7 +2,7 @@ import {initialState } from '../store'
 import produce from 'immer'
 import { 
     LIST_FETCHING, LIST_RESOLVED, LIST_REJECTED,
-    CREATE_EMPLOYEE_FETCHING, CREATE_EMPLOYEE_RESOLVED, CREATE_EMPLOYEE_REJECTED,
+    CREATE_EMPLOYEE_FETCHING, CREATE_EMPLOYEE_RESOLVED, CREATE_EMPLOYEE_REJECTED, ADD_NEW_EMPLOYEE,
     SETUP_COLLECTION,
     SET_ENTRIES_COUNT, SET_CURRENT_ACTIVE_PAGE, SET_CURRENT_PAGE_INDEX,
     SETUP_COLLECTION_AS_PAGES,SET_TOTAL_PAGES,
@@ -76,8 +76,9 @@ export default function listReducer(state = initialState.list, action) {
                 // console.log('EMPLOYEE_CREATE_RESOLVED ACTION CALLED')
                 if ( draft.post_status === 'pending' || draft.post_status === 'updating') {
                     draft.post_status = 'resolved'
-                    draft.post_data = action.payload.employee
-                    draft.collection = [...draft.collection, draft.post_data]
+                    let newEmployee = action.payload.employee
+                    draft.post_data = newEmployee
+                    draft.collection.push(newEmployee)
                     return
                 }
                 return
@@ -92,7 +93,12 @@ export default function listReducer(state = initialState.list, action) {
                 }
                 return
             }
-
+            case ADD_NEW_EMPLOYEE: {
+                    let newEmployee =  draft.post_data
+                    console.log('REDUCER =>',newEmployee )   
+                return
+            }
+            
             // CURRENT COLLECTION ( all results || sorted || searched )
             case SETUP_COLLECTION: {
                 if (draft.collection) { draft.collection = null } // reset collection
