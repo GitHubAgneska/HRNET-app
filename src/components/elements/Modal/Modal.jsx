@@ -1,9 +1,9 @@
+import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
 import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
 import Button from '../Button/Button'
-// import { Fragment } from "react"
 
-const ModalComp = ({props, cancelModal, okCloselModal, resetForm }) => {
+const ModalComp = ({ props, cancelModal, okCloselModal, resetForm, isShowing, hide }) => {
 
     const { 
         modalBgBlur,
@@ -17,6 +17,7 @@ const ModalComp = ({props, cancelModal, okCloselModal, resetForm }) => {
     } = props
 
     return (
+        isShowing ? ReactDOM.createPortal(
 
             <PageModalWrapper>
 
@@ -54,7 +55,9 @@ const ModalComp = ({props, cancelModal, okCloselModal, resetForm }) => {
                     </ModalBlock>
                 </ModalWrapper>
             
-            </PageModalWrapper>
+            </PageModalWrapper>,
+            document.body
+        ): null
     )
 }
 

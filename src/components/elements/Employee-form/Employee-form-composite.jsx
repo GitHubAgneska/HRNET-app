@@ -13,6 +13,8 @@ import Button from '../Button/Button'
 
 import { FormWrapper, FieldsWrapper, FormBtnsWrapper } from './Employee-form-style'
 import ModalComp from '../Modal/Modal'
+import useModal from '../Modal/useModal'
+
 import { listState } from "../../../state/store"
 
 
@@ -25,7 +27,8 @@ const CompositeForm = () => {
     const [ errors, setErrors ] = useState({})
     const [ isLoading, setIsLoading ] = useState(false)
     const history = useHistory();
-    
+
+
     const dispatch = useDispatch()
 
     const allFieldsOk = // acts on submit disabled/!disabled
@@ -36,13 +39,10 @@ const CompositeForm = () => {
     const formDirty = Object.values(touched).some(t => t === true );
 
     const collection = useSelector(initialState => initialState.list.collection)
-    const [ displayModal, setDisplayModal ] = useState(false);
+    const [ displayModal, /* setDisplayModal */ ] = useState(false);
     
-    const [ showConfirmAction, setConfirmAction ] = useState(false);
-    const toggleConfirmModal = () => { setConfirmAction(!showConfirmAction);}
-    const [ showInfoModal, setInfoModal ] = useState({});
-    const toggleInfoModal = () => { setInfoModal(!showInfoModal); }
-    let infoSuccess = false, infoError = false
+
+    const { isShowing: isRegistrationFormShowed, toggle: toggleInfoModal } = useModal();
 
     
     const handleInputChange = (fieldId, value) => {
@@ -91,13 +91,13 @@ const CompositeForm = () => {
     // form cancel btn
     const handleCancel = event => {
         event.preventDefault()
-        toggleConfirmModal()
+        //toggleConfirmModal()
     }
 
     // modal btn : confirm yes (reset form)
     const resetForm = () => { window.location.reload() }
     // modal btn : confirm no (close modal)
-    const cancelModal = () => { toggleConfirmModal()}
+    //const cancelModal = () => { toggleConfirmModal()}
     // modal btn : confirm ok (close modal)
     const okCloselModal = () => { toggleInfoModal()}
 
@@ -112,6 +112,7 @@ const CompositeForm = () => {
     let confirmSuccessModal = {
             message: `New employee successfully created`,
             btnNames: ['ok']
+
     }
     let warningModal = {
             message: `This employee already exists`,
@@ -173,9 +174,17 @@ const CompositeForm = () => {
                 </FormBtnsWrapper>
 
             </form>
-            { infoSuccess && 
-                <ModalComp props={confirmSuccessModal} okCloselModal={okCloselModal} />
-            }
+
+                <button onClick={toggleInfoModal}>Show modal</button>
+
+            
+                <ModalComp 
+                props={confirmSuccessModal}
+                okCloselModal={okCloselModal}
+                isShowing={isRegistrationFormShowed}
+                
+                />
+            
                 
                {/*  { showConfirmAction &&
                     <ModalComp props={confirmCancelModal} cancelModal={cancelModal} resetForm={resetForm} />

@@ -37,7 +37,7 @@ export const List = () => {
     const [ searchInputValues, setSearchInputValues ] = useState("")
     const [ suggestions, setSuggestions ] = useState([])
 
-    const originalListData = useSelector(initialState => initialState.list.data)
+    // const originalListData = useSelector(initialState => initialState.list.data)
 
 
     const handleSearchChange = e => { 
