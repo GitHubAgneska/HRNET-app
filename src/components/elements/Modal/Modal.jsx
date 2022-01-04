@@ -2,24 +2,26 @@ import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
 import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
 import Button from '../Button/Button'
+import { Fragment } from "react"
 
-const ModalComp = ({ props, cancelModal, okCloselModal, resetForm, isShowing, hide }) => {
-
+const ModalComp = ({ props, cancelModal, okCloselModal, resetForm, isShowing, hide , content}) => {
     const { 
         modalBgBlur,
         width, height,
         buttonsWrapperWidth, 
         modalData,
-        content,
+
         action,
         message,
         btnNames
     } = props
+    console.log('CONTENT=', content)
 
     return (
         isShowing ? ReactDOM.createPortal(
 
             <PageModalWrapper>
+
 
                 <ModalWrapper >
                     <ModalBlock width={width} height={height}>
@@ -27,10 +29,12 @@ const ModalComp = ({ props, cancelModal, okCloselModal, resetForm, isShowing, hi
                         <ModalBody>
                             <p>{message}</p>
                             <p>{action} {modalData}</p>
-                            {/* { content && 
+                            { content && 
                                 <Fragment>
-                                    { Object.keys(content).map(i => ( <p key={Math.random()}>{i.value}</p>))}
-                                </Fragment> } */}
+                                    <p>{content.firstName} {content.lastName}</p>
+                                    <p>{content.department} department</p>
+                                    {/* { Object.keys(content).map(i => ( <p key={Math.random()}>{i.value}</p>))} */}
+                                </Fragment> }
                         </ModalBody>
                         
                         <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>

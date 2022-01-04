@@ -88,7 +88,7 @@ export default function listReducer(state = initialState.list, action) {
                     // set to rejected, save error, delete data
                     draft.post_status = 'rejected'
                     draft.post_error = action.payload
-                    draft.post_payload = null
+                    draft.post_data = null
                     return
                 }
                 return

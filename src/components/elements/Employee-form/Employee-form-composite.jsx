@@ -26,6 +26,8 @@ const CompositeForm = () => {
     const [ touched, setTouched ] = useState({})
     const [ errors, setErrors ] = useState({})
     const [ isLoading, setIsLoading ] = useState(false)
+    const [ justCreated, setJustCreated ] = useState(null)
+    
     const history = useHistory();
 
 
@@ -41,9 +43,12 @@ const CompositeForm = () => {
     const collection = useSelector(initialState => initialState.list.collection)
     const [ displayModal, /* setDisplayModal */ ] = useState(false);
     
+    const { isShowing: isModalInfoShowed, toggle: toggleInfoModal } = useModal();
 
-    const { isShowing: isRegistrationFormShowed, toggle: toggleInfoModal } = useModal();
-
+    let confirmSuccessModal = {
+        message: `New employee successfully created`,
+        btnNames: ['ok']
+    }
     
     const handleInputChange = (fieldId, value) => {
         setValues(currentValues => { currentValues[fieldId] = value; return currentValues; }); // !== setValues({ ...values, [fieldId]: value }); ?
@@ -58,7 +63,7 @@ const CompositeForm = () => {
     }
 
     const handleSubmit = async event => {
-        // console.log('formData=', values);
+
         event.preventDefault()
         setIsLoading(true)
 
@@ -82,12 +87,15 @@ const CompositeForm = () => {
             ) {
 
                 dispatch(createEmployee(values))
-                    .then(response => alert(response) )
-
-                
+                    .then(response => setJustCreated({...response.employee}))
+                    .then(setIsLoading(false))
+                    .then(confirmCreation())
             }
     }
-
+    console.log('just created=>', justCreated)
+    const confirmCreation = () => {
+        toggleInfoModal()
+    }
     // form cancel btn
     const handleCancel = event => {
         event.preventDefault()
@@ -95,11 +103,15 @@ const CompositeForm = () => {
     }
 
     // modal btn : confirm yes (reset form)
-    const resetForm = () => { window.location.reload() }
+    const resetForm = () => { 
+        console.log('reset called')
+        document.getElementById('myform').reset()
+
+    }
     // modal btn : confirm no (close modal)
     //const cancelModal = () => { toggleConfirmModal()}
     // modal btn : confirm ok (close modal)
-    const okCloselModal = () => { toggleInfoModal()}
+    const okCloselModal = () => { resetForm(); toggleInfoModal()}
 
 
     let confirmCancelModal = {
@@ -109,11 +121,7 @@ const CompositeForm = () => {
             btnNames: ['yes', 'no']
     }
 
-    let confirmSuccessModal = {
-            message: `New employee successfully created`,
-            btnNames: ['ok']
 
-    }
     let warningModal = {
             message: `This employee already exists`,
             btnNames: ['ok']
@@ -123,7 +131,7 @@ const CompositeForm = () => {
 
     return (
         <FormWrapper displayModal={displayModal} >
-            <form>
+            <form id='myform'>
                 <FieldsWrapper>
                     { (employeeFormFields).map(i => (
                         
@@ -175,15 +183,14 @@ const CompositeForm = () => {
 
             </form>
 
-                <button onClick={toggleInfoModal}>Show modal</button>
-
-            
-                <ModalComp 
+                { justCreated && 
+                <ModalComp
                 props={confirmSuccessModal}
+                content={justCreated}
                 okCloselModal={okCloselModal}
-                isShowing={isRegistrationFormShowed}
-                
+                isShowing={isModalInfoShowed}
                 />
+                }
             
                 
                {/*  { showConfirmAction &&
