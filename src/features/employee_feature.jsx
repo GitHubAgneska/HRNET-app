@@ -1,5 +1,7 @@
 import { listState } from '../state/store'
+
 import {
+    // PUT REQUEST --
 /*  setEmployee, setFirstName, setLastName,setDob, setStartDate, setStreet,
     setCity, setUsState, setZipcode, setDepartment,
     employeeFetching, employeeResolved, employeeRejected, 
@@ -9,6 +11,7 @@ import {
 import { client } from '../api/client'
 import { changeEntriesAmount } from './list_feature'
 
+// GET BY ID REQUEST --
 // Thunk function : necessary to pass id  using thunk creator
 /* export function getEmployee(id) {
     return async(dispatch, getState) => { // returns thunk
@@ -28,13 +31,13 @@ import { changeEntriesAmount } from './list_feature'
             dispatch(employeeRejected(id, error))
         }
     }
-} */
+} 
 
 function setVoidIfUndefined(draft, id) {
     if (draft[id] === undefined) {
         draft[id] = { status: 'void' }
     }
-}
+}*/
 
 // POST ----------
 // Thunk function : necessary to pass employee object using thunk creator
@@ -60,6 +63,12 @@ export function createEmployee(employee) {
         }
     }
 }
+
+/* export const selectByLastName = (listState, requestedLastName) => 
+    createSelector(
+        listState,
+        listState => listState.collection.filter(employee => employee.lastName === requestedLastName)
+    ) */
 
 
 

@@ -1,16 +1,15 @@
 import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
-import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
-import Button from '../Button/Button'
 import { Fragment } from "react"
+import Button from '../Button/Button'
+import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
 
-const ModalComp = ({ props, cancelModal, okCloselModal, resetForm, isShowing, hide , content}) => {
+const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal, isShowing, hide, content}) => {
     const { 
         modalBgBlur,
         width, height,
         buttonsWrapperWidth, 
         modalData,
-
         action,
         message,
         btnNames
@@ -29,12 +28,20 @@ const ModalComp = ({ props, cancelModal, okCloselModal, resetForm, isShowing, hi
                         <ModalBody>
                             <p>{message}</p>
                             <p>{action} {modalData}</p>
-                            { content && 
+                            { content && content.error &&
+                                <Fragment>
+                                <p>{content.firstName} {content.lastName}</p>
+                                
+                                {/* { Object.keys(content).map(i => ( <p key={Math.random()}>{i.value}</p>))} */}
+                                </Fragment>
+                            }
+                            { content && !content.error &&
                                 <Fragment>
                                     <p>{content.firstName} {content.lastName}</p>
                                     <p>{content.department} department</p>
                                     {/* { Object.keys(content).map(i => ( <p key={Math.random()}>{i.value}</p>))} */}
-                                </Fragment> }
+                                </Fragment> 
+                            }
                         </ModalBody>
                         
                         <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
@@ -42,14 +49,14 @@ const ModalComp = ({ props, cancelModal, okCloselModal, resetForm, isShowing, hi
                                 i==='no' || i=== 'ok' ? 
                                     <Button
                                         key={Math.random()}
-                                        handleClick={cancelModal || okCloselModal}
+                                        handleClick={cancelReset || okCloselModal || confirmReset}
                                         disabled={false}
                                         btnName={i}
                                     >{i}</Button>
                                 :
                                     <Button
                                         key={Math.random()}
-                                        handleClick={resetForm}
+                                        handleClick={confirmReset}
                                         disabled={false}
                                         btnName={i}
                                     >{i}</Button>
