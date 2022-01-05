@@ -50,14 +50,14 @@ const CompositeForm = () => {
     }
     const { isShowing: isWarningModalShowed, toggle: toggleWarningModal } = useModal();
     let warningModal = {
-        message: `This employee already exists:`,
-        action: 'Would you like to edit their profile?',
+        message: `We found an existing employee with this name:`,
+        action: 'Do you want to proceed anyway?',
         btnNames: ['yes', 'no']
     }
     const { isShowing: isModalConfirmShowed, toggle: toggleConfirmModal } = useModal();
     let confirmCancelModal = {
-        action: 'reset the form',
         message: `Are you sure you want to`,
+        action: 'reset the form',
         content: `All data will be lost`,
         btnNames: ['yes', 'no']
     }
@@ -99,7 +99,7 @@ const CompositeForm = () => {
                 if (exists) {
                     setExisting({...values})
                     setErrorCreation({error: 'exists', firstName:values.firstName, lastName:values.lastName})
-                    setIsLoading(false)
+                    // setIsLoading(false)
                     toggleWarningModal()
                 }
                 else {
@@ -110,16 +110,17 @@ const CompositeForm = () => {
                     dispatch(createEmployee(newEmployee))
                         .then(response => setJustCreated({...response.employee}))
                         .then(confirmCreation())
-                        .then(setIsLoading(false))
+                        // .then(setIsLoading(false))
                         .catch(error => setErrorCreation(error))
                 }
             }
+            setIsLoading(false)
     }
+
     const checkExists = (requestedLastName) => {
         let exists = collection.filter(employee => employee.lastName.toLowerCase() === requestedLastName.toLowerCase()).length !==0
-        //console.log('exists=>',exists )
         return exists
-    }
+    }   
     const handleEdit = () => {
         setValues(existing)
         setErrorCreation({})
@@ -136,8 +137,12 @@ const CompositeForm = () => {
     const resetForm = () => { 
         document.getElementById('myform').reset()
         setValues({...initialState})
+        setJustCreated(null)
+        setExisting({...initialState})
+        setErrorCreation({error: '', firstName: '', lastName:''})
         setErrors({})
         setTouched({})
+        
     }
     // cancel form modal : confirm no (don't reset (close modal))
     const cancelReset = () => { toggleConfirmModal() }

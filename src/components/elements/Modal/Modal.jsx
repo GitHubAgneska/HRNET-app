@@ -14,25 +14,22 @@ const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal,handleEdit,
         message,
         btnNames
     } = props
-    console.log('CONTENT=', content)
+    // console.log('CONTENT=', content)
 
     return (
         isShowing ? ReactDOM.createPortal(
 
             <PageModalWrapper>
 
-
                 <ModalWrapper >
                     <ModalBlock width={width} height={height}>
 
                         <ModalBody>
                             <p>{message}</p>
-                            <p>{action} {modalData}</p>
+                            
                             { content && content.error &&
                                 <Fragment>
                                 <p>{content.firstName} {content.lastName}</p>
-                                
-                                {/* { Object.keys(content).map(i => ( <p key={Math.random()}>{i.value}</p>))} */}
                                 </Fragment>
                             }
                             { content && !content.error &&
@@ -42,6 +39,7 @@ const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal,handleEdit,
                                     {/* { Object.keys(content).map(i => ( <p key={Math.random()}>{i.value}</p>))} */}
                                 </Fragment> 
                             }
+                            <p>{action} {modalData}</p>
                         </ModalBody>
                         
                         <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>

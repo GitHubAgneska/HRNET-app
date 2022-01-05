@@ -46,9 +46,9 @@ export const List = () => {
         if ( query.length > 2 ) {
             let sugg = searchSuggestions(query, collection)
             setSuggestions(sugg)
-        } else if ( query.length === 0 ){ 
+        } else { 
             setSuggestions([])
-            dispatch(setCollection(collection))
+            dispatch(setCollection(originalListData))
             dispatch(changeEntriesAmount(currentEntriesAmount))
         }
     }
@@ -70,7 +70,7 @@ export const List = () => {
             setSearchInputValues("")
             input.value = ""
             setSuggestions([])
-            dispatch(setCollection(collection))
+            dispatch(setCollection(originalListData))
             dispatch(changeEntriesAmount(currentEntriesAmount))
             requestSetSearchTerm('')
         } else { return }
