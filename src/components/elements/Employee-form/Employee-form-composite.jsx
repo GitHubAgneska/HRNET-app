@@ -51,13 +51,13 @@ const CompositeForm = () => {
     const { isShowing: isWarningModalShowed, toggle: toggleWarningModal } = useModal();
     let warningModal = {
         message: `We found an existing employee with this name:`,
-        action: 'Do you want to proceed anyway?',
-        btnNames: ['yes', 'no']
+        action: 'Please create a different employee',
+        btnNames: ['ok']
     }
     const { isShowing: isModalConfirmShowed, toggle: toggleConfirmModal } = useModal();
     let confirmCancelModal = {
         message: `Are you sure you want to`,
-        action: 'reset the form',
+        action: 'reset the form?',
         content: `All data will be lost`,
         btnNames: ['yes', 'no']
     }
@@ -121,8 +121,7 @@ const CompositeForm = () => {
         let exists = collection.filter(employee => employee.lastName.toLowerCase() === requestedLastName.toLowerCase()).length !==0
         return exists
     }   
-    const handleEdit = () => {
-        setValues(existing)
+    const proceedAnyway = () => {
         setErrorCreation({})
         toggleWarningModal()
     }
@@ -217,17 +216,16 @@ const CompositeForm = () => {
                     <ModalComp
                     props={confirmSuccessModal}
                     content={justCreated}
-                    okCloselModal={okCloselModal}
                     isShowing={isModalSuccessShowed}
+                    okCloselModal={okCloselModal}
                     />
                 }
                 { errorCreation && 
                 <ModalComp
                 props={warningModal}
                 content={errorCreation}
-                okCloselModal={okCloselModal}
                 isShowing={isWarningModalShowed}
-                handleEdit={handleEdit}
+                okCloselModal={okCloselModal}
                 />
                 }
                 

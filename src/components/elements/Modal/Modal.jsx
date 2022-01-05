@@ -1,8 +1,7 @@
 import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
-import { Fragment } from "react"
 import Button from '../Button/Button'
-import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
+import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalContent, ModalBtnsWrapper } from './Modal-style'
 
 const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal,handleEdit, isShowing, hide, content}) => {
     const { 
@@ -28,16 +27,16 @@ const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal,handleEdit,
                             <p>{message}</p>
                             
                             { content && content.error &&
-                                <Fragment>
+                                <ModalContent>
                                 <p>{content.firstName} {content.lastName}</p>
-                                </Fragment>
+                                </ModalContent>
                             }
                             { content && !content.error &&
-                                <Fragment>
+                                <ModalContent>
                                     <p>{content.firstName} {content.lastName}</p>
                                     <p>{content.department} department</p>
                                     {/* { Object.keys(content).map(i => ( <p key={Math.random()}>{i.value}</p>))} */}
-                                </Fragment> 
+                                </ModalContent> 
                             }
                             <p>{action} {modalData}</p>
                         </ModalBody>

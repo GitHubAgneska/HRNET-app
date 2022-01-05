@@ -21,17 +21,15 @@ export const PageModalWrapper = styled.div`
     
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(49,9,121,0.8561625333727241) 0%, rgba(255,13,252,0.8561625333727241) 100%);
     font-size: 1.3em; font-family: Roboto, Helvetica, Arial, sans-serif;
-
-    animation: ${modalTransitionOpen} 0.2s linear forwards;
-    transition: fade-out 300ms ease-in-out;
 `
 
 export const ModalWrapper = styled.div`
-    
     display: flex; align-items: center; justify-content: center;
     background-color: white; 
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 15px;
+    animation: ${modalTransitionOpen} 0.2s linear forwards;
+    transition: fade-out 300ms ease-in-out;
 `
 
 export const ModalBlock = styled.div`
@@ -45,15 +43,15 @@ export const ModalBlock = styled.div`
 
 export const ModalBtnsWrapper = styled.div`
     position: absolute; bottom: 5%;
+    padding-top: 2%;
     width: 90%; margin: auto;
     display: flex; flex-flow: row nowrap;
     justify-content: space-between;
     border-top: 3px solid gray;
     
     button {
-
+        width: 30%;margin:auto;
         background-color: ${props => props.btnName ==='no' || props.btnName ==='ok' ? '#00bc77;' : '#ff006c;'}
-
         &:hover { 
             background-color:${props => props.btnName ==='cancel' ? '#007147;' :  '#8a063f;' }
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -63,10 +61,14 @@ export const ModalBtnsWrapper = styled.div`
     }
 `
 
-
 export const ModalBody = styled.div`
 `
 
-export const iconWrapper = styled.div``
+export const ModalContent = styled.div`
+    font-weight: bold;
+    font-size: 1.2em;
+    text-transform: capitalize;
+    color: darkblue;
+`
 
 
