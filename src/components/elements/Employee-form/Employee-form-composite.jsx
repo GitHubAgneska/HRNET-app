@@ -136,7 +136,7 @@ const CompositeForm = () => {
     // cancel form modal : confirm yes (reset form)
     const resetForm = () => { 
         document.getElementById('myform').reset()
-        setValues({...initialState})
+        setValues(() => initialState)
         setJustCreated(null)
         setExisting({...initialState})
         setErrorCreation({error: '', firstName: '', lastName:''})
