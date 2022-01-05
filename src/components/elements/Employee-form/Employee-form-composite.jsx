@@ -96,7 +96,7 @@ const CompositeForm = () => {
     const confirmCreation = () => {
         toggleInfoModal()
     }
-    // form cancel btn
+    // form => cancel btn
     const handleCancel = event => {
         event.preventDefault()
         //toggleConfirmModal()
@@ -104,9 +104,8 @@ const CompositeForm = () => {
 
     // modal btn : confirm yes (reset form)
     const resetForm = () => { 
-        console.log('reset called')
         document.getElementById('myform').reset()
-
+        setValues({...initialState})
     }
     // modal btn : confirm no (close modal)
     //const cancelModal = () => { toggleConfirmModal()}

@@ -1,5 +1,4 @@
 import PropTypes from "prop-types"
-// import { useState } from "react"
 import FormLabel from '../FormLabel/FormLabel'
 import { InputWrapper } from '../Employee-form/Employee-form-style'
 
@@ -14,7 +13,7 @@ const SelectInput = ({field, fieldName, values, options, handleInputChange, hand
             <select
                 options={options}
                 name={fieldName}
-                id="`{fieldName}`-select"
+                id={`${fieldName}-select`}
                 value={ fieldName ==='state'? stateValue: depValue }
                 onChange={e => handleInputChange(field.fieldName, e.target.value)}
                 onBlur={e => handleBlur(field.fieldName, e.target.value)}
