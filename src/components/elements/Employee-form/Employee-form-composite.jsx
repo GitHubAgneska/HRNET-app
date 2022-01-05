@@ -27,6 +27,7 @@ const CompositeForm = () => {
     const [ errors, setErrors ] = useState({})
     const [ isLoading, setIsLoading ] = useState(false)
     const [ justCreated, setJustCreated ] = useState(null)
+    const [ existing, setExisting ] = useState({ ...initialState})
     const [ errorCreation, setErrorCreation ] = useState({error: '', firstName: '', lastName:''})
     
     const history = useHistory();
@@ -53,8 +54,9 @@ const CompositeForm = () => {
     }
     const { isShowing: isWarningModalShowed, toggle: toggleWarningModal } = useModal();
     let warningModal = {
-        message: `This employee already exists`,
-        btnNames: ['ok']
+        message: `This employee already exists:`,
+        action: 'Would you like to edit their profile?',
+        btnNames: ['yes', 'no']
     }
     const { isShowing: isModalConfirmShowed, toggle: toggleConfirmModal } = useModal();
     let confirmCancelModal = {
@@ -100,7 +102,8 @@ const CompositeForm = () => {
             ) {
 
                 let exists = checkExists(values.lastName)
-                if (exists) { 
+                if (exists) {
+                    setExisting({...values})
                     setErrorCreation({error: 'exists', firstName:values.firstName, lastName:values.lastName})
                     setIsLoading(false)
                     toggleWarningModal()
@@ -116,8 +119,14 @@ const CompositeForm = () => {
     }
     const checkExists = (requestedLastName) => {
         let exists = collection.filter(employee => employee.lastName.toLowerCase() === requestedLastName.toLowerCase()).length !==0
-        console.log('exists=>',exists )
+        let existing = collection.filter(employee => employee.lastName.toLowerCase() === requestedLastName.toLowerCase())
+        //console.log('exists=>',exists )
         return exists
+    }
+    const handleEdit = () => {
+        setValues(existing)
+        setErrorCreation({})
+        toggleWarningModal()
     }
     
     // form => user clicks cancel btn: modal confirm action opens
@@ -140,7 +149,10 @@ const CompositeForm = () => {
     // modal successful creation
     const confirmCreation = () => { toggleSuccessModal() }
     // success modal btn : confirm ok (close modal)
-    const okCloselModal = () => { isModalSuccessShowed?toggleSuccessModal(): toggleWarningModal() ;resetForm()}
+    const okCloselModal = () => { 
+        isModalSuccessShowed?toggleSuccessModal(): toggleWarningModal()
+        resetForm()
+    }
 
 
     if ( isLoading ) { return ('loading...') }
@@ -213,6 +225,7 @@ const CompositeForm = () => {
                 content={errorCreation}
                 okCloselModal={okCloselModal}
                 isShowing={isWarningModalShowed}
+                handleEdit={handleEdit}
                 />
                 }
                 

@@ -4,7 +4,7 @@ import { Fragment } from "react"
 import Button from '../Button/Button'
 import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalBtnsWrapper } from './Modal-style'
 
-const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal, isShowing, hide, content}) => {
+const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal,handleEdit, isShowing, hide, content}) => {
     const { 
         modalBgBlur,
         width, height,
@@ -56,7 +56,7 @@ const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal, isShowing,
                                 :
                                     <Button
                                         key={Math.random()}
-                                        handleClick={confirmReset}
+                                        handleClick={confirmReset || handleEdit}
                                         disabled={false}
                                         btnName={i}
                                     >{i}</Button>
