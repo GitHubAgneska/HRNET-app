@@ -15,12 +15,10 @@ import { FormWrapper, FieldsWrapper, FormBtnsWrapper } from './Employee-form-sty
 import ModalComp from '../Modal/Modal'
 import useModal from '../Modal/useModal'
 
-import { listState } from "../../../state/store"
-
 
 const CompositeForm = () => {
 
-    const initialState = {firstName: '', lastName:'', dob:'', startDate:'',  street:'', city:'', zipcode: '', state:'', department:''};
+    const initialState = {firstName: '', lastName:'', dob:'', startDate:'',  street:'', city:'', zipcode: '', state: { name:'', abbreviation:''}, department:''};
     
     const [ values, setValues ] = useState({ ...initialState})
     const [ touched, setTouched ] = useState({})
@@ -30,10 +28,10 @@ const CompositeForm = () => {
     const [ existing, setExisting ] = useState({ ...initialState})
     const [ errorCreation, setErrorCreation ] = useState({error: '', firstName: '', lastName:''})
     
-    const history = useHistory();
-
-
     const dispatch = useDispatch()
+    const history = useHistory()
+
+    const collection = useSelector(initialState => initialState.list.collection)
 
     const allFieldsOk = // acts on submit disabled/!disabled
         Object.values(touched).every(t => t === true )
@@ -41,8 +39,6 @@ const CompositeForm = () => {
         && Object.values(errors).every(t => t === null );
 
     const formDirty = Object.values(touched).some(t => t === true );
-
-    const collection = useSelector(initialState => initialState.list.collection)
 
 
     const [ displayModal, /* setDisplayModal */ ] = useState(false);
@@ -79,7 +75,6 @@ const CompositeForm = () => {
     }
 
     const handleSubmit = async event => {
-
         event.preventDefault()
         setIsLoading(true)
 
@@ -100,7 +95,6 @@ const CompositeForm = () => {
              && Object.values(formValidation.touched).length === Object.values(values).length // all fields were touched
              && Object.values(formValidation.touched).every(t => t === true ) // every touched field is true
             ) {
-
                 let exists = checkExists(values.lastName)
                 if (exists) {
                     setExisting({...values})
@@ -108,8 +102,12 @@ const CompositeForm = () => {
                     setIsLoading(false)
                     toggleWarningModal()
                 }
-                else { 
-                    dispatch(createEmployee(values))
+                else {
+                    let state = {} // us-state property should be an object (not possible in select input)
+                    state.name = values.state
+                    let newEmployee = {...values, state }
+
+                    dispatch(createEmployee(newEmployee))
                         .then(response => setJustCreated({...response.employee}))
                         .then(confirmCreation())
                         .then(setIsLoading(false))
@@ -119,7 +117,6 @@ const CompositeForm = () => {
     }
     const checkExists = (requestedLastName) => {
         let exists = collection.filter(employee => employee.lastName.toLowerCase() === requestedLastName.toLowerCase()).length !==0
-        let existing = collection.filter(employee => employee.lastName.toLowerCase() === requestedLastName.toLowerCase())
         //console.log('exists=>',exists )
         return exists
     }

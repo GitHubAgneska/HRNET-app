@@ -22,7 +22,7 @@ const SelectInput = ({field, fieldName, values, options, handleInputChange, hand
                 >
                 { fieldName === 'state' && 
                     options.map(i => (
-                        <option key={Math.random()} value={i.name}>{i.name}</option>
+                        <option key={Math.random()} value={i.name}>{i.name} - {i.abbreviation}</option>
                     ))
                 }
                 { fieldName === 'department' && 

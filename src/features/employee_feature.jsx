@@ -5,7 +5,7 @@ import {
 /*  setEmployee, setFirstName, setLastName,setDob, setStartDate, setStreet,
     setCity, setUsState, setZipcode, setDepartment,
     employeeFetching, employeeResolved, employeeRejected, 
-    setCollection,*/
+    setCollection,*/setCollection,
     createEmployeeFetching, createEmployeeResolved, createEmployeeRejected
 } from '../state/actions/Actions'
 import { client } from '../api/client'
@@ -64,11 +64,6 @@ export function createEmployee(employee) {
     }
 }
 
-/* export const selectByLastName = (listState, requestedLastName) => 
-    createSelector(
-        listState,
-        listState => listState.collection.filter(employee => employee.lastName === requestedLastName)
-    ) */
 
 
 

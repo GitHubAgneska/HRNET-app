@@ -53,7 +53,7 @@ const cityValidation = (fieldName, fieldValue) => {
 }
 
 const stateValidation = (fieldName, fieldValue) => {
-    let state = fieldValue;
+    let state = fieldValue.name;
     if (state === 'Select a state') { return 'state is required'; }
     return null;
 }

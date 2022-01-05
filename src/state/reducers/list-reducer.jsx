@@ -79,6 +79,7 @@ export default function listReducer(state = initialState.list, action) {
                     let newEmployee = action.payload.employee
                     draft.post_data = newEmployee
                     draft.collection.push(newEmployee)
+                    draft.data.push(newEmployee)
                     return
                 }
                 return
