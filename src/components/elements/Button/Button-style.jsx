@@ -9,6 +9,15 @@ export const StyledBtn = styled.button`
     color: #fff;
     border-radius: 5px;
     width: ${props => props.width ? props.width : '100%'}
+    
+    background-color: ${props => props.type ==='action' ? '#007bff;' : '##6c757d;'}
+    
+    &:disabled { background-color: ${props => props.type ==='action' ? '#58a8ff;' : '#9fa4aa;'}}
+    
+    &:hover { 
+        background-color:${props => props.type ==='action' ? '#0062cc;' :  '#545b62;' }
+
+    
 `
 
 export const ModalButton = styled.button`

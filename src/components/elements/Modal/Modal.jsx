@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Button from '../Button/Button'
 import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalContent, ModalBtnsWrapper } from './Modal-style'
 
-const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal,handleEdit, isShowing, hide, content}) => {
+const ModalComp = ({ modalType, props, isShowing, content}) => {
     const { 
         modalBgBlur,
         width, height,
@@ -11,7 +11,7 @@ const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal,handleEdit,
         modalData,
         action,
         message,
-        btnNames
+        modalBtns
     } = props
     // console.log('CONTENT=', content)
 
@@ -22,44 +22,28 @@ const ModalComp = ({ props, cancelReset, confirmReset, okCloselModal,handleEdit,
 
                 <ModalWrapper >
                     <ModalBlock width={width} height={height}>
-
                         <ModalBody>
                             <p>{message}</p>
-                            
-                            { content && content.error &&
-                                <ModalContent>
-                                <p>{content.firstName} {content.lastName}</p>
-                                </ModalContent>
-                            }
-                            { content && !content.error &&
+                            { content && 
                                 <ModalContent>
                                     <p>{content.firstName} {content.lastName}</p>
                                     <p>{content.department} department</p>
-                                    {/* { Object.keys(content).map(i => ( <p key={Math.random()}>{i.value}</p>))} */}
-                                </ModalContent> 
+                                </ModalContent>
                             }
                             <p>{action} {modalData}</p>
                         </ModalBody>
-                        
-                        <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
-                            { btnNames.map(i => ( 
-                                i==='no' || i=== 'ok' ? 
-                                    <Button
-                                        key={Math.random()}
-                                        handleClick={cancelReset || okCloselModal || confirmReset}
-                                        disabled={false}
-                                        btnName={i}
-                                    >{i}</Button>
-                                :
-                                    <Button
-                                        key={Math.random()}
-                                        handleClick={confirmReset || handleEdit}
-                                        disabled={false}
-                                        btnName={i}
-                                    >{i}</Button>
-                                ))}
-                        </ModalBtnsWrapper>
 
+                        <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
+                            { modalBtns.map(b => (
+                                <Button
+                                type={b.type}
+                                key={Math.random()}
+                                handleClick={b.action}
+                                disabled={false}
+                                btnName={b.name}
+                                >{b.name}</Button>
+                            ))}
+                        </ModalBtnsWrapper>
                     </ModalBlock>
                 </ModalWrapper>
             
@@ -87,5 +71,4 @@ ModalComp.propTypes = {
     message: PropTypes.string,
     action: PropTypes.string,
     modalData: PropTypes.object,
-    btnNames: PropTypes.array
 }

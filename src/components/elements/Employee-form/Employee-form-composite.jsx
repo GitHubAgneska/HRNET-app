@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 
-import { selectByLastName, createEmployee } from '../../../features/employee_feature'
+import { createEmployee } from '../../../features/employee_feature'
 import { validate } from "../../../utils/form_validators"
 
 import { employeeFormFields } from '../../../data/employee-form-fields'
@@ -11,10 +11,10 @@ import SimpleInput from '../Form-inputs/SimpleInput'
 import SelectInput from '../Form-inputs/SelectInput'
 import Button from '../Button/Button'
 
-import { FormWrapper, FieldsWrapper, FormBtnsWrapper } from './Employee-form-style'
 import ModalComp from '../Modal/Modal'
 import useModal from '../Modal/useModal'
 
+import { FormWrapper, FieldsWrapper, FormBtnsWrapper } from './Employee-form-style'
 
 const CompositeForm = () => {
 
@@ -24,9 +24,9 @@ const CompositeForm = () => {
     const [ touched, setTouched ] = useState({})
     const [ errors, setErrors ] = useState({})
     const [ isLoading, setIsLoading ] = useState(false)
-    const [ justCreated, setJustCreated ] = useState(null)
+    const [ justCreated, setJustCreated ] = useState({})
     const [ existing, setExisting ] = useState({ ...initialState})
-    const [ errorCreation, setErrorCreation ] = useState({error: '', firstName: '', lastName:''})
+    const [ errorCreation, setErrorCreation ] = useState({error: '', firstName: '', lastName:'', department: ''})
     
     const dispatch = useDispatch()
     const history = useHistory()
@@ -40,27 +40,7 @@ const CompositeForm = () => {
 
     const formDirty = Object.values(touched).some(t => t === true );
 
-
     const [ displayModal, /* setDisplayModal */ ] = useState(false);
-    
-    const { isShowing: isModalSuccessShowed, toggle: toggleSuccessModal } = useModal();
-    let confirmSuccessModal = {
-        message: `New employee successfully created`,
-        btnNames: ['ok']
-    }
-    const { isShowing: isWarningModalShowed, toggle: toggleWarningModal } = useModal();
-    let warningModal = {
-        message: `We found an existing employee with this name:`,
-        action: 'Please create a different employee',
-        btnNames: ['ok']
-    }
-    const { isShowing: isModalConfirmShowed, toggle: toggleConfirmModal } = useModal();
-    let confirmCancelModal = {
-        message: `Are you sure you want to`,
-        action: 'reset the form?',
-        content: `All data will be lost`,
-        btnNames: ['yes', 'no']
-    }
     
     const handleInputChange = (fieldId, value) => {
         setValues(currentValues => { currentValues[fieldId] = value; return currentValues; }); // !== setValues({ ...values, [fieldId]: value }); ?
@@ -98,7 +78,7 @@ const CompositeForm = () => {
                 let exists = checkExists(values.lastName)
                 if (exists) {
                     setExisting({...values})
-                    setErrorCreation({error: 'exists', firstName:values.firstName, lastName:values.lastName})
+                    setErrorCreation({error: 'exists', firstName:values.firstName, lastName:values.lastName, department: values.department})
                     // setIsLoading(false)
                     toggleWarningModal()
                 }
@@ -120,10 +100,10 @@ const CompositeForm = () => {
     const checkExists = (requestedLastName) => {
         let exists = collection.filter(employee => employee.lastName.toLowerCase() === requestedLastName.toLowerCase()).length !==0
         return exists
-    }   
-    const proceedAnyway = () => {
-        setErrorCreation({})
-        toggleWarningModal()
+    }
+    
+    const navigateToList = () => {
+        history.push('./employees-list')
     }
     
     // form => user clicks cancel btn: modal confirm action opens
@@ -138,21 +118,50 @@ const CompositeForm = () => {
         setValues(() => initialState)
         setJustCreated(null)
         setExisting({...initialState})
-        setErrorCreation({error: '', firstName: '', lastName:''})
+        setErrorCreation({error: '', firstName: '', lastName:'', department: ''})
         setErrors({})
         setTouched({})
         
     }
-    // cancel form modal : confirm no (don't reset (close modal))
     const cancelReset = () => { toggleConfirmModal() }
-    const confirmReset = () => { resetForm(); toggleConfirmModal()}
+    const confirmReset = () => { 
+        resetForm()
+        isModalSuccessShowed? toggleSuccessModal()
+        : isModalConfirmShowed? toggleConfirmModal()
+        : toggleWarningModal()
+    }
     
     // modal successful creation
     const confirmCreation = () => { toggleSuccessModal() }
-    // success modal btn : confirm ok (close modal)
-    const okCloselModal = () => { 
-        isModalSuccessShowed?toggleSuccessModal(): toggleWarningModal()
-        resetForm()
+
+    const { isShowing: isModalSuccessShowed, toggle: toggleSuccessModal } = useModal();
+    let confirmSuccessModal = {
+        modalType: 'success',
+        message: `New employee successfully created`,
+        modalBtns: [
+            { type: 'action', name: 'create another employee', action: () => confirmReset() },
+            { type: 'cancel', name: 'go to list', action: () => navigateToList() }
+        ]
+    }
+    const { isShowing: isWarningModalShowed, toggle: toggleWarningModal } = useModal();
+    let warningModal = {
+        modalType: 'warning',
+        message: `We found an existing employee with this name:`,
+        action: 'Please create a different employee',
+        modalBtns: [
+            { type: 'action', name: 'create', action: () => confirmReset() },
+            { type: 'cancel', name: 'go to list', action: () => navigateToList() }
+        ]
+    }
+    const { isShowing: isModalConfirmShowed, toggle: toggleConfirmModal } = useModal();
+    let modalConfirmReset = {
+        modalType: 'confirmResetForm',
+        message: `Are you sure you want to`,
+        action: 'reset the form?',
+        modalBtns: [
+            { type: 'action', name: 'reset', action: () => confirmReset()  },
+            { type: 'cancel', name: 'cancel',action: () => cancelReset() }
+        ]
     }
 
 
@@ -206,8 +215,8 @@ const CompositeForm = () => {
                 </FieldsWrapper>
 
                 <FormBtnsWrapper style={{width: "60%"}}>
-                    <Button btnName="save" handleClick={handleSubmit} disabled={!allFieldsOk} width="40%"></Button>
-                    <Button btnName="cancel" handleClick={handleCancel} disabled={!formDirty} width="40%"></Button>
+                    <Button type="action" btnName="save" handleClick={handleSubmit} disabled={!allFieldsOk} width="40%"></Button>
+                    <Button type="cancel" btnName="cancel" handleClick={handleCancel} disabled={!formDirty} width="40%"></Button>
                 </FormBtnsWrapper>
 
             </form>
@@ -217,23 +226,25 @@ const CompositeForm = () => {
                     props={confirmSuccessModal}
                     content={justCreated}
                     isShowing={isModalSuccessShowed}
-                    okCloselModal={okCloselModal}
+                    confirmReset={confirmReset}
+                    navigateToList={navigateToList}
                     />
                 }
                 { errorCreation && 
-                <ModalComp
-                props={warningModal}
-                content={errorCreation}
-                isShowing={isWarningModalShowed}
-                okCloselModal={okCloselModal}
+                    <ModalComp
+                    props={warningModal}
+                    content={errorCreation}
+                    isShowing={isWarningModalShowed}
+                    confirmReset={confirmReset}
+                    navigateToList={navigateToList}
                 />
                 }
                 
                 <ModalComp
-                props={confirmCancelModal}
-                isShowing={isModalConfirmShowed}
-                cancelReset={cancelReset}
-                confirmReset={confirmReset}
+                    props={modalConfirmReset}
+                    isShowing={isModalConfirmShowed}
+                    cancelReset={cancelReset}
+                    confirmReset={confirmReset}
                 />
 
         </FormWrapper>

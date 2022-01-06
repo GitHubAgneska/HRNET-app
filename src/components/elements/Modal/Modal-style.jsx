@@ -68,7 +68,10 @@ export const ModalContent = styled.div`
     font-weight: bold;
     font-size: 1.2em;
     text-transform: capitalize;
-    color: darkblue;
+    p { margin: 2% auto; }
+    p:first-child{ color: darkblue; }
+    p:nth-child(2){ color: darkviolet; }
+
 `
 
 
