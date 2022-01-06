@@ -20,11 +20,11 @@ const ModalComp = ({ modalType, props, isShowing, content}) => {
 
             <PageModalWrapper>
 
-                <ModalWrapper >
+                <ModalWrapper>
                     <ModalBlock width={width} height={height}>
                         <ModalBody>
                             <p>{message}</p>
-                            { content && 
+                            { content?.department && 
                                 <ModalContent>
                                     <p>{content.firstName} {content.lastName}</p>
                                     <p>{content.department} department</p>
@@ -36,11 +36,12 @@ const ModalComp = ({ modalType, props, isShowing, content}) => {
                         <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
                             { modalBtns.map(b => (
                                 <Button
-                                type={b.type}
+                                btntype={b.btntype}
                                 key={Math.random()}
                                 handleClick={b.action}
                                 disabled={false}
                                 btnName={b.name}
+                                width="40%;"
                                 >{b.name}</Button>
                             ))}
                         </ModalBtnsWrapper>
@@ -57,9 +58,9 @@ export default ModalComp
 
 ModalComp.defaultProps = {
     modalBgBlur: true,
-    width: '70%',
-    height: '300px',
-    buttonsWrapperWidth: '50%',
+    width: '70%;',
+    height: '300px;',
+    buttonsWrapperWidth: '60%;',
 }
 
 ModalComp.propTypes = { 

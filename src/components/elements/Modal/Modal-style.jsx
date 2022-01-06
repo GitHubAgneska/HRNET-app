@@ -24,17 +24,21 @@ export const PageModalWrapper = styled.div`
 `
 
 export const ModalWrapper = styled.div`
+    min-height: 40vh;
     display: flex; align-items: center; justify-content: center;
     background-color: white; 
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 15px;
     animation: ${modalTransitionOpen} 0.2s linear forwards;
     transition: fade-out 300ms ease-in-out;
+    
+    @media screen and (max-width:600px) { width:90%; }   
+    @media screen and (min-width:600px) { width:60%;} 
 `
 
 export const ModalBlock = styled.div`
     position: relative;
-    height:300px; width:700px;
+    height:90%;
     display: flex; align-items: start; justify-content: center;
     padding:5%;
     color: black;
@@ -43,22 +47,12 @@ export const ModalBlock = styled.div`
 
 export const ModalBtnsWrapper = styled.div`
     position: absolute; bottom: 5%;
-    padding-top: 2%;
+    height: 25%;
     width: 90%; margin: auto;
+    padding-top: 2%;
     display: flex; flex-flow: row nowrap;
     justify-content: space-between;
     border-top: 3px solid gray;
-    
-    button {
-        width: 30%;margin:auto;
-        background-color: ${props => props.btnName ==='no' || props.btnName ==='ok' ? '#00bc77;' : '#ff006c;'}
-        &:hover { 
-            background-color:${props => props.btnName ==='cancel' ? '#007147;' :  '#8a063f;' }
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            font-size: 1.2rem;
-        }
-        transition: all 0.2s;
-    }
 `
 
 export const ModalBody = styled.div`
@@ -71,7 +65,6 @@ export const ModalContent = styled.div`
     p { margin: 2% auto; }
     p:first-child{ color: darkblue; }
     p:nth-child(2){ color: darkviolet; }
-
 `
 
 

@@ -138,9 +138,10 @@ const CompositeForm = () => {
     let confirmSuccessModal = {
         modalType: 'success',
         message: `New employee successfully created`,
+        action: 'Would you like to create another employee?',
         modalBtns: [
-            { type: 'action', name: 'create another employee', action: () => confirmReset() },
-            { type: 'cancel', name: 'go to list', action: () => navigateToList() }
+            { btntype: 'action', name: 'create', action: () => confirmReset() },
+            { btntype: 'cancel', name: 'go to list', action: () => navigateToList() }
         ]
     }
     const { isShowing: isWarningModalShowed, toggle: toggleWarningModal } = useModal();
@@ -149,8 +150,8 @@ const CompositeForm = () => {
         message: `We found an existing employee with this name:`,
         action: 'Please create a different employee',
         modalBtns: [
-            { type: 'action', name: 'create', action: () => confirmReset() },
-            { type: 'cancel', name: 'go to list', action: () => navigateToList() }
+            { btntype: 'action', name: 'create', action: () => confirmReset() },
+            { btntype: 'cancel', name: 'go to list', action: () => navigateToList() }
         ]
     }
     const { isShowing: isModalConfirmShowed, toggle: toggleConfirmModal } = useModal();
@@ -159,8 +160,8 @@ const CompositeForm = () => {
         message: `Are you sure you want to`,
         action: 'reset the form?',
         modalBtns: [
-            { type: 'action', name: 'reset', action: () => confirmReset()  },
-            { type: 'cancel', name: 'cancel',action: () => cancelReset() }
+            { btntype: 'action', name: 'reset', action: () => confirmReset()  },
+            { btntype: 'cancel', name: 'cancel',action: () => cancelReset() }
         ]
     }
 
@@ -215,8 +216,8 @@ const CompositeForm = () => {
                 </FieldsWrapper>
 
                 <FormBtnsWrapper style={{width: "60%"}}>
-                    <Button type="action" btnName="save" handleClick={handleSubmit} disabled={!allFieldsOk} width="40%"></Button>
-                    <Button type="cancel" btnName="cancel" handleClick={handleCancel} disabled={!formDirty} width="40%"></Button>
+                    <Button btntype="action" btnName="save" handleClick={handleSubmit} disabled={!allFieldsOk} width="40%;"></Button>
+                    <Button btntype="cancel" btnName="cancel" handleClick={handleCancel} disabled={!formDirty} width="40%;"></Button>
                 </FormBtnsWrapper>
 
             </form>

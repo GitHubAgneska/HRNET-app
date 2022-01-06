@@ -66,8 +66,4 @@ export const FormBtnsWrapper = styled.div`
     flex-direction: row;
     margin: auto;
     justify-content: space-between;
-    button:nth-child(1) { transition: background-color 0.2s; }
-    button:nth-child(1):not(disabled) { background-color: #00bc77; }
-    button:nth-child(1):disabled { background-color: grey }
-    button:nth-child(1):hover:not(:disabled) { background-color: #00bc70 }
 `
