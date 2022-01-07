@@ -15,7 +15,9 @@ const modalTransitionOpen = keyframes`
 export const PageModalWrapper = styled.div`
     height: 100vh;
     width: 100%;
-    position: absolute;
+    @media screen and (max-width:600px) { position: fixed }   
+    @media screen and (min-width:600px) { position: absolute; }
+    
     z-index: 2; top: 0;
     display: flex; align-items: center; justify-content: center;
     

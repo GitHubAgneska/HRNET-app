@@ -42,9 +42,10 @@ const CompositeForm = () => {
 
     const [ displayModal, /* setDisplayModal */ ] = useState(false);
     
-    const handleInputChange = (fieldId, value) => {
-        setValues(currentValues => { currentValues[fieldId] = value; return currentValues; }); // !== setValues({ ...values, [fieldId]: value }); ?
-        setTouched({ ...touched, [fieldId]: true });// === setTouched(touched => { touched[fieldId]= true; return touched; });
+    const handleInputChange = (fieldName, value) => {
+        setValues(currentValues => { currentValues[fieldName] = value; return currentValues; }); // !== setValues({ ...values, [fieldId]: value }); ?
+        //setTouched({ ...touched, [fieldId]: true });// === setTouched(touched => { touched[fieldId]= true; return touched; });
+        if (fieldName === 'state' || fieldName === 'department') { setTouched({ ...touched, [fieldName]: true }) }
     }
 
     const handleBlur = (fieldName, value) => {
@@ -52,7 +53,7 @@ const CompositeForm = () => {
         const { [fieldName]: removedError, ...rest } = errors;
         const error = validate[fieldName](value); // error = is a string message
         setErrors( {...errors, [fieldName]: error }); // !== setErrors({ ...rest, ...(error && { [fieldName]: touched[fieldName] && error }) }); ? 
-        
+        setTouched({ ...touched, [fieldName]: true });// === setTouched(touched => { touched[fieldId]= true; return touched; });
     }
 
     const handleSubmit = async event => {
@@ -180,6 +181,7 @@ const CompositeForm = () => {
                                 key={i._uid}
                                 fieldName={i.fieldName}
                                 field={i}
+                                isAddress={i.isAddress}
                                 values={values}
                                 handleInputChange={handleInputChange}
                                 handleBlur={handleBlur}
@@ -192,6 +194,7 @@ const CompositeForm = () => {
                                 key={i._uid}
                                 fieldName={i.fieldName}
                                 field={i}
+                                isAddress={i.isAddress}
                                 values={values}
                                 handleInputChange={handleInputChange}
                                 handleBlur={handleBlur}
@@ -204,6 +207,7 @@ const CompositeForm = () => {
                                 key={i._uid}
                                 fieldName={i.fieldName}
                                 field={i}
+                                isAddress={i.isAddress}
                                 values={values}
                                 handleInputChange={handleInputChange}
                                 options={i.options}

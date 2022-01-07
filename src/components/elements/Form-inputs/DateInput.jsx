@@ -25,7 +25,7 @@ const DateInput = ({field, fieldName, handleInputChange, handleBlur, errors, tou
                 min={fieldName === 'dob' ? '1940-01-01':'2000-01-01'}
                 max={fieldName === 'dob' ? '2000-01-01': todaysDate}
                 touched={touched}
-                style={{border: valid? '2px solid #42f5a4': invalid ? '2px solid red': ''}}
+                style={{border: valid? '2px solid #42f5a4': invalid ? '1px solid red': ''}}
             />
             { valid && <IconWrapper><img src={checked} alt="checked-icon"/></IconWrapper> }
             { invalid && <IconWrapper><img src={error} alt="error-icon"/></IconWrapper> }

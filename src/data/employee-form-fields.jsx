@@ -25,22 +25,26 @@ export const employeeFormFields = [
     {
         fieldName: 'street',
         fieldType: 'text',
+        isAddress: true,
         _uid: "7f885969-f8ba-40b9-bf5d-0d57bc9c6a8d"
     },
     {
         fieldName: 'city',
         fieldType: 'text',
+        isAddress: true,
         _uid: "f61233e8-565e-43d0-9c14-7d7f220c6020"
     },
     {
         fieldName: 'state',
         fieldType: 'select',
+        isAddress: true,
         options: states,
         _uid: "f61233e8-565e-43d0-87b3-7d7f220c6020"
     },
     {
         fieldName:  'zipcode',
         fieldType: 'text',
+        isAddress: true,
         _uid: "f00843e8-565e-43d0-87b3-7d7f220c6020"
     },
     {
