@@ -6,6 +6,9 @@ const SelectInput = ({field, fieldName, values, options, handleInputChange, hand
     
     let stateValue = values.state;
     let depValue = values.department;
+    
+    let valid = touched[field.fieldName] && !errors[field.fieldName]
+    let invalid = errors[field.fieldName]
 
     return (
         <InputWrapper>
@@ -18,7 +21,7 @@ const SelectInput = ({field, fieldName, values, options, handleInputChange, hand
                 onChange={e => handleInputChange(field.fieldName, e.target.value)}
                 onBlur={e => handleBlur(field.fieldName, e.target.value)}
                 aria-required="true"
-                touched={touched}
+                style={{border: valid? '2px solid #42f5a4': invalid ? '1px solid red': ''}}
                 >
                 { fieldName === 'state' && 
                     options.map(i => (
@@ -30,6 +33,7 @@ const SelectInput = ({field, fieldName, values, options, handleInputChange, hand
                         <option key={Math.random()} value={i}>{i}</option>
                     )) 
                 }
+                
             </select>
             { errors[field.fieldName] ? <span>{errors[field.fieldName]}</span> : null }
         </InputWrapper>

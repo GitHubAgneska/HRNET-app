@@ -52,6 +52,7 @@ const CompositeForm = () => {
         const { [fieldName]: removedError, ...rest } = errors;
         const error = validate[fieldName](value); // error = is a string message
         setErrors( {...errors, [fieldName]: error }); // !== setErrors({ ...rest, ...(error && { [fieldName]: touched[fieldName] && error }) }); ? 
+        
     }
 
     const handleSubmit = async event => {

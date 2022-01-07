@@ -35,31 +35,19 @@ export const InputWrapper = styled.div`
         padding: 5px;
         font-size: .8em;
         border-radius: 20px;
-    }
-
-    /* :focus-within label  {
-        opacity: 1;
-        transition: opacity 2s;
-        font-size: 0.7em;
-    } */
-
-    :focus-within input,
-    :focus-within select {
-        border: 2px solid pink;
+        border: 1px solid lightgrey;
+        /* border: ${ ({valid}) => valid  ? ' 2px solid green;' :'2px solid lightgrey;' } */
+        :focus-within { border: 1px solid lightblue !important; }
     }
 
     select {
         background-color: transparent !important;
-        border: 1px solid grey !important;
-        &:active, &:focus { border: 2px solid pink;}
     }
     ::placeholder { 
         font-weight: light; opacity: 0.6; font-size: 0.5rem;
     }  
-    :focus-within ::placeholder {
-        opacity:0
-    }
-    span { color: red; height: 5px; width:100%;font-size: 0.6rem}
+    :focus-within ::placeholder { opacity:0 }
+    span { color: red; height: 5px; width:100%; font-size: 0.6rem}
 `
 export const FormBtnsWrapper = styled.div`
     display: flex;

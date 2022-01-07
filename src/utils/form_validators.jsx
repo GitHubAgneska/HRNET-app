@@ -24,9 +24,11 @@ const nameValidation = (fieldName, fieldValue) => {
 }
 
 const dateValidation = (fieldName, fieldValue) => {
+    console.log('date=>',fieldValue);
     // format from input = YYYY-MM-DD
     let date = fieldValue;
     if ( date.trim()=== '' ) { return 'date is required'}
+    
     // console.log('dob/startdate OK')
     return null;
 }
@@ -53,8 +55,9 @@ const cityValidation = (fieldName, fieldValue) => {
 }
 
 const stateValidation = (fieldName, fieldValue) => {
-    let state = fieldValue.name;
-    if (state === 'Select a state') { return 'state is required'; }
+    // console.log('state=>',fieldValue);
+    let state = fieldValue;
+    if (state === 'Select a state' ) { return 'state is required'; }
     return null;
 }
 
