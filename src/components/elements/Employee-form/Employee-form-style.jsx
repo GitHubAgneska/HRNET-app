@@ -24,12 +24,18 @@ export const FormInputsWrapper = styled.fieldset`
     &:not(:nth-child(3)) { border: none; flex-flow: row nowrap; }
     &:nth-child(3) { flex-flow: row wrap; width: 80%;}
 `
-
+export const IconWrapper = styled.div`
+    width:1rem;
+    position: absolute;
+    right: 8px; top: 28px;
+    img { max-width: 100%; }
+`
 export const InputWrapper = styled.div`
     display: flex;
     flex-direction: column;
     text-align: left;
     margin: 1rem;
+    position: relative;
 
     input, select {
         padding: 5px;

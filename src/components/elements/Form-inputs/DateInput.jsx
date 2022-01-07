@@ -1,7 +1,9 @@
 import PropTypes from "prop-types"
 import FormLabel from '../FormLabel/FormLabel'
-import { InputWrapper } from '../Employee-form/Employee-form-style'
+import { InputWrapper, IconWrapper } from '../Employee-form/Employee-form-style'
 import { today } from '../../../utils/form_validators'
+import checked from '../../../assets/imgs/icons/checked.png'
+import error from '../../../assets/imgs/icons/error.png'
 
 const DateInput = ({field, fieldName, handleInputChange, handleBlur, errors, touched }) => {
     // console.log('error DATE ELEMENT ==', errors[fieldName]);
@@ -25,6 +27,8 @@ const DateInput = ({field, fieldName, handleInputChange, handleBlur, errors, tou
                 touched={touched}
                 style={{border: valid? '2px solid #42f5a4': invalid ? '2px solid red': ''}}
             />
+            { valid && <IconWrapper><img src={checked} alt="checked-icon"/></IconWrapper> }
+            { invalid && <IconWrapper><img src={error} alt="error-icon"/></IconWrapper> }
             { errors[fieldName] ? <span>{errors[fieldName]}</span> : null }
         </InputWrapper>
     )

@@ -1,6 +1,8 @@
 import PropTypes from "prop-types"
 import FormLabel from '../FormLabel/FormLabel'
-import { InputWrapper } from '../Employee-form/Employee-form-style'
+import { InputWrapper, IconWrapper } from '../Employee-form/Employee-form-style'
+import checked from '../../../assets/imgs/icons/checked.png'
+import error from '../../../assets/imgs/icons/error.png'
 
 const SelectInput = ({field, fieldName, values, options, handleInputChange, handleBlur, errors, touched}) => {
     
@@ -35,6 +37,8 @@ const SelectInput = ({field, fieldName, values, options, handleInputChange, hand
                 }
                 
             </select>
+            { valid && <IconWrapper><img src={checked} alt="checked-icon"/></IconWrapper> }
+            { invalid && <IconWrapper><img src={error} alt="error-icon"/></IconWrapper> }
             { errors[field.fieldName] ? <span>{errors[field.fieldName]}</span> : null }
         </InputWrapper>
     )

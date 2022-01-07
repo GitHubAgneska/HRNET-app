@@ -1,6 +1,8 @@
 import PropTypes from "prop-types"
 import FormLabel from '../FormLabel/FormLabel'
-import { InputWrapper } from '../Employee-form/Employee-form-style'
+import { InputWrapper, IconWrapper } from '../Employee-form/Employee-form-style'
+import checked from '../../../assets/imgs/icons/checked.png'
+import error from '../../../assets/imgs/icons/error.png'
 
 const SimpleInput = ({field, handleInputChange, handleBlur, errors, touched }) => {
     
@@ -18,8 +20,9 @@ const SimpleInput = ({field, handleInputChange, handleBlur, errors, touched }) =
                 onBlur={e => handleBlur(field.fieldName, e.target.value)}
                 aria-required="true"
                 style={{border: valid? '2px solid #42f5a4': invalid ? '1px solid red': ''}}
-
             />
+            { valid && <IconWrapper><img src={checked} alt="checked-icon"/></IconWrapper> }
+            { invalid && <IconWrapper><img src={error} alt="error-icon"/></IconWrapper> }
             { errors[field.fieldName] ? <span>{errors[field.fieldName]}</span> : null }
         </InputWrapper>
     )
