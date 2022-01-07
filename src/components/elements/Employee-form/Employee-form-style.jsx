@@ -1,12 +1,17 @@
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 
 export const FormWrapper = styled.div`
-    padding-bottom: 2%;
+    background-color: lightgray;
+    @media screen and (min-width:600px) { padding: 2%;}  
+    @media screen and (max-width:600px) { padding-bottom: 5%;}
+`
+export const StyledForm = styled.form`
+    
 `
 export const FieldsWrapper = styled.div`
     @media screen and (max-width:600px) { width:100%; border: none;}   
-    @media screen and (min-width:600px) { width:60%;}   
-    height: 70vh;
+    @media screen and (min-width:600px) { width:60%; height: 70vh;}   
+    
     margin: auto;
     position: relative;
     border: 2px solid lightgrey;
@@ -24,11 +29,24 @@ export const FormInputsWrapper = styled.fieldset`
     &:not(:nth-child(3)) { border: none; flex-flow: row nowrap; }
     &:nth-child(3) { flex-flow: row wrap; width: 80%;}
 `
+const iconTransition = keyframes`
+    from {
+        transform: opacity(0);
+        transform: translateX(-55px);
+    }
+    to {
+        transform: opacity(1);
+        transform: translateX(-20px);
+    }
+`
+
 export const IconWrapper = styled.div`
     width:1rem;
     position: absolute;
     right: 8px; top: 28px;
     img { max-width: 100%; }
+    animation: ${iconTransition} 0.2s linear forwards;
+
 `
 export const InputWrapper = styled.div`
     display: flex;

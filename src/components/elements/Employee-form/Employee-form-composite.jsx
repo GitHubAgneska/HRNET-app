@@ -14,7 +14,7 @@ import Button from '../Button/Button'
 import ModalComp from '../Modal/Modal'
 import useModal from '../Modal/useModal'
 
-import { FormWrapper, FieldsWrapper, FormBtnsWrapper } from './Employee-form-style'
+import { FormWrapper, StyledForm, FieldsWrapper, FormBtnsWrapper } from './Employee-form-style'
 
 const CompositeForm = () => {
 
@@ -171,7 +171,7 @@ const CompositeForm = () => {
 
     return (
         <FormWrapper displayModal={displayModal} >
-            <form id='myform'>
+            <StyledForm id='myform'>
                 <FieldsWrapper>
                     { (employeeFormFields).map(i => (
                         
@@ -221,7 +221,7 @@ const CompositeForm = () => {
                     <Button btntype="cancel" btnName="cancel" handleClick={handleCancel} disabled={!formDirty} width="40%;"></Button>
                 </FormBtnsWrapper>
 
-            </form>
+            </StyledForm>
 
                 { justCreated && 
                     <ModalComp

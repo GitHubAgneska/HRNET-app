@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         margin: 0;
+        height:100vh;
         display: flex;
         flex-direction: column;
         min-height: 100vh;
@@ -33,16 +34,18 @@ export const GlobalStyle = createGlobalStyle`
 `
 
 export const TitleWrapper = styled.div`
-    margin: 2% auto;
-    border: 1px solid grey;
-    border-radius:5px;
-    text-align: center;
-    background-color: white;
+    height:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: violet;
 `
 
 export const StyledTitle = styled.h1`
-    color: grey;
+    color: white;
     font-size:1em;
+    margin: 0;
 `
 
 export const LoadingSpinnerWrapper = styled.div`
