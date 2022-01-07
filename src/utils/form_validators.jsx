@@ -24,11 +24,16 @@ const nameValidation = (fieldName, fieldValue) => {
 }
 
 const dateValidation = (fieldName, fieldValue) => {
-    console.log('date=>',fieldValue);
+    console.log('date=>',fieldValue );
     // format from input = YYYY-MM-DD
-    let date = fieldValue;
+    let date = fieldValue
+
+    let todaysDate = today().toString();
+    let min=fieldName === 'dob' ? '1940-01-01':'2000-01-01'
+    let max=fieldName === 'dob' ? '2000-01-01': todaysDate
+
     if ( date.trim()=== '' ) { return 'date is required'}
-    
+    if ( date < min || date > max ) { return 'date is not valid'}
     // console.log('dob/startdate OK')
     return null;
 }
