@@ -38,10 +38,10 @@ export default SearchBox
 
 SearchBox.propTypes = {
     values: PropTypes.string,
-    handleSearchChange: PropTypes.func.isRequired,
-    clearInput: PropTypes.func.isRequired,
-    handleSearchSubmit: PropTypes.func.isRequired,
+    handleSearchChange: PropTypes.func,
+    clearInput: PropTypes.func,
+    handleSearchSubmit: PropTypes.func,
     /* suggestions: PropTypes.object, */
-    selectSuggestion: PropTypes.func.isRequired,
-    handleKeyDown: PropTypes.func.isRequired
+    selectSuggestion: PropTypes.func,
+    handleKeyDown: PropTypes.func
 }

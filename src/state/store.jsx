@@ -35,7 +35,10 @@ export const reducers = combineReducers({
 
 export const rootReducer = (state, action) => { return reducers(state, action)}
 
-const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const reduxDevtools =  window.__REDUX_DEVTOOLS_EXTENSION__
+? window.__REDUX_DEVTOOLS_EXTENSION__()
+: f => f
 export const store = createStore(rootReducer, compose(applyMiddleware(thunk),reduxDevtools));
 
 store.subscribe(() => { console.log('NEW STATE===>', store.getState())})

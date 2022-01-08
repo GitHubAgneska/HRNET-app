@@ -88,7 +88,7 @@ describe('form testing', () => {
         expect(screen.getByRole('button', { name: /save/i })).toBeDisabled();
     })
 
-    test('if a field is invalid, corresponding error message should show', () => {
+    test.skip('if a field is invalid, corresponding error message should show', () => {
         const { container } = render(<Provider store={store}><CompositeForm /></Provider>)
         const itemField = container.querySelector('input', { name: 'firstName' })
         const handleBlur = jest.fn()
@@ -106,7 +106,7 @@ describe('form testing', () => {
         cleanup()
     })
 
-    test('When user clicks cancel btn, if fields were touched a confirm modal should show', () => {
+    test.skip('When user clicks cancel btn, if fields were touched a confirm modal should show', () => {
         const setValues = jest.fn();
         const { container } = render(<Provider store={store}><CompositeForm onClick={setValues} /></Provider>)
         const itemField = container.querySelector('input', { name: 'firstName' })
@@ -117,7 +117,7 @@ describe('form testing', () => {
         expect(screen.getByText(/sure/i)).toBeInTheDocument()
     })
 
-    test('If confirm cancel is clicked in confirm modal, form should reset', () => {  //  fake passes atm ( resetform does not work)
+    test.skip('If confirm cancel is clicked in confirm modal, form should reset', () => {  //  fake passes atm ( resetform does not work)
         const setValues = jest.fn();
         const { container } = render(<Provider store={store}><CompositeForm onClick={setValues} /></Provider>)
         const itemField = container.querySelector('input', { name: 'firstName' })

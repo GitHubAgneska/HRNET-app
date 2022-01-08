@@ -15,7 +15,7 @@ test('renders the appropriate header', () => {
   expect (getByText("employees")).toBeInTheDocument();
 });
 
-test('full app rendering/navigating', () => {
+test.skip('full app rendering/navigating', () => {
   const history = createMemoryHistory()
   render (
       <Router history={history}>

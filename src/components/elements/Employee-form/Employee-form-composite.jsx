@@ -91,8 +91,8 @@ const CompositeForm = () => {
 
                     dispatch(createEmployee(newEmployee))
                         .then(response => setJustCreated({...response.employee}))
+                        .then(setIsLoading(false))
                         .then(confirmCreation())
-                        // .then(setIsLoading(false))
                         .catch(error => setErrorCreation(error))
                 }
             }
@@ -227,7 +227,7 @@ const CompositeForm = () => {
 
             </StyledForm>
 
-                { justCreated && 
+                { justCreated?.firstName && 
                     <ModalComp
                     props={confirmSuccessModal}
                     content={justCreated}
