@@ -1,9 +1,11 @@
 import styled from "styled-components"
 
 export const TableWrapper = styled.div`
-    height: 60vh;
+    max-height: 60vh;
     overflow: scroll;
-    border-bottom:1px solid grey;
+    border: 2px solid white;
+    border-radius: 5px;
+    color:white;
 `
 
 export const StyledTable = styled.table` 
@@ -29,12 +31,12 @@ export const TableHeaderIconWrapper = styled.div`
 
 export const StyledTableRow = styled.tr`
     height: 2rem;
-
+    
     ${({entries}) => entries%2===0 ? 
-    `:nth-child(even) {background-color: #ccc; }`
-    : `:nth-child(odd) {background-color: #ccc; }` }
+    `:nth-child(even) {background-color: #white; }`
+    : `:nth-child(odd) {background-color: #ccc; color:black }` }
 
-    &:hover { background-color: lightblue;   }
+    &:hover { background-color: lightblue; color: black;}
     
     td { 
         width: 10%;

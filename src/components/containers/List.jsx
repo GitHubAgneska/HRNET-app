@@ -11,7 +11,7 @@ import SelectEntriesBox from '../elements/SelectEntriesBox/SelectEntriesBox'
 import SearchBox from "../elements/SearchBox/SearchBox"
 import { searchSuggestions } from '../../utils/searchText'
 
-import { DataTablePageWrapper } from '../../style/global_style'
+import { DataTablePageWrapper, DataTableContentWrapper,DataTableTopWrapper, TitleWrapper, StyledTitle  } from '../../style/global_style'
 
 
 export const List = () => {
@@ -88,38 +88,45 @@ export const List = () => {
 
 
     return (
+
         <DataTablePageWrapper>
+            <TitleWrapper>
+                <StyledTitle>Employees list</StyledTitle>
+            </TitleWrapper>
 
-            <SelectEntriesBox 
-                options={entriesOptions}
-                selectEntriesAmount={selectEntriesAmount}
-                currentlyshowing={currentlyShowing}
-                listTotal={listTotal}
-            />
+            <DataTableContentWrapper>
 
-            <SearchBox 
-                handleSearchChange={handleSearchChange}
-                handleSearchSubmit={handleSearchSubmit}
-                clearInput={clearInput}
-                values={searchInputValues}
-                suggestions={suggestions}
-                selectSuggestion={selectSuggestion}
-                handleKeyDown={handleKeyDown}
-            />
+                <DataTableTopWrapper>
+                <SearchBox 
+                        handleSearchChange={handleSearchChange}
+                        handleSearchSubmit={handleSearchSubmit}
+                        clearInput={clearInput}
+                        values={searchInputValues}
+                        suggestions={suggestions}
+                        selectSuggestion={selectSuggestion}
+                        handleKeyDown={handleKeyDown}
+                    /> 
+                    <SelectEntriesBox 
+                        options={entriesOptions}
+                        selectEntriesAmount={selectEntriesAmount}
+                        currentlyshowing={currentlyShowing}
+                        listTotal={listTotal}
+                    />
+                </DataTableTopWrapper>
 
-            { collection && collectionAsPages &&
-                <Table
-                currentPageToDisplay={currentPageToDisplay}
-                sortListBy={sortListBy}
+                { collection && collectionAsPages &&
+                    <Table
+                    currentPageToDisplay={currentPageToDisplay}
+                    sortListBy={sortListBy}
+                    />
+                }
+
+                <Pagination 
+                    totalPages={totalPages}
+                    currentActivePage={currentPageIndex}
+                    changePage={changePage}
                 />
-            }
-
-            <Pagination 
-                totalPages={totalPages}
-                currentActivePage={currentPageIndex}
-                changePage={changePage}
-            />
-
+            </DataTableContentWrapper>
         </DataTablePageWrapper>
     )
 }

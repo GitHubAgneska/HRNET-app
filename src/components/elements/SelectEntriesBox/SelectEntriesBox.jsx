@@ -9,7 +9,7 @@ const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing, listT
     return (
         <SelectEntriesBoxWrapper>
 
-            <label htmlFor="entries">Show per page:</label>
+            <label htmlFor="entries">Show per page: </label>
             <select 
                 options={options}
                 name="entries"

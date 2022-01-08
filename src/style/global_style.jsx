@@ -29,16 +29,18 @@ export const GlobalStyle = createGlobalStyle`
     ul li { list-style: none; }
     button { display: block; border: none; }
     main {
+        background-color: grey;
         @media screen and (min-width:600px) { width: 90%; margin: auto;}
+        @media screen and (max-width:600px) { height: 100vh;}
     }
 `
 
 export const TitleWrapper = styled.div`
-    height:40px;
+    @media screen and (max-width:600px) { height:25px; }
+    @media screen and (min-width:600px) { height:40px; }
     display: flex;
     align-items: center;
     justify-content: center;
-    
     background-color: violet;
 `
 
@@ -52,13 +54,22 @@ export const LoadingSpinnerWrapper = styled.div`
     margin-top:10%;
 `
 
-export const DataTablePageWrapper = styled.main`
-    width: 90%;
-    margin:auto; padding-top: 2%;
-`
+export const EmployeeFormPageWrapper = styled.main``
+export const DataTablePageWrapper = styled.main``
 
-export const EmployeeFormPageWrapper = styled.main`
-    /* border:1px solid lightgrey; */
+export const DataTableContentWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2%;
+    
+`
+export const DataTableTopWrapper =  styled.div`
+    display:flex;
+    @media screen and (max-width:600px) {  flex-flow: column nowrap; }
+    @media screen and (min-width:600px) { flex-flow: row nowrap; justify-content: space-between;}
+    margin-bottom: 2%;
+    border-bottom: 2px solid white;
 `
 
 /* accessibility - .sr-only class */

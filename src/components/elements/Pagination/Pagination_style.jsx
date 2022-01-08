@@ -1,21 +1,16 @@
 import styled from "styled-components"
 
 export const PaginationWrapper = styled.div`
-    margin: 3% auto;
     display: flex; flex-flow: row nowrap;
     justify-content: center;
-    border: 1px solid grey; border-radius: 5px;
+    margin-top: 2%;
 `
 
 export const PageNumber = styled.div`
-    font-size:1.5rem;
-    height:2rem; width: 2rem;margin: 1%;
-    background-color: lightgray;
     display: flex; justify-content: center; align-content:center;
+    font-size:1rem; color:white;
+    height:1.5rem; width: 1.5rem; margin: 1%;
+    border:1px solid white;
     border-radius: 50%;
-    ${ ({currentActivePage}) => currentActivePage && 'border:1px solid red'}
-`
-
-export const Paginated =  styled.div`
-    width: 80%; border: 1px solid red;
+    ${ ({currentActivePage}) => currentActivePage && 'border:1px solid violet'}
 `

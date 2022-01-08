@@ -24,7 +24,7 @@ const Table = ({currentPageToDisplay, sortListBy}) => {
             let match = false;
             if (currentQuery.length > 2 && valueToDisplay.toLowerCase().includes(currentQuery)  ) { match=true }
 
-            return (<td key={Math.random()} style={{backgroundColor:match?'yellow':'none'}} >{valueToDisplay}</td>) 
+            return (<td key={Math.random()} style={{backgroundColor:match?'yellow':'none',color:match?'black':'inherit'}} >{valueToDisplay}</td>) 
         })        
         return (<StyledTableRow key={Math.random()}>{columnData}</StyledTableRow>)
     }
