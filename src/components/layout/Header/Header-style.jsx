@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledNav = styled.nav`
-    @media screen and (min-width:600px) { width: 90%; margin: auto;height: 8vh;}
+    @media screen and (min-width:600px) { /* width: 90%; margin: auto; */height: 8vh;}
     @media screen and (max-width:600px) {height:3rem; padding: 3%}
     display: flex;
     flexFlow: row nowrap;
@@ -11,14 +11,13 @@ export const StyledNav = styled.nav`
     background-color: lightgrey;
 `
 
-export const MainLogoWrapper = styled.div`
-    @media screen and (max-width:600px) { max-width: 80px; }
-    @media screen and (min-width:600px) { min-width: 135px; }
-`
+export const MainLogoWrapper = styled.div``
 
 export const MainLogo = styled.h1`
-    max-width: 100%;
+    @media screen and (max-width:600px) { font-size:1em }
+    @media screen and (min-width:600px) { font-size:1.5em }
     color: white;
+    margin: 0;
 `
 
 export const LinksWrapper = styled.div`

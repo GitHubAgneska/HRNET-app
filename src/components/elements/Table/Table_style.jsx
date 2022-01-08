@@ -3,8 +3,7 @@ import styled from "styled-components"
 export const TableWrapper = styled.div`
     max-height: 60vh;
     overflow: scroll;
-    border: 2px solid white;
-    border-radius: 5px;
+    border: 1px solid white;
     color:white;
 `
 
@@ -21,7 +20,7 @@ export const StyledTableHeader = styled.thead`
         height: 3.5rem;
         position: sticky; top: 0; 
         color: white; 
-        background-color: #888; 
+        background-color:violet;
     }
 `
 
@@ -36,11 +35,12 @@ export const StyledTableRow = styled.tr`
     `:nth-child(even) {background-color: #white; }`
     : `:nth-child(odd) {background-color: #ccc; color:black }` }
 
-    &:hover { background-color: lightblue; color: black;}
+    &:hover { background-color: #53E0CB; color: black; border: none; }
     
     td { 
         width: 10%;
         overflow: hidden;
+        border-bottom: 2px solid violet;
     }
 `
 

@@ -29,8 +29,8 @@ export const GlobalStyle = createGlobalStyle`
     ul li { list-style: none; }
     button { display: block; border: none; }
     main {
-        background-color: grey;
-        @media screen and (min-width:600px) { width: 90%; margin: auto;}
+        background-color: #515151;
+       /*  @media screen and (min-width:600px) { width: 90%; margin: auto;} */
         @media screen and (max-width:600px) { height: 100vh;}
     }
 `

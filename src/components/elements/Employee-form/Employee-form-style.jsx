@@ -3,7 +3,7 @@ import styled, {keyframes} from 'styled-components'
 export const FormWrapper = styled.div`
     @media screen and (min-width:600px) { padding: 2%;}  
     @media screen and (max-width:600px) { padding-bottom: 5%;}
-    background-color: gray; color: white
+    color: white
 `
 export const StyledForm = styled.form`
     
