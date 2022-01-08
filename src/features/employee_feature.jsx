@@ -5,7 +5,7 @@ import {
 /*  setEmployee, setFirstName, setLastName,setDob, setStartDate, setStreet,
     setCity, setUsState, setZipcode, setDepartment,
     employeeFetching, employeeResolved, employeeRejected, 
-    setCollection,*/setCollection,
+    setCollection,*/
     createEmployeeFetching, createEmployeeResolved, createEmployeeRejected
 } from '../state/actions/Actions'
 import { client } from '../api/client'

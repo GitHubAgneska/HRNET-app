@@ -1,8 +1,8 @@
 import PropTypes from "prop-types"
 import FormLabel from '../FormLabel/FormLabel'
 import { InputWrapper, IconWrapper } from '../Employee-form/Employee-form-style'
-import checked from '../../../assets/imgs/icons/checked.png'
-import error from '../../../assets/imgs/icons/error.png'
+import checked from '../../../assets/icons/checked.png'
+import error from '../../../assets/icons/error.png'
 
 const SimpleInput = ({field, handleInputChange, handleBlur, errors, touched }) => {
     

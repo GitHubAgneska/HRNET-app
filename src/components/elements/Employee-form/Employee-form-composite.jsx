@@ -25,6 +25,7 @@ const CompositeForm = () => {
     const [ errors, setErrors ] = useState({})
     const [ isLoading, setIsLoading ] = useState(false)
     const [ justCreated, setJustCreated ] = useState({})
+    // eslint-disable-next-line no-unused-vars
     const [ existing, setExisting ] = useState({ ...initialState})
     const [ errorCreation, setErrorCreation ] = useState({error: '', firstName: '', lastName:'', department: ''})
     

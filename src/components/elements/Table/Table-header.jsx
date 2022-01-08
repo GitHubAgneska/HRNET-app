@@ -2,7 +2,7 @@ import { Fragment } from "react"
 import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TableHeaderCell, TableHeaderIconWrapper } from './Table_style'
+import { TableHeaderIconWrapper } from './Table_style'
 
 let headers = [ 'firstName', 'lastName', 'dob', 'startDate', 'street', 'city', 'state', 'zipcode', 'department']
 
