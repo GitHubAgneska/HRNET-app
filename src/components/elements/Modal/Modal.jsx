@@ -1,12 +1,10 @@
 import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
 import Button from '../Button/Button'
-import { PageModalWrapper, ModalWrapper, ModalBlock, ModalBody, ModalContent, ModalBtnsWrapper } from './Modal-style'
+import { PageModalWrapper, ModalWrapper, ModalBody, ModalContent, ModalBtnsWrapper } from './Modal-style'
 
 const ModalComp = ({ modalType, props, isShowing, content}) => {
     const { 
-        modalBgBlur,
-        width, height,
         buttonsWrapperWidth, 
         modalData,
         action,
@@ -21,31 +19,29 @@ const ModalComp = ({ modalType, props, isShowing, content}) => {
             <PageModalWrapper>
 
                 <ModalWrapper>
-                    <ModalBlock width={width} height={height}>
-                        <ModalBody>
-                            <p>{message}</p>
-                            { content?.department && 
-                                <ModalContent>
-                                    <p>{content.firstName} {content.lastName}</p>
-                                    <p>{content.department} department</p>
-                                </ModalContent>
-                            }
-                            <p>{action} {modalData}</p>
-                        </ModalBody>
+                    <ModalBody>
+                        <p>{message}</p>
+                        { content?.department && 
+                            <ModalContent>
+                                <p>{content.firstName} {content.lastName}</p>
+                                <p>{content.department} department</p>
+                            </ModalContent>
+                        }
+                        <p>{action} {modalData}</p>
+                    </ModalBody>
 
-                        <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
-                            { modalBtns.map(b => (
-                                <Button
-                                btntype={b.btntype}
-                                key={Math.random()}
-                                handleClick={b.action}
-                                disabled={false}
-                                btnName={b.name}
-                                width="40%;"
-                                >{b.name}</Button>
-                            ))}
-                        </ModalBtnsWrapper>
-                    </ModalBlock>
+                    <ModalBtnsWrapper buttonsWrapperWidth={buttonsWrapperWidth}>
+                        { modalBtns.map(b => (
+                            <Button
+                            btntype={b.btntype}
+                            key={Math.random()}
+                            handleClick={b.action}
+                            disabled={false}
+                            btnName={b.name}
+                            width="40%;"
+                            >{b.name}</Button>
+                        ))}
+                    </ModalBtnsWrapper>
                 </ModalWrapper>
             
             </PageModalWrapper>,
