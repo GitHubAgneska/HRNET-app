@@ -2,6 +2,8 @@
 ## HRnet : a company's internal application to create and view employee records
 ---
 
+![alt text](https://github.com/GitHubAgneska/HRNET-app/blob/master/src/design/mobile_list-2.png)
+
 ### ▶︎ STACK
 - HTML5/CSS3
 - React / Redux
