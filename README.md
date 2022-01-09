@@ -2,7 +2,10 @@
 ## HRnet : a company's internal application to create and view employee records
 ---
 
-![alt text](https://github.com/GitHubAgneska/HRNET-app/blob/master/src/design/mobile_list-2.png)
+<p align="center">
+    <img src="./src/design/xd_MOBILE_design/mobile_form-1.png" width="250" alt="list design for mobile">
+  <img src="./src/design/xd_MOBILE_design/mobile_list-2.png" width="250" alt="list design for mobile">
+</p>
 
 ### ▶︎ STACK
 - HTML5/CSS3
