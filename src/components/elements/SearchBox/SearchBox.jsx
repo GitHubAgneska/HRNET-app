@@ -8,8 +8,8 @@ const SearchBox = ({values, handleSearchChange, clearInput, handleSearchSubmit, 
     const suggestionsBoxIsActive = suggestions && suggestions.size > 0
 
     return (
-        <SearchSectionWrapper>
-            <SearchBoxWrapper suggestionsBoxIsActive={suggestionsBoxIsActive}>
+        <SearchSectionWrapper suggestionsBoxIsActive={suggestionsBoxIsActive}>
+            <SearchBoxWrapper>
                 
                 <SearchBoxInput 
                     type="text"

@@ -1,9 +1,11 @@
 import styled from "styled-components"
 
 export const PaginationWrapper = styled.div`
+    width:100%;
     display: flex; flex-flow: row nowrap;
     justify-content: center;
-    margin-top: 2%;
+    position: absolute;
+    bottom:2%;
 `
 
 export const PageNumber = styled.div`

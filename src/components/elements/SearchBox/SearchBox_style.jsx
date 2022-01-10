@@ -1,28 +1,36 @@
 import styled from "styled-components"
 
-
 export const SearchSectionWrapper = styled.section`
     margin-bottom: 2%;
     @media screen and (max-width:600px) {  width:100%; }
     @media screen and (min-width:600px) {  width:50%; }
+    transition: all 0.2s;
+    
+    ${({ suggestionsBoxIsActive }) => suggestionsBoxIsActive && 
+    `
+        position: absolute;
+        z-index: 2;
+        width: 60%;
+        background-color: gray;
+        border-radius: 15px
+    `}
 `
 
 export const SearchBoxWrapper = styled.div`
     width: 100%;
-    background-color:white;
     padding:1%;
     display: inline-flex;
-    margin-top: 2%;
     align-items: center;
     svg { margin: 1%; }
     
-
     ${({ suggestionsBoxIsActive }) => suggestionsBoxIsActive && 
-        `border-top-right-radius: 15px;
-        border-top-left-radius: 15px; `}
+    `
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+    `}
     
     ${({ suggestionsBoxIsActive }) => !suggestionsBoxIsActive && 
-        `border-radius: 15px `}
+        `border-radius: 15px ; background-color:white;`}
 `
 
 export const SearchBoxInput = styled.input`
@@ -38,7 +46,6 @@ export const SearchBoxInput = styled.input`
 export const SearchSuggestionsWrapper = styled.div`
     border: 2px solid #ccc;
     text-align: justify;
-    margin-bottom: 2%;
     color: white;
     ul {
         li { 

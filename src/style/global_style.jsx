@@ -30,8 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     button { display: block; border: none; }
     main {
         background-color: #515151;
-       /*  @media screen and (min-width:600px) { width: 90%; margin: auto;} */
-        @media screen and (max-width:600px) { height: 100vh;}
+        height: 100vh;
     }
 `
 
@@ -68,8 +67,7 @@ export const DataTableTopWrapper =  styled.div`
     display:flex;
     @media screen and (max-width:600px) {  flex-flow: column nowrap; }
     @media screen and (min-width:600px) { flex-flow: row nowrap; justify-content: space-between;}
-    margin-bottom: 2%;
-    border-bottom: 2px solid white;
+    margin: 2% 0%;
 `
 
 /* accessibility - .sr-only class */
