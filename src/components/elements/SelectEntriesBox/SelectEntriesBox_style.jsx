@@ -5,6 +5,7 @@ export const SelectEntriesBoxWrapper = styled.div`
     height: 45px;
     font-size:0.8rem;
     text-align: left;
+    line-height: 2;
     @media screen and (max-width:600px) {display: inline-block;  width:unset}
     select {
         padding: 5px;

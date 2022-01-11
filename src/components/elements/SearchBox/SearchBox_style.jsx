@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const SearchSectionWrapper = styled.section`
-    margin-bottom: 2%;
     @media screen and (max-width:600px) {  width:100%; }
     @media screen and (min-width:600px) {  width:50%; }
     transition: all 0.2s;
@@ -18,6 +17,7 @@ export const SearchSectionWrapper = styled.section`
 
 export const SearchBoxWrapper = styled.div`
     width: 100%;
+    height: 30px;
     padding:1%;
     display: inline-flex;
     align-items: center;

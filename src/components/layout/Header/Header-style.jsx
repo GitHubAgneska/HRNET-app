@@ -24,5 +24,8 @@ export const LinksWrapper = styled.div`
     width: 25%;
     @media screen and (max-width:600px) {display: inline-grid;text-align: left;}
     display: inline-flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    a { margin-left: 10%; }
+    a:hover { text-decoration: underline;}
+
 `
