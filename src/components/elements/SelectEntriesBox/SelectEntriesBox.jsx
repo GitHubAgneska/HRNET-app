@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux'
 import PropTypes from "prop-types"
 
 const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing, listTotal}) => {
-
+    
     const currentEntries = useSelector(initialState => initialState.list.entries)
-
+    console.log('currentlyshowing=', currentlyshowing)
+    const start = currentlyshowing[0], end = currentlyshowing[1]
     return (
         <SelectEntriesBoxWrapper>
 
@@ -21,7 +22,7 @@ const SelectEntriesBox = ({options, selectEntriesAmount, currentlyshowing, listT
                 ))}
             </select>
 
-            <div currentlyshowing={currentlyshowing}>Showing: {currentlyshowing} of {listTotal}</div>
+            <div currentlyshowing={currentlyshowing}>Showing: {start} to {end} - of {listTotal} results</div>
         </SelectEntriesBoxWrapper>
     )
 }
@@ -31,6 +32,6 @@ export default SelectEntriesBox
 SelectEntriesBox.propTypes = {
     options: PropTypes.array.isRequired,
     selectEntriesAmount: PropTypes.func.isRequired,
-    currentlyshowing: PropTypes.number.isRequired,
+    currentlyshowing: PropTypes.array.isRequired,
     listTotal: PropTypes.number
 }

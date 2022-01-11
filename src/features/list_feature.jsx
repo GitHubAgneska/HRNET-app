@@ -3,13 +3,13 @@ import {
     listFetching, listResolved, listRejected,
     setCollection,
     setEntriesPerPage, setTotalPages,
-    setCurrentActivePage, setCurrentActivePageIndex,
+    setCurrentActivePage, setCurrentActivePageIndex,setCurrentlyShowing,
     setCollectionAsPages,
     sortParamChanged, sortStatusChanged,
     searchtermChanged
 } from '../state/actions/Actions'
 import { client } from '../api/client'
-
+import _ from 'lodash'
 // ......................................................
 // FETCH
 // ......................................................
@@ -43,25 +43,69 @@ export const updatePage = (pageNumber) => (dispatch, getState) => {
 
 export const changeEntriesAmount = (entries) => (dispatch, getState) => {     
     dispatch(setEntriesPerPage(entries))
-
+    
     const currentList = listState(getState()).collection; // console.log('CURRENTLIST COLLECTION WHEN SET COLLECTION AS PAGES (SET PAGE(entries))=========>', currentList)
     const currentActivePageIndex = listState(getState()).currentPageIndex
     
     let outputPages = []
-    let from = 0
+    let from = 0, to = 0
     let totalPages = Math.floor(currentList.length / entries)
     dispatch(setTotalPages(totalPages))
     
     // setup pages arrays
     for (let i = from; i <= totalPages; i++ ) {
-        let to = from + entries
+        to = from + entries
         outputPages.push(currentList.slice(from, to))
         from += entries
     }
+
     // set current page to default only if unset (otherwise keep current page after rearranging after entries amount changed)
     if ( !currentActivePageIndex ) { dispatch(setCurrentActivePageIndex(0)) }
     dispatch(setCollectionAsPages(outputPages))
+
+    dispatch(showCurrent(currentActivePageIndex, entries))
 }
+
+export const showCurrent = (pageindex, entries) => (dispatch, getState) => {
+    
+    const totalListLength = listState(getState()).collection.length
+    let [ start, end ] = listState(getState()).currentlyShowing
+    const currentEntries = listState(getState()).entries
+    const currentPage =  listState(getState()).currentPage
+    const currentActivePageIndex = listState(getState()).currentPageIndex
+
+    console.log('REQUESTED====>',currentActivePageIndex )
+
+    
+
+    // entries amount changes - pageindex = same
+    if (!pageindex && entries ) {
+        let [ start, end ] = [0, 0]
+        pageindex = currentActivePageIndex
+
+        if (pageindex === 1) { [ start, end ] = [1, entries]}
+        else { [ start, end ] = [end+1, end+=entries] }
+
+        dispatch(setCurrentlyShowing([ start, end ]))
+    }
+    //  pageindex changes - entries amount = same
+    if (pageindex > 0 && !entries) {
+        entries = currentEntries
+        if (pageindex!== 0) {
+            if ( start === 0  ) { start = 1 } else ( start = end+1 )
+            if ((start + currentEntries) > totalListLength) { end = totalListLength }
+            if ( totalListLength - (start + currentEntries) < entries) { end+= totalListLength-end }
+            else { end = start + currentEntries }
+        } else { [ start, end ] = [1,currentEntries] }
+
+        dispatch(setCurrentlyShowing([ start, end ]))
+    }
+}
+
+
+
+
+
 
 // ......................................................
 // LIST SORTING

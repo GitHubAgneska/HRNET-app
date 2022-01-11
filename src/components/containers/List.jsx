@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from 'react'
 
-import { sortList, updatePage, changeEntriesAmount, requestSetSearchTerm } from "../../features/list_feature"
+import { sortList, updatePage, changeEntriesAmount, showCurrent, requestSetSearchTerm } from "../../features/list_feature"
 import { setCollection } from '../../state/actions/Actions'
 
 import Table from "../elements/Table/Table"
@@ -25,12 +25,13 @@ export const List = () => {
     const totalPages = useSelector(initialState => initialState.list.totalPages)
 
     const sortListBy = (filterParam, reverse ) => { dispatch(sortList(filterParam, reverse)) }
-    const changePage = (pageNumber) => { console.log('page requested:', pageNumber); dispatch(updatePage(pageNumber))}
+    const changePage = (pageNumber) => { console.log('page requested:', pageNumber); dispatch(updatePage(pageNumber)); dispatch(showCurrent(pageNumber, null))}
 
     const entriesOptions = [ 15, 30, 50]
     const currentEntriesAmount = useSelector(initialState => initialState.list.entries)
-    const selectEntriesAmount = (n) => { dispatch(changeEntriesAmount(n)) }
-    const currentlyShowing = currentPageToDisplay.length
+    const selectEntriesAmount = (n) => { dispatch(changeEntriesAmount(n)) ; dispatch(showCurrent(null, n))}
+    const currentlyShowing = useSelector(initialState => initialState.list.currentlyShowing)
+
     const listTotal = collection.length
 
     const input = document.querySelector('input')

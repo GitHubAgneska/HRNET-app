@@ -22,6 +22,7 @@ export const initialState = {
         entries: 15,
         currentPage: null,
         currentPageIndex: null,
+        currentlyShowing:[1, 15],
         totalPages: 1
     }
 }

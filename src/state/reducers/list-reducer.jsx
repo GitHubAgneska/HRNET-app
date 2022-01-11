@@ -4,7 +4,7 @@ import {
     LIST_FETCHING, LIST_RESOLVED, LIST_REJECTED,
     CREATE_EMPLOYEE_FETCHING, CREATE_EMPLOYEE_RESOLVED, CREATE_EMPLOYEE_REJECTED, ADD_NEW_EMPLOYEE,
     SETUP_COLLECTION,
-    SET_ENTRIES_COUNT, SET_CURRENT_ACTIVE_PAGE, SET_CURRENT_PAGE_INDEX,
+    SET_ENTRIES_COUNT, SET_CURRENT_ACTIVE_PAGE, SET_CURRENT_PAGE_INDEX,SET_CURRENTLYSHOWING,
     SETUP_COLLECTION_AS_PAGES,SET_TOTAL_PAGES,
 
     SORT_STATUS_CHANGED, SORT_PARAM_CHANGED,
@@ -128,6 +128,9 @@ export default function listReducer(state = initialState.list, action) {
             case SET_CURRENT_ACTIVE_PAGE: {
                 let requestedIndex = action.payload
                 return { ...state, currentPage: state.collectionAsPages[requestedIndex+1] }
+            }
+            case SET_CURRENTLYSHOWING: {
+                return { ...state, currentlyShowing: action.payload }
             }
             // SORT ACTIONS
             case SORT_STATUS_CHANGED: { 
