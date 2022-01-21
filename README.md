@@ -10,13 +10,13 @@
 ### ▶︎ STACK
 - HTML5/CSS3
 - React / Redux
-- CI/CD: Circleci + Heroku
 ---
 
 ###  ▶︎ TOOLS
 - MirageJs + FakerJs
 - LightHouse
 - Jest/Testing-library
+- CI/CD: Circleci + Heroku
 
 ---
 ###  ▶︎ INSTALL
@@ -44,6 +44,10 @@ npm run start
 
 - React Data table with sort / search / pagination is available as an NPM package
 https://www.npmjs.com/package/react-datatable-search-pagination
+
+---
+###  ▶︎ Projects requirements & development process
+=> hrnet dev [roadmap](roadmap.md)
 
 ---
 
