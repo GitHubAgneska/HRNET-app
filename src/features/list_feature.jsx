@@ -41,7 +41,9 @@ export const updatePage = (pageNumber) => (dispatch, getState) => {
 }
 
 
-export const changeEntriesAmount = (entries) => (dispatch, getState) => {     
+export const changeEntriesAmount = (entries) => (dispatch, getState) => {
+
+    console.log('changeEntriesAmount called!')
     dispatch(setEntriesPerPage(entries))
 
     const currentList = listState(getState()).collection; // console.log('CURRENTLIST COLLECTION WHEN SET COLLECTION AS PAGES (SET PAGE(entries))=========>', currentList)
